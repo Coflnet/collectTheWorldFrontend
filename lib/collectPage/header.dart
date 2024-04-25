@@ -4,7 +4,7 @@ class header extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.only(top: 10),
+      padding: const EdgeInsets.only(top: 30),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -30,10 +30,10 @@ class headerSearchButton extends StatelessWidget {
                 ),
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withOpacity(0.2), // Shadow color
-                spreadRadius: -2, // Spread radius
-                blurRadius: 10, // Blur radius
-                offset: const Offset(0, 10), // Offset from the top left corner
+                color: Colors.black.withOpacity(0.2),
+                spreadRadius: -2,
+                blurRadius: 10,
+                offset: const Offset(0, 15), 
               ),
             ]),
         child: IconButton(

@@ -3,6 +3,7 @@ import 'dart:ffi';
 import 'package:flutter/material.dart';
 import 'package:collect_the_world/footer/footerMain.dart';
 import 'package:collect_the_world/collectPage/header.dart';
+import 'package:collect_the_world/collectPage/selectedPage.dart';
 
 void main() {
   runApp(const homePage());
@@ -30,9 +31,13 @@ class CapturePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(fontFamily: 'Poppins'),
       home: Scaffold(
         body: Column(
-          children: [header()],
+          children: [
+            header(),
+            Expanded(child: Selectedpage())
+          ],
         ),
         floatingActionButton: const cameraButton(),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
