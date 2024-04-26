@@ -1,9 +1,14 @@
 import 'dart:ffi';
+import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:collect_the_world/footer/footerMain.dart';
 import 'package:collect_the_world/collectPage/header.dart';
 import 'package:collect_the_world/collectPage/selectedPage.dart';
+import 'package:collect_the_world/background/frostedGlass.dart';
+import 'package:collect_the_world/background/glowingSpots.dart';
+import 'package:flutter/rendering.dart';
+import 'package:flutter/widgets.dart';
 
 void main() {
   runApp(const homePage());
@@ -14,12 +19,22 @@ class homePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       home: Scaffold(
-        backgroundColor: Color.fromRGBO(39, 60, 87, 1),
-        floatingActionButton: cameraButton(),
+        body: Stack(children: [
+
+          Container(
+            decoration: const BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage("assets/images/background.png"),
+                    fit: BoxFit.cover)),
+          ),
+          FrostedGlass(),
+          Footer(),
+        ]),
+        backgroundColor: const Color.fromRGBO(34, 40, 49, 1),
+        floatingActionButton: const cameraButton(),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        bottomNavigationBar: Footer(),
       ),
     );
   }
@@ -33,16 +48,23 @@ class CapturePage extends StatelessWidget {
     return MaterialApp(
       theme: ThemeData(fontFamily: 'Poppins'),
       home: Scaffold(
-        body: Column(
-          children: [
-            header(),
-            Expanded(child: Selectedpage())
-          ],
-        ),
+        body: Stack(children: [
+          Container(
+            decoration: const BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage("assets/images/background.png"),
+                    fit: BoxFit.cover)),
+          ),
+          FrostedGlass(),
+          Column(
+            children: [header(), Expanded(child: Selectedpage())],
+          ),
+          
+          Footer(),
+        ]),
         floatingActionButton: const cameraButton(),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        backgroundColor: const Color.fromRGBO(39, 60, 87, 1),
-        bottomNavigationBar: const Footer(),
+        backgroundColor: const Color.fromRGBO(34, 40, 49, 1),
       ),
     );
   }

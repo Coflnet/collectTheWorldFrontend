@@ -1,14 +1,17 @@
-import 'dart:io';
-
-import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 
 import 'package:flutter/material.dart';
+
 import 'package:flutter/widgets.dart';
 import 'package:flutter_swipe_detector/flutter_swipe_detector.dart';
 import 'package:collect_the_world/collectPage/slidingWigetBox.dart';
 
+typedef void updateCurrentSelection(int currentSelection);
+
 class SlidingWidgets extends StatefulWidget {
+  final updateCurrentSelection onUpdate;
+
+  SlidingWidgets({required this.onUpdate});
+
   @override
   _SlidingWidgetsState createState() => _SlidingWidgetsState();
 }
@@ -16,6 +19,7 @@ class SlidingWidgets extends StatefulWidget {
 class _SlidingWidgetsState extends State<SlidingWidgets> {
   int currentSelection = 0;
   late PageController _pageController;
+
   final List<Widget> pages = [
     const SlidingBox(name: "page 1"),
     const SlidingBox(name: "page 2"),
@@ -33,8 +37,10 @@ class _SlidingWidgetsState extends State<SlidingWidgets> {
     return SwipeDetector(
         onSwipeLeft: (offset) {
           setState(() {
+            print("hello world");
             if (currentSelection < 2) {
               currentSelection++;
+              widget.onUpdate(currentSelection);
               _pageController.nextPage(
                   duration: const Duration(milliseconds: 300),
                   curve: Curves.easeInOutCubic);
@@ -45,6 +51,7 @@ class _SlidingWidgetsState extends State<SlidingWidgets> {
           setState(() {
             if (currentSelection > 0) {
               currentSelection--;
+              widget.onUpdate(currentSelection);
               _pageController.previousPage(
                   duration: const Duration(milliseconds: 300),
                   curve: Curves.easeInOutCubic);
@@ -62,10 +69,11 @@ class _SlidingWidgetsState extends State<SlidingWidgets> {
               onPageChanged: (index) {
                 setState(() {
                   currentSelection = index;
+                  widget.onUpdate(index);
+
                 });
               },
             ),
-
           ],
         ));
   }

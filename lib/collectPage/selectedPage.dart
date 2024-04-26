@@ -2,8 +2,22 @@ import 'dart:ffi';
 
 import 'package:flutter/material.dart';
 import 'package:collect_the_world/collectPage/slidingWidgets.dart';
+import 'package:flutter/widgets.dart';
 
-class Selectedpage extends StatelessWidget {
+class Selectedpage extends StatefulWidget {
+  @override
+  _SelectedPageState createState() => _SelectedPageState();
+}
+
+class _SelectedPageState extends State<Selectedpage> {
+  int currentSelection = 0;
+
+  void updateCurrentSelection(int newSelection) {
+    setState(() {
+      currentSelection = newSelection;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -11,15 +25,30 @@ class Selectedpage extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-
+            SelectedPageLabels(
+                text: "Daily", isSelected: currentSelection == 0),
+            SelectedPageLabels(
+                text: "Weekly", isSelected: currentSelection == 1),
+            SelectedPageLabels(
+                text: "Newest", isSelected: currentSelection == 2),
           ],
         ),
-        Expanded(child: SlidingWidgets()),
+        Container(
+          margin: EdgeInsets.fromLTRB(15, 0, 15, 0),
+          height: 4,
+          alignment: Alignment.bottomCenter,
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              color: const Color.fromARGB(255, 143, 143, 143)),
+        ),
+        Expanded(
+            child: SlidingWidgets(
+          onUpdate: (newID) => updateCurrentSelection(newID),
+        )),
       ],
     );
   }
 }
-
 
 class SelectedPageLabels extends StatefulWidget {
   final String text;
@@ -35,12 +64,21 @@ class _SelectedPageLabelsState extends State<SelectedPageLabels> {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(20),
-      child: Text(
-        widget.text, // Accessing text from the widget
-        style: TextStyle(
-          fontSize: 20, // Adjust the font size as needed
-          color: Colors.white70,
+      child: TweenAnimationBuilder<Color?>(
+        duration: const Duration(milliseconds: 300),
+        tween: ColorTween(
+          begin: widget.isSelected ? Colors.white60 : Colors.white,
+          end: widget.isSelected ? Colors.white : Colors.white60,
         ),
+        builder: (context, color, child) {
+          return Text(
+            widget.text,
+            style: TextStyle(
+              fontSize: 30,
+              color: color,
+            ),
+          );
+        },
       ),
     );
   }
