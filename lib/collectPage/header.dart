@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 
 class header extends StatelessWidget {
@@ -18,31 +20,28 @@ class headerSearchButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        height: 60,
-        margin: EdgeInsets.only(right: 20),
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(18),
-            color: const Color.fromRGBO(60, 90, 126, 1),
-            border: Border.all(
-                color: const Color.fromARGB(30, 87, 119, 158),
-                strokeAlign: BorderSide.strokeAlignInside,
-                width: 3
-                ),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(0.2),
-                spreadRadius: -2,
-                blurRadius: 10,
-                offset: const Offset(0, 15), 
-              ),
-            ]),
-        child: IconButton(
-            iconSize: 40,
-            onPressed: () {},
-            icon: const Icon(
-              Icons.search,
-              color: Colors.white,
-            )));
+      margin: EdgeInsets.only(right: 30),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(20),
+        child: BackdropFilter(
+          filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
+          child: Container(
+            decoration: BoxDecoration(
+              color: Colors.grey.shade200.withOpacity(0.05),
+              border: Border.all(color: Colors.white12, width: 1.5, ),
+              borderRadius: BorderRadius.circular(20),
+            ),
+            child: IconButton(
+                iconSize: 40,
+                onPressed: () {},
+                icon: const Icon(
+                  Icons.search,
+                  color: Colors.white,
+                )),
+          ),
+        ),
+      ),
+    );
   }
 }
 
@@ -62,4 +61,3 @@ class headerBackButton extends StatelessWidget {
     );
   }
 }
-

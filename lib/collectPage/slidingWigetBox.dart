@@ -54,7 +54,7 @@ class _ContainerListViewState extends State<ContainerListView> {
   }
 
   void getItems() async {
-    final response await http.get(Uri.parse("$url/ctw/daily"));
+    final response = await http.get(Uri.parse("$url/ctw/daily"));
     if (response.statusCode == 200) {
       var result = jsonDecode(response.body);
       setState(() {

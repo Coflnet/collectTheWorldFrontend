@@ -74,7 +74,7 @@ class _SelectedPageLabelsState extends State<SelectedPageLabels> {
           return Text(
             widget.text,
             style: TextStyle(
-              fontSize: 30,
+              fontSize: 25,
               color: color,
             ),
           );
