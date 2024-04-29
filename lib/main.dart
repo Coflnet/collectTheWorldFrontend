@@ -3,6 +3,7 @@ import 'dart:ui';
 
 import 'package:camera/camera.dart';
 import 'package:collect_the_world/cameraScene/cameraScene.dart';
+import 'package:collect_the_world/cameraScene/confirm/confirmScene.dart';
 import 'package:flutter/material.dart';
 import 'package:collect_the_world/footer/footerMain.dart';
 import 'package:collect_the_world/collectPage/header.dart';
@@ -84,9 +85,6 @@ class cameraScene extends StatelessWidget {
 }
 
 class confirmScene extends StatelessWidget {
-  final image;
-
-  confirmScene({required this.image});
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -94,15 +92,23 @@ class confirmScene extends StatelessWidget {
       home: Scaffold(
         body: Stack(children: [
           Container(
+            width: double.infinity,
+            height: double.infinity,
             decoration: const BoxDecoration(
                 image: DecorationImage(
                     image: AssetImage("assets/images/background.png"),
                     fit: BoxFit.cover)),
           ),
+          const Positioned(
+            bottom: 0,
+            left: 0,
+            right: 0,
+            child: Footer(),
+          ),
           FrostedGlass(),
-          
-          Footer(),
+          confirmSceneMain()
         ]),
+        resizeToAvoidBottomInset: false,
         floatingActionButton: cameraButton(),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         backgroundColor: const Color.fromRGBO(34, 40, 49, 1),

@@ -2,6 +2,7 @@ import 'dart:io';
 import "package:collect_the_world/globals.dart" as globals;
 
 import 'package:camera/camera.dart';
+import 'package:collect_the_world/main.dart';
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 
@@ -29,6 +30,7 @@ class _CameraScreenState extends State<CameraScreen> {
 
   Future<void> _captureImage() async {
     try {
+      widget.controller.setFlashMode(FlashMode.off);
       final image = await widget.controller.takePicture();
       final directory = await getTemporaryDirectory();
       final imagePath = '${directory.path}/captured_image.jpg';
@@ -36,6 +38,10 @@ class _CameraScreenState extends State<CameraScreen> {
       setState(() {
         globals.image = File(imagePath);
       });
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => confirmScene()));
     } catch (e) {
       print(e);
     }
