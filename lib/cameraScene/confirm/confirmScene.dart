@@ -11,8 +11,9 @@ class confirmSceneMain extends StatelessWidget {
     return SingleChildScrollView(
       child: Column(
         children: [
+          searchBar(),
           Container(
-            margin: const EdgeInsets.fromLTRB(60, 75, 60, 25),
+            margin: const EdgeInsets.fromLTRB(70, 40, 70, 25),
             decoration: BoxDecoration(
               border: Border.all(
                 width: 2,
@@ -30,28 +31,26 @@ class confirmSceneMain extends StatelessWidget {
                     ),
             ),
           ),
-          searchBar(),
           confirmButton(),
-          SizedBox(height: 80), 
+          SizedBox(height: 80),
         ],
       ),
     );
   }
 }
 
-
 class confirmButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        margin: const EdgeInsets.only(top: 30),
+        margin: const EdgeInsets.only(top: 20),
         child: ClipRRect(
           borderRadius: BorderRadius.circular(50),
           child: BackdropFilter(
             filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
             child: Container(
-              width: 73,
-              height: 73,
+              width: 83,
+              height: 83,
               decoration: BoxDecoration(
                 color:
                     const Color.fromARGB(255, 207, 207, 207).withOpacity(0.04),
@@ -60,7 +59,12 @@ class confirmButton extends StatelessWidget {
                     color: const Color.fromARGB(43, 255, 255, 255), width: 0.7),
               ),
               child: IconButton(
-                  onPressed: () => {}, icon: const Icon(Icons.check_rounded, color: Colors.orange, size: 50,)),
+                  onPressed: () => {},
+                  icon: const Icon(
+                    Icons.check_rounded,
+                    color: Colors.orange,
+                    size: 60,
+                  )),
             ),
           ),
         ));

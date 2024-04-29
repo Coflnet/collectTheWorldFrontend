@@ -2,6 +2,7 @@ import 'dart:ffi';
 import 'dart:ui';
 
 import 'package:camera/camera.dart';
+import 'package:collect_the_world/background/backgroundImage.dart';
 import 'package:collect_the_world/cameraScene/cameraScene.dart';
 import 'package:collect_the_world/cameraScene/confirm/confirmScene.dart';
 import 'package:flutter/material.dart';
@@ -25,12 +26,7 @@ class homePage extends StatelessWidget {
     return MaterialApp(
       home: Scaffold(
         body: Stack(children: [
-          Container(
-            decoration: const BoxDecoration(
-                image: DecorationImage(
-                    image: AssetImage("assets/images/background.png"),
-                    fit: BoxFit.cover)),
-          ),
+          backgroundImage(),
           FrostedGlass(),
           Footer(),
         ]),
@@ -51,12 +47,7 @@ class CapturePage extends StatelessWidget {
       theme: ThemeData(fontFamily: 'Poppins'),
       home: Scaffold(
         body: Stack(children: [
-          Container(
-            decoration: const BoxDecoration(
-                image: DecorationImage(
-                    image: AssetImage("assets/images/background.png"),
-                    fit: BoxFit.cover)),
-          ),
+          backgroundImage(),
           FrostedGlass(),
           Column(
             children: [header(), Expanded(child: Selectedpage())],
@@ -91,14 +82,7 @@ class confirmScene extends StatelessWidget {
       theme: ThemeData(fontFamily: 'Poppins'),
       home: Scaffold(
         body: Stack(children: [
-          Container(
-            width: double.infinity,
-            height: double.infinity,
-            decoration: const BoxDecoration(
-                image: DecorationImage(
-                    image: AssetImage("assets/images/background.png"),
-                    fit: BoxFit.cover)),
-          ),
+          backgroundImage(),
           const Positioned(
             bottom: 0,
             left: 0,

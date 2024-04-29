@@ -7,7 +7,7 @@ class searchBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.fromLTRB(30, 10, 30, 0),
+      margin: const EdgeInsets.fromLTRB(30, 70, 30, 0),
       child: SearchAnchor(
         builder: (BuildContext context, SearchController controller) {
           return ClipRRect(
