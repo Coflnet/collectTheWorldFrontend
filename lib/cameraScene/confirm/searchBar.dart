@@ -3,7 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-class searchBar extends StatelessWidget {
+class ConfirmPageSearchBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(

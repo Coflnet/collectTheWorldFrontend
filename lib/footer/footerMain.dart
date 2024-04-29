@@ -30,7 +30,7 @@ class Footer extends StatelessWidget {
                     color: Color.fromRGBO(110, 137, 164, 1)),
                 onPressed: () => {
                   Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => const homePage()))
+                      MaterialPageRoute(builder: (context) => const HomePage()))
                 },
               ),
             ),

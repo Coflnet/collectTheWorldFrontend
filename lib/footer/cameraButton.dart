@@ -7,12 +7,12 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'dart:ui';
 
-class cameraButton extends StatefulWidget {
+class CameraButton extends StatefulWidget {
   @override
-  cameraButtonState createState() => cameraButtonState();
+  CameraButtonState createState() => CameraButtonState();
 }
 
-class cameraButtonState extends State<cameraButton> {
+class CameraButtonState extends State<CameraButton> {
   late CameraController _controller;
   late var cameras;
 
@@ -68,6 +68,6 @@ class cameraButtonState extends State<cameraButton> {
     Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (context) => cameraScene(controller: _controller)));
+            builder: (context) => CameraScene(controller: _controller)));
   }
 }

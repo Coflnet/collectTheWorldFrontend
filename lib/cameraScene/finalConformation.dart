@@ -11,7 +11,7 @@ class finalConformationScene extends StatelessWidget {
     return Scaffold(
       body: Stack(
         children: [
-          backgroundImage(),
+          BackgroundImage(),
           FrostedGlass(),
           Column(
             children: [],
@@ -22,7 +22,7 @@ class finalConformationScene extends StatelessWidget {
   }
 }
 
-class backButton extends StatelessWidget {
+class BackButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Align(
@@ -47,7 +47,7 @@ class backButton extends StatelessWidget {
                   child: IconButton(
                       onPressed: () => {},
                       icon: const Icon(
-                        Icons,
+                        Icons.arrow_back_rounded, 
                         color: Colors.orange,
                         size: 60,
                       )),

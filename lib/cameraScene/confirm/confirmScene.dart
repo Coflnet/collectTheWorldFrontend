@@ -5,13 +5,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-class confirmSceneMain extends StatelessWidget {
+class ConfirmSceneMain extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Column(
         children: [
-          searchBar(),
+          ConfirmPageSearchBar(),
           Container(
             margin: const EdgeInsets.fromLTRB(70, 40, 70, 25),
             decoration: BoxDecoration(
@@ -31,7 +31,7 @@ class confirmSceneMain extends StatelessWidget {
                     ),
             ),
           ),
-          confirmButton(),
+          ConfirmButton(),
           SizedBox(height: 80),
         ],
       ),
@@ -39,7 +39,7 @@ class confirmSceneMain extends StatelessWidget {
   }
 }
 
-class confirmButton extends StatelessWidget {
+class ConfirmButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(

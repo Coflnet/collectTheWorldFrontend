@@ -15,23 +15,23 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 
 void main() {
-  runApp(const homePage());
+  runApp(const HomePage());
 }
 
-class homePage extends StatelessWidget {
-  const homePage({super.key});
+class HomePage extends StatelessWidget {
+  const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
         body: Stack(children: [
-          backgroundImage(),
+          BackgroundImage(),
           FrostedGlass(),
           Footer(),
         ]),
         backgroundColor: const Color.fromRGBO(34, 40, 49, 1),
-        floatingActionButton: cameraButton(),
+        floatingActionButton: CameraButton(),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       ),
     );
@@ -47,14 +47,14 @@ class CapturePage extends StatelessWidget {
       theme: ThemeData(fontFamily: 'Poppins'),
       home: Scaffold(
         body: Stack(children: [
-          backgroundImage(),
+          BackgroundImage(),
           FrostedGlass(),
           Column(
             children: [header(), Expanded(child: Selectedpage())],
           ),
           Footer(),
         ]),
-        floatingActionButton: cameraButton(),
+        floatingActionButton: CameraButton(),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         backgroundColor: const Color.fromRGBO(34, 40, 49, 1),
       ),
@@ -62,10 +62,10 @@ class CapturePage extends StatelessWidget {
   }
 }
 
-class cameraScene extends StatelessWidget {
+class CameraScene extends StatelessWidget {
   final CameraController controller;
 
-  cameraScene({required this.controller});
+  CameraScene({required this.controller});
 
   @override
   Widget build(BuildContext context) {
@@ -75,14 +75,14 @@ class cameraScene extends StatelessWidget {
   }
 }
 
-class confirmScene extends StatelessWidget {
+class ConfirmScene extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(fontFamily: 'Poppins'),
       home: Scaffold(
         body: Stack(children: [
-          backgroundImage(),
+          BackgroundImage(),
           const Positioned(
             bottom: 0,
             left: 0,
@@ -90,10 +90,10 @@ class confirmScene extends StatelessWidget {
             child: Footer(),
           ),
           FrostedGlass(),
-          confirmSceneMain()
+          ConfirmSceneMain()
         ]),
         resizeToAvoidBottomInset: false,
-        floatingActionButton: cameraButton(),
+        floatingActionButton: CameraButton(),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         backgroundColor: const Color.fromRGBO(34, 40, 49, 1),
       ),

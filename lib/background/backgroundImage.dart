@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 
-class backgroundImage extends StatelessWidget {
+class BackgroundImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(

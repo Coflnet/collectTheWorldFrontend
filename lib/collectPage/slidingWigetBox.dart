@@ -46,7 +46,7 @@ class _ContainerListViewState extends State<ContainerListView> {
       ListView.builder(
           itemCount: items.length,
           itemBuilder: (BuildContext context, int index) {
-            return itemWidget(name: items[index]);
+            return ItemWidget(name: items[index]);
           }),
       
 
@@ -64,11 +64,11 @@ class _ContainerListViewState extends State<ContainerListView> {
   }
 }
 
-class itemWidget extends StatelessWidget {
+class ItemWidget extends StatelessWidget {
   final String name;
   final int xp = 25;
 
-  const itemWidget({required this.name});
+  const ItemWidget({required this.name});
 
   @override
   Widget build(BuildContext context) {

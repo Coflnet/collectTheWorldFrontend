@@ -41,7 +41,7 @@ class _CameraScreenState extends State<CameraScreen> {
       Navigator.push(
           context,
           MaterialPageRoute(
-              builder: (context) => confirmScene()));
+              builder: (context) => ConfirmScene()));
     } catch (e) {
       print(e);
     }
