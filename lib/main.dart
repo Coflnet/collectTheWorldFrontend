@@ -48,11 +48,11 @@ class CapturePage extends StatelessWidget {
       home: Scaffold(
         body: Stack(children: [
           BackgroundImage(),
-          FrostedGlass(),
+
           Column(
             children: [header(), Expanded(child: Selectedpage())],
           ),
-          Footer(),
+          const Footer(),
         ]),
         floatingActionButton: CameraButton(),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,

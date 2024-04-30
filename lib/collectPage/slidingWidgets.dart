@@ -1,3 +1,4 @@
+import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
@@ -8,73 +9,70 @@ import 'package:collect_the_world/collectPage/slidingWigetBox.dart';
 typedef void updateCurrentSelection(int currentSelection);
 
 class SlidingWidgets extends StatefulWidget {
-  final updateCurrentSelection onUpdate;
+  final String widgetName;
+  final String endPoint;
+  final bool isVisibleVal;
+  final double marginVal;
+  final double iconSizeVal;
 
-  SlidingWidgets({required this.onUpdate});
+  const SlidingWidgets(
+      {super.key,
+      required this.widgetName,
+      required this.endPoint,
+      this.iconSizeVal = 30,
+      this.marginVal = 10,
+      this.isVisibleVal = true});
 
   @override
-  _SlidingWidgetsState createState() => _SlidingWidgetsState();
+  SlidingWidgetsState createState() => SlidingWidgetsState();
 }
 
-class _SlidingWidgetsState extends State<SlidingWidgets> {
-  int currentSelection = 0;
-  late PageController _pageController;
-
-  final List<Widget> pages = [
-    const SlidingBox(name: "page 1"),
-    const SlidingBox(name: "page 2"),
-    const SlidingBox(name: "page 3")
-  ];
-
+class SlidingWidgetsState extends State<SlidingWidgets> {
   @override
   void initState() {
     super.initState();
-    _pageController = PageController(initialPage: currentSelection);
   }
 
   @override
   Widget build(BuildContext context) {
-    return SwipeDetector(
-        onSwipeLeft: (offset) {
-          setState(() {
-            print("hello world");
-            if (currentSelection < 2) {
-              currentSelection++;
-              widget.onUpdate(currentSelection);
-              _pageController.nextPage(
-                  duration: const Duration(milliseconds: 300),
-                  curve: Curves.easeInOutCubic);
-            }
-          });
-        },
-        onSwipeRight: (offset) {
-          setState(() {
-            if (currentSelection > 0) {
-              currentSelection--;
-              widget.onUpdate(currentSelection);
-              _pageController.previousPage(
-                  duration: const Duration(milliseconds: 300),
-                  curve: Curves.easeInOutCubic);
-            }
-          });
-        },
-        child: Stack(
-          children: [
-            PageView.builder(
-              controller: _pageController,
-              itemCount: pages.length,
-              itemBuilder: (context, index) {
-                return pages[index];
-              },
-              onPageChanged: (index) {
-                setState(() {
-                  currentSelection = index;
-                  widget.onUpdate(index);
-
-                });
-              },
-            ),
-          ],
-        ));
+    return Container(
+      width: double.infinity,
+      decoration: BoxDecoration(
+        border: Border.all(width: 1.5, color: Colors.white10),
+        borderRadius: BorderRadius.circular(10),
+        color: Colors.white.withOpacity(0.05),
+      ),
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Container(
+                width: 10,
+              ),
+              Text(
+                widget.widgetName,
+                style: TextStyle(
+                  color: Colors.white.withOpacity(0.95),
+                  fontSize: 30,
+                ),
+              ),
+              IconButton(
+                onPressed: () => {},
+                icon: const Icon(
+                  Icons.expand_rounded,
+                  color: Colors.white70,
+                ),
+              )
+            ],
+          ),
+          Expanded(
+              child: ContainerListView(
+                  isVisible: widget.isVisibleVal,
+                  margin: widget.marginVal,
+                  iconSize: widget.iconSizeVal)),
+        ],
+      ),
+    );
   }
 }

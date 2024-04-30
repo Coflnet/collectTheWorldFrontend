@@ -2,10 +2,14 @@ import 'dart:ui';
 
 import 'package:collect_the_world/background/backgroundImage.dart';
 import 'package:collect_the_world/background/frostedGlass.dart';
+import 'package:collect_the_world/cameraScene/confirm/confirmButton.dart';
+import 'package:collect_the_world/cameraScene/confirm/imageWidget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class finalConformationScene extends StatelessWidget {
+class FinalConformationScene extends StatelessWidget {
+  const FinalConformationScene({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -14,7 +18,12 @@ class finalConformationScene extends StatelessWidget {
           BackgroundImage(),
           FrostedGlass(),
           Column(
-            children: [],
+            children: [
+              const BackButton(),
+              const Center(child: ImageWidget()),
+              ItemName(),
+              const ConfirmButton(),
+            ],
           ),
         ],
       ),
@@ -23,19 +32,21 @@ class finalConformationScene extends StatelessWidget {
 }
 
 class BackButton extends StatelessWidget {
+  const BackButton({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Align(
         alignment: Alignment.topLeft,
         child: Container(
-            margin: const EdgeInsets.only(top: 20),
+            margin: const EdgeInsets.fromLTRB(30, 40, 0, 0),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(50),
               child: BackdropFilter(
                 filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
                 child: Container(
-                  width: 83,
-                  height: 83,
+                  width: 63,
+                  height: 63,
                   decoration: BoxDecoration(
                     color: const Color.fromARGB(255, 207, 207, 207)
                         .withOpacity(0.04),
@@ -47,12 +58,29 @@ class BackButton extends StatelessWidget {
                   child: IconButton(
                       onPressed: () => {},
                       icon: const Icon(
-                        Icons.arrow_back_rounded, 
+                        Icons.arrow_back_rounded,
                         color: Colors.orange,
-                        size: 60,
+                        size: 40,
                       )),
                 ),
               ),
             )));
   }
 }
+
+
+class ItemName extends StatelessWidget {
+  final String itemName = "apple";
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.only(top: 10),
+      child: Text(
+        "This is a \n $itemName?",
+        style: const TextStyle(color: Colors.white, fontSize: 30),
+      ),
+    );
+  }
+}
+

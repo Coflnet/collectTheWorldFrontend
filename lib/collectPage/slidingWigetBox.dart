@@ -4,9 +4,10 @@ import 'dart:ui';
 
 import 'package:flutter/animation.dart';
 import 'package:flutter/material.dart';
+import 'package:glassmorphism_ui/glassmorphism_ui.dart';
 import 'package:http/http.dart' as http;
 
-String url = "http://localhost:6969";
+String url = "http://10.0.0.19:6969";
 
 class SlidingBox extends StatelessWidget {
   final String name;
@@ -27,6 +28,12 @@ class SlidingBox extends StatelessWidget {
 }
 
 class ContainerListView extends StatefulWidget {
+  final bool isVisible;
+  final double margin;
+  final double iconSize;
+  const ContainerListView(
+      {super.key, this.margin = 10, this.isVisible = true, this.iconSize = 30});
+
   @override
   _ContainerListViewState createState() => _ContainerListViewState();
 }
@@ -36,6 +43,7 @@ class _ContainerListViewState extends State<ContainerListView> {
 
   @override
   void initState() {
+    print("init");
     super.initState();
     getItems();
   }
@@ -46,10 +54,12 @@ class _ContainerListViewState extends State<ContainerListView> {
       ListView.builder(
           itemCount: items.length,
           itemBuilder: (BuildContext context, int index) {
-            return ItemWidget(name: items[index]);
+            return NewItemWidget(
+                name: items[index],
+                iconSize: widget.iconSize,
+                margin: widget.margin,
+                isVisible: widget.isVisible);
           }),
-      
-
     ]);
   }
 
@@ -64,68 +74,47 @@ class _ContainerListViewState extends State<ContainerListView> {
   }
 }
 
-class ItemWidget extends StatelessWidget {
+class NewItemWidget extends StatelessWidget {
   final String name;
-  final int xp = 25;
+  final int xp;
+  final bool isVisible;
+  final double margin;
+  final double iconSize;
 
-  const ItemWidget({required this.name});
+  const NewItemWidget(
+      {required this.name,
+      this.iconSize = 30,
+      this.margin = 10,
+      this.isVisible = true,
+      this.xp = 25});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.fromLTRB(10, 10, 10, 10),
-      decoration: BoxDecoration(
-          border: Border.all(
-              width: 1.5, color: const Color.fromARGB(61, 247, 247, 247)),
-          borderRadius: BorderRadius.circular(15)),
-      height: 85,
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(16),
-        child: BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
-          child: Container(
-            padding: EdgeInsets.fromLTRB(10, 0, 15, 0),
-            decoration: BoxDecoration(
-              color: Colors.grey.shade200.withOpacity(0.05),
+      margin: EdgeInsets.all(margin),
+      child: GlassContainer(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            IconButton(
+              onPressed: () => {},
+              icon: Icon(Icons.check_box_outline_blank, size: iconSize),
+              color: Colors.white,
             ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(children: [
-                  const Icon(Icons.check_box_outline_blank_rounded,
-                      color: Colors.white,
-                      size: 50,
-                      shadows: [
-                        Shadow(
-                            blurRadius: 6,
-                            color: Color.fromARGB(155, 255, 255, 255),
-                            offset: Offset(0.5, 3))
-                      ]),
-                  const SizedBox(
-                    width: 10,
-                  ),
-                  Text(name,
-                      style: const TextStyle(color: Colors.white, shadows: [
-                        Shadow(
-                            blurRadius: 8,
-                            color: Color.fromARGB(155, 255, 255, 255),
-                            offset: Offset(0, 6))
-                      ]),
-                      textScaler: const TextScaler.linear(1.3)),
-                ]),
-                Text(
-                  "+$xp",
-                  style: const TextStyle(color: Colors.white, shadows: [
-                    Shadow(
-                        blurRadius: 8,
-                        color: Color.fromARGB(155, 255, 255, 255),
-                        offset: Offset(0, 6))
-                  ]),
-                  textScaler: const TextScaler.linear(1.7),
-                )
-              ],
+            Expanded(
+              // Wrap the Text widget with Expanded
+              child: Text(
+                name,
+                style: const TextStyle(
+                  color: Colors.white,
+                ),
+                overflow: TextOverflow.ellipsis,
+              ),
             ),
-          ),
+            const SizedBox(
+              width: 10,
+            )
+          ],
         ),
       ),
     );
