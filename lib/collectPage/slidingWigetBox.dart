@@ -52,6 +52,8 @@ class _ContainerListViewState extends State<ContainerListView> {
   Widget build(BuildContext context) {
     return Stack(children: [
       ListView.builder(
+          controller: ScrollController(initialScrollOffset: 0),
+          shrinkWrap: true,
           itemCount: items.length,
           itemBuilder: (BuildContext context, int index) {
             return NewItemWidget(
@@ -68,7 +70,7 @@ class _ContainerListViewState extends State<ContainerListView> {
     if (response.statusCode == 200) {
       var result = jsonDecode(response.body);
       setState(() {
-        items.addAll(result["items"]);
+        items.addAll(result["items"].take(5));
       });
     }
   }
@@ -93,27 +95,34 @@ class NewItemWidget extends StatelessWidget {
     return Container(
       margin: EdgeInsets.all(margin),
       child: GlassContainer(
+        blur: 0.0,
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            IconButton(
-              onPressed: () => {},
-              icon: Icon(Icons.check_box_outline_blank, size: iconSize),
-              color: Colors.white,
-            ),
             Expanded(
-              // Wrap the Text widget with Expanded
-              child: Text(
-                name,
-                style: const TextStyle(
-                  color: Colors.white,
-                ),
-                overflow: TextOverflow.ellipsis,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  IconButton(
+                    onPressed: () => {},
+                    icon: Icon(Icons.check_box_outline_blank, size: iconSize),
+                    color: Colors.white,
+                  ),
+                  Expanded(
+                    // Wrap the Text widget with Expanded
+                    child: Text(
+                      name,
+                      style: const TextStyle(
+                        color: Colors.white,
+                      ),
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 10,
+                  )
+                ],
               ),
             ),
-            const SizedBox(
-              width: 10,
-            )
           ],
         ),
       ),

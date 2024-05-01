@@ -12,10 +12,10 @@ class FrostedGlass extends StatelessWidget {
       child: Center(
         child: ClipRect(
           child: new BackdropFilter(
-            filter: new ImageFilter.blur(sigmaX: 1.0, sigmaY: 1.0),
+            filter: new ImageFilter.blur(sigmaX: 50.0, sigmaY: 50.0),
             child: new Container(
                 decoration: new BoxDecoration(
-                    color: Colors.grey.shade200.withOpacity(0.00))),
+                    color: const Color.fromARGB(0, 238, 238, 238))),
           ),
         ),
       ),

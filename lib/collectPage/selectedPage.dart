@@ -30,25 +30,31 @@ class _SelectedPageState extends State<Selectedpage> {
           ),
           Expanded(
               child: SlidingWidgets(
-                  widgetName: "Newest", endPoint: "http://localhost:6969/", iconSizeVal: 40,)),
+            widgetName: "⭐ Newest",
+            endPoint: "http://localhost:6969/",
+            iconSizeVal: 40,
+          )),
           SizedBox(height: 15),
           Expanded(
             child: Row(
               children: [
                 Expanded(
                     child: SlidingWidgets(
-                        widgetName: "Weekly",
-                        endPoint: "http://localhost:6969/")),
+                  widgetName: "🗓️ Weekly",
+                  endPoint: "http://localhost:6969/",
+                  textSize: 21,
+                )),
                 SizedBox(width: 15),
                 Expanded(
                     child: SlidingWidgets(
-                        widgetName: "Daily",
+                        widgetName: "☀️ Daily",
+                        textSize: 26,
                         endPoint: "http://localhost:6969/")),
               ],
             ),
           ),
           SizedBox(
-            height: 70,
+            height: 100,
           )
         ],
       ),

@@ -26,8 +26,16 @@ class HomePage extends StatelessWidget {
     return MaterialApp(
       home: Scaffold(
         body: Stack(children: [
-          BackgroundImage(),
-          FrostedGlass(),
+          Container(
+              decoration: const BoxDecoration(
+                  gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              Color.fromRGBO(38, 43, 55, 1),
+              Color.fromRGBO(28, 29, 39, 1),
+            ],
+          ))),
           Footer(),
         ]),
         backgroundColor: const Color.fromRGBO(34, 40, 49, 1),
@@ -47,8 +55,16 @@ class CapturePage extends StatelessWidget {
       theme: ThemeData(fontFamily: 'Poppins'),
       home: Scaffold(
         body: Stack(children: [
-          BackgroundImage(),
-
+          Container(
+              decoration: const BoxDecoration(
+                  gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              Color.fromRGBO(38, 43, 55, 1),
+              Color.fromRGBO(28, 29, 39, 1),
+            ],
+          ))),
           Column(
             children: [header(), Expanded(child: Selectedpage())],
           ),
@@ -82,7 +98,6 @@ class ConfirmScene extends StatelessWidget {
       theme: ThemeData(fontFamily: 'Poppins'),
       home: Scaffold(
         body: Stack(children: [
-          BackgroundImage(),
           const Positioned(
             bottom: 0,
             left: 0,
