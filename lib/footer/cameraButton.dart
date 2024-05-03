@@ -23,9 +23,7 @@ class CameraButtonState extends State<CameraButton> {
   }
 
   Future<void> _initializeCamera() async {
-    print("trying to load");
     if (Platform.isAndroid || Platform.isIOS){
-      print("loading");
       cameras = await availableCameras();
       _controller = CameraController(cameras.first, ResolutionPreset.high);
       await _controller.initialize();

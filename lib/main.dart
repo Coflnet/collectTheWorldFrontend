@@ -2,6 +2,7 @@ import 'dart:ffi';
 import 'dart:ui';
 
 import 'package:camera/camera.dart';
+import 'package:collect_the_world/background/backgroundGradiant.dart';
 import 'package:collect_the_world/background/backgroundImage.dart';
 import 'package:collect_the_world/cameraScene/cameraScene.dart';
 import 'package:collect_the_world/cameraScene/confirm/confirmScene.dart';
@@ -55,16 +56,7 @@ class CapturePage extends StatelessWidget {
       theme: ThemeData(fontFamily: 'Poppins'),
       home: Scaffold(
         body: Stack(children: [
-          Container(
-              decoration: const BoxDecoration(
-                  gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [
-              Color.fromRGBO(38, 43, 55, 1),
-              Color.fromRGBO(28, 29, 39, 1),
-            ],
-          ))),
+          BackgroundGradiant(),
           Column(
             children: [header(), Expanded(child: Selectedpage())],
           ),
@@ -97,14 +89,9 @@ class ConfirmScene extends StatelessWidget {
     return MaterialApp(
       theme: ThemeData(fontFamily: 'Poppins'),
       home: Scaffold(
-        body: Stack(children: [
-          const Positioned(
-            bottom: 0,
-            left: 0,
-            right: 0,
-            child: Footer(),
-          ),
-          FrostedGlass(),
+        body: const Stack(children: [
+          BackgroundGradiant(),
+          Footer(),
           ConfirmSceneMain()
         ]),
         resizeToAvoidBottomInset: false,

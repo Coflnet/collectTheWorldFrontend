@@ -3,7 +3,18 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-class ConfirmPageSearchBar extends StatelessWidget {
+class ConfirmPageSearchBar extends StatefulWidget {
+  final ValueChanged<String> onSearchContentChanged;
+
+  const ConfirmPageSearchBar({ required this.onSearchContentChanged});
+
+  @override
+  _ConfirmPageSearchBarState createState() => _ConfirmPageSearchBarState();
+}
+
+
+class _ConfirmPageSearchBarState extends State<ConfirmPageSearchBar> {
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -25,6 +36,7 @@ class ConfirmPageSearchBar extends StatelessWidget {
                       width: 0.7),
                 ),
                 child: SearchBar(
+                  onChanged: (newText) => widget.onSearchContentChanged(newText),
                   leading: const Icon(Icons.search, color: Colors.white,),
                   shadowColor: const WidgetStatePropertyAll(Colors.transparent),
                   backgroundColor: WidgetStateProperty.all(Colors.transparent),

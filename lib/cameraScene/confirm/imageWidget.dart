@@ -18,10 +18,10 @@ class ImageWidget extends StatelessWidget {
       child: ClipRRect(
         borderRadius: BorderRadius.circular(20),
         child: globals.image == null
-            ? Container() // Placeholder widget if no image is selected
+            ? Container()
             : Image.file(
                 globals.image!,
-                fit: BoxFit.cover, // Cover the whole area
+                fit: BoxFit.cover, 
               ),
       ),
     );

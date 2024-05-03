@@ -30,10 +30,15 @@ class _CameraScreenState extends State<CameraScreen> {
 
   Future<void> _captureImage() async {
     try {
+      final directory = await getTemporaryDirectory();
+      String filePath = '${directory.path}/captured_image.jpg';
+
       widget.controller.setFlashMode(FlashMode.off);
       final image = await widget.controller.takePicture();
-      final directory = await getTemporaryDirectory();
-      final imagePath = '${directory.path}/captured_image.jpg';
+      if (File(filePath).existsSync()){
+          File(filePath).deleteSync();
+      }
+      final imagePath = filePath;
       await image.saveTo(imagePath);
       setState(() {
         globals.image = File(imagePath);

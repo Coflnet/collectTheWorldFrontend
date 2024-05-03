@@ -8,7 +8,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class FinalConformationScene extends StatelessWidget {
-  const FinalConformationScene({super.key});
+  final String itemName;
+  const FinalConformationScene({super.key, required this.itemName});
 
   @override
   Widget build(BuildContext context) {
@@ -21,8 +22,8 @@ class FinalConformationScene extends StatelessWidget {
             children: [
               const BackButton(),
               const Center(child: ImageWidget()),
-              ItemName(),
-              const ConfirmButton(),
+              ItemNameLabel(),
+              ConfirmButton(searchBarContent: itemName, isHttpRequest: true,),
             ],
           ),
         ],
@@ -69,7 +70,7 @@ class BackButton extends StatelessWidget {
 }
 
 
-class ItemName extends StatelessWidget {
+class ItemNameLabel extends StatelessWidget {
   final String itemName = "apple";
 
   @override
@@ -83,4 +84,6 @@ class ItemName extends StatelessWidget {
     );
   }
 }
+
+
 

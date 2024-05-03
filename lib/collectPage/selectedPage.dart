@@ -42,20 +42,20 @@ class _SelectedPageState extends State<Selectedpage> {
                     child: SlidingWidgets(
                   widgetName: "🗓️ Weekly",
                   endPoint: "http://localhost:6969/",
-                  textSize: 21,
+                  textSize: 30,
                 )),
                 SizedBox(width: 15),
                 Expanded(
                     child: SlidingWidgets(
                         widgetName: "☀️ Daily",
-                        textSize: 26,
+                        textSize: 30,
                         endPoint: "http://localhost:6969/")),
               ],
             ),
           ),
           SizedBox(
             height: 100,
-          )
+          ),
         ],
       ),
     );
