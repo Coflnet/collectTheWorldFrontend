@@ -7,6 +7,7 @@ import 'package:collect_the_world/background/backgroundImage.dart';
 import 'package:collect_the_world/cameraScene/confirm/widgets/confettiWidget.dart';
 import 'package:collect_the_world/cameraScene/pages/cameraScene.dart';
 import 'package:collect_the_world/cameraScene/pages/confirmScene.dart';
+import 'package:collect_the_world/globalWidgets/header/header.dart';
 import 'package:collect_the_world/globalWidgets/loadingWidget.dart';
 import 'package:confetti/confetti.dart';
 import 'package:flutter/material.dart';
@@ -17,6 +18,7 @@ import 'package:collect_the_world/background/frostedGlass.dart';
 import 'package:collect_the_world/footer/cameraButton.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
+import 'package:http/http.dart';
 
 void main() {
   runApp(HomePage() );
@@ -28,6 +30,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(fontFamily: 'Poppins'),
       home: Scaffold(
         body: Stack(children: [
           Container(
@@ -40,6 +43,7 @@ class HomePage extends StatelessWidget {
               Color.fromRGBO(28, 29, 39, 1),
             ],
           ))),
+          customHeader(),
           Footer(),
         ]),
         backgroundColor: const Color.fromRGBO(34, 40, 49, 1),
