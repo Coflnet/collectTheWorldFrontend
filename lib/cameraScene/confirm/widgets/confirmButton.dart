@@ -1,7 +1,8 @@
+import 'package:collect_the_world/cameraScene/confirm/confirmingImage.dart';
 import 'package:collect_the_world/globals.dart' as globals;
 import 'dart:convert';
 import 'dart:ui';
-import 'package:collect_the_world/cameraScene/finalConformation.dart';
+import 'package:collect_the_world/cameraScene/pages/finalConformation.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -46,7 +47,7 @@ class ConfirmButton extends StatelessWidget {
 
   void handleButtonPress(context) async {
     if (isHttpRequest) {
-      makeHttpRequest();
+      makeHttpRequest(context);
       return;
     }
     Navigator.push(
@@ -56,18 +57,12 @@ class ConfirmButton extends StatelessWidget {
                 FinalConformationScene(itemName: searchBarContent)));
   }
 
-  void makeHttpRequest() async {
-    var image = await globals.image!.readAsBytes();
-    var image64 = base64Encode(image);
-
-    var dataToSend = {"image": image64, 'name': searchBarContent};
-    String jsonDataToSend = jsonEncode(dataToSend);
-    final response = await http.post(
-        Uri.parse("http://10.0.0.19:8080/api/ctw/proccess"),
-        headers: {'Content-Type': 'application/json'},
-        body: jsonDataToSend);
-    if (response.statusCode == 200) {
-      print("yay");
-    }
+  void makeHttpRequest(context) async {
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) =>
+                ConfirmingimagePage(searchBarContent: searchBarContent,)));
+    return;
   }
 }

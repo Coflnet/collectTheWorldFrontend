@@ -2,8 +2,9 @@ import 'dart:ui';
 
 import 'package:collect_the_world/background/backgroundImage.dart';
 import 'package:collect_the_world/background/frostedGlass.dart';
-import 'package:collect_the_world/cameraScene/confirm/confirmButton.dart';
-import 'package:collect_the_world/cameraScene/confirm/imageWidget.dart';
+import 'package:collect_the_world/cameraScene/confirm/widgets/confirmButton.dart';
+import 'package:collect_the_world/cameraScene/confirm/widgets/imageWidget.dart';
+import 'package:collect_the_world/footer/cameraButton.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -22,12 +23,14 @@ class FinalConformationScene extends StatelessWidget {
             children: [
               const BackButton(),
               const Center(child: ImageWidget()),
-              ItemNameLabel(),
+              ItemNameLabel(itemName: itemName,),
               ConfirmButton(searchBarContent: itemName, isHttpRequest: true,),
             ],
           ),
         ],
       ),
+        floatingActionButton: CameraButton(),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
 }
@@ -71,13 +74,16 @@ class BackButton extends StatelessWidget {
 
 
 class ItemNameLabel extends StatelessWidget {
-  final String itemName = "apple";
+  final String itemName;
+
+  const ItemNameLabel({super.key, required this.itemName});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(top: 10),
       child: Text(
+        textAlign: TextAlign.center,
         "This is a \n $itemName?",
         style: const TextStyle(color: Colors.white, fontSize: 30),
       ),

@@ -4,8 +4,11 @@ import 'dart:ui';
 import 'package:camera/camera.dart';
 import 'package:collect_the_world/background/backgroundGradiant.dart';
 import 'package:collect_the_world/background/backgroundImage.dart';
-import 'package:collect_the_world/cameraScene/cameraScene.dart';
-import 'package:collect_the_world/cameraScene/confirm/confirmScene.dart';
+import 'package:collect_the_world/cameraScene/confirm/widgets/confettiWidget.dart';
+import 'package:collect_the_world/cameraScene/pages/cameraScene.dart';
+import 'package:collect_the_world/cameraScene/pages/confirmScene.dart';
+import 'package:collect_the_world/globalWidgets/loadingWidget.dart';
+import 'package:confetti/confetti.dart';
 import 'package:flutter/material.dart';
 import 'package:collect_the_world/footer/footerMain.dart';
 import 'package:collect_the_world/collectPage/header.dart';
@@ -16,7 +19,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 
 void main() {
-  runApp(const HomePage());
+  runApp(HomePage() );
 }
 
 class HomePage extends StatelessWidget {
@@ -89,11 +92,8 @@ class ConfirmScene extends StatelessWidget {
     return MaterialApp(
       theme: ThemeData(fontFamily: 'Poppins'),
       home: Scaffold(
-        body: const Stack(children: [
-          BackgroundGradiant(),
-          Footer(),
-          ConfirmSceneMain()
-        ]),
+        body: const Stack(
+            children: [BackgroundGradiant(), Footer(), ConfirmSceneMain()]),
         resizeToAvoidBottomInset: false,
         floatingActionButton: CameraButton(),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,

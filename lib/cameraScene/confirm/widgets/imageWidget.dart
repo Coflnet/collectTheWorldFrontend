@@ -1,8 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:collect_the_world/globals.dart' as globals;
 
-class ImageWidget extends StatelessWidget {
+class ImageWidget extends StatefulWidget{
   const ImageWidget({super.key});
+
+
+  ImageWidgetState createState() => ImageWidgetState();
+}
+
+class ImageWidgetState extends State<ImageWidget> {
+  
+
+  @override
+  void initState() {
+    imageCache.clear();
+    super.initState();
+  }
+
 
   @override
   Widget build(BuildContext context) {

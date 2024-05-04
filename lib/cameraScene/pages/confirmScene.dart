@@ -1,6 +1,6 @@
 import 'dart:ui';
-import 'package:collect_the_world/cameraScene/confirm/confirmButton.dart';
-import 'package:collect_the_world/cameraScene/confirm/imageWidget.dart';
+import 'package:collect_the_world/cameraScene/confirm/widgets/confirmButton.dart';
+import 'package:collect_the_world/cameraScene/confirm/widgets/imageWidget.dart';
 import 'package:collect_the_world/cameraScene/confirm/searchBar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -28,7 +28,7 @@ class _ConfirmSceneMainState extends State<ConfirmSceneMain> {
       child: Column(
         children: [
           ConfirmPageSearchBar(onSearchContentChanged: updateSearchBarContent),
-          ImageWidget(),
+          const ImageWidget(),
           ConfirmButton(searchBarContent: searchBarContent, isHttpRequest: false,),
           const SizedBox(height: 80),
         ],
