@@ -42,13 +42,13 @@ class _SelectedPageState extends State<Selectedpage> {
                     child: SlidingWidgets(
                   widgetName: "🗓️ Weekly",
                   endPoint: "http://localhost:6969/",
-                  textSize: 30,
+                  textSize: 20,
                 )),
                 SizedBox(width: 15),
                 Expanded(
                     child: SlidingWidgets(
                         widgetName: "☀️ Daily",
-                        textSize: 30,
+                        textSize: 25,
                         endPoint: "http://localhost:6969/")),
               ],
             ),

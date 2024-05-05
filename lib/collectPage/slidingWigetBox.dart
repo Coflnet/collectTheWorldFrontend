@@ -2,6 +2,9 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:ui';
 
+import 'package:camera/camera.dart';
+import 'package:collect_the_world/cameraScene/pages/cameraScene.dart';
+import 'package:collect_the_world/main.dart';
 import 'package:flutter/animation.dart';
 import 'package:flutter/material.dart';
 import 'package:glassmorphism_ui/glassmorphism_ui.dart';
@@ -76,7 +79,7 @@ class _ContainerListViewState extends State<ContainerListView> {
   }
 }
 
-class NewItemWidget extends StatelessWidget {
+class NewItemWidget extends StatefulWidget {
   final String name;
   final int xp;
   final bool isVisible;
@@ -86,46 +89,76 @@ class NewItemWidget extends StatelessWidget {
   const NewItemWidget(
       {required this.name,
       this.iconSize = 30,
-      this.margin = 10,
+      this.margin = 8,
       this.isVisible = true,
       this.xp = 25});
 
   @override
+  NewItemWidgetState createState() => NewItemWidgetState();
+}
+
+class NewItemWidgetState extends State<NewItemWidget> {
+  late CameraController _controller;
+  late var cameras;
+
+  Future<void> _initializeCamera() async {
+    if (Platform.isAndroid || Platform.isIOS) {
+      cameras = await availableCameras();
+      _controller = CameraController(cameras.first, ResolutionPreset.high);
+      await _controller.initialize();
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.all(margin),
-      child: GlassContainer(
-        blur: 0.0,
-        child: Row(
-          children: [
-            Expanded(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  IconButton(
-                    onPressed: () => {},
-                    icon: Icon(Icons.check_box_outline_blank, size: iconSize),
-                    color: Colors.white,
-                  ),
-                  Expanded(
-                    // Wrap the Text widget with Expanded
-                    child: Text(
-                      name,
-                      style: const TextStyle(
-                        color: Colors.white,
-                      ),
-                      overflow: TextOverflow.ellipsis,
+      child: TextButton(
+        onPressed: () {
+          changeScene(context);
+        },
+        child: GlassContainer(
+          blur: 0.0,
+          child: Row(
+            children: [
+              Expanded(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Container(
+                      margin: EdgeInsets.all(6),
+                      child: Icon(Icons.check_box_outline_blank,
+                            size: widget.iconSize, color: Colors.white,),
                     ),
-                  ),
-                  const SizedBox(
-                    width: 10,
-                  )
-                ],
+                    Expanded(
+                      // Wrap the Text widget with Expanded
+                      child: Text(
+                        widget.name,
+                        style: const TextStyle(
+                          color: Colors.white,
+                        ),
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 10,
+                    )
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
+  }
+
+  void changeScene(context) async {
+    print("chaning");
+    await _initializeCamera();
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) =>
+                CameraScreen(controller: _controller, dailyWeeklyItem: true)));
   }
 }

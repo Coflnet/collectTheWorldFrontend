@@ -63,10 +63,11 @@ class CapturePage extends StatelessWidget {
       theme: ThemeData(fontFamily: 'Poppins'),
       home: Scaffold(
         body: Stack(children: [
-          BackgroundGradiant(),
+          const BackgroundGradiant(),
           Column(
-            children: [header(), Expanded(child: Selectedpage())],
+            children: [const SizedBox(height: 125,), Expanded(child: Selectedpage())],
           ),
+          customHeader(),
           const Footer(),
         ]),
         floatingActionButton: CameraButton(),
@@ -79,13 +80,15 @@ class CapturePage extends StatelessWidget {
 
 class CameraScene extends StatelessWidget {
   final CameraController controller;
+  final dailyWeeklyItem;
+  final itemName;
 
-  CameraScene({required this.controller});
+  CameraScene({required this.controller, this.dailyWeeklyItem = false, this.itemName = ""});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: CameraScreen(controller),
+      child: CameraScreen(controller: controller, dailyWeeklyItem:dailyWeeklyItem, itemName: itemName,),
     );
   }
 }
