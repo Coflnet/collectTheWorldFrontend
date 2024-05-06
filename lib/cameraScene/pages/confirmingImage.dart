@@ -12,6 +12,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import "package:collect_the_world/globals.dart" as globals;
+import 'package:collect_the_world/globalScripts/dailyStreak.dart'
+    as dailyStreakScript;
 
 class ConfirmingimagePage extends StatefulWidget {
   final String searchBarContent;
@@ -32,7 +34,7 @@ class ConfirmingimagePageState extends State<ConfirmingimagePage> {
     super.initState();
     makeHttpCall();
     confettiController =
-        ConfettiController(duration: Duration(milliseconds: 50));
+        ConfettiController(duration: const Duration(milliseconds: 50));
   }
 
   @override
@@ -94,6 +96,13 @@ class ConfirmingimagePageState extends State<ConfirmingimagePage> {
         body: jsonDataToSend);
     if (response.statusCode == 200) {
       confettiController.play();
+
+      if (dailyStreakScript.lastUpdate.isAfter(DateTime.now())) {
+        dailyStreakScript.streak = 0;
+        dailyStreakScript.LoadDailyStreak().updateDayTimes();
+      }
+      dailyStreakScript.streak += 1;
+      dailyStreakScript.LoadDailyStreak().updateDayTimes();
       setState(() {
         isLoading = false;
       });

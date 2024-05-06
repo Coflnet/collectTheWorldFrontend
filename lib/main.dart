@@ -6,6 +6,7 @@ import 'package:collect_the_world/background/backgroundGradiant.dart';
 import 'package:collect_the_world/cameraScene/pages/cameraScene.dart';
 import 'package:collect_the_world/cameraScene/pages/confirmScene.dart';
 import 'package:collect_the_world/globalScripts/dailyStreak.dart';
+import 'package:collect_the_world/globalWidgets/header/dailyStreak.dart';
 import 'package:collect_the_world/globalWidgets/header/header.dart';
 import 'package:flutter/material.dart';
 import 'package:collect_the_world/footer/footerMain.dart';
@@ -30,7 +31,7 @@ class HomePageState extends State<HomePage> {
   int dailyStreakNum = 0;
 
   @override
-  void initState() async {
+  void initState() {
     super.initState();
     dailyStreak.loadStreak();
     setState(() {
@@ -54,7 +55,7 @@ class HomePageState extends State<HomePage> {
               Color.fromRGBO(28, 29, 39, 1),
             ],
           ))),
-          CustomHeader(dailStreakNum: dailyStreakNum,),
+          CustomHeader(dailStreakNum: dailyStreakNum),
           const Footer(),
         ]),
         backgroundColor: const Color.fromRGBO(34, 40, 49, 1),
@@ -83,7 +84,7 @@ class CapturePage extends StatelessWidget {
               Expanded(child: Selectedpage())
             ],
           ),
-          customHeader(),
+          CustomHeader(dailStreakNum: globalStreakFile.streak),
           const Footer(),
         ]),
         floatingActionButton: CameraButton(),

@@ -1,4 +1,4 @@
-import 'package:collect_the_world/cameraScene/confirm/confirmingImage.dart';
+import 'package:collect_the_world/cameraScene/pages/confirmingImage.dart';
 import 'package:collect_the_world/globals.dart' as globals;
 import 'dart:convert';
 import 'dart:ui';

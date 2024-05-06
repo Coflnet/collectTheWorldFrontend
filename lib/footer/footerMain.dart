@@ -79,7 +79,7 @@ class Footer extends StatelessWidget {
               child: IconButton(
                 iconSize: 33,
                 icon: const Icon(
-                  Icons.notifications_outlined,
+                  Icons.person_2_outlined,
                   color: Color.fromRGBO(110, 137, 164, 1),
                 ),
                 onPressed: () => {},
