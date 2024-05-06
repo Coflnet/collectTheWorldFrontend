@@ -3,29 +3,40 @@ import 'dart:ui';
 
 import 'package:camera/camera.dart';
 import 'package:collect_the_world/background/backgroundGradiant.dart';
-import 'package:collect_the_world/background/backgroundImage.dart';
-import 'package:collect_the_world/cameraScene/confirm/widgets/confettiWidget.dart';
 import 'package:collect_the_world/cameraScene/pages/cameraScene.dart';
 import 'package:collect_the_world/cameraScene/pages/confirmScene.dart';
+import 'package:collect_the_world/globalScripts/dailyStreak.dart';
 import 'package:collect_the_world/globalWidgets/header/header.dart';
-import 'package:collect_the_world/globalWidgets/loadingWidget.dart';
-import 'package:confetti/confetti.dart';
 import 'package:flutter/material.dart';
 import 'package:collect_the_world/footer/footerMain.dart';
-import 'package:collect_the_world/collectPage/header.dart';
 import 'package:collect_the_world/collectPage/selectedPage.dart';
-import 'package:collect_the_world/background/frostedGlass.dart';
 import 'package:collect_the_world/footer/cameraButton.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter/widgets.dart';
-import 'package:http/http.dart';
+import 'package:collect_the_world/globalScripts/dailyStreak.dart'
+    as globalStreakFile;
 
 void main() {
-  runApp(HomePage() );
+  runApp(const HomePage());
 }
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
+
+  @override
+  HomePageState createState() => HomePageState();
+}
+
+class HomePageState extends State<HomePage> {
+  LoadDailyStreak dailyStreak = LoadDailyStreak();
+  int dailyStreakNum = 0;
+
+  @override
+  void initState() async {
+    super.initState();
+    dailyStreak.loadStreak();
+    setState(() {
+      dailyStreakNum = globalStreakFile.streak;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,8 +54,8 @@ class HomePage extends StatelessWidget {
               Color.fromRGBO(28, 29, 39, 1),
             ],
           ))),
-          customHeader(),
-          Footer(),
+          CustomHeader(dailStreakNum: dailyStreakNum,),
+          const Footer(),
         ]),
         backgroundColor: const Color.fromRGBO(34, 40, 49, 1),
         floatingActionButton: CameraButton(),
@@ -65,7 +76,12 @@ class CapturePage extends StatelessWidget {
         body: Stack(children: [
           const BackgroundGradiant(),
           Column(
-            children: [const SizedBox(height: 125,), Expanded(child: Selectedpage())],
+            children: [
+              const SizedBox(
+                height: 125,
+              ),
+              Expanded(child: Selectedpage())
+            ],
           ),
           customHeader(),
           const Footer(),
@@ -83,12 +99,19 @@ class CameraScene extends StatelessWidget {
   final dailyWeeklyItem;
   final itemName;
 
-  CameraScene({required this.controller, this.dailyWeeklyItem = false, this.itemName = ""});
+  CameraScene(
+      {required this.controller,
+      this.dailyWeeklyItem = false,
+      this.itemName = ""});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: CameraScreen(controller: controller, dailyWeeklyItem:dailyWeeklyItem, itemName: itemName,),
+      child: CameraScreen(
+        controller: controller,
+        dailyWeeklyItem: dailyWeeklyItem,
+        itemName: itemName,
+      ),
     );
   }
 }

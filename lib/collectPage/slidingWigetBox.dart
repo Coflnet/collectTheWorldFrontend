@@ -125,7 +125,7 @@ class NewItemWidgetState extends State<NewItemWidget> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Container(
-                      margin: EdgeInsets.all(6),
+                      margin: const EdgeInsets.all(6),
                       child: Icon(Icons.check_box_outline_blank,
                             size: widget.iconSize, color: Colors.white,),
                     ),
@@ -153,7 +153,6 @@ class NewItemWidgetState extends State<NewItemWidget> {
   }
 
   void changeScene(context) async {
-    print("chaning");
     await _initializeCamera();
     Navigator.push(
         context,

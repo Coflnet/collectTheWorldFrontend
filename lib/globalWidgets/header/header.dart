@@ -4,13 +4,19 @@ import 'package:collect_the_world/globalWidgets/header/xpwidget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class customHeader extends StatelessWidget {
+class CustomHeader extends StatelessWidget {
+  final int dailStreakNum;
+
+  const CustomHeader({super.key, required this.dailStreakNum});
+
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: const BoxDecoration(
         color: Color.fromARGB(255, 28, 32, 44),
-        border: Border(bottom: BorderSide(color: Color.fromARGB(255, 141, 141, 141), width: 2) ),
+        border: Border(
+            bottom: BorderSide(
+                color: Color.fromARGB(255, 141, 141, 141), width: 2)),
       ),
       height: 120,
       width: double.infinity,
@@ -25,7 +31,7 @@ class customHeader extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 CurrentPosition(),
-                DailyStreak(),
+                DailyStreak(dailStreakNum: dailStreakNum,),
                 XpWidget(),
               ],
             ),
