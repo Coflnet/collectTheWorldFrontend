@@ -24,13 +24,13 @@ class ImageWidgetState extends State<ImageWidget> {
       margin: const EdgeInsets.fromLTRB(70, 40, 70, 25),
       decoration: BoxDecoration(
         border: Border.all(
-          width: 2,
+          width: 3,
           color: Colors.white24,
         ),
         borderRadius: BorderRadius.circular(20),
       ),
       child: ClipRRect(
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(15),
         child: globals.image == null
             ? Container()
             : Image.file(
