@@ -29,6 +29,7 @@ dependencies:
   glassmorphism: ^3.0.0
   loading_animation_widget: ^1.2.1
   confetti: ^0.7.0
+  auto_size_text: ^3.0.0
 
 dev_dependencies:
   flutter_test:
@@ -54,4 +55,4 @@ flutter:
   fonts: 
   - family: Poppins
     fonts:
-      - asset: fonts/Poppins-Bold.ttf
+      - asset: fonts/Poppins-SemiBold.ttf

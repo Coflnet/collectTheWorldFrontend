@@ -8,6 +8,7 @@ import 'package:collect_the_world/cameraScene/pages/confirmScene.dart';
 import 'package:collect_the_world/globalScripts/dailyStreak.dart';
 import 'package:collect_the_world/globalWidgets/header/dailyStreak.dart';
 import 'package:collect_the_world/globalWidgets/header/header.dart';
+import 'package:collect_the_world/homePage/contentContainer.dart';
 import 'package:flutter/material.dart';
 import 'package:collect_the_world/footer/footerMain.dart';
 import 'package:collect_the_world/collectPage/selectedPage.dart';
@@ -56,6 +57,7 @@ class HomePageState extends State<HomePage> {
             ],
           ))),
           CustomHeader(dailStreakNum: dailyStreakNum),
+          ContentContainer(),
           const Footer(),
         ]),
         backgroundColor: const Color.fromRGBO(34, 40, 49, 1),

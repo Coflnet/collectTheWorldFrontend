@@ -11,7 +11,7 @@ class CurrentPositionState extends State<CurrentPosition> {
   @override
   Widget build(BuildContext context) {
     return Row(children: [
-      const Icon(Icons.leaderboard_outlined, size: 30, color: Colors.white,),
+      const Icon(Icons.leaderboard_outlined, size: 30, color: Color.fromARGB(255, 48, 95, 177),),
       Container(
         margin: const EdgeInsets.only(left: 10),
         child: const Text(

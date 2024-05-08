@@ -19,6 +19,8 @@ class LoadDailyStreak {
     String filePath = "${appDir}/dailyStreak.json";
     File file = File(filePath);
 
+    return;
+
     if (!file.existsSync()) {
       file.createSync();
       var fileData = {

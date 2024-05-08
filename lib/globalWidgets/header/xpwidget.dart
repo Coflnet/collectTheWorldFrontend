@@ -9,10 +9,15 @@ class XpWidget extends StatefulWidget {
 class XpWidgetState extends State<XpWidget> {
   @override
   Widget build(BuildContext context) {
-    return const Text(
-      "69 XP",
-      textScaler: TextScaler.linear(2),
-      style: TextStyle(color: Colors.white),
+    return const Row(
+      children: [
+        Icon(Icons.grade, color: Colors.yellowAccent, size: 30,),
+        Text(
+          " 69",
+          textScaler: TextScaler.linear(2),
+          style: TextStyle(color: Colors.white),
+        ),
+      ],
     );
   }
 }
