@@ -1,0 +1,242 @@
+//
+// AUTO-GENERATED FILE, DO NOT MODIFY!
+//
+// @dart=2.12
+
+// ignore_for_file: unused_element, unused_import
+// ignore_for_file: always_put_required_named_parameters_first
+// ignore_for_file: constant_identifier_names
+// ignore_for_file: lines_longer_than_80_chars
+
+part of openapi.api;
+
+class CapturedImageWithDownloadUrl {
+  /// Returns a new [CapturedImageWithDownloadUrl] instance.
+  CapturedImageWithDownloadUrl({
+    this.id,
+    this.userId,
+    this.objectLabel,
+    this.description,
+    this.day,
+    this.verifications,
+    this.metadata = const {},
+    this.contentType,
+    this.size,
+    this.downloadUrl,
+  });
+
+  ///
+  /// Please note: This property should have been non-nullable! Since the specification file
+  /// does not include a default value (using the "default:" property), however, the generated
+  /// source code must fall back to having a nullable type.
+  /// Consider adding a "default:" property in the specification file to hide this note.
+  ///
+  String? id;
+
+  ///
+  /// Please note: This property should have been non-nullable! Since the specification file
+  /// does not include a default value (using the "default:" property), however, the generated
+  /// source code must fall back to having a nullable type.
+  /// Consider adding a "default:" property in the specification file to hide this note.
+  ///
+  String? userId;
+
+  String? objectLabel;
+
+  String? description;
+
+  ///
+  /// Please note: This property should have been non-nullable! Since the specification file
+  /// does not include a default value (using the "default:" property), however, the generated
+  /// source code must fall back to having a nullable type.
+  /// Consider adding a "default:" property in the specification file to hide this note.
+  ///
+  int? day;
+
+  ///
+  /// Please note: This property should have been non-nullable! Since the specification file
+  /// does not include a default value (using the "default:" property), however, the generated
+  /// source code must fall back to having a nullable type.
+  /// Consider adding a "default:" property in the specification file to hide this note.
+  ///
+  int? verifications;
+
+  /// Can contain \"segmentation\", \"ocr\" etc
+  Map<String, String>? metadata;
+
+  String? contentType;
+
+  ///
+  /// Please note: This property should have been non-nullable! Since the specification file
+  /// does not include a default value (using the "default:" property), however, the generated
+  /// source code must fall back to having a nullable type.
+  /// Consider adding a "default:" property in the specification file to hide this note.
+  ///
+  int? size;
+
+  String? downloadUrl;
+
+  @override
+  bool operator ==(Object other) => identical(this, other) || other is CapturedImageWithDownloadUrl &&
+    other.id == id &&
+    other.userId == userId &&
+    other.objectLabel == objectLabel &&
+    other.description == description &&
+    other.day == day &&
+    other.verifications == verifications &&
+    _deepEquality.equals(other.metadata, metadata) &&
+    other.contentType == contentType &&
+    other.size == size &&
+    other.downloadUrl == downloadUrl;
+
+  @override
+  int get hashCode =>
+    // ignore: unnecessary_parenthesis
+    (id == null ? 0 : id!.hashCode) +
+    (userId == null ? 0 : userId!.hashCode) +
+    (objectLabel == null ? 0 : objectLabel!.hashCode) +
+    (description == null ? 0 : description!.hashCode) +
+    (day == null ? 0 : day!.hashCode) +
+    (verifications == null ? 0 : verifications!.hashCode) +
+    (metadata == null ? 0 : metadata!.hashCode) +
+    (contentType == null ? 0 : contentType!.hashCode) +
+    (size == null ? 0 : size!.hashCode) +
+    (downloadUrl == null ? 0 : downloadUrl!.hashCode);
+
+  @override
+  String toString() => 'CapturedImageWithDownloadUrl[id=$id, userId=$userId, objectLabel=$objectLabel, description=$description, day=$day, verifications=$verifications, metadata=$metadata, contentType=$contentType, size=$size, downloadUrl=$downloadUrl]';
+
+  Map<String, dynamic> toJson() {
+    final json = <String, dynamic>{};
+    if (this.id != null) {
+      json[r'id'] = this.id;
+    } else {
+      json[r'id'] = null;
+    }
+    if (this.userId != null) {
+      json[r'userId'] = this.userId;
+    } else {
+      json[r'userId'] = null;
+    }
+    if (this.objectLabel != null) {
+      json[r'objectLabel'] = this.objectLabel;
+    } else {
+      json[r'objectLabel'] = null;
+    }
+    if (this.description != null) {
+      json[r'description'] = this.description;
+    } else {
+      json[r'description'] = null;
+    }
+    if (this.day != null) {
+      json[r'day'] = this.day;
+    } else {
+      json[r'day'] = null;
+    }
+    if (this.verifications != null) {
+      json[r'verifications'] = this.verifications;
+    } else {
+      json[r'verifications'] = null;
+    }
+    if (this.metadata != null) {
+      json[r'metadata'] = this.metadata;
+    } else {
+      json[r'metadata'] = null;
+    }
+    if (this.contentType != null) {
+      json[r'contentType'] = this.contentType;
+    } else {
+      json[r'contentType'] = null;
+    }
+    if (this.size != null) {
+      json[r'size'] = this.size;
+    } else {
+      json[r'size'] = null;
+    }
+    if (this.downloadUrl != null) {
+      json[r'downloadUrl'] = this.downloadUrl;
+    } else {
+      json[r'downloadUrl'] = null;
+    }
+    return json;
+  }
+
+  /// Returns a new [CapturedImageWithDownloadUrl] instance and imports its values from
+  /// [value] if it's a [Map], null otherwise.
+  // ignore: prefer_constructors_over_static_methods
+  static CapturedImageWithDownloadUrl? fromJson(dynamic value) {
+    if (value is Map) {
+      final json = value.cast<String, dynamic>();
+
+      // Ensure that the map contains the required keys.
+      // Note 1: the values aren't checked for validity beyond being non-null.
+      // Note 2: this code is stripped in release mode!
+      assert(() {
+        requiredKeys.forEach((key) {
+          assert(json.containsKey(key), 'Required key "CapturedImageWithDownloadUrl[$key]" is missing from JSON.');
+          assert(json[key] != null, 'Required key "CapturedImageWithDownloadUrl[$key]" has a null value in JSON.');
+        });
+        return true;
+      }());
+
+      return CapturedImageWithDownloadUrl(
+        id: mapValueOfType<String>(json, r'id'),
+        userId: mapValueOfType<String>(json, r'userId'),
+        objectLabel: mapValueOfType<String>(json, r'objectLabel'),
+        description: mapValueOfType<String>(json, r'description'),
+        day: mapValueOfType<int>(json, r'day'),
+        verifications: mapValueOfType<int>(json, r'verifications'),
+        metadata: mapCastOfType<String, String>(json, r'metadata') ?? const {},
+        contentType: mapValueOfType<String>(json, r'contentType'),
+        size: mapValueOfType<int>(json, r'size'),
+        downloadUrl: mapValueOfType<String>(json, r'downloadUrl'),
+      );
+    }
+    return null;
+  }
+
+  static List<CapturedImageWithDownloadUrl> listFromJson(dynamic json, {bool growable = false,}) {
+    final result = <CapturedImageWithDownloadUrl>[];
+    if (json is List && json.isNotEmpty) {
+      for (final row in json) {
+        final value = CapturedImageWithDownloadUrl.fromJson(row);
+        if (value != null) {
+          result.add(value);
+        }
+      }
+    }
+    return result.toList(growable: growable);
+  }
+
+  static Map<String, CapturedImageWithDownloadUrl> mapFromJson(dynamic json) {
+    final map = <String, CapturedImageWithDownloadUrl>{};
+    if (json is Map && json.isNotEmpty) {
+      json = json.cast<String, dynamic>(); // ignore: parameter_assignments
+      for (final entry in json.entries) {
+        final value = CapturedImageWithDownloadUrl.fromJson(entry.value);
+        if (value != null) {
+          map[entry.key] = value;
+        }
+      }
+    }
+    return map;
+  }
+
+  // maps a json object with a list of CapturedImageWithDownloadUrl-objects as value to a dart map
+  static Map<String, List<CapturedImageWithDownloadUrl>> mapListFromJson(dynamic json, {bool growable = false,}) {
+    final map = <String, List<CapturedImageWithDownloadUrl>>{};
+    if (json is Map && json.isNotEmpty) {
+      // ignore: parameter_assignments
+      json = json.cast<String, dynamic>();
+      for (final entry in json.entries) {
+        map[entry.key] = CapturedImageWithDownloadUrl.listFromJson(entry.value, growable: growable,);
+      }
+    }
+    return map;
+  }
+
+  /// The list of required keys that must be present in a JSON.
+  static const requiredKeys = <String>{
+  };
+}
+
