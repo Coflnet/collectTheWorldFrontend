@@ -1,9 +1,6 @@
 import 'dart:convert';
-import 'dart:ffi';
 import 'dart:io';
 
-import 'package:collect_the_world/globalWidgets/header/dailyStreak.dart';
-import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 
 int streak = 0;
@@ -19,7 +16,9 @@ class LoadDailyStreak {
     String filePath = "${appDir}/dailyStreak.json";
     File file = File(filePath);
 
-    return;
+    if (!Platform.isAndroid || !Platform.isIOS) {
+      return;
+    }
 
     if (!file.existsSync()) {
       file.createSync();

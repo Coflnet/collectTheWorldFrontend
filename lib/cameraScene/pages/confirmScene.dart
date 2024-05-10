@@ -29,7 +29,7 @@ class _ConfirmSceneMainState extends State<ConfirmSceneMain> {
         children: [
           ConfirmPageSearchBar(onSearchContentChanged: updateSearchBarContent),
           const ImageWidget(),
-          ConfirmButton(searchBarContent: searchBarContent, isHttpRequest: false,),
+        ConfirmButton(searchBarContent: searchBarContent, isHttpRequest: false,),
           const SizedBox(height: 80),
         ],
       ),

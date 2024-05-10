@@ -1,6 +1,13 @@
+import 'dart:io';
+
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:camera/camera.dart';
+import 'package:collect_the_world/cameraScene/pages/cameraScene.dart';
+import 'package:collect_the_world/globalScripts/cameraController.dart';
 import 'package:collect_the_world/globalWidgets/baseWidget/baseWidget.dart';
+import 'package:collect_the_world/homePage/contentContainer.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class CollectItemWidget extends StatelessWidget {
@@ -21,11 +28,12 @@ class CollectItemWidget extends StatelessWidget {
           Expanded(
             child: Center(
               child: Container(
-                  margin:  const EdgeInsets.all(20),
+                  margin: const EdgeInsets.all(20),
                   child: AutoSizeText(
                     maxLines: 1,
                     "Apple",
-                    style: TextStyle(fontSize: 50, color: Colors.white.withOpacity(0.9)),
+                    style: TextStyle(
+                        fontSize: 50, color: Colors.white.withOpacity(0.9)),
                   )),
             ),
           ),
@@ -78,5 +86,26 @@ class CollectItemWidget extends StatelessWidget {
         ],
       )),
     );
+  }
+}
+
+class CameraButton extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return IconButton(
+        onPressed: () => changeToCameraScene(context),
+        icon: const Icon(
+          Icons.arrow_forward_rounded,
+          color: Color.fromRGBO(126, 156, 187, 1),
+          size: 40,
+        ));
+  }
+
+  void changeToCameraScene(context) async {
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) =>
+                CameraScreen(controller: controller, dailyWeeklyItem: true)));
   }
 }

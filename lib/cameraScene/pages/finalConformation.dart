@@ -6,7 +6,9 @@ import 'package:collect_the_world/background/frostedGlass.dart';
 import 'package:collect_the_world/cameraScene/confirm/widgets/confirmButton.dart';
 import 'package:collect_the_world/cameraScene/confirm/widgets/createDescription.dart';
 import 'package:collect_the_world/cameraScene/confirm/widgets/imageWidget.dart';
+import 'package:collect_the_world/cameraScene/pages/cameraScene.dart';
 import 'package:collect_the_world/footer/cameraButton.dart';
+import 'package:collect_the_world/globalScripts/cameraController.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -23,9 +25,9 @@ class FinalConformationScene extends StatelessWidget {
           FrostedGlass(),
           Column(
             children: [
-              const Row(
+              Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [BackButton(), CreateDescription()],
+                children: [const BackButton(), CreateDescription(searchBarContent: itemName,)],
               ),
               const Center(child: ImageWidget()),
               ItemNameLabel(
@@ -39,8 +41,6 @@ class FinalConformationScene extends StatelessWidget {
           ),
         ],
       ),
-      floatingActionButton: CameraButton(),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
 }
@@ -59,13 +59,20 @@ class BackButton extends StatelessWidget {
               color: Colors.white10,
               border: Border.all(color: Colors.white12)),
           child: IconButton(
-              onPressed: () => {},
+              onPressed: () => Navigator.of(context).pop(),
               icon: const Icon(
                 Icons.arrow_back_rounded,
                 color: Colors.orange,
                 size: 40,
               )),
         ));
+  }
+  void changeToCameraScene(context) async {
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) =>
+                CameraScreen(controller: controller, dailyWeeklyItem: true)));
   }
 }
 

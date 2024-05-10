@@ -2,7 +2,9 @@ import 'package:collect_the_world/cameraScene/pages/descriptionScene.dart';
 import 'package:flutter/material.dart';
 
 class CreateDescription extends StatelessWidget {
-  const CreateDescription({super.key});
+  final String searchBarContent;
+
+  const CreateDescription({super.key, required this.searchBarContent});
 
   @override
   Widget build(BuildContext context) {
@@ -18,17 +20,19 @@ class CreateDescription extends StatelessWidget {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => DescriptionScene()))
+                          builder: (context) => DescriptionScene(
+                                searchBarContents: searchBarContent,
+                              )))
                 },
             child: const Row(
               children: [
                 Text(
                   "Add description",
-                  style: TextStyle(color: Colors.white, fontSize: 15),
+                  style: TextStyle(color: Colors.orangeAccent, fontSize: 15),
                 ),
                 Icon(
                   Icons.add_rounded,
-                  color: Colors.white,
+                  color: Colors.orangeAccent,
                   size: 45,
                 )
               ],

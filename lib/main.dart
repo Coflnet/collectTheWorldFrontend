@@ -5,6 +5,7 @@ import 'package:camera/camera.dart';
 import 'package:collect_the_world/background/backgroundGradiant.dart';
 import 'package:collect_the_world/cameraScene/pages/cameraScene.dart';
 import 'package:collect_the_world/cameraScene/pages/confirmScene.dart';
+import 'package:collect_the_world/globalScripts/cameraController.dart';
 import 'package:collect_the_world/globalScripts/dailyStreak.dart';
 import 'package:collect_the_world/globalWidgets/header/dailyStreak.dart';
 import 'package:collect_the_world/globalWidgets/header/header.dart';
@@ -32,8 +33,9 @@ class HomePageState extends State<HomePage> {
   int dailyStreakNum = 0;
 
   @override
-  void initState() {
+  initState() {
     super.initState();
+    initCamera();
     dailyStreak.loadStreak();
     setState(() {
       dailyStreakNum = globalStreakFile.streak;

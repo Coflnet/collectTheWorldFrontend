@@ -19,29 +19,22 @@ class ConfirmButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
         margin: const EdgeInsets.only(top: 20),
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(50),
-          child: BackdropFilter(
-            filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
-            child: Container(
-              width: 83,
-              height: 83,
-              decoration: BoxDecoration(
-                color:
-                    const Color.fromARGB(255, 207, 207, 207).withOpacity(0.04),
-                borderRadius: BorderRadius.circular(70),
-                border: Border.all(
-                    color: const Color.fromARGB(43, 255, 255, 255), width: 0.7),
-              ),
-              child: IconButton(
-                  onPressed: () => {handleButtonPress(context)},
-                  icon: const Icon(
-                    Icons.check_rounded,
-                    color: Colors.orange,
-                    size: 60,
-                  )),
-            ),
+        child: Container(
+          width: 83,
+          height: 83,
+          decoration: BoxDecoration(
+            color: Colors.white10,
+                        borderRadius: BorderRadius.circular(70),
+            border: Border.all(
+                color: Colors.white12, width: 1.5),
           ),
+          child: IconButton(
+              onPressed: () => {handleButtonPress(context)},
+              icon: const Icon(
+                Icons.check_rounded,
+                color: Colors.orange,
+                size: 60,
+              )),
         ));
   }
 
