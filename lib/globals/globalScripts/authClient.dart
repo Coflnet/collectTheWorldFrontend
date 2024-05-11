@@ -8,6 +8,7 @@ import 'package:random_string_generator/random_string_generator.dart';
 
 String token = "";
 var secret = "";
+final client = ApiClient(basePath: "https://ctw.coflnet.com");
 
 class Authclient {
   void initClient() async {
@@ -15,49 +16,54 @@ class Authclient {
       return;
     }
     Directory appDir = await getApplicationDocumentsDirectory();
-    String filePath = "${appDir}/clientDetails.json";
+    String filePath = "${appDir.path}/clientDetail.json";
     File file = File(filePath);
 
-    if (!file.existsSync()) {
-      file.createSync();
+    if (!await appDir.exists()) {
+      await appDir.create(recursive: true);
+    }
+
+    if (!await file.exists()) {
+      print(
+          "ljwehrkuwherklhwethqwiouh\nljwehrkuwherklhwethqwiouh\nljwehrkuwherklhwethqwiouh\n");
+      file.createSync(recursive: true);
       var fileData = {"token": "", "secret": ""};
       var jsonFileData = jsonEncode(fileData);
       await file.writeAsString(jsonFileData);
       generateSecret();
       storeData();
     }
-    generateToken();
-    storeData();
     var fileDatajson = await file.readAsString();
     var fileData = await jsonDecode(fileDatajson);
+    secret = fileData.secret;
+    generateToken();
+    storeData();
 
     token = fileData.token;
-    secret = fileData.secret;
-    
-    print(token);
   }
 
   void generateSecret() {
     var generator =
-        RandomStringGenerator(fixedLength: 20, mustHaveAtLeastOneOfEach: true);
+        RandomStringGenerator(fixedLength: 36, mustHaveAtLeastOneOfEach: true);
     secret = generator.generate();
   }
 
   void generateToken() async {
-    final apiInstance = AuthApi();
+    final apiInstance = AuthApi(client);
     final loginRequest = AnonymousLoginRequest(secret: secret, locale: "en");
     try {
       final response = await apiInstance.apiAuthAnonymousPost(
           anonymousLoginRequest: loginRequest);
       token = response!.token!;
+      print(token);
     } catch (e) {
       print("there was a error generating new token: $e");
     }
   }
 
   void storeData() async {
-        Directory appDir = await getApplicationDocumentsDirectory();
-    String filePath = "${appDir}/clientDetails.json";
+    Directory appDir = await getApplicationDocumentsDirectory();
+    String filePath = "${appDir.path}/clientDetail.json";
     File file = File(filePath);
     var fileData = {
       "token": token,
@@ -67,4 +73,11 @@ class Authclient {
     file.writeAsString(fileDataJson);
   }
 
+  String tokenRequest() {
+    if (token == ""){
+      initClient();
+      return token;
+    }
+    return token;
+  }
 }

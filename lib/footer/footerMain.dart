@@ -1,7 +1,10 @@
 import 'package:collect_the_world/main.dart';
+import 'package:collect_the_world/pages/profilePage/profilePage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dart:ui';
+
+import 'package:haptic_feedback/haptic_feedback.dart';
 
 class Footer extends StatelessWidget {
   const Footer({super.key});
@@ -29,8 +32,18 @@ class Footer extends StatelessWidget {
                 icon: const Icon(Icons.home_outlined,
                     color: Color.fromRGBO(110, 137, 164, 1)),
                 onPressed: () => {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => const HomePage()))
+                  Haptics.vibrate(HapticsType.light),
+                  Navigator.push(
+                      context,
+                      PageRouteBuilder(
+                        pageBuilder: (context, animation, secondaryAnimation) =>
+                            const HomePage(),
+                        transitionsBuilder:
+                            (context, animation, secondaryAnimation, child) {
+                          return child;
+                        },
+                        transitionDuration: const Duration(milliseconds: 0),
+                      ))
                 },
               ),
             ),
@@ -46,10 +59,18 @@ class Footer extends StatelessWidget {
                 icon: const Icon(Icons.paste_rounded,
                     color: Color.fromRGBO(110, 137, 164, 1)),
                 onPressed: () => {
+                  Haptics.vibrate(HapticsType.light),
                   Navigator.push(
                       context,
-                      MaterialPageRoute(
-                          builder: (context) => const CapturePage()))
+                      PageRouteBuilder(
+                        pageBuilder: (context, animation, secondaryAnimation) =>
+                            const CapturePage(),
+                        transitionsBuilder:
+                            (context, animation, secondaryAnimation, child) {
+                          return child;
+                        },
+                        transitionDuration: const Duration(milliseconds: 0),
+                      ))
                 },
               ),
             ),
@@ -82,7 +103,20 @@ class Footer extends StatelessWidget {
                   Icons.person,
                   color: Color.fromRGBO(110, 137, 164, 1),
                 ),
-                onPressed: () => {},
+                onPressed: () => {
+                  Haptics.vibrate(HapticsType.light),
+                  Navigator.push(
+                      context,
+                      PageRouteBuilder(
+                        pageBuilder: (context, animation, secondaryAnimation) =>
+                            const ProfilePage(),
+                        transitionsBuilder:
+                            (context, animation, secondaryAnimation, child) {
+                          return child;
+                        },
+                        transitionDuration: const Duration(milliseconds: 0),
+                      ))
+                },
               ),
             )
           ],

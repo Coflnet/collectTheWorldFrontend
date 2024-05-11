@@ -13,12 +13,10 @@ class LoadDailyStreak {
 
   void loadStreak() async {
     Directory appDir = await getApplicationDocumentsDirectory();
-    String filePath = "${appDir}/dailyStreak.json";
+    String filePath = "${appDir.path}/dailyStreak.json";
     File file = File(filePath);
 
-    if (!Platform.isAndroid || !Platform.isIOS) {
-      return;
-    }
+
 
     if (!file.existsSync()) {
       file.createSync();

@@ -23,7 +23,7 @@ class CameraButtonState extends State<CameraButton> {
   }
 
   Future<void> _initializeCamera() async {
-    if (Platform.isAndroid || Platform.isIOS){
+    if (Platform.isAndroid || Platform.isIOS) {
       cameras = await availableCameras();
       _controller = CameraController(cameras.first, ResolutionPreset.high);
       await _controller.initialize();
@@ -65,7 +65,13 @@ class CameraButtonState extends State<CameraButton> {
     await _initializeCamera();
     Navigator.push(
         context,
-        MaterialPageRoute(
-            builder: (context) => CameraScene(controller: _controller)));
+        PageRouteBuilder(
+          pageBuilder: (context, animation, secondaryAnimation) =>
+              CameraScene(controller: _controller),
+          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            return child;
+          },
+          transitionDuration: const Duration(milliseconds: 0),
+        ));
   }
 }

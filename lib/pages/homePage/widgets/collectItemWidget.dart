@@ -10,7 +10,22 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-class CollectItemWidget extends StatelessWidget {
+
+class CollectItemWidget extends StatefulWidget {
+
+
+  @override
+  CollectItemWidgetState createState() => CollectItemWidgetState();
+}
+
+
+class CollectItemWidgetState extends State<CollectItemWidget> {
+
+  void initState() {
+    super.initState();
+    
+  }
+
   @override
   Widget build(BuildContext context) {
     return Expanded(
