@@ -42,7 +42,6 @@ class HomePageState extends State<HomePage> {
     super.initState();
     initCamera();
     dailyStreak.loadStreak();
-    itemDetails().getNewItem();
     setState(() {
       dailyStreakNum = globalStreakFile.streak;
     });

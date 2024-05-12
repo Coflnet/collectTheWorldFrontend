@@ -7,7 +7,7 @@ import 'package:collect_the_world/globals/globalScripts/authClient.dart'
     as authclie;
 import 'package:path_provider/path_provider.dart';
 
-var currentItem = {};
+var currentItem = "";
 var collectedItems = {};
 
 class itemDetails {
@@ -20,6 +20,7 @@ class itemDetails {
     Directory appDir = await getApplicationDocumentsDirectory();
     String filePath = "${appDir.path}/itemDetails.json";
     File file = File(filePath);
+    await file.delete();
 
     if (!file.existsSync()) {
       createFile(file);
@@ -32,20 +33,19 @@ class itemDetails {
     currentItem = fileData.currentItem;
   }
 
-  String getCurrentItem() {
-    if (currentItem == {}) {
-      getNewItem();
-      return currentItem["name"];
+  Future<String?> getCurrentItem() async {
+    print(currentItem);
+    if (currentItem.isEmpty) {
+        return await getNewItem();
     }
-    if (DateTime.now().isAfter(currentItem["timeStamp"])) {
-      getNewItem();
-      return currentItem["name"];
+    if (DateTime.now().isAfter(DateTime.now())) {
+      return await getNewItem();
     }
-    return currentItem["name"];
+    return currentItem;
   }
 
-  void getNewItem() async {
-    token = authclie.Authclient().tokenRequest();
+  Future<String?> getNewItem() async {
+    token = (await authclie.Authclient().tokenRequest())!;
     var authclient = HttpBearerAuth();
     authclient.accessToken = token;
     final client = ApiClient(
@@ -56,8 +56,12 @@ class itemDetails {
     try {
       final result = await api_instance.apiObjectsCategoriesGet();
       print(result);
+      String? name = result?[0].name;
+      currentItem = name!;
+      return name;
     } catch (e) {
       print('Exception when calling ObjectApi->apiObjectsCategoriesGet: $e\n');
+      return "error";
     }
   }
 

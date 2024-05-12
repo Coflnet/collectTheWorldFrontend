@@ -2,6 +2,8 @@ import 'dart:io';
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:camera/camera.dart';
+import 'package:collect_the_world/globals/globalScripts/itemToFindUpdater.dart';
+import 'package:collect_the_world/globals/globalWidgets/loadingWidget.dart';
 import 'package:collect_the_world/pages/homePage/cameraScene/pages/cameraScene.dart';
 import 'package:collect_the_world/globals/globalScripts/cameraController.dart';
 import 'package:collect_the_world/globals/globalWidgets/baseWidget/baseWidget.dart';
@@ -10,20 +12,23 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-
 class CollectItemWidget extends StatefulWidget {
-
-
   @override
   CollectItemWidgetState createState() => CollectItemWidgetState();
 }
 
-
 class CollectItemWidgetState extends State<CollectItemWidget> {
+  String itemName = "";
+  bool loaded = false;
 
   void initState() {
     super.initState();
-    
+    itemDetails().getCurrentItem().then((newItemName) {
+      setState(() {
+        loaded = true;
+        itemName = newItemName!;
+      });
+    });
   }
 
   @override
@@ -42,15 +47,17 @@ class CollectItemWidgetState extends State<CollectItemWidget> {
           ),
           Expanded(
             child: Center(
-              child: Container(
-                  margin: const EdgeInsets.all(20),
-                  child: AutoSizeText(
-                    maxLines: 1,
-                    "Apple",
-                    style: TextStyle(
-                        fontSize: 50, color: Colors.white.withOpacity(0.9)),
-                  )),
-            ),
+                child: loaded
+                    ? Container(
+                        margin: const EdgeInsets.all(20),
+                        child: AutoSizeText(
+                          maxLines: 1,
+                          "$itemName",
+                          style: TextStyle(
+                              fontSize: 50,
+                              color: Colors.white.withOpacity(0.9)),
+                        ))
+                    : const Loadingwidget(isVisible: true)),
           ),
           Container(
             margin: EdgeInsets.all(10),

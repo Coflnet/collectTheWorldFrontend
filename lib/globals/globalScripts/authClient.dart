@@ -11,9 +11,10 @@ var secret = "";
 final client = ApiClient(basePath: "https://ctw.coflnet.com");
 
 class Authclient {
-  void initClient() async {
+  Future<String?> initClient() async {
+    print("helokhskjad\nhelokhskjad\nhelokhskjad\nhelokhskjad\n");
     if (Platform.isLinux || Platform.isMacOS || Platform.isWindows) {
-      return;
+      return "";
     }
     Directory appDir = await getApplicationDocumentsDirectory();
     String filePath = "${appDir.path}/clientDetail.json";
@@ -32,14 +33,16 @@ class Authclient {
       await file.writeAsString(jsonFileData);
       generateSecret();
       storeData();
+      
     }
     var fileDatajson = await file.readAsString();
     var fileData = await jsonDecode(fileDatajson);
-    secret = fileData.secret;
-    generateToken();
+    secret = fileData["secret"];
+    var returnToken = await generateToken();
     storeData();
 
-    token = fileData.token;
+    token = fileData["token"];
+    return returnToken;
   }
 
   void generateSecret() {
@@ -48,16 +51,17 @@ class Authclient {
     secret = generator.generate();
   }
 
-  void generateToken() async {
+  Future<String?> generateToken() async {
     final apiInstance = AuthApi(client);
     final loginRequest = AnonymousLoginRequest(secret: secret, locale: "en");
     try {
       final response = await apiInstance.apiAuthAnonymousPost(
           anonymousLoginRequest: loginRequest);
       token = response!.token!;
-      print(token);
+      return token;
     } catch (e) {
       print("there was a error generating new token: $e");
+      return "";
     }
   }
 
@@ -73,10 +77,9 @@ class Authclient {
     file.writeAsString(fileDataJson);
   }
 
-  String tokenRequest() {
+  Future<String?> tokenRequest() async {
     if (token == ""){
-      initClient();
-      return token;
+      return await initClient();
     }
     return token;
   }
