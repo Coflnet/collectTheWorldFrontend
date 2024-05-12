@@ -127,13 +127,17 @@ class CameraScene extends StatelessWidget {
 }
 
 class ConfirmScene extends StatelessWidget {
+  final bool isItemToFind;
+
+  const ConfirmScene({super.key, this.isItemToFind = false});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(fontFamily: 'Poppins'),
       home: Scaffold(
-        body: const Stack(
-            children: [BackgroundGradiant(), Footer(), ConfirmSceneMain()]),
+        body: Stack(
+            children: [const BackgroundGradiant(), const Footer(), ConfirmSceneMain(isItemToFind: isItemToFind,)]),
         resizeToAvoidBottomInset: false,
         floatingActionButton: CameraButton(),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,

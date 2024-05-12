@@ -5,7 +5,7 @@ import 'package:camera/camera.dart';
 import 'package:collect_the_world/globals/globalScripts/itemToFindUpdater.dart';
 import 'package:collect_the_world/globals/globalWidgets/loadingWidget.dart';
 import 'package:collect_the_world/pages/homePage/cameraScene/pages/cameraScene.dart';
-import 'package:collect_the_world/globals/globalScripts/cameraController.dart';
+import 'package:collect_the_world/globals/globalScripts/cameraController.dart' as cam;
 import 'package:collect_the_world/globals/globalWidgets/baseWidget/baseWidget.dart';
 import 'package:collect_the_world/pages/homePage/contentContainer.dart';
 import 'package:flutter/cupertino.dart';
@@ -60,7 +60,7 @@ class CollectItemWidgetState extends State<CollectItemWidget> {
                     : const Loadingwidget(isVisible: true)),
           ),
           Container(
-            margin: EdgeInsets.all(10),
+            margin: const EdgeInsets.all(10),
             alignment: Alignment.bottomCenter,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -71,7 +71,7 @@ class CollectItemWidgetState extends State<CollectItemWidget> {
                       borderRadius: BorderRadius.circular(15),
                       border: Border.all(color: Colors.white24, width: 1.8)),
                   child: IconButton(
-                      onPressed: () => {},
+                      onPressed: () => {changeToCameraScene(context)},
                       icon: const Icon(
                         Icons.camera_alt_outlined,
                         color: Color.fromRGBO(124, 154, 184, 1),
@@ -109,6 +109,17 @@ class CollectItemWidgetState extends State<CollectItemWidget> {
       )),
     );
   }
+  void changeToCameraScene(context) async {
+    var newcontoller = await cam.initCamera();
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => CameraScreen(
+                  controller: newcontoller!,
+                  dailyWeeklyItem: true,
+                  isItemToFind: true,
+                )));
+  }
 }
 
 class CameraButton extends StatelessWidget {
@@ -124,10 +135,13 @@ class CameraButton extends StatelessWidget {
   }
 
   void changeToCameraScene(context) async {
+    var newcontoller = await cam.initCamera();
     Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (context) =>
-                CameraScreen(controller: controller, dailyWeeklyItem: true)));
+            builder: (context) => CameraScreen(
+                  controller: newcontoller!,
+                  dailyWeeklyItem: true,
+                )));
   }
 }

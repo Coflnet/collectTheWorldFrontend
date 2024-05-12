@@ -1,3 +1,4 @@
+import 'package:collect_the_world/globals/globalScripts/itemToFindUpdater.dart';
 import 'package:collect_the_world/pages/homePage/cameraScene/pages/confirmingImage.dart';
 import 'package:collect_the_world/globals/globalScripts/globals.dart' as globals;
 import 'dart:convert';
@@ -11,9 +12,10 @@ String url = "http://10.0.0.19:6969";
 class ConfirmButton extends StatelessWidget {
   final String searchBarContent;
   final bool isHttpRequest;
+  final bool isItemToFind;
 
   const ConfirmButton(
-      {super.key, required this.searchBarContent, required this.isHttpRequest});
+      {super.key, required this.searchBarContent, required this.isHttpRequest, this.isItemToFind = false});
 
   @override
   Widget build(BuildContext context) {
@@ -39,6 +41,10 @@ class ConfirmButton extends StatelessWidget {
   }
 
   void handleButtonPress(context) async {
+    if (isItemToFind){
+      itemDetails().getNewItem();
+    }
+
     if (isHttpRequest) {
       makeHttpRequest(context);
       return;

@@ -7,7 +7,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 class ConfirmSceneMain extends StatefulWidget {
-  const ConfirmSceneMain({super.key});
+  final bool isItemToFind;
+
+  const ConfirmSceneMain({super.key, this.isItemToFind = false});
 
   @override
   _ConfirmSceneMainState createState() => _ConfirmSceneMainState();
@@ -29,7 +31,7 @@ class _ConfirmSceneMainState extends State<ConfirmSceneMain> {
         children: [
           ConfirmPageSearchBar(onSearchContentChanged: updateSearchBarContent),
           const ImageWidget(),
-        ConfirmButton(searchBarContent: searchBarContent, isHttpRequest: false,),
+        ConfirmButton(searchBarContent: searchBarContent, isHttpRequest: false, isItemToFind: widget.isItemToFind,),
           const SizedBox(height: 80),
         ],
       ),
