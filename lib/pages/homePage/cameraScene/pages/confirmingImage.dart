@@ -2,16 +2,22 @@ import 'dart:convert';
 import 'dart:ffi';
 import 'dart:isolate';
 
+import 'package:collect_the_world/generatedCode/api.dart';
 import 'package:collect_the_world/pages/homePage/cameraScene/confirm/widgets/confettiWidget.dart';
 import 'package:confetti/confetti.dart';
 import 'package:http/http.dart' as http;
+import 'package:collect_the_world/globals/globalScripts/cameraController.dart'
+    as cam;
+import 'package:collect_the_world/globals/globalScripts/authClient.dart'
+    as authclie;
 import 'package:collect_the_world/background/backgroundGradiant.dart';
 import 'package:collect_the_world/footer/footerMain.dart';
 import 'package:collect_the_world/globals/globalWidgets/loadingWidget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import "package:collect_the_world/globals/globalScripts/globals.dart" as globals;
+import "package:collect_the_world/globals/globalScripts/globals.dart"
+    as globals;
 import 'package:collect_the_world/globals/globalScripts/dailyStreak.dart'
     as dailyStreakScript;
 
@@ -33,6 +39,9 @@ class ConfirmingimagePageState extends State<ConfirmingimagePage> {
   void initState() {
     super.initState();
     makeHttpCall();
+    print(
+      "ljshfkjsh,jfshfkjshk,jskjhgskljhf\nljshfkjsh,jfshfkjshk,jskjhgskljhf\nljshfkjsh,jfshfkjshk,jskjhgskljhf\nljshfkjsh,jfshfkjshk,jskjhgskljhf\nljshfkjsh,jfshfkjshk,jskjhgskljhf\nljshfkjsh,jfshfkjshk,jskjhgskljhf\n");
+
     confettiController =
         ConfettiController(duration: const Duration(milliseconds: 50));
   }
@@ -84,28 +93,29 @@ class ConfirmingimagePageState extends State<ConfirmingimagePage> {
   }
 
   void makeHttpCall() async {
-    super.initState();
+
+
     var image = await globals.image!.readAsBytes();
-    var image64 = base64Encode(image);
+    var url = Uri.parse(
+        "https://ctw.coflnet.com/api/images/apple");
 
-    var dataToSend = {"image": image64, 'name': widget.searchBarContent};
-    String jsonDataToSend = jsonEncode(dataToSend);
-    final response = await http.post(
-        Uri.parse("http://10.0.0.19:8080/api/ctw/proccess"),
-        headers: {'Content-Type': 'application/json'},
-        body: jsonDataToSend);
+
+    var request = http.MultipartRequest("POST", url);
+    var token = (await authclie.Authclient().tokenRequest())!;
+    print(token);
+    request.headers["Authorization"] = 'Bearer $token';
+
+    request.files.add(http.MultipartFile.fromBytes(
+      'image',
+      image,
+      filename: 'image.jpg',
+    ));
+    var response = await request.send();
+
     if (response.statusCode == 200) {
-      confettiController.play();
-
-      if (dailyStreakScript.lastUpdate.isAfter(DateTime.now())) {
-        dailyStreakScript.streak = 0;
-        dailyStreakScript.LoadDailyStreak().updateDayTimes();
-      }
-      dailyStreakScript.streak += 1;
-      dailyStreakScript.LoadDailyStreak().updateDayTimes();
-      setState(() {
-        isLoading = false;
-      });
+      print("Successfull upload of image!");
+    } else {
+      print('Failed to upload image. Status code: ${response.statusCode}');
     }
   }
 }

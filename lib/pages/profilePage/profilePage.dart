@@ -2,6 +2,7 @@ import 'package:collect_the_world/background/backgroundGradiant.dart';
 import 'package:collect_the_world/footer/footerMain.dart';
 import 'package:collect_the_world/globals/globalWidgets/header/header.dart';
 import 'package:collect_the_world/pages/homePage/collectPage/header.dart';
+import 'package:collect_the_world/pages/profilePage/profileWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:collect_the_world/globals/globalScripts/dailyStreak.dart'
     as globalStreakFile;
@@ -20,6 +21,7 @@ class ProfilePage extends StatelessWidget {
               Column(
                 children: [
                   CustomHeader(dailStreakNum: globalStreakFile.streak),
+                  Profilewidget(),
                 ],
               ),
               const Footer(),

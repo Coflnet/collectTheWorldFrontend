@@ -26,7 +26,8 @@ class Footer extends StatelessWidget {
                   border: Border.all(
                     color: const Color.fromARGB(118, 221, 221, 221),
                   ),
-                  borderRadius: BorderRadius.circular(15)),
+                  borderRadius: BorderRadius.circular(15),
+                  color: Colors.white10.withOpacity(0.08)),
               child: IconButton(
                 iconSize: 33,
                 icon: const Icon(Icons.home_outlined,
@@ -53,7 +54,8 @@ class Footer extends StatelessWidget {
                   border: Border.all(
                     color: const Color.fromARGB(118, 221, 221, 221),
                   ),
-                  borderRadius: BorderRadius.circular(15)),
+                  borderRadius: BorderRadius.circular(15),
+                  color: Colors.white10.withOpacity(0.08)),
               child: IconButton(
                 iconSize: 32,
                 icon: const Icon(Icons.paste_rounded,
@@ -83,7 +85,8 @@ class Footer extends StatelessWidget {
                   border: Border.all(
                     color: const Color.fromARGB(118, 221, 221, 221),
                   ),
-                  borderRadius: BorderRadius.circular(15)),
+                  borderRadius: BorderRadius.circular(15),
+                  color: Colors.white10.withOpacity(0.08)),
               child: IconButton(
                 iconSize: 33,
                 icon: const Icon(Icons.leaderboard_outlined,
@@ -96,7 +99,8 @@ class Footer extends StatelessWidget {
                   border: Border.all(
                     color: const Color.fromARGB(118, 221, 221, 221),
                   ),
-                  borderRadius: BorderRadius.circular(15)),
+                  borderRadius: BorderRadius.circular(15),
+                  color: Colors.white10.withOpacity(0.08)),
               child: IconButton(
                 iconSize: 33,
                 icon: const Icon(

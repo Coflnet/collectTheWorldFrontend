@@ -14,13 +14,13 @@ class baseWidget extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
           border: Border.all(color: Colors.white24, width: 2),
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(15),
           gradient: const LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
             colors: [
               Color.fromRGBO(76, 76, 104, 1),
-              Color.fromRGBO(43, 44, 61, 1),
+              Color.fromRGBO(53, 54, 75, 1),
             ],
           )),
       child: child,
