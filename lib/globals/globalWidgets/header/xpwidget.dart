@@ -11,9 +11,8 @@ class XpWidgetState extends State<XpWidget> {
   Widget build(BuildContext context) {
     return const Row(
       children: [
-        Icon(Icons.grade, color: Colors.yellowAccent, size: 30,),
         Text(
-          " 69",
+          "⭐ 69",
           textScaler: TextScaler.linear(2),
           style: TextStyle(color: Colors.white),
         ),

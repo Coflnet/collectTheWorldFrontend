@@ -55,7 +55,7 @@ class Authclient {
     final apiInstance = AuthApi(client);
     final loginRequest = AnonymousLoginRequest(secret: secret, locale: "en");
     try {
-      final response = await apiInstance.apiAuthAnonymousPost(
+      final response = await apiInstance.login(
           anonymousLoginRequest: loginRequest);
       token = response!.token!;
       return token;

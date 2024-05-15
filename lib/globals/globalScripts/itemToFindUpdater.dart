@@ -54,9 +54,9 @@ class itemDetails {
     final api_instance = ObjectApi(client);
 
     try {
-      final result = await api_instance.apiObjectsCategoriesGet();
+      final result = await api_instance.getNextObject();
       print(result);
-      String? name = result?[0].name;
+      String? name = result?.name;
       currentItem = name!;
       return name;
     } catch (e) {

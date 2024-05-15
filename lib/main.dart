@@ -3,8 +3,6 @@ import 'dart:ui';
 
 import 'package:camera/camera.dart';
 import 'package:collect_the_world/background/backgroundGradiant.dart';
-import 'package:collect_the_world/globals/globalScripts/authClient.dart';
-import 'package:collect_the_world/globals/globalScripts/itemToFindUpdater.dart';
 import 'package:collect_the_world/pages/homePage/cameraScene/pages/cameraScene.dart';
 import 'package:collect_the_world/pages/homePage/cameraScene/pages/confirmScene.dart';
 import 'package:collect_the_world/globals/globalScripts/cameraController.dart';
@@ -22,6 +20,7 @@ import 'package:flutter/services.dart';
 void main() {
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
     statusBarColor: Colors.transparent, // Making status bar transparent
+    systemNavigationBarColor: Color.fromRGBO(28, 29, 39, 1),
   ));
   runApp(const HomePage());
 }
@@ -136,8 +135,13 @@ class ConfirmScene extends StatelessWidget {
     return MaterialApp(
       theme: ThemeData(fontFamily: 'Poppins'),
       home: Scaffold(
-        body: Stack(
-            children: [const BackgroundGradiant(), const Footer(), ConfirmSceneMain(isItemToFind: isItemToFind,)]),
+        body: Stack(children: [
+          const BackgroundGradiant(),
+          const Footer(),
+          ConfirmSceneMain(
+            isItemToFind: isItemToFind,
+          )
+        ]),
         resizeToAvoidBottomInset: false,
         floatingActionButton: CameraButton(),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,

@@ -3,6 +3,8 @@ import 'package:collect_the_world/footer/footerMain.dart';
 import 'package:collect_the_world/globals/globalWidgets/header/header.dart';
 import 'package:collect_the_world/pages/homePage/collectPage/header.dart';
 import 'package:collect_the_world/pages/profilePage/profileWidget.dart';
+import 'package:collect_the_world/pages/profilePage/widgets/linkButtons/discordLinkButton.dart';
+import 'package:collect_the_world/pages/profilePage/widgets/linksWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:collect_the_world/globals/globalScripts/dailyStreak.dart'
     as globalStreakFile;
@@ -22,6 +24,7 @@ class ProfilePage extends StatelessWidget {
                 children: [
                   CustomHeader(dailStreakNum: globalStreakFile.streak),
                   Profilewidget(),
+                  const LinksWidget(),
                 ],
               ),
               const Footer(),

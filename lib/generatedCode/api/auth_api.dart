@@ -20,7 +20,7 @@ class AuthApi {
   /// Parameters:
   ///
   /// * [AnonymousLoginRequest] anonymousLoginRequest:
-  Future<Response> apiAuthAnonymousPostWithHttpInfo({ AnonymousLoginRequest? anonymousLoginRequest, }) async {
+  Future<Response> loginWithHttpInfo({ AnonymousLoginRequest? anonymousLoginRequest, }) async {
     // ignore: prefer_const_declarations
     final path = r'/api/auth/anonymous';
 
@@ -48,8 +48,8 @@ class AuthApi {
   /// Parameters:
   ///
   /// * [AnonymousLoginRequest] anonymousLoginRequest:
-  Future<TokenResponse?> apiAuthAnonymousPost({ AnonymousLoginRequest? anonymousLoginRequest, }) async {
-    final response = await apiAuthAnonymousPostWithHttpInfo( anonymousLoginRequest: anonymousLoginRequest, );
+  Future<TokenResponse?> login({ AnonymousLoginRequest? anonymousLoginRequest, }) async {
+    final response = await loginWithHttpInfo( anonymousLoginRequest: anonymousLoginRequest, );
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }

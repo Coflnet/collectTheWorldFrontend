@@ -17,7 +17,7 @@ class ObjectApi {
   final ApiClient apiClient;
 
   /// Performs an HTTP 'GET /api/objects/categories' operation and returns the [Response].
-  Future<Response> apiObjectsCategoriesGetWithHttpInfo() async {
+  Future<Response> getCategoriesWithHttpInfo() async {
     // ignore: prefer_const_declarations
     final path = r'/api/objects/categories';
 
@@ -42,8 +42,8 @@ class ObjectApi {
     );
   }
 
-  Future<List<Category>?> apiObjectsCategoriesGet() async {
-    final response = await apiObjectsCategoriesGetWithHttpInfo();
+  Future<List<Category>?> getCategories() async {
+    final response = await getCategoriesWithHttpInfo();
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }
@@ -64,7 +64,7 @@ class ObjectApi {
   /// Parameters:
   ///
   /// * [String] categoryName (required):
-  Future<Response> apiObjectsCategoryCategoryNameGetWithHttpInfo(String categoryName,) async {
+  Future<Response> getCategoryObjectsWithHttpInfo(String categoryName,) async {
     // ignore: prefer_const_declarations
     final path = r'/api/objects/category/{categoryName}'
       .replaceAll('{categoryName}', categoryName);
@@ -93,8 +93,8 @@ class ObjectApi {
   /// Parameters:
   ///
   /// * [String] categoryName (required):
-  Future<List<CollectableObject>?> apiObjectsCategoryCategoryNameGet(String categoryName,) async {
-    final response = await apiObjectsCategoryCategoryNameGetWithHttpInfo(categoryName,);
+  Future<List<CollectableObject>?> getCategoryObjects(String categoryName,) async {
+    final response = await getCategoryObjectsWithHttpInfo(categoryName,);
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }
@@ -111,10 +111,10 @@ class ObjectApi {
     return null;
   }
 
-  /// Performs an HTTP 'GET /api/objects' operation and returns the [Response].
-  Future<Response> apiObjectsGetWithHttpInfo() async {
+  /// Performs an HTTP 'GET /api/objects/next' operation and returns the [Response].
+  Future<Response> getNextObjectWithHttpInfo() async {
     // ignore: prefer_const_declarations
-    final path = r'/api/objects';
+    final path = r'/api/objects/next';
 
     // ignore: prefer_final_locals
     Object? postBody;
@@ -137,8 +137,8 @@ class ObjectApi {
     );
   }
 
-  Future<List<CollectableObject>?> apiObjectsGet() async {
-    final response = await apiObjectsGetWithHttpInfo();
+  Future<CollectableObject?> getNextObject() async {
+    final response = await getNextObjectWithHttpInfo();
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }
@@ -146,11 +146,8 @@ class ObjectApi {
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
     if (response.body.isNotEmpty && response.statusCode != HttpStatus.noContent) {
-      final responseBody = await _decodeBodyBytes(response);
-      return (await apiClient.deserializeAsync(responseBody, 'List<CollectableObject>') as List)
-        .cast<CollectableObject>()
-        .toList(growable: false);
-
+      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'CollectableObject',) as CollectableObject;
+    
     }
     return null;
   }
@@ -159,7 +156,7 @@ class ObjectApi {
   /// Parameters:
   ///
   /// * [String] objectId (required):
-  Future<Response> apiObjectsObjectIdGetWithHttpInfo(String objectId,) async {
+  Future<Response> getObjectWithHttpInfo(String objectId,) async {
     // ignore: prefer_const_declarations
     final path = r'/api/objects/{objectId}'
       .replaceAll('{objectId}', objectId);
@@ -188,8 +185,8 @@ class ObjectApi {
   /// Parameters:
   ///
   /// * [String] objectId (required):
-  Future<CollectableObject?> apiObjectsObjectIdGet(String objectId,) async {
-    final response = await apiObjectsObjectIdGetWithHttpInfo(objectId,);
+  Future<CollectableObject?> getObject(String objectId,) async {
+    final response = await getObjectWithHttpInfo(objectId,);
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }
@@ -199,6 +196,50 @@ class ObjectApi {
     if (response.body.isNotEmpty && response.statusCode != HttpStatus.noContent) {
       return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'CollectableObject',) as CollectableObject;
     
+    }
+    return null;
+  }
+
+  /// Performs an HTTP 'GET /api/objects' operation and returns the [Response].
+  Future<Response> getObjectsWithHttpInfo() async {
+    // ignore: prefer_const_declarations
+    final path = r'/api/objects';
+
+    // ignore: prefer_final_locals
+    Object? postBody;
+
+    final queryParams = <QueryParam>[];
+    final headerParams = <String, String>{};
+    final formParams = <String, String>{};
+
+    const contentTypes = <String>[];
+
+
+    return apiClient.invokeAPI(
+      path,
+      'GET',
+      queryParams,
+      postBody,
+      headerParams,
+      formParams,
+      contentTypes.isEmpty ? null : contentTypes.first,
+    );
+  }
+
+  Future<List<CollectableObject>?> getObjects() async {
+    final response = await getObjectsWithHttpInfo();
+    if (response.statusCode >= HttpStatus.badRequest) {
+      throw ApiException(response.statusCode, await _decodeBodyBytes(response));
+    }
+    // When a remote server returns no body with a status of 204, we shall not decode it.
+    // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
+    // FormatException when trying to decode an empty string.
+    if (response.body.isNotEmpty && response.statusCode != HttpStatus.noContent) {
+      final responseBody = await _decodeBodyBytes(response);
+      return (await apiClient.deserializeAsync(responseBody, 'List<CollectableObject>') as List)
+        .cast<CollectableObject>()
+        .toList(growable: false);
+
     }
     return null;
   }

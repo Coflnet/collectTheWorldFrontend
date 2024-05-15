@@ -1,4 +1,6 @@
+import 'package:collect_the_world/pages/profilePage/widgets/NameAndPositionWidget.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class Profileimagewidget extends StatelessWidget {
@@ -6,6 +8,7 @@ class Profileimagewidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
             decoration: const BoxDecoration(
@@ -15,34 +18,12 @@ class Profileimagewidget extends StatelessWidget {
                 child: const Icon(
                   Icons.person,
                   color: Colors.white70,
-                  size: 30,
+                  size: 40,
                 )),
           ),
-          Container(
-            margin: const EdgeInsets.only(left: 10),
-            child: Column(
-              children: [
-                const Text(
-                  "Tentamens",
-                  style: TextStyle(color: Colors.white, fontSize: 15),
-                ),
-                Container(
-                  height: 2,
-                  width: 80,
-                  color: Colors.white30,
-                  
-                ),
-                const Row(
-                  children: [
-                    Icon(Icons.leaderboard_outlined, color: Colors.blueAccent, size: 18,),
-                    Text(" 69th",
-                        style: TextStyle(color: Colors.white, fontSize: 15)),
-                  ],
-                )
-              ],
-            ),
-          )
+          const NameAndPositionWidget(),
         ],
+        
       ),
     );
   }

@@ -24,7 +24,7 @@ class ImageApi {
   ///
   /// * [String] id (required):
   ///   
-  Future<Response> apiImagesIdGetWithHttpInfo(String id,) async {
+  Future<Response> getImageWithHttpInfo(String id,) async {
     // ignore: prefer_const_declarations
     final path = r'/api/images/{id}'
       .replaceAll('{id}', id);
@@ -56,8 +56,8 @@ class ImageApi {
   ///
   /// * [String] id (required):
   ///   
-  Future<CapturedImageWithDownloadUrl?> apiImagesIdGet(String id,) async {
-    final response = await apiImagesIdGetWithHttpInfo(id,);
+  Future<CapturedImageWithDownloadUrl?> getImage(String id,) async {
+    final response = await getImageWithHttpInfo(id,);
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }
@@ -79,7 +79,9 @@ class ImageApi {
   ///
   /// * [String] label (required):
   ///   
-  Future<Response> apiImagesLabelPostWithHttpInfo(String label,) async {
+  ///
+  /// * [MultipartFile] file:
+  Future<Response> uploadImageWithHttpInfo(String label, { MultipartFile? file, }) async {
     // ignore: prefer_const_declarations
     final path = r'/api/images/{label}'
       .replaceAll('{label}', label);
@@ -91,8 +93,18 @@ class ImageApi {
     final headerParams = <String, String>{};
     final formParams = <String, String>{};
 
-    const contentTypes = <String>[];
+    const contentTypes = <String>['multipart/form-data'];
 
+    bool hasFields = false;
+    final mp = MultipartRequest('POST', Uri.parse(path));
+    if (file != null) {
+      hasFields = true;
+      mp.fields[r'file'] = file.field;
+      mp.files.add(file);
+    }
+    if (hasFields) {
+      postBody = mp;
+    }
 
     return apiClient.invokeAPI(
       path,
@@ -111,8 +123,10 @@ class ImageApi {
   ///
   /// * [String] label (required):
   ///   
-  Future<CapturedImage?> apiImagesLabelPost(String label,) async {
-    final response = await apiImagesLabelPostWithHttpInfo(label,);
+  ///
+  /// * [MultipartFile] file:
+  Future<CapturedImage?> uploadImage(String label, { MultipartFile? file, }) async {
+    final response = await uploadImageWithHttpInfo(label,  file: file, );
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }

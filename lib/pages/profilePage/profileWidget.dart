@@ -1,5 +1,8 @@
 import 'package:collect_the_world/globals/globalWidgets/baseWidget/baseWidget.dart';
+import 'package:collect_the_world/pages/profilePage/profilePage.dart';
+import 'package:collect_the_world/pages/profilePage/widgets/NameAndPositionWidget.dart';
 import 'package:collect_the_world/pages/profilePage/widgets/profileImageWidget.dart';
+import 'package:collect_the_world/pages/profilePage/widgets/profileStats.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -12,6 +15,7 @@ class Profilewidget extends StatelessWidget {
           child: Container(
         margin: const EdgeInsets.all(15),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -31,7 +35,8 @@ class Profilewidget extends StatelessWidget {
                   ],
                 ),
               ],
-            )
+            ),
+            Profilestats()
           ],
         ),
       )),
