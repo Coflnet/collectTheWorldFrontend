@@ -9,13 +9,17 @@ import 'package:collect_the_world/globals/globalScripts/cameraController.dart';
 import 'package:collect_the_world/globals/globalScripts/dailyStreak.dart';
 import 'package:collect_the_world/globals/globalWidgets/header/header.dart';
 import 'package:collect_the_world/pages/homePage/contentContainer.dart';
+import 'package:collect_the_world/popups/conformationPopup/conformationPopup.dart';
 import 'package:flutter/material.dart';
 import 'package:collect_the_world/footer/footerMain.dart';
 import 'package:collect_the_world/pages/homePage/collectPage/selectedPage.dart';
 import 'package:collect_the_world/footer/cameraButton.dart';
 import 'package:collect_the_world/globals/globalScripts/dailyStreak.dart'
     as globalStreakFile;
+import 'package:collect_the_world/globals/globalKeys.dart' as globalKeys;
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
+
 
 void main() {
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
@@ -46,26 +50,32 @@ class HomePageState extends State<HomePage> {
     });
   }
 
+
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(fontFamily: 'Poppins'),
       home: Scaffold(
-        body: Stack(children: [
-          Container(
-              decoration: const BoxDecoration(
-                  gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [
-              Color.fromRGBO(38, 43, 55, 1),
-              Color.fromRGBO(28, 29, 39, 1),
-            ],
-          ))),
-          CustomHeader(dailStreakNum: dailyStreakNum),
-          ContentContainer(),
-          const Footer(),
-        ]),
+        body: ChangeNotifierProvider(
+          create: (context) => PopupNotifier(),
+          child: Stack(children: [
+            Container(
+                decoration: const BoxDecoration(
+                    gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
+                Color.fromRGBO(38, 43, 55, 1),
+                Color.fromRGBO(28, 29, 39, 1),
+              ],
+            ))),
+            CustomHeader(dailStreakNum: dailyStreakNum),
+            const ConformationPopup(),
+            ContentContainer(),
+            const Footer(),
+          ]),
+        ),
         backgroundColor: const Color.fromRGBO(34, 40, 49, 1),
         floatingActionButton: CameraButton(),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,

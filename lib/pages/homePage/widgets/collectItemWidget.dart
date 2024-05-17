@@ -8,16 +8,24 @@ import 'package:collect_the_world/pages/homePage/cameraScene/pages/cameraScene.d
 import 'package:collect_the_world/globals/globalScripts/cameraController.dart' as cam;
 import 'package:collect_the_world/globals/globalWidgets/baseWidget/baseWidget.dart';
 import 'package:collect_the_world/pages/homePage/contentContainer.dart';
+import 'package:collect_the_world/popups/conformationPopup/conformationPopup.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:collect_the_world/globals/globalKeys.dart' as globalKeys;
+import 'package:provider/provider.dart';
+
 
 class CollectItemWidget extends StatefulWidget {
   @override
   CollectItemWidgetState createState() => CollectItemWidgetState();
 }
 
+
+
 class CollectItemWidgetState extends State<CollectItemWidget> {
+  
+
   String itemName = "";
   bool loaded = false;
 
@@ -96,7 +104,10 @@ class CollectItemWidgetState extends State<CollectItemWidget> {
                         borderRadius: BorderRadius.circular(15),
                         border: Border.all(color: Colors.white24, width: 1.8)),
                     child: IconButton(
-                        onPressed: () => {},
+                        onPressed: () => {
+                          print("hello world"),
+                          Provider.of<PopupNotifier>(context, listen: false).appear()
+                        },
                         icon: const Icon(
                           Icons.arrow_forward_rounded,
                           color: Color.fromRGBO(126, 156, 187, 1),

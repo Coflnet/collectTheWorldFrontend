@@ -3,6 +3,7 @@ import 'package:collect_the_world/pages/homePage/widgets/globalTask.dart';
 import 'package:flutter/cupertino.dart';
 
 class ContentContainer extends StatelessWidget {
+  
   @override
   Widget build(BuildContext context) {
     return Container(

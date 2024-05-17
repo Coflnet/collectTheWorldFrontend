@@ -5,12 +5,14 @@ import 'package:collect_the_world/pages/homePage/collectPage/header.dart';
 import 'package:collect_the_world/pages/profilePage/profileWidget.dart';
 import 'package:collect_the_world/pages/profilePage/widgets/linkButtons/discordLinkButton.dart';
 import 'package:collect_the_world/pages/profilePage/widgets/linksWidget.dart';
+import 'package:collect_the_world/popups/conformationPopup/conformationPopup.dart';
 import 'package:flutter/material.dart';
 import 'package:collect_the_world/globals/globalScripts/dailyStreak.dart'
     as globalStreakFile;
 
 class ProfilePage extends StatelessWidget {
-  const ProfilePage({super.key});
+
+  const ProfilePage({super.key,});
 
   @override
   Widget build(BuildContext context) {
@@ -19,11 +21,16 @@ class ProfilePage extends StatelessWidget {
         home: Scaffold(
           body: Stack(
             children: [
+              ConformationPopup(),
               const BackgroundGradiant(),
               Column(
                 children: [
                   CustomHeader(dailStreakNum: globalStreakFile.streak),
+                  Container(
+                    margin: const EdgeInsets.only(top: 30),
+                  ),
                   Profilewidget(),
+                  
                   const LinksWidget(),
                 ],
               ),
