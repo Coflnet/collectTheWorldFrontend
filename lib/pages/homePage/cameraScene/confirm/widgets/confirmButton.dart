@@ -1,4 +1,4 @@
-import 'package:collect_the_world/globals/globalScripts/itemToFindUpdater.dart';
+import 'package:collect_the_world/globals/globalScripts/systems/itemToFindUpdater.dart';
 import 'package:collect_the_world/pages/homePage/cameraScene/pages/confirmingImage.dart';
 import 'package:collect_the_world/globals/globalScripts/globals.dart' as globals;
 import 'dart:convert';

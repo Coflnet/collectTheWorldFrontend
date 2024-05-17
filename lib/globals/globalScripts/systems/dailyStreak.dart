@@ -9,9 +9,10 @@ DateTime currentDayTime = DateTime.now();
 
 
 class LoadDailyStreak {
-  DateTime now = DateTime.now();
+  
 
   void loadStreak() async {
+    DateTime now = DateTime.now();
     Directory appDir = await getApplicationDocumentsDirectory();
     String filePath = "${appDir.path}/dailyStreak.json";
     File file = File(filePath);
@@ -57,6 +58,7 @@ class LoadDailyStreak {
   }
 
   void updateDayTimes(){
+    DateTime now = DateTime.now();
     currentDayTime = DateTime(now.year, now.month, now.day, 47, 59, 59);
     currentDayTime = DateTime(now.year, now.month, now.day, 23, 59, 59);
     saveStreakData();

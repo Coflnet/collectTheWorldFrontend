@@ -184,6 +184,8 @@ class ApiClient {
           return value is DateTime ? value : DateTime.tryParse(value);
         case 'AnonymousLoginRequest':
           return AnonymousLoginRequest.fromJson(value);
+        case 'BoardEntry':
+          return BoardEntry.fromJson(value);
         case 'CapturedImage':
           return CapturedImage.fromJson(value);
         case 'CapturedImageWithDownloadUrl':
@@ -192,6 +194,10 @@ class ApiClient {
           return Category.fromJson(value);
         case 'CollectableObject':
           return CollectableObject.fromJson(value);
+        case 'Profile':
+          return Profile.fromJson(value);
+        case 'Stat':
+          return Stat.fromJson(value);
         case 'TokenResponse':
           return TokenResponse.fromJson(value);
         default:

@@ -41,7 +41,7 @@ class SlidingWidgetsState extends State<SlidingWidgets> {
     return Container(
       decoration: BoxDecoration(
           border: Border.all(color: Colors.white24, width: 2),
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(15),
           gradient: const LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,

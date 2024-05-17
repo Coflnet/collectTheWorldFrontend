@@ -2,8 +2,8 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:collect_the_world/generatedCode/api.dart';
-import 'package:collect_the_world/globals/globalScripts/authClient.dart';
-import 'package:collect_the_world/globals/globalScripts/authClient.dart'
+import 'package:collect_the_world/globals/globalScripts/systems/authClient.dart';
+import 'package:collect_the_world/globals/globalScripts/systems/authClient.dart'
     as authclie;
 import 'package:path_provider/path_provider.dart';
 

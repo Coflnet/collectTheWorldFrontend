@@ -8,7 +8,7 @@ import 'package:collect_the_world/pages/profilePage/widgets/linkButtons/discordL
 import 'package:collect_the_world/pages/profilePage/widgets/linksWidget.dart';
 import 'package:collect_the_world/popups/conformationPopup/conformationPopup.dart';
 import 'package:flutter/material.dart';
-import 'package:collect_the_world/globals/globalScripts/dailyStreak.dart'
+import 'package:collect_the_world/globals/globalScripts/systems/dailyStreak.dart'
     as globalStreakFile;
 
 class ProfilePage extends StatelessWidget {

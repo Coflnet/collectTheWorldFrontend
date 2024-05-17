@@ -21,7 +21,7 @@ class _SelectedPageState extends State<Selectedpage> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.fromLTRB(20, 10, 20, 0),
+      margin: const EdgeInsets.fromLTRB(30, 28, 30, 0),
       child: const Column(
         children: [
           Row(
@@ -38,13 +38,7 @@ class _SelectedPageState extends State<Selectedpage> {
           Expanded(
             child: Row(
               children: [
-                Expanded(
-                    child: SlidingWidgets(
-                  widgetName: "🗓️ Weekly",
-                  endPoint: "http://localhost:6969/",
-                  textSize: 20,
-                )),
-                SizedBox(width: 15),
+
                 Expanded(
                     child: SlidingWidgets(
                         widgetName: "☀️ Daily",

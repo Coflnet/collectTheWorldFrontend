@@ -6,7 +6,7 @@ import 'package:collect_the_world/background/backgroundGradiant.dart';
 import 'package:collect_the_world/pages/homePage/cameraScene/pages/cameraScene.dart';
 import 'package:collect_the_world/pages/homePage/cameraScene/pages/confirmScene.dart';
 import 'package:collect_the_world/globals/globalScripts/cameraController.dart';
-import 'package:collect_the_world/globals/globalScripts/dailyStreak.dart';
+import 'package:collect_the_world/globals/globalScripts/systems/dailyStreak.dart';
 import 'package:collect_the_world/globals/globalWidgets/header/header.dart';
 import 'package:collect_the_world/pages/homePage/contentContainer.dart';
 import 'package:collect_the_world/popups/conformationPopup/conformationPopup.dart';
@@ -14,7 +14,7 @@ import 'package:flutter/material.dart';
 import 'package:collect_the_world/footer/footerMain.dart';
 import 'package:collect_the_world/pages/homePage/collectPage/selectedPage.dart';
 import 'package:collect_the_world/footer/cameraButton.dart';
-import 'package:collect_the_world/globals/globalScripts/dailyStreak.dart'
+import 'package:collect_the_world/globals/globalScripts/systems/dailyStreak.dart'
     as globalStreakFile;
 import 'package:collect_the_world/globals/globalKeys.dart' as globalKeys;
 import 'package:flutter/services.dart';

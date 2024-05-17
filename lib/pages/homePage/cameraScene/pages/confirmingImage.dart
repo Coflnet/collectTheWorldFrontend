@@ -9,7 +9,7 @@ import 'package:confetti/confetti.dart';
 import 'package:http/http.dart' as http;
 import 'package:collect_the_world/globals/globalScripts/cameraController.dart'
     as cam;
-import 'package:collect_the_world/globals/globalScripts/authClient.dart'
+import 'package:collect_the_world/globals/globalScripts/systems/authClient.dart'
     as authclie;
 import 'package:collect_the_world/background/backgroundGradiant.dart';
 import 'package:collect_the_world/footer/footerMain.dart';
@@ -19,7 +19,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import "package:collect_the_world/globals/globalScripts/globals.dart"
     as globals;
-import 'package:collect_the_world/globals/globalScripts/dailyStreak.dart'
+import 'package:collect_the_world/globals/globalScripts/systems/dailyStreak.dart'
     as dailyStreakScript;
 
 class ConfirmingimagePage extends StatefulWidget {
