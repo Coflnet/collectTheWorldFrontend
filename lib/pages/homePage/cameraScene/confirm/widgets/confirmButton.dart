@@ -1,6 +1,7 @@
 import 'package:collect_the_world/globals/globalScripts/systems/itemToFindUpdater.dart';
 import 'package:collect_the_world/pages/homePage/cameraScene/pages/confirmingImage.dart';
-import 'package:collect_the_world/globals/globalScripts/globals.dart' as globals;
+import 'package:collect_the_world/globals/globalScripts/globals.dart'
+    as globals;
 import 'dart:convert';
 import 'dart:ui';
 import 'package:collect_the_world/pages/homePage/cameraScene/pages/finalConformation.dart';
@@ -13,9 +14,14 @@ class ConfirmButton extends StatelessWidget {
   final String searchBarContent;
   final bool isHttpRequest;
   final bool isItemToFind;
+  final bool isDescription;
 
   const ConfirmButton(
-      {super.key, required this.searchBarContent, required this.isHttpRequest, this.isItemToFind = false});
+      {super.key,
+      required this.searchBarContent,
+      required this.isHttpRequest,
+      this.isItemToFind = false,
+      this.isDescription = false});
 
   @override
   Widget build(BuildContext context) {
@@ -26,9 +32,8 @@ class ConfirmButton extends StatelessWidget {
           height: 83,
           decoration: BoxDecoration(
             color: Colors.white10,
-                        borderRadius: BorderRadius.circular(70),
-            border: Border.all(
-                color: Colors.white12, width: 1.5),
+            borderRadius: BorderRadius.circular(70),
+            border: Border.all(color: Colors.white12, width: 1.5),
           ),
           child: IconButton(
               onPressed: () => {handleButtonPress(context)},
@@ -41,7 +46,7 @@ class ConfirmButton extends StatelessWidget {
   }
 
   void handleButtonPress(context) async {
-    if (isItemToFind){
+    if (isItemToFind) {
       itemDetails().getNewItem();
     }
 
@@ -60,8 +65,9 @@ class ConfirmButton extends StatelessWidget {
     Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (context) =>
-                ConfirmingimagePage(searchBarContent: searchBarContent,)));
+            builder: (context) => ConfirmingimagePage(
+                  searchBarContent: searchBarContent,
+                )));
     return;
   }
 }

@@ -23,7 +23,9 @@ import 'package:provider/provider.dart';
 
 void main() {
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-    statusBarColor: Colors.transparent, // Making status bar transparent
+    statusBarColor: Colors.transparent,
+    statusBarBrightness: Brightness.light,
+    statusBarIconBrightness: Brightness.light,
     systemNavigationBarColor: Color.fromRGBO(28, 29, 39, 1),
   ));
   runApp(const HomePage());
@@ -77,7 +79,7 @@ class HomePageState extends State<HomePage> {
           ]),
         ),
         backgroundColor: const Color.fromRGBO(34, 40, 49, 1),
-        floatingActionButton: CameraButton(),
+        floatingActionButton: CameraButtonFooter(),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       ),
     );
@@ -105,7 +107,7 @@ class CapturePage extends StatelessWidget {
           CustomHeader(dailStreakNum: globalStreakFile.streak),
           const Footer(),
         ]),
-        floatingActionButton: CameraButton(),
+        floatingActionButton: CameraButtonFooter(),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         backgroundColor: const Color.fromRGBO(34, 40, 49, 1),
       ),
@@ -153,7 +155,7 @@ class ConfirmScene extends StatelessWidget {
           )
         ]),
         resizeToAvoidBottomInset: false,
-        floatingActionButton: CameraButton(),
+        floatingActionButton: CameraButtonFooter(),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         backgroundColor: const Color.fromRGBO(34, 40, 49, 1),
       ),

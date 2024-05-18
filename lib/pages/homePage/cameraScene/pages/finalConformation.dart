@@ -33,7 +33,7 @@ class FinalConformationScene extends StatelessWidget {
               ItemNameLabel(
                 itemName: itemName,
               ),
-              ConfirmButton(
+            ConfirmButton(
                 searchBarContent: itemName,
                 isHttpRequest: true,
               ),

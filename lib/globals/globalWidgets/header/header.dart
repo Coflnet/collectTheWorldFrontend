@@ -18,7 +18,7 @@ class CustomHeader extends StatelessWidget {
             bottom: BorderSide(
                 color: Color.fromARGB(255, 141, 141, 141), width: 2)),
       ),
-      height: 120,
+      height: 105,
       width: double.infinity,
       padding: const EdgeInsets.fromLTRB(20, 52, 20, 0),
       alignment: Alignment.topCenter,

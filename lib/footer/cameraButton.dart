@@ -7,12 +7,14 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'dart:ui';
 
-class CameraButton extends StatefulWidget {
+class CameraButtonFooter extends StatefulWidget {
+  const CameraButtonFooter({super.key});
+
   @override
   CameraButtonState createState() => CameraButtonState();
 }
 
-class CameraButtonState extends State<CameraButton> {
+class CameraButtonState extends State<CameraButtonFooter> {
   late CameraController _controller;
   late var cameras;
 

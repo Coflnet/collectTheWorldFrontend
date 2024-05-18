@@ -190,6 +190,6 @@ class NewItemWidgetState extends State<NewItemWidget> {
         context,
         MaterialPageRoute(
             builder: (context) =>
-                CameraScreen(controller: _controller, dailyWeeklyItem: true)));
+                CameraScreen(controller: _controller, dailyWeeklyItem: true, itemName: widget.name,)));
   }
 }

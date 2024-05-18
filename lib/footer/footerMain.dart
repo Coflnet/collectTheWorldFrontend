@@ -1,4 +1,5 @@
 import 'package:collect_the_world/main.dart';
+import 'package:collect_the_world/pages/leaderboard/LeaderboardMain.dart';
 import 'package:collect_the_world/pages/profilePage/profilePage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -91,7 +92,20 @@ class Footer extends StatelessWidget {
                 iconSize: 33,
                 icon: const Icon(Icons.leaderboard_outlined,
                     color: Color.fromRGBO(110, 137, 164, 1)),
-                onPressed: () => {},
+                onPressed: () => {
+                  Haptics.vibrate(HapticsType.light),
+                  Navigator.push(
+                      context,
+                      PageRouteBuilder(
+                        pageBuilder: (context, animation, secondaryAnimation) =>
+                            const LeaderboardMain(),
+                        transitionsBuilder:
+                            (context, animation, secondaryAnimation, child) {
+                          return child;
+                        },
+                        transitionDuration: const Duration(milliseconds: 0),
+                      ))
+                },
               ),
             ),
             Container(

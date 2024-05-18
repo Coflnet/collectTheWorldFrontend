@@ -7,7 +7,7 @@ class ContentContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.fromLTRB(30,150,30,85),
+      margin: const EdgeInsets.fromLTRB(30,130,30,90),
       child: Column(
         
         children: [

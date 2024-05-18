@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:ffi';
+import 'dart:io';
 import 'dart:isolate';
 
 import 'package:collect_the_world/generatedCode/api.dart';
@@ -11,6 +12,8 @@ import 'package:collect_the_world/globals/globalScripts/cameraController.dart'
     as cam;
 import 'package:collect_the_world/globals/globalScripts/systems/authClient.dart'
     as authclie;
+import 'package:collect_the_world/globals/globalScripts/systems/imageUploader.dart'
+    as imageUploader;
 import 'package:collect_the_world/background/backgroundGradiant.dart';
 import 'package:collect_the_world/footer/footerMain.dart';
 import 'package:collect_the_world/globals/globalWidgets/loadingWidget.dart';
@@ -24,8 +27,14 @@ import 'package:collect_the_world/globals/globalScripts/systems/dailyStreak.dart
 
 class ConfirmingimagePage extends StatefulWidget {
   final String searchBarContent;
+  final bool isDescription;
+  final String description;
 
-  const ConfirmingimagePage({super.key, required this.searchBarContent});
+  const ConfirmingimagePage(
+      {super.key,
+      required this.searchBarContent,
+      this.isDescription = false,
+      this.description = ""});
 
   @override
   ConfirmingimagePageState createState() => ConfirmingimagePageState();
@@ -58,34 +67,34 @@ class ConfirmingimagePageState extends State<ConfirmingimagePage> {
         ),
         Center(
           child: Visibility(
-            visible: isLoading,
+              visible: isLoading,
               child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text("XP Gained    ",
-                      textScaler: TextScaler.linear(2),
-                      style: TextStyle(color: Colors.white)),
-                  Text(xpGain,
-                      textScaler: const TextScaler.linear(3),
-                      style: const TextStyle(color: Colors.white)),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text("XP Gained    ",
+                          textScaler: TextScaler.linear(2),
+                          style: TextStyle(color: Colors.white)),
+                      Text(xpGain,
+                          textScaler: const TextScaler.linear(3),
+                          style: const TextStyle(color: Colors.white)),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text("Times found    ",
+                          textScaler: TextScaler.linear(2),
+                          style: TextStyle(color: Colors.white)),
+                      Text(xpGain,
+                          textScaler: const TextScaler.linear(3),
+                          style: const TextStyle(color: Colors.white)),
+                    ],
+                  )
                 ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text("Times found    ",
-                      textScaler: TextScaler.linear(2),
-                      style: TextStyle(color: Colors.white)),
-                  Text(xpGain,
-                      textScaler: const TextScaler.linear(3),
-                      style: const TextStyle(color: Colors.white)),
-                ],
-              )
-            ],
-          )),
+              )),
         ),
         const Footer(),
       ]),
@@ -93,6 +102,10 @@ class ConfirmingimagePageState extends State<ConfirmingimagePage> {
   }
 
   void makeHttpCall() async {
+    if (widget.isDescription) {
+      descriptionEndpoint();
+      return;
+    }
     var image = await globals.image!.readAsBytes();
     var url = Uri.parse("https://ctw.coflnet.com/api/images/apple");
 
@@ -122,6 +135,30 @@ class ConfirmingimagePageState extends State<ConfirmingimagePage> {
       });
     } else {
       print('Failed to upload image. Status code: ${response.statusCode}');
+    }
+  }
+
+  void descriptionEndpoint() async {
+    if (!imageUploader.imageUploader().finnishedLoading) {
+      sleep(const Duration(milliseconds: 300));
+      descriptionEndpoint();
+    }
+
+    var token = (await authclie.Authclient().tokenRequest())!;
+    var authclient = HttpBearerAuth();
+    authclient.accessToken = token;
+    final client = ApiClient(
+        basePath: "https://ctw.coflnet.com", authentication: authclient);
+
+    final apiInstance = ImageApi(client);
+
+    try {
+      final result = await apiInstance.addDescription(
+          imageUploader.imageUploader().objectId,
+          body: widget.description);
+      confettiController.play();
+    } catch (e) {
+      print('Exception when calling ImageApi->addDescription: $e\n');
     }
   }
 }

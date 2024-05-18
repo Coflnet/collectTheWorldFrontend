@@ -1,7 +1,7 @@
 import 'package:collect_the_world/background/backgroundGradiant.dart';
+import 'package:collect_the_world/footer/cameraButton.dart';
 import 'package:collect_the_world/footer/footerMain.dart';
 import 'package:collect_the_world/globals/globalWidgets/header/header.dart';
-import 'package:collect_the_world/pages/homePage/collectPage/header.dart';
 import 'package:collect_the_world/pages/homePage/widgets/collectItemWidget.dart';
 import 'package:collect_the_world/pages/profilePage/profileWidget.dart';
 import 'package:collect_the_world/pages/profilePage/widgets/linkButtons/discordLinkButton.dart';
@@ -21,7 +21,7 @@ class ProfilePage extends StatelessWidget {
     return MaterialApp(
         theme: ThemeData(fontFamily: 'Poppins'),
         home: Scaffold(
-          floatingActionButton: CameraButton(),
+          floatingActionButton: CameraButtonFooter(),
           floatingActionButtonLocation:
               FloatingActionButtonLocation.centerDocked,
           body: Stack(

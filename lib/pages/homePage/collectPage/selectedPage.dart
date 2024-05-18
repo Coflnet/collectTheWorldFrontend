@@ -21,7 +21,7 @@ class _SelectedPageState extends State<Selectedpage> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.fromLTRB(30, 28, 30, 0),
+      margin: const EdgeInsets.fromLTRB(30, 3, 30, 0),
       child: const Column(
         children: [
           Row(

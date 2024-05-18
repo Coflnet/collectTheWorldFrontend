@@ -34,9 +34,8 @@ class itemDetails {
   }
 
   Future<String?> getCurrentItem() async {
-    print(currentItem);
     if (currentItem.isEmpty) {
-        return await getNewItem();
+      return await getNewItem();
     }
     if (DateTime.now().isAfter(DateTime.now())) {
       return await getNewItem();
