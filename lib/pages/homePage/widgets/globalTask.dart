@@ -13,7 +13,7 @@ class GlobalTask extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text("🌎 Global Quest",
+                Text("🌎 Global Quest",
                       textScaler: TextScaler.linear(2),
                       style: TextStyle(color: Colors.white)),
                 ],

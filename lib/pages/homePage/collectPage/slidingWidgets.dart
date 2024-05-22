@@ -3,9 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 
 import 'package:flutter/widgets.dart';
-import 'package:flutter_swipe_detector/flutter_swipe_detector.dart';
 import 'package:collect_the_world/pages/homePage/collectPage/slidingWigetBox.dart';
-import 'package:glassmorphism_ui/glassmorphism_ui.dart';
 
 typedef void updateCurrentSelection(int currentSelection);
 

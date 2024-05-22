@@ -9,12 +9,12 @@ class XpWidget extends StatefulWidget {
 class XpWidgetState extends State<XpWidget> {
   @override
   Widget build(BuildContext context) {
-    return const Row(
+    return Row(
       children: [
         Text(
           "⭐ 69",
-          textScaler: TextScaler.linear(2),
-          style: TextStyle(color: Colors.white),
+          textScaler: const TextScaler.linear(2),
+          style: TextStyle(color: Colors.white.withOpacity(0.9), fontFamily: "Poppins-Medium"),
         ),
       ],
     );

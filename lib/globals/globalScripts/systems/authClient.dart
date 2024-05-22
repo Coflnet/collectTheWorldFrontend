@@ -13,9 +13,6 @@ final client = ApiClient(basePath: "https://ctw.coflnet.com");
 class Authclient {
   Future<String?> initClient() async {
     print("helokhskjad\nhelokhskjad\nhelokhskjad\nhelokhskjad\n");
-    if (Platform.isLinux || Platform.isMacOS || Platform.isWindows) {
-      return "";
-    }
     Directory appDir = await getApplicationDocumentsDirectory();
     String filePath = "${appDir.path}/clientDetail.json";
     File file = File(filePath);

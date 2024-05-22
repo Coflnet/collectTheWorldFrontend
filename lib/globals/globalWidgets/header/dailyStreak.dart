@@ -11,8 +11,6 @@ class DailyStreak extends StatefulWidget {
 }
 
 class DailyStreakStreak extends State<DailyStreak> {
-
-
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -24,7 +22,8 @@ class DailyStreakStreak extends State<DailyStreak> {
         ),
         Text(
           "${widget.dailStreakNum}",
-          style: const TextStyle(fontSize: 25, color: Colors.white),
+          style: TextStyle(
+              fontSize: 25, color: Colors.white.withOpacity(0.9), fontFamily: "Poppins-Medium"),
         )
       ],
     );

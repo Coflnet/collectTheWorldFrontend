@@ -3,6 +3,7 @@ import 'dart:ui';
 
 import 'package:camera/camera.dart';
 import 'package:collect_the_world/background/backgroundGradiant.dart';
+import 'package:collect_the_world/globals/globalScripts/systems/authClient.dart';
 import 'package:collect_the_world/pages/homePage/cameraScene/pages/cameraScene.dart';
 import 'package:collect_the_world/pages/homePage/cameraScene/pages/confirmScene.dart';
 import 'package:collect_the_world/globals/globalScripts/cameraController.dart';
@@ -19,14 +20,15 @@ import 'package:collect_the_world/globals/globalScripts/systems/dailyStreak.dart
 import 'package:collect_the_world/globals/globalKeys.dart' as globalKeys;
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-
+import 'package:collect_the_world/globals/globalScripts/systems/authClient.dart'
+    as authclie;
 
 void main() {
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
     statusBarColor: Colors.transparent,
     statusBarBrightness: Brightness.light,
     statusBarIconBrightness: Brightness.light,
-    systemNavigationBarColor: Color.fromRGBO(28, 29, 39, 1),
+    systemNavigationBarColor: Color.fromRGBO(39, 48, 59, 1),
   ));
   runApp(const HomePage());
 }
@@ -45,14 +47,13 @@ class HomePageState extends State<HomePage> {
   @override
   initState() {
     super.initState();
+    authclie.Authclient().initClient();
     initCamera();
     dailyStreak.loadStreak();
     setState(() {
       dailyStreakNum = globalStreakFile.streak;
     });
   }
-
-
 
   @override
   Widget build(BuildContext context) {

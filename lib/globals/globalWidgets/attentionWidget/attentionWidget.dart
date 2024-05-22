@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class baseWidget extends StatelessWidget {
+class AttentionWidget extends StatelessWidget {
   final Widget child;
 
-  const baseWidget({
+  const AttentionWidget({
     super.key,
     required this.child,
   });
@@ -18,9 +18,8 @@ class baseWidget extends StatelessWidget {
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
             colors: [
-              Color.fromRGBO(73, 61, 91, 1),
-              Color.fromRGBO(61, 64, 91, 1),
-              
+              Color.fromRGBO(29, 170, 180, 1),
+              Color.fromRGBO(24, 127, 136, 1),
             ],
           )),
       child: child,

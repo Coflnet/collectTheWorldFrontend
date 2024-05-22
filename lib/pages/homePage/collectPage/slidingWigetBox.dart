@@ -49,7 +49,6 @@ class _ContainerListViewState extends State<ContainerListView> {
 
   @override
   void initState() {
-    print("init");
     super.initState();
     getItems();
   }
@@ -76,17 +75,9 @@ class _ContainerListViewState extends State<ContainerListView> {
   void getItems() async {
     requestItems();
 
-    // final response = await http.get(Uri.parse("$url/ctw/daily"));
-    // if (response.statusCode == 200) {
-    //   var result = jsonDecode(response.body);
-    //   setState(() {
-    //     items.addAll(result["items"].take(5));
-    //   });
-    // }
   }
 
-  Future<String?> requestItems() async {
-    print("lkjhlkajdljasd\nlkjhlkajdljasd\nlkjhlkajdljasd\n");
+  void requestItems() async {
     var token = (await authclie.Authclient().tokenRequest())!;
     var authclient = HttpBearerAuth();
     authclient.accessToken = token;
@@ -163,13 +154,16 @@ class NewItemWidgetState extends State<NewItemWidget> {
                     ),
                   ),
                   Expanded(
-                    // Wrap the Text widget with Expanded
-                    child: Text(
-                      widget.name,
-                      style: const TextStyle(
-                        color: Colors.white,
+                    child: Container(
+                      margin: const EdgeInsets.only(left: 10),
+                      child: Text(
+                        widget.name,
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 20
+                        ),
+                        overflow: TextOverflow.ellipsis,
                       ),
-                      overflow: TextOverflow.ellipsis,
                     ),
                   ),
                   const SizedBox(

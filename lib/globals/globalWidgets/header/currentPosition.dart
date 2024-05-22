@@ -14,10 +14,10 @@ class CurrentPositionState extends State<CurrentPosition> {
       const Icon(Icons.leaderboard_outlined, size: 30, color: Color.fromARGB(255, 48, 95, 177),),
       Container(
         margin: const EdgeInsets.only(left: 10),
-        child: const Text(
+        child: Text(
           "100th",
-          textScaler: TextScaler.linear(1.55),
-          style: TextStyle(color: Colors.white),
+          textScaler: const TextScaler.linear(1.55),
+          style: TextStyle(color: Colors.white.withOpacity(0.9), fontFamily: "Poppins-Medium"),
         ),
       ),
     ]);
