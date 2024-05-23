@@ -35,13 +35,15 @@ class CameraButtonState extends State<CameraButtonFooter> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: const EdgeInsets.fromLTRB(0, 10, 5, 0),
         child: IconButton(
-          iconSize: 60,
+          alignment: Alignment.bottomCenter,
+          iconSize: 55,
           onPressed: () {
             loadCameraScene();
           },
-          icon: const Icon(Icons.camera_alt_rounded),
-          color: Colors.grey, // Icon color
+          icon: const Icon(Icons.camera_alt_outlined),
+          color: const Color.fromARGB(255, 163, 195, 230), // Icon color
         ));
   }
 
