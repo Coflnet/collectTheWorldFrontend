@@ -32,15 +32,19 @@ part 'api/auth_api.dart';
 part 'api/image_api.dart';
 part 'api/leaderboard_api.dart';
 part 'api/object_api.dart';
+part 'api/skip_api.dart';
 part 'api/stats_api.dart';
 
 part 'model/anonymous_login_request.dart';
 part 'model/board_entry.dart';
+part 'model/board_names.dart';
 part 'model/captured_image.dart';
 part 'model/captured_image_with_download_url.dart';
 part 'model/category.dart';
 part 'model/collectable_object.dart';
 part 'model/profile.dart';
+part 'model/skip_response.dart';
+part 'model/skips_available.dart';
 part 'model/stat.dart';
 part 'model/token_response.dart';
 

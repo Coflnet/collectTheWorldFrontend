@@ -186,6 +186,8 @@ class ApiClient {
           return AnonymousLoginRequest.fromJson(value);
         case 'BoardEntry':
           return BoardEntry.fromJson(value);
+        case 'BoardNames':
+          return BoardNames.fromJson(value);
         case 'CapturedImage':
           return CapturedImage.fromJson(value);
         case 'CapturedImageWithDownloadUrl':
@@ -196,6 +198,10 @@ class ApiClient {
           return CollectableObject.fromJson(value);
         case 'Profile':
           return Profile.fromJson(value);
+        case 'SkipResponse':
+          return SkipResponse.fromJson(value);
+        case 'SkipsAvailable':
+          return SkipsAvailable.fromJson(value);
         case 'Stat':
           return Stat.fromJson(value);
         case 'TokenResponse':

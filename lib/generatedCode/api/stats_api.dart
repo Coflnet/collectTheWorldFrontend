@@ -16,6 +16,47 @@ class StatsApi {
 
   final ApiClient apiClient;
 
+  /// Performs an HTTP 'GET /stats/daily_exp' operation and returns the [Response].
+  Future<Response> getDailyExpStatsWithHttpInfo() async {
+    // ignore: prefer_const_declarations
+    final path = r'/stats/daily_exp';
+
+    // ignore: prefer_final_locals
+    Object? postBody;
+
+    final queryParams = <QueryParam>[];
+    final headerParams = <String, String>{};
+    final formParams = <String, String>{};
+
+    const contentTypes = <String>[];
+
+
+    return apiClient.invokeAPI(
+      path,
+      'GET',
+      queryParams,
+      postBody,
+      headerParams,
+      formParams,
+      contentTypes.isEmpty ? null : contentTypes.first,
+    );
+  }
+
+  Future<int?> getDailyExpStats() async {
+    final response = await getDailyExpStatsWithHttpInfo();
+    if (response.statusCode >= HttpStatus.badRequest) {
+      throw ApiException(response.statusCode, await _decodeBodyBytes(response));
+    }
+    // When a remote server returns no body with a status of 204, we shall not decode it.
+    // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
+    // FormatException when trying to decode an empty string.
+    if (response.body.isNotEmpty && response.statusCode != HttpStatus.noContent) {
+      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'int',) as int;
+    
+    }
+    return null;
+  }
+
   /// Performs an HTTP 'GET /stats/{statName}' operation and returns the [Response].
   /// Parameters:
   ///
@@ -104,6 +145,47 @@ class StatsApi {
         .cast<Stat>()
         .toList(growable: false);
 
+    }
+    return null;
+  }
+
+  /// Performs an HTTP 'GET /stats/weekly_exp' operation and returns the [Response].
+  Future<Response> getWeeklyExpStatsWithHttpInfo() async {
+    // ignore: prefer_const_declarations
+    final path = r'/stats/weekly_exp';
+
+    // ignore: prefer_final_locals
+    Object? postBody;
+
+    final queryParams = <QueryParam>[];
+    final headerParams = <String, String>{};
+    final formParams = <String, String>{};
+
+    const contentTypes = <String>[];
+
+
+    return apiClient.invokeAPI(
+      path,
+      'GET',
+      queryParams,
+      postBody,
+      headerParams,
+      formParams,
+      contentTypes.isEmpty ? null : contentTypes.first,
+    );
+  }
+
+  Future<int?> getWeeklyExpStats() async {
+    final response = await getWeeklyExpStatsWithHttpInfo();
+    if (response.statusCode >= HttpStatus.badRequest) {
+      throw ApiException(response.statusCode, await _decodeBodyBytes(response));
+    }
+    // When a remote server returns no body with a status of 204, we shall not decode it.
+    // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
+    // FormatException when trying to decode an empty string.
+    if (response.body.isNotEmpty && response.statusCode != HttpStatus.noContent) {
+      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'int',) as int;
+    
     }
     return null;
   }

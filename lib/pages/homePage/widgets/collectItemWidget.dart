@@ -60,20 +60,28 @@ class CollectItemWidgetState extends State<CollectItemWidget> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Column(
-                children: [
-                  Container(
-                    margin: EdgeInsets.only(top: 4),
-                    child: Text(
-                      itemName,
-                      style: TextStyle(
-                          color: Colors.white.withOpacity(0.9),
-                          fontWeight: FontWeight.bold,
-                          fontSize: 30),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Container(
+                      margin: const EdgeInsets.only(top: 4),
+                      child: AutoSizeText(
+                        maxLines: 1,
+                        textAlign: TextAlign.start,
+                        itemName,
+                        style: TextStyle(
+                            color: Colors.white.withOpacity(0.9),
+                            fontWeight: FontWeight.bold,
+                            fontSize: 30),
+                      ),
                     ),
-                  ),
-                  const SkipButton()
-                ],
+                    const Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [SkipButton()],
+                    )
+                  ],
+                ),
               ),
               const CameraButton()
             ],
@@ -121,18 +129,26 @@ class CameraButton extends StatelessWidget {
   const CameraButton({super.key});
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 85,
-      height: 85,
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(50), color: Colors.pink[50]),
-      child: IconButton(
-          onPressed: () => changeToCameraScene(context),
-          icon: Icon(
-            Icons.camera_alt_outlined,
-            size: 50,
-            color: Colors.black.withOpacity(0.8),
-          )),
+    return Expanded(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          Container(
+            width: 85,
+            height: 85,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(50),
+                color: Colors.pink[50]),
+            child: IconButton(
+                onPressed: () => changeToCameraScene(context),
+                icon: Icon(
+                  Icons.camera_alt_outlined,
+                  size: 50,
+                  color: Colors.black.withOpacity(0.8),
+                )),
+          ),
+        ],
+      ),
     );
   }
 

@@ -1,10 +1,12 @@
+import 'package:collect_the_world/globals/globalScripts/systems/itemToFindUpdater.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 
 class ConformationPopup extends StatefulWidget {
-  const ConformationPopup({Key? key}) : super(key: key);
+  final VoidCallback callback; 
+  const ConformationPopup({Key? key, required this.callback}) : super(key: key);
 
   @override
   ConformationPopupState createState() => ConformationPopupState();
@@ -72,7 +74,7 @@ class ConformationPopupState extends State<ConformationPopup>
                   color: const Color.fromRGBO(39, 45, 58, 1),
                   borderRadius: BorderRadius.circular(20),
                   border: Border.all(
-                      color: Color.fromRGBO(67, 74, 88, 1), width: 1.5)),
+                      color: const Color.fromRGBO(67, 74, 88, 1), width: 1.5)),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -83,7 +85,8 @@ class ConformationPopupState extends State<ConformationPopup>
                           border: Border.all(color: Colors.white12),
                           borderRadius: BorderRadius.circular(15)),
                       child: IconButton(
-                          onPressed: () {},
+                          onPressed: () {
+                          },
                           icon: const Icon(
                             Icons.do_disturb,
                             color: Colors.white,
@@ -103,7 +106,7 @@ class ConformationPopupState extends State<ConformationPopup>
                               border: Border.all(color: Colors.white12),
                               borderRadius: BorderRadius.circular(15)),
                           child: IconButton(
-                              onPressed: () {},
+                              onPressed: () {itemDetails().skipItem();},
                               icon: const Icon(
                                 Icons.check,
                                 size: 32,

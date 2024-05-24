@@ -83,4 +83,19 @@ class itemDetails {
     var fileDataJson = jsonEncode(fileData);
     file.writeAsString(fileDataJson);
   }
+
+  void skipItem() async {
+    token = (await authclie.Authclient().tokenRequest())!;
+    var authclient = HttpBearerAuth();
+    authclient.accessToken = token;
+    final client = ApiClient(
+        basePath: "https://ctw.coflnet.com", authentication: authclient);
+    final apiInstance = SkipApi(client);
+    try{
+    final result = await apiInstance.skip("smart home");
+    print(result);
+    } catch (e) {
+      print('Exception when calling SkipApi: $e\n');
+    }
+  }
 }
