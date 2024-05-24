@@ -6,16 +6,17 @@ class GlobalTask extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: Container(
-        margin: const EdgeInsets.only(top: 13),
+        margin: const EdgeInsets.only(top: 16),
         child: const baseWidget(
           child: Column(
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                Text("🌎 Global Quest",
+                  Text("🌎 Global Quest",
                       textScaler: TextScaler.linear(2),
-                      style: TextStyle(color: Colors.white)),
+                      style: TextStyle(
+                          color: Colors.white, fontWeight: FontWeight.w600)),
                 ],
               )
             ],

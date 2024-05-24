@@ -45,17 +45,17 @@ class CollectItemWidgetState extends State<CollectItemWidget> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
-            margin: const EdgeInsets.fromLTRB(18, 18, 0, 8),
+            margin: const EdgeInsets.fromLTRB(24, 18, 0, 8),
             child: Text(
-              "🔎Item to find",
+              "🔎 Item to find",
               style: TextStyle(
                   color: Colors.white.withOpacity(0.85),
-                  fontFamily: "Poppins-medium",
+                  fontFamily: "PTSans",
                   fontSize: 25,
-                  fontWeight: FontWeight.w600),
+                  fontWeight: FontWeight.w500),
             )),
         Container(
-          margin: const EdgeInsets.symmetric(horizontal: 18),
+          margin: const EdgeInsets.symmetric(horizontal: 24),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -68,55 +68,74 @@ class CollectItemWidgetState extends State<CollectItemWidget> {
                       itemName,
                       style: TextStyle(
                           color: Colors.white.withOpacity(0.9),
-                          fontWeight: FontWeight.w600,
+                          fontWeight: FontWeight.bold,
                           fontSize: 30),
                     ),
                   ),
-                  Container(
-                    margin: EdgeInsets.fromLTRB(0, 16, 0, 8),
-                    width: 110,
-                    decoration: BoxDecoration(
-                        gradient: const LinearGradient(
-                            begin: Alignment.centerLeft,
-                            end: Alignment.centerRight,
-                            colors: [
-                              Color.fromRGBO(107, 82, 165, 1),
-                              Color.fromRGBO(89, 68, 139, 1)
-                            ]),
-                        borderRadius: BorderRadius.circular(16)),
-                    child: TextButton(
-                      onPressed: () => {},
-                      child: const Text(
-                        "Skip item",
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 15),
-                      ),
-                    ),
-                  )
+                  const SkipButton()
                 ],
               ),
-              Container(
-                width: 85,
-                height: 85,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(50),
-                    color: Colors.pink[50]),
-                child: IconButton(
-                    onPressed: () => changeToCameraScene(context),
-                    icon: const Icon(
-                      Icons.camera_alt_outlined,
-                      size: 50,
-                    )),
-              )
+              const CameraButton()
             ],
           ),
         )
       ],
     )));
   }
+}
 
-  //Provider.of<PopupNotifier>(context, listen: false).appear()
+class SkipButton extends StatelessWidget {
+  const SkipButton({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.fromLTRB(0, 16, 0, 8),
+      width: 110,
+      decoration: BoxDecoration(
+          gradient: const LinearGradient(
+              begin: Alignment.centerLeft,
+              end: Alignment.centerRight,
+              colors: [
+                Color.fromRGBO(100, 80, 160, 1),
+                Color.fromRGBO(89, 68, 139, 1)
+              ]),
+          borderRadius: BorderRadius.circular(16)),
+      child: TextButton(
+        onPressed: () =>
+            {Provider.of<PopupNotifier>(context, listen: false).appear()},
+        child: const Text(
+          "Skip item",
+          style: TextStyle(
+              color: Colors.white,
+              fontSize: 15,
+              fontWeight: FontWeight.w700,
+              fontFamily: "Fredoka-SemiExpanded"),
+        ),
+      ),
+    );
+  }
+}
+
+class CameraButton extends StatelessWidget {
+  const CameraButton({super.key});
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 85,
+      height: 85,
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(50), color: Colors.pink[50]),
+      child: IconButton(
+          onPressed: () => changeToCameraScene(context),
+          icon: Icon(
+            Icons.camera_alt_outlined,
+            size: 50,
+            color: Colors.black.withOpacity(0.8),
+          )),
+    );
+  }
+
   void changeToCameraScene(context) async {
     var newcontoller = await cam.initCamera();
     Navigator.push(
@@ -126,30 +145,6 @@ class CollectItemWidgetState extends State<CollectItemWidget> {
                   controller: newcontoller!,
                   dailyWeeklyItem: true,
                   isItemToFind: true,
-                )));
-  }
-}
-
-class CameraButton extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return IconButton(
-        onPressed: () => changeToCameraScene(context),
-        icon: const Icon(
-          Icons.arrow_forward_rounded,
-          color: Color.fromRGBO(126, 156, 187, 1),
-          size: 40,
-        ));
-  }
-
-  void changeToCameraScene(context) async {
-    var newcontoller = await cam.initCamera();
-    Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) => CameraScreen(
-                  controller: newcontoller!,
-                  dailyWeeklyItem: true,
                 )));
   }
 }

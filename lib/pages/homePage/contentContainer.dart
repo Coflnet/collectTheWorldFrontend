@@ -1,4 +1,5 @@
 import 'package:collect_the_world/pages/homePage/widgets/collectItemWidget.dart';
+import 'package:collect_the_world/pages/homePage/widgets/dailyBonuses.dart';
 import 'package:collect_the_world/pages/homePage/widgets/dailyItems.dart';
 import 'package:collect_the_world/pages/homePage/widgets/globalTask.dart';
 import 'package:flutter/cupertino.dart';
@@ -8,11 +9,11 @@ class ContentContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.fromLTRB(24, 129, 24, 90),
+      margin: const EdgeInsets.fromLTRB(24, 133, 24, 95),
       child: Column(
         children: [
           Expanded(
-              flex: 3,
+              flex: 4,
               child: Column(
                 children: [
                   CollectItemWidget(),
@@ -20,11 +21,11 @@ class ContentContainer extends StatelessWidget {
                 ],
               )),
           Expanded(
-            flex: 5,
+            flex: 6,
             child: Column(
               children: [
                 GlobalTask(),
-                GlobalTask(),
+                DailyBonuses(),
               ],
             ),
           ),

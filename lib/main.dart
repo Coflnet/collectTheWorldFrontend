@@ -58,7 +58,7 @@ class HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(fontFamily: 'Poppins'),
+      theme: ThemeData(fontFamily: 'Rubik'),
       home: Scaffold(
         body: ChangeNotifierProvider(
           create: (context) => PopupNotifier(),
