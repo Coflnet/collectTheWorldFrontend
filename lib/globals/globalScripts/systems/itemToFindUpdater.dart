@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
@@ -43,6 +44,10 @@ class itemDetails {
     return currentItem;
   }
 
+  Future<String?> fetchNewItem() async {
+    return await getNewItem();
+  }
+
   Future<String?> getNewItem() async {
     token = (await authclie.Authclient().tokenRequest())!;
     var authclient = HttpBearerAuth();
@@ -84,7 +89,7 @@ class itemDetails {
     file.writeAsString(fileDataJson);
   }
 
-  void skipItem() async {
+  Future<void> skipItem() async {
     token = (await authclie.Authclient().tokenRequest())!;
     var authclient = HttpBearerAuth();
     authclient.accessToken = token;
@@ -97,5 +102,14 @@ class itemDetails {
     } catch (e) {
       print('Exception when calling SkipApi: $e\n');
     }
+  }
+
+  Future<void> skipItemAsync() async {
+    final completer = Completer<void>();
+
+    await skipItem();
+
+    completer.complete();
+    return completer.future;
   }
 }

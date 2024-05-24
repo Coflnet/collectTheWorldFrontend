@@ -16,6 +16,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:collect_the_world/globals/globalKeys.dart' as globalKeys;
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:provider/provider.dart';
 
 class CollectItemWidget extends StatefulWidget {
@@ -66,19 +67,27 @@ class CollectItemWidgetState extends State<CollectItemWidget> {
                   children: [
                     Container(
                       margin: const EdgeInsets.only(top: 4),
-                      child: AutoSizeText(
-                        maxLines: 1,
-                        textAlign: TextAlign.start,
-                        itemName,
-                        style: TextStyle(
-                            color: Colors.white.withOpacity(0.9),
-                            fontWeight: FontWeight.bold,
-                            fontSize: 30),
-                      ),
+                      child: loaded
+                          ? AutoSizeText(
+                              maxLines: 1,
+                              textAlign: TextAlign.start,
+                              itemName,
+                              style: TextStyle(
+                                  color: Colors.white.withOpacity(0.9),
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 30),
+                            )
+                          : LoadingAnimationWidget.inkDrop(
+                              color: Colors.white, size: 45),
                     ),
-                    const Row(
+                    Row(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: [SkipButton()],
+                      children: [
+                        SkipButton(
+                          parentCallBack: skipConfirmed,
+                          parentCallBackStarted: skipStarted,
+                        )
+                      ],
                     )
                   ],
                 ),
@@ -90,10 +99,30 @@ class CollectItemWidgetState extends State<CollectItemWidget> {
       ],
     )));
   }
+
+  void skipStarted() {
+    setState(() {
+      loaded = false;
+    });
+  }
+
+  void skipConfirmed() {
+    itemDetails().fetchNewItem().then((newItemName) {
+      setState(() {
+        itemName = newItemName!;
+        loaded = true;
+      });
+    });
+  }
 }
 
 class SkipButton extends StatelessWidget {
-  const SkipButton({super.key});
+  final VoidCallback parentCallBack;
+  final VoidCallback parentCallBackStarted;
+  const SkipButton(
+      {super.key,
+      required this.parentCallBack,
+      required this.parentCallBackStarted});
 
   @override
   Widget build(BuildContext context) {
@@ -110,8 +139,10 @@ class SkipButton extends StatelessWidget {
               ]),
           borderRadius: BorderRadius.circular(16)),
       child: TextButton(
-        onPressed: () =>
-            {Provider.of<PopupNotifier>(context, listen: false).appear()},
+        onPressed: () => {
+          Provider.of<PopupNotifier>(context, listen: false)
+              .appear(skipConfirmed, parentCallBackStarted)
+        },
         child: const Text(
           "Skip item",
           style: TextStyle(
@@ -122,6 +153,10 @@ class SkipButton extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void skipConfirmed() {
+    parentCallBack();
   }
 }
 

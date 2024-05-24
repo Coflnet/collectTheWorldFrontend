@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:collect_the_world/globals/globalScripts/systems/itemToFindUpdater.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -5,8 +7,7 @@ import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 
 class ConformationPopup extends StatefulWidget {
-  final VoidCallback callback; 
-  const ConformationPopup({Key? key, required this.callback}) : super(key: key);
+  const ConformationPopup({Key? key}) : super(key: key);
 
   @override
   ConformationPopupState createState() => ConformationPopupState();
@@ -19,8 +20,8 @@ class PopupNotifier extends ChangeNotifier {
     _popeupState = state;
   }
 
-  void appear() {
-    _popeupState.appear();
+  void appear(VoidCallback callback, callBackStarted) {
+    _popeupState.appear(callback, callBackStarted);
   }
 }
 
@@ -28,6 +29,8 @@ class ConformationPopupState extends State<ConformationPopup>
     with SingleTickerProviderStateMixin {
   double topPosition = -100;
   late AnimationController controller;
+  VoidCallback newItemCallback = () {};
+  VoidCallback callBackStarted = () {};
 
   @override
   void initState() {
@@ -42,7 +45,9 @@ class ConformationPopupState extends State<ConformationPopup>
     });
   }
 
-  void appear() {
+  void appear(VoidCallback callback, callBackStartedRef) {
+    newItemCallback = callback;
+    callBackStarted = callBackStartedRef;
     setState(() {
       topPosition = 40;
       controller.forward();
@@ -85,8 +90,7 @@ class ConformationPopupState extends State<ConformationPopup>
                           border: Border.all(color: Colors.white12),
                           borderRadius: BorderRadius.circular(15)),
                       child: IconButton(
-                          onPressed: () {
-                          },
+                          onPressed: () {},
                           icon: const Icon(
                             Icons.do_disturb,
                             color: Colors.white,
@@ -106,7 +110,15 @@ class ConformationPopupState extends State<ConformationPopup>
                               border: Border.all(color: Colors.white12),
                               borderRadius: BorderRadius.circular(15)),
                           child: IconButton(
-                              onPressed: () {itemDetails().skipItem();},
+                              onPressed: () async {
+                                callBackStarted();
+                                setState(() {
+                                  topPosition = -100;
+                                  controller.reverse();
+                                });
+                                await itemDetails().skipItemAsync();
+                                newItemCallback();
+                              },
                               icon: const Icon(
                                 Icons.check,
                                 size: 32,
