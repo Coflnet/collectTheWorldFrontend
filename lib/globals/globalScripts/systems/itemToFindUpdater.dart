@@ -113,3 +113,61 @@ class itemDetails {
     return completer.future;
   }
 }
+
+
+
+
+//Expanded(
+//        child: AttentionWidget(
+//            child: Column(
+//      crossAxisAlignment: CrossAxisAlignment.start,
+//      children: [
+//        Container(
+//            margin: const EdgeInsets.fromLTRB(24, 18, 0, 8),
+//            child: Text(
+//              "🔎 Item to find",
+//              style: TextStyle(
+//                  color: Colors.white.withOpacity(0.85),
+//                  fontFamily: "PTSans",
+//                  fontSize: 25,
+//                  fontWeight: FontWeight.w500),
+//            )),
+//        Container(
+//          margin: const EdgeInsets.symmetric(horizontal: 24),
+//          child: Row(
+//            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//            crossAxisAlignment: CrossAxisAlignment.start,
+//            children: [
+//              Expanded(
+//                child: Column(
+//                  crossAxisAlignment: CrossAxisAlignment.center,
+//                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                  children: [
+//                    Container(
+//                      margin: const EdgeInsets.only(top: 4),
+//                      child: loaded
+//                          ? AutoSizeText(
+//                              maxLines: 1,
+//                              textAlign: TextAlign.start,
+//                              itemName,
+//                              style: TextStyle(
+//                                  color: Colors.white.withOpacity(0.9),
+//                                  fontWeight: FontWeight.bold,
+//                                  fontSize: 30),
+//                            )
+//                          : LoadingAnimationWidget.inkDrop(
+//                              color: Colors.white, size: 45),
+//                    ),
+//                    SkipButton(
+//                      parentCallBack: skipConfirmed,
+//                      parentCallBackStarted: skipStarted,
+//                    )
+//                  ],
+//                ),
+//              ),
+//              const CameraButton()
+//            ],
+//          ),
+//        )
+//      ],
+//    )));

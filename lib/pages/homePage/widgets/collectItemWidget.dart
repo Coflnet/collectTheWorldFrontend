@@ -42,60 +42,54 @@ class CollectItemWidgetState extends State<CollectItemWidget> {
   Widget build(BuildContext context) {
     return Expanded(
         child: AttentionWidget(
-            child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+            child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Container(
-            margin: const EdgeInsets.fromLTRB(24, 18, 0, 8),
-            child: Text(
-              "🔎 Item to find",
-              style: TextStyle(
-                  color: Colors.white.withOpacity(0.85),
-                  fontFamily: "PTSans",
-                  fontSize: 25,
-                  fontWeight: FontWeight.w500),
-            )),
-        Container(
-          margin: const EdgeInsets.symmetric(horizontal: 24),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
+        Expanded(
+          flex: 3,
+          child: Container(
+            margin: const EdgeInsets.fromLTRB(18, 14, 0, 0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Container(
-                      margin: const EdgeInsets.only(top: 4),
-                      child: loaded
-                          ? AutoSizeText(
-                              maxLines: 1,
-                              textAlign: TextAlign.start,
-                              itemName,
-                              style: TextStyle(
-                                  color: Colors.white.withOpacity(0.9),
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 30),
-                            )
-                          : LoadingAnimationWidget.inkDrop(
-                              color: Colors.white, size: 45),
+                    Text(
+                      "🔎 Item to find",
+                      textAlign: TextAlign.left,
+                      style: TextStyle(
+                          color: Colors.white.withOpacity(0.85),
+                          fontFamily: "PTSans",
+                          fontSize: 25,
+                          fontWeight: FontWeight.w500),
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        SkipButton(
-                          parentCallBack: skipConfirmed,
-                          parentCallBackStarted: skipStarted,
-                        )
-                      ],
-                    )
                   ],
                 ),
-              ),
-              const CameraButton()
-            ],
+                Container(
+                  margin: const EdgeInsets.only(top: 4),
+                  child: loaded
+                      ? AutoSizeText(
+                          maxLines: 1,
+                          textAlign: TextAlign.start,
+                          itemName,
+                          style: TextStyle(
+                              color: Colors.white.withOpacity(0.9),
+                              fontWeight: FontWeight.bold,
+                              fontSize: 30),
+                        )
+                      : LoadingAnimationWidget.inkDrop(
+                          color: Colors.white, size: 45),
+                ),
+                SkipButton(
+                  parentCallBack: skipConfirmed,
+                  parentCallBackStarted: skipStarted,
+                )
+              ],
+            ),
           ),
-        )
+        ),
+        CameraButton()
       ],
     )));
   }
@@ -127,7 +121,7 @@ class SkipButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.fromLTRB(0, 16, 0, 8),
+      margin: const EdgeInsets.fromLTRB(0, 8, 4, 8),
       width: 110,
       decoration: BoxDecoration(
           gradient: const LinearGradient(
@@ -165,10 +159,12 @@ class CameraButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(
+      flex: 2,
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.end,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Container(
+            margin: const EdgeInsets.fromLTRB(0, 14, 12, 0),
             width: 85,
             height: 85,
             decoration: BoxDecoration(

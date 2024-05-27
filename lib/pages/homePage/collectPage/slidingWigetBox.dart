@@ -7,6 +7,7 @@ import 'package:collect_the_world/generatedCode/api.dart';
 import 'package:collect_the_world/pages/homePage/cameraScene/pages/cameraScene.dart';
 import 'package:collect_the_world/main.dart';
 import 'package:flutter/animation.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:glassmorphism_ui/glassmorphism_ui.dart';
 import 'package:http/http.dart' as http;
@@ -74,7 +75,6 @@ class _ContainerListViewState extends State<ContainerListView> {
 
   void getItems() async {
     requestItems();
-
   }
 
   void requestItems() async {
@@ -131,11 +131,7 @@ class NewItemWidgetState extends State<NewItemWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.fromLTRB(13, 8, 13, 8),
-      decoration: BoxDecoration(
-          color: Colors.white10,
-          border: Border.all(color: Colors.white12),
-          borderRadius: BorderRadius.circular(15)),
+      margin: const EdgeInsets.only(bottom: 4),
       child: TextButton(
         onPressed: () {
           changeScene(context);
@@ -158,16 +154,17 @@ class NewItemWidgetState extends State<NewItemWidget> {
                       margin: const EdgeInsets.only(left: 10),
                       child: Text(
                         widget.name,
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 20
-                        ),
+                        style: const TextStyle(color: Colors.white, fontSize: 20),
                         overflow: TextOverflow.ellipsis,
                       ),
                     ),
                   ),
-                  const SizedBox(
-                    width: 10,
+                  Text(
+                    "50XP",
+                    style: TextStyle(
+                        fontFamily: "Robik-Light",
+                        fontSize: 20,
+                        color: Colors.white.withOpacity(0.9)),
                   )
                 ],
               ),
@@ -183,7 +180,10 @@ class NewItemWidgetState extends State<NewItemWidget> {
     Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (context) =>
-                CameraScreen(controller: _controller, dailyWeeklyItem: true, itemName: widget.name,)));
+            builder: (context) => CameraScreen(
+                  controller: _controller,
+                  dailyWeeklyItem: true,
+                  itemName: widget.name,
+                )));
   }
 }

@@ -11,11 +11,12 @@ class XpWidgetState extends State<XpWidget> {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Text(
-          "⭐ 69",
-          textScaler: const TextScaler.linear(2),
-          style: TextStyle(color: Colors.white.withOpacity(0.9), fontFamily: "Poppins-Medium"),
-        ),
+        Text("⭐ 69",
+            textScaler: const TextScaler.linear(2),
+            style: TextStyle(
+              color: Colors.white.withOpacity(0.9),
+              fontWeight: FontWeight.w600,
+            )),
       ],
     );
   }

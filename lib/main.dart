@@ -13,7 +13,7 @@ import 'package:collect_the_world/pages/homePage/contentContainer.dart';
 import 'package:collect_the_world/popups/conformationPopup/conformationPopup.dart';
 import 'package:flutter/material.dart';
 import 'package:collect_the_world/footer/footerMain.dart';
-import 'package:collect_the_world/pages/homePage/collectPage/selectedPage.dart';
+import 'package:collect_the_world/pages/homePage/collectPage/itemSlidingPage.dart';
 import 'package:collect_the_world/footer/cameraButton.dart';
 import 'package:collect_the_world/globals/globalScripts/systems/dailyStreak.dart'
     as globalStreakFile;
@@ -93,13 +93,13 @@ class CapturePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(fontFamily: 'Poppins'),
+      theme: ThemeData(fontFamily: 'Rubik'),
       home: Scaffold(
         body: Stack(children: [
-          const BackgroundGradiant(),
-          Column(
+        const BackgroundGradiant(),
+          const Column(
             children: [
-              const SizedBox(
+              SizedBox(
                 height: 125,
               ),
               Expanded(child: Selectedpage())
@@ -108,7 +108,7 @@ class CapturePage extends StatelessWidget {
           CustomHeader(dailStreakNum: globalStreakFile.streak),
           const Footer(),
         ]),
-        floatingActionButton: CameraButtonFooter(),
+        floatingActionButton: const CameraButtonFooter(),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         backgroundColor: const Color.fromRGBO(34, 40, 49, 1),
       ),

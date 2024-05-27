@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:collect_the_world/globals/globalScripts/systems/itemToFindUpdater.dart';
+import 'package:collect_the_world/globals/globalWidgets/baseWidget/baseWidget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -73,13 +74,7 @@ class ConformationPopupState extends State<ConformationPopup>
         children: [
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Container(
-              width: MediaQuery.of(context).size.width,
-              decoration: BoxDecoration(
-                  color: const Color.fromRGBO(39, 45, 58, 1),
-                  borderRadius: BorderRadius.circular(20),
-                  border: Border.all(
-                      color: const Color.fromRGBO(67, 74, 88, 1), width: 1.5)),
+            child: baseWidget(
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -90,7 +85,12 @@ class ConformationPopupState extends State<ConformationPopup>
                           border: Border.all(color: Colors.white12),
                           borderRadius: BorderRadius.circular(15)),
                       child: IconButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            setState(() {
+                              topPosition = -100;
+                              controller.reverse();
+                            });
+                          },
                           icon: const Icon(
                             Icons.do_disturb,
                             color: Colors.white,
@@ -122,7 +122,7 @@ class ConformationPopupState extends State<ConformationPopup>
                               icon: const Icon(
                                 Icons.check,
                                 size: 32,
-                                color: Colors.orangeAccent,
+                                color: Color.fromRGBO(127, 97, 194, 1),
                               ))),
                     ],
                   )

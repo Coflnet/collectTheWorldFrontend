@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:collect_the_world/globals/globalWidgets/baseWidget/baseWidget.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter/widgets.dart';
@@ -36,26 +37,13 @@ class SlidingWidgetsState extends State<SlidingWidgets> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-          border: Border.all(color: Colors.white24, width: 2),
-          borderRadius: BorderRadius.circular(15),
-          gradient: const LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [
-              Color.fromRGBO(81, 81, 112, 1),
-              Color.fromRGBO(54, 56, 77, 1),
-            ],
-          )),
+    return baseWidget(
       child: Column(
         children: [
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Container(
-                width: 10,
-              ),
+              
               Text(
                 widget.widgetName,
                 style: TextStyle(
@@ -63,13 +51,7 @@ class SlidingWidgetsState extends State<SlidingWidgets> {
                   fontSize: widget.textSize,
                 ),
               ),
-              IconButton(
-                onPressed: () => {},
-                icon: const Icon(
-                  Icons.expand_rounded,
-                  color: Colors.white70,
-                ),
-              )
+              
             ],
           ),
           Expanded(

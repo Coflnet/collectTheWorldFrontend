@@ -20,11 +20,12 @@ class DailyStreakStreak extends State<DailyStreak> {
           size: 40,
           color: Colors.orangeAccent,
         ),
-        Text(
-          "${widget.dailStreakNum}",
-          style: TextStyle(
-              fontSize: 25, color: Colors.white.withOpacity(0.9), fontFamily: "Poppins-Medium"),
-        )
+        Text("${widget.dailStreakNum}",
+            style: TextStyle(
+              fontSize: 25,
+              color: Colors.white.withOpacity(0.9),
+              fontWeight: FontWeight.w600,
+            ))
       ],
     );
   }
