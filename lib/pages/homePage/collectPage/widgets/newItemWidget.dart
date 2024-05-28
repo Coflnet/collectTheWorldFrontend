@@ -1,7 +1,9 @@
 import 'dart:io';
 
 import 'package:camera/camera.dart';
+import 'package:collect_the_world/globals/extentions/extentions.dart';
 import 'package:collect_the_world/pages/homePage/cameraScene/pages/cameraScene.dart';
+import 'package:collect_the_world/pages/homePage/collectPage/widgets/numberWidgetContainer.dart';
 import 'package:flutter/material.dart';
 
 class NewItemWidget extends StatefulWidget {
@@ -30,55 +32,65 @@ class NewItemWidgetState extends State<NewItemWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(bottom: 4),
       child: TextButton(
+        style: TextButton.styleFrom(padding: EdgeInsets.fromLTRB(8, 12, 8, 0)),
         onPressed: () {
           changeScene(context);
         },
-        child: Row(
+        child: Column(
           children: [
-            Expanded(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                    margin: EdgeInsets.fromLTRB(2, 0, 3, 0),
-                    child: Text(
-                      "${widget.index + 1}",
-                      style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 25,
-                          fontWeight: FontWeight.w600),
-                    ),
-                  ),
-                  const Icon(
-                    Icons.check_box_outline_blank,
-                    size: 40,
-                    color: Colors.white,
-                  ),
-                  Expanded(
-                    child: Container(
-                      margin: const EdgeInsets.only(left: 10),
-                      child: Text(
-                        widget.name,
-                        style: const TextStyle(
-                            color: Color.fromARGB(255, 255, 243, 247),
-                            fontSize: 20,
-                            fontWeight: FontWeight.w600),
-                        overflow: TextOverflow.ellipsis,
+            Row(
+              children: [
+                Expanded(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      SizedBox(
+                        width: 40,
+                        child: Center(
+                          child: Text(
+                            "${widget.index + 1}",
+                            style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 20,
+                                fontWeight: FontWeight.w600),
+                          ),
+                        ),
                       ),
-                    ),
+                      const Icon(
+                        Icons.check_box_outline_blank,
+                        size: 47,
+                        color: Colors.white,
+                      ),
+                      Expanded(
+                        child: Container(
+                          margin: const EdgeInsets.only(left: 10),
+                          child: Text(
+                            widget.name.capitalize(),
+                            style: const TextStyle(
+                                color: Color.fromARGB(255, 255, 243, 247),
+                                fontSize: 20,
+                                fontWeight: FontWeight.w900),
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                      ),
+                      NumberWidgetContainer(xpCount: widget.xp)
+                    ],
                   ),
-                  const Text(
-                    "50XP",
-                    style: TextStyle(
-                        fontFamily: "Robik-Light",
-                        fontSize: 20,
-                        color: Colors.white),
-                  )
-                ],
-              ),
+                ),
+              ],
             ),
+            Container(
+              margin: const EdgeInsets.only(top: 12),
+              decoration: const BoxDecoration(
+                color: Color.fromRGBO(98, 99, 112, 0.356),
+                borderRadius: BorderRadius.all(Radius.circular(8))
+              ),
+              width: 380,
+              height: 2,
+            )
           ],
         ),
       ),

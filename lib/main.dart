@@ -28,7 +28,7 @@ void main() {
     statusBarColor: Colors.transparent,
     statusBarBrightness: Brightness.light,
     statusBarIconBrightness: Brightness.light,
-    systemNavigationBarColor: Color.fromRGBO(39, 48, 59, 1),
+    systemNavigationBarColor: Color.fromRGBO(24, 32, 39, 1),
   ));
   runApp(const HomePage());
 }
@@ -63,16 +63,7 @@ class HomePageState extends State<HomePage> {
         body: ChangeNotifierProvider(
           create: (context) => PopupNotifier(),
           child: Stack(children: [
-            Container(
-                decoration: const BoxDecoration(
-                    gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: [
-                Color.fromRGBO(38, 43, 55, 1),
-                Color.fromRGBO(28, 29, 39, 1),
-              ],
-            ))),
+            const BackgroundGradiant(),
             CustomHeader(dailStreakNum: dailyStreakNum),
             const ConformationPopup(),
             ContentContainer(),
@@ -80,7 +71,7 @@ class HomePageState extends State<HomePage> {
           ]),
         ),
         backgroundColor: const Color.fromRGBO(34, 40, 49, 1),
-        floatingActionButton: CameraButtonFooter(),
+        floatingActionButton: const CameraButtonFooter(),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       ),
     );
@@ -96,7 +87,7 @@ class CapturePage extends StatelessWidget {
       theme: ThemeData(fontFamily: 'Rubik'),
       home: Scaffold(
         body: Stack(children: [
-        const BackgroundGradiant(),
+          const BackgroundGradiant(),
           const Column(
             children: [
               SizedBox(

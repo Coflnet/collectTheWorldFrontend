@@ -10,16 +10,20 @@ class TimerCountDownWidget extends StatefulWidget {
 
 class _TimerCountDownWidgetState extends State<TimerCountDownWidget>
     with SingleTickerProviderStateMixin {
-  late CustomTimerController controller = CustomTimerController(
-      vsync: this,
-      begin: const Duration(hours: 24),
-      end: const Duration(),
-      initialState: CustomTimerState.reset,
-      interval: CustomTimerInterval.milliseconds);
+  late CustomTimerController controller;
 
   @override
   void initState() {
     super.initState();
+    setState(() {
+      controller = CustomTimerController(
+        vsync: this,
+        begin: getUtcCountDown(),
+        end: const Duration(),
+        initialState: CustomTimerState.reset,
+        interval: CustomTimerInterval.milliseconds);
+    
+    });
     controller.start();
   }
 
@@ -38,5 +42,17 @@ class _TimerCountDownWidgetState extends State<TimerCountDownWidget>
         },
       ),
     );
+  }
+
+  Duration getUtcCountDown() {
+    DateTime nowUtc = DateTime.now().toUtc();
+
+    // Calculate the next occurrence of 00:00 UTC
+    DateTime nextMidnightUtc = DateTime.utc(
+      nowUtc.year,
+      nowUtc.month,
+      nowUtc.day + 1,
+    );
+    return nextMidnightUtc.difference(nowUtc);
   }
 }

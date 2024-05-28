@@ -17,14 +17,12 @@ class LoadDailyStreak {
     String filePath = "${appDir.path}/dailyStreak.json";
     File file = File(filePath);
 
-
-
     if (!file.existsSync()) {
       file.createSync();
       var fileData = {
         "dailyStreak": 0,
-        "nextDayTime": DateTime(now.year, now.month, now.day, 23, 59, 59),
-        "currentDayTime": DateTime(now.year, now.month, now.day, 23, 59, 59),
+        "nextDayTime": DateTime(now.year, now.month, now.day, 23, 59, 59).toIso8601String(),
+        "currentDayTime": DateTime(now.year, now.month, now.day, 23, 59, 59).toIso8601String(),
       };
       var jsonFileData = jsonEncode(fileData);
       await file.writeAsString(jsonFileData);
@@ -33,8 +31,8 @@ class LoadDailyStreak {
     var fileDatajson = await file.readAsString();
     var fileData = await jsonDecode(fileDatajson);
 
-    streak = fileData.dailyStreak;
-    currentDayTime = fileData.currentDayTime;
+    streak = fileData["dailyStreak"];
+    currentDayTime = fileData["currentDayTime"];
     checkStreakTime();
   }
 

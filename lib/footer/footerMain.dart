@@ -15,11 +15,10 @@ class Footer extends StatelessWidget {
     return Align(
       alignment: Alignment.bottomCenter,
       child: Container(
-        margin: EdgeInsets.only(left: 2),
-        height: 70,
-        decoration: const BoxDecoration(
-            color: Color.fromRGBO(39, 48, 59, 1),
-            border: Border(top: BorderSide(color: Colors.grey))),
+        height: 76,
+        decoration: BoxDecoration(
+            color: const Color.fromRGBO(24, 32, 39, 1),
+            border: Border(top: BorderSide(color: Colors.grey.withOpacity(0.6), width: 2))),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [

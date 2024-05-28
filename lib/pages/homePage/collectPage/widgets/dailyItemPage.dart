@@ -1,3 +1,6 @@
+import 'dart:math';
+
+import 'package:collect_the_world/globals/cachingScripts/listCaching.dart';
 import 'package:collect_the_world/globals/globalScripts/systems/authClient.dart'
     as authclie;
 import 'package:collect_the_world/generatedCode/api.dart';
@@ -47,23 +50,47 @@ class _DailyItemPageState extends State<DailyItemPage> {
                   height: 2,
                 ),
                 Expanded(
-                  child: Container(
-                    margin: const EdgeInsets.only(bottom: 70),
-                    child: MediaQuery.removePadding(
-                      context: context,
-                      removeTop: true,
-                      child: ListView.builder(
-                          controller: ScrollController(initialScrollOffset: 0),
-                          shrinkWrap: true,
-                          itemCount: items.length,
-                          itemBuilder: (BuildContext context, int index) {
-                            return NewItemWidget(
-                              name: items[index]["name"],
-                              xp: items[index]["xp"],
-                              index: index,
-                            );
-                          }),
-                    ),
+                  child: Stack(
+                    children: [
+                      Container(
+                        margin: const EdgeInsets.only(bottom: 70),
+                        child: MediaQuery.removePadding(
+                          context: context,
+                          removeTop: true,
+                          child: ListView.builder(
+                              controller:
+                                  ScrollController(initialScrollOffset: 0),
+                              shrinkWrap: true,
+                              itemCount: items.length,
+                              itemBuilder: (BuildContext context, int index) {
+                                return NewItemWidget(
+                                  name: items[index]["name"],
+                                  xp: items[index]["xp"],
+                                index: index,
+                                );
+                              }),
+                        ),
+                      ),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Container(
+                            height: 60,
+                            margin: const EdgeInsets.only(bottom: 70),
+                            decoration: const BoxDecoration(
+                                gradient: LinearGradient(
+                                    begin: Alignment.bottomCenter,
+                                    end: Alignment.topCenter,
+                                    colors: [
+                                  Colors.black38,
+                                  Colors.black26,
+                                  Colors.transparent,
+                                  
+                                ])),
+                          ),
+                        ],
+                      )
+                    ],
                   ),
                 ),
               ],
@@ -75,21 +102,11 @@ class _DailyItemPageState extends State<DailyItemPage> {
   }
 
   void requestItems() async {
-    print("lkjhlkajdljasd\nlkjhlkajdljasd\nlkjhlkajdljasd\n");
-    var token = (await authclie.Authclient().tokenRequest())!;
-    var authclient = HttpBearerAuth();
-    authclient.accessToken = token;
-    final client = ApiClient(
-        basePath: "https://ctw.coflnet.com", authentication: authclient);
-    final apiInstance = ObjectApi(client);
+    print("ljasdmlkasdkds\nljasdmlkasdkds\nljasdmlkasdkds\nljasdmlkasdkds\n");
 
-    var result = await apiInstance.getChellenge(count: 10);
-
-    Set<dynamic> newList = {};
-
-    for (var i in result!) {
-      newList.add({"name": i.name, "xp": i.value});
-    }
+    final newList = await ListCaching().getCache();
+    print(newList);
+    print("ljasdmlkasdkds\nljasdmlkasdkds\nljasdmlkasdkds\nljasdmlkasdkds\n");
     setState(() {
       items.addAll(newList);
     });

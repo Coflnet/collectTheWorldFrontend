@@ -13,8 +13,8 @@ class BackgroundGradiant extends StatelessWidget {
       begin: Alignment.topCenter,
       end: Alignment.bottomCenter,
       colors: [
-        Color.fromRGBO(30, 31, 43, 1),
-        Color.fromRGBO(29, 30, 44, 1),
+        Color.fromRGBO(24, 32, 39, 1),
+        Color.fromRGBO(24, 32, 39, 1),
 
       ],
     )));
