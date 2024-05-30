@@ -5,6 +5,7 @@ import "package:collect_the_world/globals/globalScripts/globals.dart"
 
 import 'package:collect_the_world/globals/globalScripts/systems/authClient.dart'
     as authclie;
+import 'package:collect_the_world/globals/globalScripts/systems/authClient.dart';
 import 'package:collect_the_world/globals/globalScripts/systems/dailyStreak.dart'
     as dailyStreakScript;
 import 'package:http/http.dart' as http;
@@ -45,7 +46,13 @@ class imageUploader {
       dailyStreakScript.streak += 1;
       dailyStreakScript.LoadDailyStreak().updateDayTimes();
     } else {
-      print('Failed to upload image. Status code: ${response.statusCode}');
+      if (response.statusCode == 401) {
+        await Authclient().generateToken();
+        makeHttpCall();
+        return;
+      }
+
+      print('Exception when calling api/images: ${response.statusCode}\n');
     }
   }
 }

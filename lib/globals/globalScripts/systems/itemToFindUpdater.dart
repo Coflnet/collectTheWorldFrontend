@@ -30,8 +30,8 @@ class itemDetails {
     var fileDataJson = file.readAsStringSync();
     var fileData = jsonDecode(fileDataJson);
 
-    collectedItems = fileData.collectedItems;
-    currentItem = fileData.currentItem;
+    collectedItems = fileData["collectedItems"];
+    currentItem = fileData["currentItem"];
   }
 
   Future<String?> getCurrentItem() async {
@@ -64,6 +64,16 @@ class itemDetails {
       currentItem = name!;
       return name;
     } catch (e) {
+      if (e is! ApiException) {
+        print(
+            'Exception when calling ObjectApi->apiObjectsCategoriesGet: $e\n');
+        return "error";
+      }
+      if (e.code == 401) {
+        await Authclient().generateToken();
+        return await getNewItem();
+      }
+
       print('Exception when calling ObjectApi->apiObjectsCategoriesGet: $e\n');
       return "error";
     }
@@ -96,9 +106,9 @@ class itemDetails {
     final client = ApiClient(
         basePath: "https://ctw.coflnet.com", authentication: authclient);
     final apiInstance = SkipApi(client);
-    try{
-    final result = await apiInstance.skip("smart home");
-    print(result);
+    try {
+      final result = await apiInstance.skip("smart home");
+      print(result);
     } catch (e) {
       print('Exception when calling SkipApi: $e\n');
     }

@@ -1,11 +1,11 @@
 import 'dart:convert';
 import 'dart:io';
 import 'dart:math';
-import 'dart:ui';
 
 import 'package:collect_the_world/globals/globalScripts/systems/authClient.dart'
     as authclie;
 import 'package:collect_the_world/generatedCode/api.dart';
+import 'package:collect_the_world/globals/globalScripts/systems/authClient.dart';
 import 'package:path_provider/path_provider.dart';
 
 class ListCaching {
@@ -21,7 +21,6 @@ class ListCaching {
       return cache;
     }
 
-    DateTime now = DateTime.now();
     Directory appDir = await getApplicationDocumentsDirectory();
     String filePath = "${appDir.path}/listCache.json";
     File file = File(filePath);
@@ -47,9 +46,6 @@ class ListCaching {
     if (cache.isEmpty) {
       return await reguestNewList();
     }
-    if (DateTime.now().isAfter(lastUpdate)) {
-      return await reguestNewList();
-    }
     return cache;
   }
 
@@ -60,9 +56,23 @@ class ListCaching {
     final client = ApiClient(
         basePath: "https://ctw.coflnet.com", authentication: authclient);
     final apiInstance = ObjectApi(client);
+    List<CollectableObject>? result;
+    try {
+      result = await apiInstance.getChellenge(count: 10);
+    } catch (e) {
+      if (e is! ApiException) {
+        print(
+            'Exception when calling ObjectApi->apiObjectsCategoriesGet: $e\n');
+        return {};
+      }
+      if (e.code == 401) {
+        await Authclient().generateToken();
+        return await reguestNewList();
+      }
 
-    var result = await apiInstance.getChellenge(count: 10);
-
+      print('Exception when calling ObjectApi->apiObjectsCategoriesGet: $e\n');
+      return {};
+    }
     Set<dynamic> newList = {};
 
     for (var i in result!) {
@@ -71,6 +81,22 @@ class ListCaching {
       newList.add({"name": i.name, "xp": xp});
     }
     cache = newList;
+    saveData();
     return cache;
+  }
+
+  void saveData() async {
+    Directory appDir = await getApplicationDocumentsDirectory();
+    String filePath = "${appDir.path}/listCache.json";
+    File file = File(filePath);
+    var fileData = {
+      "listCache": cache,
+    };
+    var jsonFileData = jsonEncode(fileData);
+    await file.writeAsString(jsonFileData);
+  }
+
+  void checkIfItemUpdated() {
+    reguestNewList();
   }
 }

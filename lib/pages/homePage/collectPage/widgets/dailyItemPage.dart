@@ -102,11 +102,8 @@ class _DailyItemPageState extends State<DailyItemPage> {
   }
 
   void requestItems() async {
-    print("ljasdmlkasdkds\nljasdmlkasdkds\nljasdmlkasdkds\nljasdmlkasdkds\n");
 
     final newList = await ListCaching().getCache();
-    print(newList);
-    print("ljasdmlkasdkds\nljasdmlkasdkds\nljasdmlkasdkds\nljasdmlkasdkds\n");
     setState(() {
       items.addAll(newList);
     });
