@@ -17,14 +17,20 @@ class _TimerCountDownWidgetState extends State<TimerCountDownWidget>
     super.initState();
     setState(() {
       controller = CustomTimerController(
-        vsync: this,
-        begin: getUtcCountDown(),
-        end: const Duration(),
-        initialState: CustomTimerState.reset,
-        interval: CustomTimerInterval.milliseconds);
-    
+          vsync: this,
+          begin: getUtcCountDown(),
+          end: const Duration(),
+          initialState: CustomTimerState.reset,
+          interval: CustomTimerInterval.milliseconds);
     });
     controller.start();
+  }
+
+  @override
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
   }
 
   @override

@@ -18,7 +18,8 @@ class ListCaching {
 
   Future<Set> loadCache() async {
     if (cache.isNotEmpty) {
-      return cache;
+      print("returning\nreturning\nreturning\nreturning\n");
+      return cache.toSet();
     }
 
     Directory appDir = await getApplicationDocumentsDirectory();
@@ -29,7 +30,7 @@ class ListCaching {
       file.createSync();
 
       var fileData = {
-        "listCache": {},
+        "listCache": [],
       };
       var jsonFileData = jsonEncode(fileData);
       await file.writeAsString(jsonFileData);
@@ -38,15 +39,15 @@ class ListCaching {
     var fileDatajson = await file.readAsString();
     var fileData = await jsonDecode(fileDatajson);
     cache = fileData["listCache"];
-    lastUpdate = DateTime.parse(fileData["currentDayTime"]);
     return await checkUpdateTime();
   }
 
   Future<Set> checkUpdateTime() async {
     if (cache.isEmpty) {
+      print("request\nrequest\nrequest\nrequest\nrequest\nrequest\n");
       return await reguestNewList();
     }
-    return cache;
+    return cache.toSet();
   }
 
   Future<Set> reguestNewList() async {
@@ -73,16 +74,17 @@ class ListCaching {
       print('Exception when calling ObjectApi->apiObjectsCategoriesGet: $e\n');
       return {};
     }
-    Set<dynamic> newList = {};
+    Set newList = {};
 
     for (var i in result!) {
       var rng = Random();
       int xp = rng.nextInt(30);
       newList.add({"name": i.name, "xp": xp});
     }
-    cache = newList;
+    cache = newList.toList();
+    print(cache);
     saveData();
-    return cache;
+    return cache.toSet();
   }
 
   void saveData() async {

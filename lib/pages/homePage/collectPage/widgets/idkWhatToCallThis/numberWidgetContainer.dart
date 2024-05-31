@@ -1,4 +1,4 @@
-import 'package:collect_the_world/pages/homePage/collectPage/widgets/numberWidgets.dart';
+import 'package:collect_the_world/pages/homePage/collectPage/widgets/idkWhatToCallThis/numberWidgets.dart';
 import 'package:flutter/cupertino.dart';
 
 class NumberWidgetContainer extends StatelessWidget {

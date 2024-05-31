@@ -3,7 +3,7 @@ import 'dart:ui';
 
 import 'package:camera/camera.dart';
 import 'package:collect_the_world/background/backgroundGradiant.dart';
-import 'package:collect_the_world/globals/cachingScripts/listCaching.dart';
+import 'package:collect_the_world/globals/globalScripts/cachingScripts/listCaching.dart';
 import 'package:collect_the_world/globals/globalScripts/systems/authClient.dart';
 import 'package:collect_the_world/pages/homePage/cameraScene/pages/cameraScene.dart';
 import 'package:collect_the_world/pages/homePage/cameraScene/pages/confirmScene.dart';

@@ -1,12 +1,12 @@
 import 'dart:math';
 
-import 'package:collect_the_world/globals/cachingScripts/listCaching.dart';
+import 'package:collect_the_world/globals/globalScripts/cachingScripts/listCaching.dart';
 import 'package:collect_the_world/globals/globalScripts/systems/authClient.dart'
     as authclie;
 import 'package:collect_the_world/generatedCode/api.dart';
-import 'package:collect_the_world/pages/homePage/collectPage/widgets/TimerCountDownWidget.dart';
+import 'package:collect_the_world/pages/homePage/collectPage/widgets/idkWhatToCallThis/TimerCountDownWidget.dart';
 import 'package:collect_the_world/pages/homePage/collectPage/widgets/dailyItemsQuest.dart';
-import 'package:collect_the_world/pages/homePage/collectPage/widgets/newItemWidget.dart';
+import 'package:collect_the_world/pages/homePage/collectPage/widgets/idkWhatToCallThis/newItemWidget.dart';
 import 'package:flutter/material.dart';
 
 class DailyItemPage extends StatefulWidget {
@@ -66,7 +66,7 @@ class _DailyItemPageState extends State<DailyItemPage> {
                                 return NewItemWidget(
                                   name: items[index]["name"],
                                   xp: items[index]["xp"],
-                                index: index,
+                                  index: index,
                                 );
                               }),
                         ),
@@ -85,7 +85,6 @@ class _DailyItemPageState extends State<DailyItemPage> {
                                   Colors.black38,
                                   Colors.black26,
                                   Colors.transparent,
-                                  
                                 ])),
                           ),
                         ],
@@ -102,10 +101,10 @@ class _DailyItemPageState extends State<DailyItemPage> {
   }
 
   void requestItems() async {
-
     final newList = await ListCaching().getCache();
     setState(() {
       items.addAll(newList);
     });
   }
+
 }

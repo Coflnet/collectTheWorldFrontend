@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:camera/camera.dart';
 import 'package:collect_the_world/globals/extentions/extentions.dart';
 import 'package:collect_the_world/pages/homePage/cameraScene/pages/cameraScene.dart';
-import 'package:collect_the_world/pages/homePage/collectPage/widgets/numberWidgetContainer.dart';
+import 'package:collect_the_world/pages/homePage/collectPage/widgets/idkWhatToCallThis/numberWidgetContainer.dart';
 import 'package:flutter/material.dart';
 
 class NewItemWidget extends StatefulWidget {
