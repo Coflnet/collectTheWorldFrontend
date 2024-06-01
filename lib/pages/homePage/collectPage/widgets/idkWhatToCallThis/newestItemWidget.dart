@@ -5,6 +5,7 @@ import 'package:camera/camera.dart';
 import 'package:collect_the_world/globals/extentions/extentions.dart';
 import 'package:collect_the_world/pages/homePage/cameraScene/pages/cameraScene.dart';
 import 'package:collect_the_world/pages/homePage/collectPage/widgets/idkWhatToCallThis/numberWidgetContainer.dart';
+import 'package:collect_the_world/pages/profilePage/widgets/profileImageWidget.dart';
 import 'package:flutter/material.dart';
 
 class NewestItemWidget extends StatefulWidget {
@@ -34,7 +35,7 @@ class NewestItemWidgetState extends State<NewestItemWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.fromLTRB(10, 0, 24, 16),
+      margin: const EdgeInsets.fromLTRB(10, 0, 24, 24),
       child: TextButton(
         style: TextButton.styleFrom(
             padding: const EdgeInsets.fromLTRB(0, 0, 0, 0)),
@@ -53,50 +54,50 @@ class NewestItemWidgetState extends State<NewestItemWidget> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       SizedBox(
-                        width: 40,
+                        width: 35,
                         child: Center(
                           child: Text(
                             "${widget.index + 1}",
                             style: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 20,
-                                fontWeight: FontWeight.w600),
+                                fontWeight: FontWeight.w800),
                           ),
                         ),
                       ),
-                      const Icon(
-                        Icons.check_box_outline_blank,
-                        size: 40,
-                        color: Colors.white,
-                      ),
-                      Expanded(
-                        flex: 4,
-                        child: ItemNameWidget(name: widget.name),
-                      ),
-                      Expanded(
-                        flex: 5,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      ItemNameWidget(name: widget.name),
+                      TextButton(
+                        style: TextButton.styleFrom(
+                            padding: const EdgeInsets.all(0)),
+                        onPressed: () {},
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            NumberWidgetContainer(xpCount: widget.xp),
-                            IconButton(
-                              style: IconButton.styleFrom(padding: EdgeInsets.all(0)),
-                                onPressed: () => {},
-                                icon: Icon(
-                                  Icons.info_outline_rounded,
-                                  color: Colors.pink[50],
-                                  size: 38,
-                                )),
+                            const Text(
+                              "Found by",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w600),
+                            ),
+                            Text(
+                              'Tentamens',
+                              style: TextStyle(
+                                  color: Colors.white.withOpacity(0.7),
+                                  fontSize: 15),
+                            )
                           ],
                         ),
-                      )
+                      ),
+                      const Expanded(child: SizedBox()),
+                      NumberWidgetContainer(xpCount: widget.xp)
                     ],
                   ),
                 ),
               ],
             ),
             Container(
-              margin: const EdgeInsets.fromLTRB(24, 16, 24, 0),
+              margin: const EdgeInsets.fromLTRB(24, 24, 24, 0),
               decoration: const BoxDecoration(
                   color: Color.fromRGBO(98, 99, 112, 0.356),
                   borderRadius: BorderRadius.all(Radius.circular(8))),
@@ -129,12 +130,33 @@ class ItemNameWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(left: 10),
-      child: AutoSizeText(
-        name.capitalize(),
-        style: const TextStyle(
-            color: Colors.white, fontSize: 19, fontWeight: FontWeight.w800),
-        overflow: TextOverflow.ellipsis,
+      child: SizedBox(
+        width: 90,
+        child: AutoSizeText(
+          name.capitalize(),
+          style: const TextStyle(
+              color: Colors.white, fontSize: 19, fontWeight: FontWeight.w800),
+          overflow: TextOverflow.ellipsis,
+        ),
       ),
     );
+  }
+}
+
+class ProfileImageWidget extends StatelessWidget {
+  const ProfileImageWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        decoration: const BoxDecoration(
+            shape: BoxShape.circle, color: Colors.orangeAccent),
+        child: Container(
+            margin: const EdgeInsets.all(6),
+            child: const Icon(
+              Icons.person,
+              color: Colors.white70,
+              size: 14,
+            )));
   }
 }
