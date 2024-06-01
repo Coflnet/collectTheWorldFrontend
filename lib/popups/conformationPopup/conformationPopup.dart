@@ -116,7 +116,7 @@ class ConformationPopupState extends State<ConformationPopup>
                                   topPosition = -100;
                                   controller.reverse();
                                 });
-                                await itemDetails().skipItemAsync();
+                                await ItemToFindHandler().skipItemAsync();
                                 newItemCallback();
                               },
                               icon: const Icon(

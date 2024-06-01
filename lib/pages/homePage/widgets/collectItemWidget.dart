@@ -30,7 +30,7 @@ class CollectItemWidgetState extends State<CollectItemWidget> {
 
   void initState() {
     super.initState();
-    itemDetails().getCurrentItem().then((newItemName) {
+    ItemToFindHandler().getCurrentItem().then((newItemName) {
       setState(() {
         loaded = true;
         itemName = newItemName!;
@@ -101,7 +101,7 @@ class CollectItemWidgetState extends State<CollectItemWidget> {
   }
 
   void skipConfirmed() {
-    itemDetails().fetchNewItem().then((newItemName) {
+    ItemToFindHandler().fetchNewItem().then((newItemName) {
       setState(() {
         itemName = newItemName!;
         loaded = true;

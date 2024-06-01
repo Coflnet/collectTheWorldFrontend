@@ -8,20 +8,16 @@ import 'package:collect_the_world/globals/globalScripts/systems/authClient.dart'
     as authclie;
 import 'package:path_provider/path_provider.dart';
 
-var currentItem = "";
-var collectedItems = {};
+var currentItem = "nil";
 
-class itemDetails {
-  void loadFileData() async {
-    print(
-        "hkshdkhahkhasdh\nhkshdkhahkhasdh\nhkshdkhahkhasdh\nhkshdkhahkhasdh\n");
+class ItemToFindHandler {
+  Future<String> loadFileData() async {
     if (Platform.isLinux || Platform.isMacOS || Platform.isWindows) {
-      return;
+      return "";
     }
     Directory appDir = await getApplicationDocumentsDirectory();
     String filePath = "${appDir.path}/itemDetails.json";
     File file = File(filePath);
-    await file.delete();
 
     if (!file.existsSync()) {
       createFile(file);
@@ -30,15 +26,18 @@ class itemDetails {
     var fileDataJson = file.readAsStringSync();
     var fileData = jsonDecode(fileDataJson);
 
-    collectedItems = fileData["collectedItems"];
     currentItem = fileData["currentItem"];
+    if (currentItem == "") {
+      currentItem = (await fetchNewItem())!;
+    }
+    return currentItem;
   }
 
   Future<String?> getCurrentItem() async {
-    if (currentItem.isEmpty) {
-      return await getNewItem();
+    if (currentItem == "nil") {
+      return await loadFileData();
     }
-    if (DateTime.now().isAfter(DateTime.now())) {
+    if (currentItem == "") {
       return await getNewItem();
     }
     return currentItem;
@@ -49,6 +48,7 @@ class itemDetails {
   }
 
   Future<String?> getNewItem() async {
+    print("requesting new item\nrequesting new item\nrequesting new item");
     token = (await authclie.Authclient().tokenRequest())!;
     var authclient = HttpBearerAuth();
     authclient.accessToken = token;
@@ -59,9 +59,9 @@ class itemDetails {
 
     try {
       final result = await api_instance.getNextObject();
-      print(result);
       String? name = result?.name;
       currentItem = name!;
+      saveData();
       return name;
     } catch (e) {
       if (e is! ApiException) {
@@ -81,18 +81,17 @@ class itemDetails {
 
   void createFile(file) async {
     file.createSync();
-    var fileData = {"currentItem": {}, "collectedItems": {}};
+    var fileData = {"currentItem": ""};
     var jsonFileData = jsonEncode(fileData);
     await file.writeAsString(jsonFileData);
   }
 
-  void saveStreakData() async {
+  void saveData() async {
     Directory appDir = await getApplicationDocumentsDirectory();
-    String filePath = "${appDir}/itemDetails.json";
+    String filePath = "${appDir.path}/itemDetails.json";
     File file = File(filePath);
     var fileData = {
       "currentItem": currentItem,
-      "collectedItems": collectedItems
     };
 
     var fileDataJson = jsonEncode(fileData);
@@ -123,61 +122,3 @@ class itemDetails {
     return completer.future;
   }
 }
-
-
-
-
-//Expanded(
-//        child: AttentionWidget(
-//            child: Column(
-//      crossAxisAlignment: CrossAxisAlignment.start,
-//      children: [
-//        Container(
-//            margin: const EdgeInsets.fromLTRB(24, 18, 0, 8),
-//            child: Text(
-//              "🔎 Item to find",
-//              style: TextStyle(
-//                  color: Colors.white.withOpacity(0.85),
-//                  fontFamily: "PTSans",
-//                  fontSize: 25,
-//                  fontWeight: FontWeight.w500),
-//            )),
-//        Container(
-//          margin: const EdgeInsets.symmetric(horizontal: 24),
-//          child: Row(
-//            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//            crossAxisAlignment: CrossAxisAlignment.start,
-//            children: [
-//              Expanded(
-//                child: Column(
-//                  crossAxisAlignment: CrossAxisAlignment.center,
-//                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//                  children: [
-//                    Container(
-//                      margin: const EdgeInsets.only(top: 4),
-//                      child: loaded
-//                          ? AutoSizeText(
-//                              maxLines: 1,
-//                              textAlign: TextAlign.start,
-//                              itemName,
-//                              style: TextStyle(
-//                                  color: Colors.white.withOpacity(0.9),
-//                                  fontWeight: FontWeight.bold,
-//                                  fontSize: 30),
-//                            )
-//                          : LoadingAnimationWidget.inkDrop(
-//                              color: Colors.white, size: 45),
-//                    ),
-//                    SkipButton(
-//                      parentCallBack: skipConfirmed,
-//                      parentCallBackStarted: skipStarted,
-//                    )
-//                  ],
-//                ),
-//              ),
-//              const CameraButton()
-//            ],
-//          ),
-//        )
-//      ],
-//    )));

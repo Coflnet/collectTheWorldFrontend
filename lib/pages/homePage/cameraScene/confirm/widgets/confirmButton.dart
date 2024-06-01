@@ -47,7 +47,7 @@ class ConfirmButton extends StatelessWidget {
 
   void handleButtonPress(context) async {
     if (isItemToFind) {
-      itemDetails().getNewItem();
+      ItemToFindHandler().getNewItem();
     }
 
     if (isHttpRequest) {
