@@ -6,18 +6,19 @@ import 'package:collect_the_world/pages/homePage/cameraScene/pages/cameraScene.d
 import 'package:collect_the_world/pages/homePage/collectPage/widgets/idkWhatToCallThis/numberWidgetContainer.dart';
 import 'package:flutter/material.dart';
 
-class NewItemWidget extends StatefulWidget {
+class DailyItemWidget extends StatefulWidget {
   final String name;
   final int xp;
   final int index;
 
-  const NewItemWidget({required this.name, this.xp = 25, required this.index});
+  const DailyItemWidget(
+      {super.key, required this.name, this.xp = 25, required this.index});
 
   @override
-  NewItemWidgetState createState() => NewItemWidgetState();
+  DailyItemWidgetState createState() => DailyItemWidgetState();
 }
 
-class NewItemWidgetState extends State<NewItemWidget> {
+class DailyItemWidgetState extends State<DailyItemWidget> {
   late CameraController _controller;
   late var cameras;
 
@@ -33,7 +34,8 @@ class NewItemWidgetState extends State<NewItemWidget> {
   Widget build(BuildContext context) {
     return Container(
       child: TextButton(
-        style: TextButton.styleFrom(padding: EdgeInsets.fromLTRB(8, 12, 8, 0)),
+        style:
+            TextButton.styleFrom(padding: EdgeInsets.fromLTRB(16, 12, 16, 0)),
         onPressed: () {
           changeScene(context);
         },
@@ -85,9 +87,8 @@ class NewItemWidgetState extends State<NewItemWidget> {
             Container(
               margin: const EdgeInsets.only(top: 12),
               decoration: const BoxDecoration(
-                color: Color.fromRGBO(98, 99, 112, 0.356),
-                borderRadius: BorderRadius.all(Radius.circular(8))
-              ),
+                  color: Color.fromRGBO(98, 99, 112, 0.356),
+                  borderRadius: BorderRadius.all(Radius.circular(8))),
               width: 380,
               height: 2,
             )
