@@ -13,6 +13,7 @@ class LeaderboardHandler {
     List<dynamic> realUsersList = [];
     List leaderboardFileData =
         await LeaderboardFileHandler().getLeaderBoardData(selectedPageId);
+    print(leaderboardFileData);
     DateTime fileTimeStamp = DateTime.parse(leaderboardFileData[0]);
     if (leaderboardFileData.length == 1 ||
         fileTimeStamp.isBefore(DateTime.now())) {
@@ -25,10 +26,14 @@ class LeaderboardHandler {
       finalUsersList.addAll(leaderboardFileData);
     }
     if (finalUsersList.length - 10 < 0) {
-      print("generatingFake\ngeneratingFak\ngeneratingFake");
       finalUsersList.addAll(LeaderboardFakeUserGen()
           .generateFakeUsers(realUsersList.length - 10, selectedPageId));
     }
+
+    List returnList = [];
+    returnList.add(leaderboardFileData[0]);
+    returnList.addAll(finalUsersList);
+    LeaderboardFileHandler().updateCorrectData(returnList, selectedPageId);
 
     return finalUsersList;
   }
