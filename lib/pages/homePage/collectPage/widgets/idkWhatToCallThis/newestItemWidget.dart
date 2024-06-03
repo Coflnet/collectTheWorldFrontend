@@ -131,11 +131,11 @@ class ItemNameWidget extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.only(left: 10),
       child: SizedBox(
-        width: 90,
+        width: 120,
         child: AutoSizeText(
           name.capitalize(),
           style: const TextStyle(
-              color: Colors.white, fontSize: 19, fontWeight: FontWeight.w800),
+              color: Colors.white, fontSize: 22, fontWeight: FontWeight.w800),
           overflow: TextOverflow.ellipsis,
         ),
       ),

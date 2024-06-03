@@ -35,7 +35,7 @@ class DailyItemWidgetState extends State<DailyItemWidget> {
     return Container(
       child: TextButton(
         style:
-            TextButton.styleFrom(padding: EdgeInsets.fromLTRB(16, 12, 16, 0)),
+            TextButton.styleFrom(padding: const EdgeInsets.fromLTRB(16, 16, 16, 0)),
         onPressed: () {
           changeScene(context);
         },
@@ -62,7 +62,7 @@ class DailyItemWidgetState extends State<DailyItemWidget> {
                       ),
                       const Icon(
                         Icons.check_box_outline_blank,
-                        size: 47,
+                        size: 42,
                         color: Colors.white,
                       ),
                       Expanded(
@@ -85,7 +85,7 @@ class DailyItemWidgetState extends State<DailyItemWidget> {
               ],
             ),
             Container(
-              margin: const EdgeInsets.only(top: 12),
+              margin: const EdgeInsets.only(top: 16),
               decoration: const BoxDecoration(
                   color: Color.fromRGBO(98, 99, 112, 0.356),
                   borderRadius: BorderRadius.all(Radius.circular(8))),

@@ -1,5 +1,4 @@
 import 'package:collect_the_world/globals/globalScripts/cachingScripts/listCaching.dart';
-import 'package:collect_the_world/pages/homePage/collectPage/widgets/idkWhatToCallThis/dailyItemWidget.dart';
 import 'package:collect_the_world/pages/homePage/collectPage/widgets/idkWhatToCallThis/newestItemWidget.dart';
 import 'package:collect_the_world/pages/homePage/collectPage/widgets/idkWhatToCallThis/newestItemsQuest.dart';
 import 'package:flutter/cupertino.dart';
@@ -62,13 +61,20 @@ class NewestItemPageState extends State<NewestItemPage> {
                             controller:
                                 ScrollController(initialScrollOffset: 0),
                             shrinkWrap: true,
-                            itemCount: items.length,
+                            itemCount: items.length + 1,
                             itemBuilder: (BuildContext context, int index) {
-                              return NewestItemWidget(
-                                name: items[index]["name"],
-                                xp: items[index]["xp"],
-                                index: index,
-                              );
+                              if (index == 0) {
+                                return const SizedBox(
+                                  height: 16,
+                                );
+                              } else {
+                                index = index -1;
+                                return NewestItemWidget(
+                                  name: items[index]["name"],
+                                  xp: items[index]["xp"],
+                                  index: index,
+                                );
+                              }
                             }),
                       ),
                     ),

@@ -21,80 +21,79 @@ class DailyItemsQuestState extends State<DailyItemsQuest> {
       margin: const EdgeInsets.fromLTRB(24, 14, 24, 0),
       child: AttentionWidget(
           child: Container(
-        margin: const EdgeInsets.fromLTRB(16, 10, 16, 8),
+        margin: const EdgeInsets.fromLTRB(18, 16, 24, 12),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Container(
                 child: const Text(
-              "⭐ ",
+              "⭐",
               style: TextStyle(color: Colors.white, fontSize: 40),
             )),
             Expanded(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text(
-                    "Collect 1 more item",
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 25,
-                        fontWeight: FontWeight.w700),
-                  ),
-                  Container(
-                    margin: const EdgeInsets.only(top: 4),
-                    child: Stack(
-                      children: [
-                        Row(
-                          children: [
-                            Expanded(
-                              child: LinearProgressIndicator(
-                                backgroundColor: Colors.pink[50],
-                                borderRadius: BorderRadius.circular(8),
-                                semanticsLabel: "hello world",
-                                value: 0.0,
-                                minHeight: 28,
-                              ),
-                            ),
-                            Container(
-                              margin: const EdgeInsets.only(left: 3),
-                              child: const Text(
-                                "10XP",
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 22,
-                                    fontWeight: FontWeight.w500),
-                              ),
-                            )
-                          ],
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              "0/1",
-                              style: TextStyle(
-                                  color: Colors.grey[700],
-                                  fontWeight: FontWeight.w700,
-                                  fontSize: 20),
-                            ),
-                            Container(
-                              margin: const EdgeInsets.only(left: 3),
-                              child: const Text(
-                                "10XP",
-                                style: TextStyle(
-                                    color: Colors.transparent,
-                                    fontSize: 22,
-                                    fontWeight: FontWeight.w500),
-                              ),
-                            )
-                          ],
-                        ),
-                      ],
+              child: Container(
+                margin: const EdgeInsets.only(left: 16),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      "Collect 1 more item",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 25,
+                          fontWeight: FontWeight.w700),
                     ),
-                  )
-                ],
+                    Container(
+                      margin: const EdgeInsets.only(top: 4),
+                      child: Stack(
+                        children: [
+                          Row(
+                            children: [
+                              Expanded(
+                                child: LinearProgressIndicator(
+                                  backgroundColor: Colors.pink[50],
+                                  borderRadius: const BorderRadius.only(
+                                      topLeft: Radius.circular(8),
+                                      bottomLeft: Radius.circular(8)),
+                                  semanticsLabel: "hello world",
+                                  value: 0.0,
+                                  minHeight: 22,
+                                ),
+                              ),
+                              Image.asset(
+                                "assets/treasureChestGold.png",
+                                scale: 3.3,
+                              )
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                "0/1",
+                                style: TextStyle(
+                                    color: Colors.grey[700],
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: 20),
+                              ),
+                              Container(
+                                margin: const EdgeInsets.only(left: 3),
+                                child: const Text(
+                                  "10XP",
+                                  style: TextStyle(
+                                      color: Colors.transparent,
+                                      fontSize: 22,
+                                      fontWeight: FontWeight.w500),
+                                ),
+                              )
+                            ],
+                          ),
+                        ],
+                      ),
+                    )
+                  ],
+                ),
               ),
             ),
           ],
