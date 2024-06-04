@@ -2,6 +2,7 @@ import 'package:collect_the_world/generatedCode/api.dart';
 import 'package:collect_the_world/globals/globalScripts/systems/authClient.dart';
 import 'package:collect_the_world/pages/leaderboard/scripts/leaderboardHandler.dart';
 import 'package:collect_the_world/pages/leaderboard/widgets/containers/leaderBoardWidget/leaderBoardWidget.dart';
+import 'package:collect_the_world/pages/leaderboard/widgets/containers/leaderboardPlacement/LBPLmain.dart';
 import 'package:flutter/material.dart';
 
 class LeaderboardDailyPage extends StatefulWidget {
@@ -24,6 +25,13 @@ class LeaderboardDailyPageState extends State<LeaderboardDailyPage> {
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
+        Column(
+          children: <Widget>[
+            SizedBox(
+                height: MediaQuery.of(context).size.height / 2.5,
+                child: const LBPLmain(topUsers: []))
+          ],
+        ),
         Expanded(
             child: Container(
           margin: const EdgeInsets.only(bottom: 70),
