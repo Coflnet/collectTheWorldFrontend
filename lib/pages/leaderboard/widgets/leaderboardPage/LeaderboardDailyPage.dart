@@ -2,6 +2,7 @@ import 'package:collect_the_world/generatedCode/api.dart';
 import 'package:collect_the_world/globals/globalScripts/systems/authClient.dart';
 import 'package:collect_the_world/pages/leaderboard/scripts/leaderboardHandler.dart';
 import 'package:collect_the_world/pages/leaderboard/widgets/containers/leaderBoardWidget/leaderBoardWidget.dart';
+import 'package:collect_the_world/pages/leaderboard/widgets/containers/leaderBoardWidget/leaderboardDivider.dart';
 import 'package:collect_the_world/pages/leaderboard/widgets/containers/leaderboardPlacement/LBPLmain.dart';
 import 'package:flutter/material.dart';
 
@@ -29,21 +30,26 @@ class LeaderboardDailyPageState extends State<LeaderboardDailyPage> {
           children: <Widget>[
             SizedBox(
                 height: MediaQuery.of(context).size.height / 2.5,
-                child: const LBPLmain(topUsers: []))
+                child: const LBPLmain(topUsers: [])),
+            const LeaderboardDivider()
           ],
         ),
         Expanded(
             child: Container(
           margin: const EdgeInsets.only(bottom: 70),
-          child: ListView.builder(
-            shrinkWrap: true,
-            itemCount: leaderboardlist.length,
-            itemBuilder: (context, index) {
-              return LeaderBoardWidget(
-                  name: leaderboardlist[index][0],
-                  xp: leaderboardlist[index][1],
-                  index: index);
-            },
+          child: MediaQuery.removePadding(
+            context: context,
+            removeTop: true,
+            child: ListView.builder(
+              shrinkWrap: true,
+              itemCount: leaderboardlist.length,
+              itemBuilder: (context, index) {
+                return LeaderBoardWidget(
+                    name: leaderboardlist[index][0],
+                    xp: leaderboardlist[index][1],
+                    index: index);
+              },
+            ),
           ),
         ))
       ],

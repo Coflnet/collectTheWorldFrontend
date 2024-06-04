@@ -30,6 +30,10 @@ class LeaderboardFakeUserGen {
     List generatedUser = [];
 
     for (var i = 0; i < amountOfUserToCreate; i++) {
+      if (names.isEmpty){
+        print("error out of names");
+        return [];
+      }
       int randomNum = random.nextInt(names.length);
       List copyNames = names;
       String username = copyNames[randomNum];
@@ -44,7 +48,8 @@ class LeaderboardFakeUserGen {
 
   int generateXP(int multi) {
     final random = Random();
-    var xpCount = random.nextInt((50 * (multi * 2)));
+    print("multi ${multi}");
+    var xpCount = random.nextInt((50 * (multi * 2))) + 10;
     return roundTo5(xpCount);
   }
 

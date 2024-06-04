@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:collect_the_world/pages/leaderboard/widgets/containers/leaderBoardWidget/LBprofilePicture.dart';
 import 'package:flutter/material.dart';
 
@@ -15,11 +16,12 @@ class LBplacementTwo extends StatelessWidget {
           ),
           Expanded(
             child: Container(
-              margin: const EdgeInsets.fromLTRB(8,4,8,4),
-
+              margin: const EdgeInsets.fromLTRB(8, 4, 8, 4),
               width: double.infinity,
               padding: const EdgeInsets.only(top: 16),
-              decoration: BoxDecoration(color: Colors.grey[400]),
+              decoration: BoxDecoration(
+                  color: Colors.grey[400],
+                  borderRadius: BorderRadius.circular(8)),
               child: const PlacementContent(),
             ),
           )
@@ -37,13 +39,15 @@ class PlacementContent extends StatelessWidget {
     return Column(
       children: <Widget>[
         const TmpProfile(),
-        const Text(
+        const SizedBox(height: 4,),
+        const AutoSizeText(
+          overflow: TextOverflow.ellipsis,
           "Tentamens",
-          style: TextStyle(color: Colors.white70, fontSize: 18),
+          style: TextStyle(color: Colors.white70, fontSize: 14),
         ),
         Text(
           "2",
-          style: TextStyle(color: Colors.yellow[50], fontSize: 36),
+          style: TextStyle(color: Colors.yellow[50], fontSize: 33),
         )
       ],
     );

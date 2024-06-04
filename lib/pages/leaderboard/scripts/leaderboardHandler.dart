@@ -13,28 +13,27 @@ class LeaderboardHandler {
     List<dynamic> realUsersList = [];
     List leaderboardFileData =
         await LeaderboardFileHandler().getLeaderBoardData(selectedPageId);
-    print(leaderboardFileData);
-    DateTime fileTimeStamp = DateTime.parse(leaderboardFileData[0]);
-    if (leaderboardFileData.length == 1 ||
-        fileTimeStamp.isBefore(DateTime.now())) {
-      realUsersList =
-          await LeaderboardRequestHandler().loadLeaderBoard(selectedPageId);
-    }
-    finalUsersList.addAll(realUsersList);
-    if (leaderboardFileData.length != 1) {
-      leaderboardFileData.removeAt(0);
-      finalUsersList.addAll(leaderboardFileData);
-    }
+
     if (finalUsersList.length - 10 < 0) {
+      print("gen fake\ngen fake\ngen fake\ngen fake");
+
       finalUsersList.addAll(LeaderboardFakeUserGen()
           .generateFakeUsers(realUsersList.length - 10, selectedPageId));
     }
 
-    List returnList = [];
-    returnList.add(leaderboardFileData[0]);
-    returnList.addAll(finalUsersList);
-    LeaderboardFileHandler().updateCorrectData(returnList, selectedPageId);
+    LeaderboardFileHandler().updateCorrectData(finalUsersList, selectedPageId);
 
     return finalUsersList;
+  }
+
+  Future<List> validateRealUserCount(List leaderboardFileData, int id) async {
+    if (leaderboardFileData.length > 1) {
+      return leaderboardFileData;
+    }
+
+    if (leaderboardFileData.length == 1) {
+          return await LeaderboardRequestHandler().loadLeaderBoard(id);
+    
+    }
   }
 }

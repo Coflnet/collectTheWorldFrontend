@@ -1,6 +1,7 @@
 import 'package:collect_the_world/pages/leaderboard/widgets/containers/leaderBoardWidget/LBPositionWidget.dart';
 import 'package:collect_the_world/pages/leaderboard/widgets/containers/leaderBoardWidget/LBprofilePicture.dart';
 import 'package:collect_the_world/pages/leaderboard/widgets/containers/leaderBoardWidget/LBuserNameWidget.dart';
+import 'package:collect_the_world/pages/leaderboard/widgets/containers/leaderBoardWidget/LBxpWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:collect_the_world/globals/extentions/extentions.dart';
 
@@ -23,7 +24,8 @@ class LeaderBoardWidget extends StatelessWidget {
               children: [
                 LBPositionWidget(index: index),
                 const TmpProfile(),
-                LBuserNameWidget(name: name)
+                LBuserNameWidget(name: name),
+                LBxpWidget(xp: xp)
               ],
             ),
             Container(
