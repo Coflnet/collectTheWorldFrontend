@@ -13,7 +13,7 @@ class CustomHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: const BoxDecoration(
-        color: Color.fromARGB(255, 28, 32, 44),
+        color: Color.fromRGBO(21, 31, 51, 1),
         border: Border(
             bottom: BorderSide(
                 color: Color.fromARGB(255, 141, 141, 141), width: 2)),

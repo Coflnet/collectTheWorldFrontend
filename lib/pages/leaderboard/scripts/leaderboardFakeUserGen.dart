@@ -49,7 +49,7 @@ class LeaderboardFakeUserGen {
   int generateXP(int multi) {
     final random = Random();
     print("multi ${multi}");
-    var xpCount = random.nextInt((50 * (multi * 2))) + 10;
+    var xpCount = random.nextInt((75 * (multi * 2))) + 50 * multi;
     return roundTo5(xpCount);
   }
 

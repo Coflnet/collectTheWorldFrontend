@@ -6,7 +6,7 @@ class LeaderboardDivider extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(top: 16),
+      margin: const EdgeInsets.only(top: 8),
       height: 2,
       decoration: BoxDecoration(
           color: Colors.grey[600], borderRadius: BorderRadius.circular(8)),

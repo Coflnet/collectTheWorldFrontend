@@ -1,4 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+class PageChangeNotifer extends ChangeNotifier {
+  late LeaderboardHeaderState lbState;
+
+  void setPageState(LeaderboardHeaderState state) {
+    lbState = state;
+  }
+
+  void changePage(id) {
+    lbState.changePageSel(id);
+  }
+}
 
 class LeaderboardHeader extends StatefulWidget {
   const LeaderboardHeader({super.key});
@@ -8,7 +21,7 @@ class LeaderboardHeader extends StatefulWidget {
 }
 
 class LeaderboardHeaderState extends State<LeaderboardHeader> {
-  int currentSelection = 3;
+  int currentSelection = 1;
 
   var nameTextStyle = ({int sel = 1, int cur = 0}) {
     return TextStyle(
@@ -17,6 +30,7 @@ class LeaderboardHeaderState extends State<LeaderboardHeader> {
 
   @override
   Widget build(BuildContext context) {
+    Provider.of<PageChangeNotifer>(context, listen: false).setPageState(this);
     return Container(
       decoration: BoxDecoration(color: Colors.blueGrey[800]),
       height: 90,
@@ -40,8 +54,9 @@ class LeaderboardHeaderState extends State<LeaderboardHeader> {
             ),
             AnimatedPositioned(
               duration: const Duration(milliseconds: 300),
+              curve: Curves.easeOutCubic,
               left: MediaQuery.of(context).size.width *
-                      getIndicatorPosition(currentSelection),
+                  getIndicatorPosition(currentSelection),
               bottom: 0,
               child: Container(
                 width: MediaQuery.of(context).size.width /
@@ -56,6 +71,13 @@ class LeaderboardHeaderState extends State<LeaderboardHeader> {
     );
   }
 
+  void changePageSel(int id) {
+    setState(() {
+      print("changing id");
+      currentSelection = id;
+    });
+  }
+
   double getIndicatorPosition(int selection) {
     switch (selection) {
       case 1:
@@ -68,5 +90,4 @@ class LeaderboardHeaderState extends State<LeaderboardHeader> {
         return 0;
     }
   }
-
 }

@@ -29,7 +29,7 @@ void main() {
     statusBarColor: Colors.transparent,
     statusBarBrightness: Brightness.light,
     statusBarIconBrightness: Brightness.light,
-    systemNavigationBarColor: Color.fromRGBO(24, 32, 39, 1),
+    systemNavigationBarColor: Color.fromRGBO(21, 31, 51, 1),
   ));
   runApp(const HomePage());
 }

@@ -18,8 +18,8 @@ class baseWidget extends StatelessWidget {
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
             colors: [
-              Color.fromRGBO(73, 61, 91, 1),
-              Color.fromRGBO(61, 64, 91, 1),
+              Color.fromRGBO(62, 52, 99, 1),
+              Color.fromRGBO(62, 52, 99, 1),
               
             ],
           )),

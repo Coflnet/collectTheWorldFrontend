@@ -14,14 +14,13 @@ class LeaderboardHandler {
     List leaderboardFileData =
         await LeaderboardFileHandler().getLeaderBoardData(selectedPageId);
 
-    if (finalUsersList.length - 10 < 0) {
-      print("gen fake\ngen fake\ngen fake\ngen fake");
-
-      finalUsersList.addAll(LeaderboardFakeUserGen()
-          .generateFakeUsers(realUsersList.length - 10, selectedPageId));
-    }
+    finalUsersList =
+        await validateRealUserCount(leaderboardFileData, selectedPageId);
+    print(finalUsersList.length);
 
     LeaderboardFileHandler().updateCorrectData(finalUsersList, selectedPageId);
+
+    finalUsersList.sort((a, b) => b[1].compareTo(a[1]));
 
     return finalUsersList;
   }
@@ -31,9 +30,13 @@ class LeaderboardHandler {
       return leaderboardFileData;
     }
 
-    if (leaderboardFileData.length == 1) {
-          return await LeaderboardRequestHandler().loadLeaderBoard(id);
-    
+    List returnResult = [];
+    returnResult = await LeaderboardRequestHandler().loadLeaderBoard(id);
+    if (returnResult.length - 10 <= 0) {
+      returnResult.addAll(LeaderboardFakeUserGen()
+          .generateFakeUsers(returnResult.length - 10, id));
+      return returnResult;
     }
+    return [];
   }
 }

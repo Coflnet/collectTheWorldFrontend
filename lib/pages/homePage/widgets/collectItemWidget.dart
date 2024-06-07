@@ -128,8 +128,8 @@ class SkipButton extends StatelessWidget {
               begin: Alignment.centerLeft,
               end: Alignment.centerRight,
               colors: [
-                Color.fromRGBO(100, 80, 160, 1),
-                Color.fromRGBO(89, 68, 139, 1)
+                Color.fromRGBO(49, 41, 133, 1),
+                Color.fromRGBO(43, 36, 117, 1)
               ]),
           borderRadius: BorderRadius.circular(16)),
       child: TextButton(

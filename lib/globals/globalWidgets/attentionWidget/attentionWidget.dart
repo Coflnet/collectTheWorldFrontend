@@ -19,8 +19,8 @@ class AttentionWidget extends StatelessWidget {
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
             colors: [
-              Color.fromRGBO(48, 46, 109, 1),
-              Color.fromRGBO(40, 46, 109, 1),
+              Color.fromRGBO(105, 69, 135, 1),
+              Color.fromRGBO(105, 69, 135, 1),
             ],
           )),
       child: child,

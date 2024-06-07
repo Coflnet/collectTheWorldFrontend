@@ -17,7 +17,7 @@ class Footer extends StatelessWidget {
       child: Container(
         height: 76,
         decoration: BoxDecoration(
-            color: const Color.fromRGBO(24, 32, 39, 1),
+            color: const Color.fromRGBO(21, 31, 51, 1),
             border: Border(top: BorderSide(color: Colors.grey.withOpacity(0.6), width: 2))),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
