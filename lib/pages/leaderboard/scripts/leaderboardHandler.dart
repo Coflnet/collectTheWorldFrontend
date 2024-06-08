@@ -10,13 +10,11 @@ import 'package:intl/intl.dart';
 class LeaderboardHandler {
   Future<List<dynamic>> getLeaderboard(int selectedPageId) async {
     List<dynamic> finalUsersList = [];
-    List<dynamic> realUsersList = [];
     List leaderboardFileData =
         await LeaderboardFileHandler().getLeaderBoardData(selectedPageId);
 
     finalUsersList =
         await validateRealUserCount(leaderboardFileData, selectedPageId);
-    print(finalUsersList.length);
 
     LeaderboardFileHandler().updateCorrectData(finalUsersList, selectedPageId);
 
@@ -30,8 +28,9 @@ class LeaderboardHandler {
       return leaderboardFileData;
     }
 
-    List returnResult = [];
-    returnResult = await LeaderboardRequestHandler().loadLeaderBoard(id);
+    List<dynamic> returnResult = [];
+    var leaderBoardData = await LeaderboardRequestHandler().loadLeaderBoard(id);
+    returnResult.addAll(leaderBoardData);
     if (returnResult.length - 10 <= 0) {
       returnResult.addAll(LeaderboardFakeUserGen()
           .generateFakeUsers(returnResult.length - 10, id));

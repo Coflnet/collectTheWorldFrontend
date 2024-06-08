@@ -9,7 +9,7 @@ class LBplacementXpWidget extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        Text("$count",
+        Text("+$count",
             style: TextStyle(
                 color: Colors.white.withOpacity(0.9),
                 fontSize: 20,

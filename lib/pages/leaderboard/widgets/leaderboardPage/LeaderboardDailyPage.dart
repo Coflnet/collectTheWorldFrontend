@@ -30,13 +30,12 @@ class LeaderboardDailyPageState extends State<LeaderboardDailyPage> {
         Column(
           children: <Widget>[
             const SizedBox(
-              height: 110,
+              height: 105,
             ),
+            const LBRewardDaily(),
             SizedBox(
                 height: MediaQuery.of(context).size.height / 4.5,
                 child: const LBPLmain(topUsers: [])),
-            const Text("Top Ten \n Reward 1000XP",
-                style: TextStyle(color: Colors.white)),
             const LeaderboardDivider(),
           ],
         ),
@@ -70,31 +69,20 @@ class LeaderboardDailyPageState extends State<LeaderboardDailyPage> {
   }
 }
 
-class LBRewardInfoWidget extends StatelessWidget {
-  const LBRewardInfoWidget({super.key});
+class LBRewardDaily extends StatelessWidget {
+  const LBRewardDaily({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.fromLTRB(0, 16, 0, 8),
-      decoration: BoxDecoration(
-          color: Color.fromRGBO(178, 152, 255, 1),
-          borderRadius: BorderRadius.circular(12)),
-      child: TextButton(
-          style: TextButton.styleFrom(
-              padding: const EdgeInsets.fromLTRB(16, 4, 12, 4)),
-          onPressed: () {},
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Text(
-                "Rewards",
-                style: TextStyle(color: Colors.purple[50], fontSize: 20),
-              ),
-              SizedBox(width: 5),
-              Icon(Icons.info_outline, size: 35, color: Colors.purple[50]),
-            ],
-          )),
+    return Column(
+      children: <Widget>[
+        const Text("Top Ten",
+            textAlign: TextAlign.center,
+            style: TextStyle(color: Colors.white, fontSize: 20)),
+        Text("+1000XP",
+            style: TextStyle(
+                color: Colors.white.withOpacity(0.9), fontSize: 25, fontFamily: "Rukik-RLight", fontWeight: FontWeight.w700))
+      ],
     );
   }
 }

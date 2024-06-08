@@ -3,12 +3,12 @@ import 'dart:io';
 
 import 'package:path_provider/path_provider.dart';
 
-class LeaderboardFileHandler {
-  bool fileLoadedYet = false;
-  List dailyFakeUsers = [];
-  List weeklyFakeUsers = [];
-  List allTimeFakeUsers = [];
+bool fileLoadedYet = false;
+List dailyFakeUsers = [];
+List weeklyFakeUsers = [];
+List allTimeFakeUsers = [];
 
+class LeaderboardFileHandler {
   Future<List> getLeaderBoardData(int id) async {
     if (!fileLoadedYet) {
       await getFileData();
@@ -79,9 +79,11 @@ class LeaderboardFileHandler {
     };
     var jsonFileData = jsonEncode(fileData);
     await file.writeAsString(jsonFileData);
+    
   }
 
   void updateCorrectData(List newList, int curSel) {
+    print("saving to $curSel new list $newList");
     switch (curSel) {
       case 1:
         dailyFakeUsers = newList;

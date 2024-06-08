@@ -28,27 +28,23 @@ class LeaderboardFakeUserGen {
     amountOfUserToCreate = amountOfUserToCreate * -1;
     final random = Random();
     List generatedUser = [];
+    List copyNames = List.from(names);
 
     for (var i = 0; i < amountOfUserToCreate; i++) {
-      if (names.isEmpty){
-        print("error out of names");
-        return [];
-      }
-      int randomNum = random.nextInt(names.length);
-      List copyNames = names;
+      
+      int randomNum = random.nextInt(copyNames.length);
       String username = copyNames[randomNum];
       copyNames.remove(username);
       int xp = generateXP(pageId);
       List user = [username, xp];
       generatedUser.add(user);
     }
-
+    
     return generatedUser;
   }
 
   int generateXP(int multi) {
     final random = Random();
-    print("multi ${multi}");
     var xpCount = random.nextInt((75 * (multi * 2))) + 50 * multi;
     return roundTo5(xpCount);
   }
@@ -57,3 +53,4 @@ class LeaderboardFakeUserGen {
     return (number / 5).round() * 5;
   }
 }
+

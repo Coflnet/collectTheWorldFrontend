@@ -32,7 +32,11 @@ class LeaderboardRequestHandler {
     try {
       final result =
           await apiInstance.getLeaderboard(getLeaderBoardId(variation));
-      print(result);
+      if (result == null){
+        return [];
+      }
+      print("result $result");
+      return result;
     } catch (e) {
       if (e is! ApiException) {
         print(
@@ -47,6 +51,5 @@ class LeaderboardRequestHandler {
       print('Exception when calling ObjectApi->apiObjectsCategoriesGet: $e\n');
       return [];
     }
-    return [];
   }
 }
