@@ -16,7 +16,7 @@ class LeaderBoardWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextButton(
         style: TextButton.styleFrom(
-            padding: const EdgeInsets.fromLTRB(16, 16, 16, 0)),
+            padding: const EdgeInsets.fromLTRB(16, 28, 16, 0)),
         onPressed: () {},
         child: Column(
           children: [
@@ -29,7 +29,7 @@ class LeaderBoardWidget extends StatelessWidget {
               ],
             ),
             Container(
-              margin: const EdgeInsets.only(top: 16),
+              margin: const EdgeInsets.only(top: 28),
               decoration: const BoxDecoration(
                   color: Color.fromRGBO(98, 99, 112, 0.356),
                   borderRadius: BorderRadius.all(Radius.circular(8))),

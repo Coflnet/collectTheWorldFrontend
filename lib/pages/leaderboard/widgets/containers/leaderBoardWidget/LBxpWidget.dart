@@ -6,6 +6,13 @@ class LBxpWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text("$xp", );
+    return Text(
+      "${xp}XP",
+      style: const TextStyle(
+          color: Colors.white,
+          fontFamily: "Rukik-RLight",
+          fontSize: 20,
+          fontWeight: FontWeight.w700),
+    );
   }
 }

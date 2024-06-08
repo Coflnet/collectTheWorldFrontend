@@ -13,7 +13,7 @@ class TmpProfile extends StatelessWidget {
           child: const Icon(
             Icons.person,
             color: Colors.white70,
-            size: 40,
+            size: 30,
           )),
     );
   }

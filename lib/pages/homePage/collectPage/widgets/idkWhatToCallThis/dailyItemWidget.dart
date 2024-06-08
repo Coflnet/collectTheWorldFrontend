@@ -35,7 +35,7 @@ class DailyItemWidgetState extends State<DailyItemWidget> {
     return Container(
       child: TextButton(
         style:
-            TextButton.styleFrom(padding: const EdgeInsets.fromLTRB(16, 16, 16, 0)),
+            TextButton.styleFrom(padding: const EdgeInsets.fromLTRB(16, 24, 16, 0)),
         onPressed: () {
           changeScene(context);
         },
@@ -49,7 +49,7 @@ class DailyItemWidgetState extends State<DailyItemWidget> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       SizedBox(
-                        width: 40,
+                        width: 45,
                         child: Center(
                           child: Text(
                             "${widget.index + 1}",
@@ -85,7 +85,7 @@ class DailyItemWidgetState extends State<DailyItemWidget> {
               ],
             ),
             Container(
-              margin: const EdgeInsets.only(top: 16),
+              margin: const EdgeInsets.only(top: 24),
               decoration: const BoxDecoration(
                   color: Color.fromRGBO(98, 99, 112, 0.356),
                   borderRadius: BorderRadius.all(Radius.circular(8))),

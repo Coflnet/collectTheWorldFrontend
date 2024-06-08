@@ -12,15 +12,16 @@ class AttentionWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(bottom: 10),
+      padding: const EdgeInsets.only(bottom: 10),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16),
           gradient: const LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
+            begin: Alignment.centerRight,
+            end: Alignment.centerLeft,
             colors: [
-              Color.fromRGBO(105, 69, 135, 1),
-              Color.fromRGBO(105, 69, 135, 1),
+              Color.fromRGBO(112, 48, 172, 1),
+              Color.fromRGBO(112, 48, 172, 1),
+              Color.fromRGBO(99, 40, 154, 1),
             ],
           )),
       child: child,

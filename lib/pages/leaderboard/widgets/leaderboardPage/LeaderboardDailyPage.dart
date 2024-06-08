@@ -29,14 +29,15 @@ class LeaderboardDailyPageState extends State<LeaderboardDailyPage> {
       children: <Widget>[
         Column(
           children: <Widget>[
-            const Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [LBRewardInfoWidget()],
+            const SizedBox(
+              height: 110,
             ),
             SizedBox(
                 height: MediaQuery.of(context).size.height / 4.5,
                 child: const LBPLmain(topUsers: [])),
-            const LeaderboardDivider()
+            const Text("Top Ten \n Reward 1000XP",
+                style: TextStyle(color: Colors.white)),
+            const LeaderboardDivider(),
           ],
         ),
         Expanded(
@@ -75,25 +76,25 @@ class LBRewardInfoWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.fromLTRB(0, 104, 0, 8),
-      child: baseWidget(
-        child: TextButton(
-            style: TextButton.styleFrom(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 16, vertical: 4)),
-            onPressed: () {},
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                const Text(
-                  "Rewards",
-                  style: TextStyle(color: Colors.white, fontSize: 20),
-                ),
-                const SizedBox(width: 5),
-                Icon(Icons.info_outline, size: 35, color: Colors.pink[50]),
-              ],
-            )),
-      ),
+      margin: const EdgeInsets.fromLTRB(0, 16, 0, 8),
+      decoration: BoxDecoration(
+          color: Color.fromRGBO(178, 152, 255, 1),
+          borderRadius: BorderRadius.circular(12)),
+      child: TextButton(
+          style: TextButton.styleFrom(
+              padding: const EdgeInsets.fromLTRB(16, 4, 12, 4)),
+          onPressed: () {},
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Text(
+                "Rewards",
+                style: TextStyle(color: Colors.purple[50], fontSize: 20),
+              ),
+              SizedBox(width: 5),
+              Icon(Icons.info_outline, size: 35, color: Colors.purple[50]),
+            ],
+          )),
     );
   }
 }

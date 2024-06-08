@@ -25,7 +25,6 @@ class PageContainerState extends State<LeaderBoardPageContainer> {
   }
 
   void updateCurrentSelection(int newSelection) {
-    print("changed ${newSelection}");
     Provider.of<PageChangeNotifer>(context, listen: false)
         .changePage(newSelection + 1);
     setState(() {

@@ -14,8 +14,8 @@ class LBuserNameWidget extends StatelessWidget {
           name.capitalize(),
           style: const TextStyle(
               color: Color.fromARGB(255, 255, 243, 247),
-              fontSize: 20,
-              fontWeight: FontWeight.w900),
+              fontSize: 18,
+              fontWeight: FontWeight.w700),
           overflow: TextOverflow.ellipsis,
         ),
       ),
