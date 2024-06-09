@@ -1,5 +1,6 @@
 import 'package:collect_the_world/pages/leaderboard/widgets/header/LeaderboardHeader.dart';
 import 'package:collect_the_world/pages/leaderboard/widgets/leaderboardPage/LeaderboardDailyPage.dart';
+import 'package:collect_the_world/pages/leaderboard/widgets/leaderboardPage/leaderboardAllTimePage.dart';
 import 'package:collect_the_world/pages/leaderboard/widgets/leaderboardPage/leaderboardWeeklyPage.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -14,7 +15,8 @@ class LeaderBoardPageContainer extends StatefulWidget {
 class PageContainerState extends State<LeaderBoardPageContainer> {
   final List<Widget> pages = [
     const LeaderboardDailyPage(),
-    const LeaderboardWeeklyPage()
+    const LeaderboardWeeklyPage(),
+    const LeaderboardAllTimePage()
   ];
   int currentSelection = 0;
   late PageController pageController;

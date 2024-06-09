@@ -13,7 +13,7 @@ class Profilewidget extends StatelessWidget {
       margin: const EdgeInsets.all(10),
       child: baseWidget(
           child: Container(
-        margin: const EdgeInsets.all(15),
+        margin: const EdgeInsets.fromLTRB(24, 20, 24, 20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

@@ -32,11 +32,22 @@ class LeaderboardRequestHandler {
     try {
       final result =
           await apiInstance.getLeaderboard(getLeaderBoardId(variation));
-      if (result == null){
+      if (result == null) {
         return [];
       }
-      print("result $result");
-      return result;
+
+      List returnList = [];
+
+      for (var i in result) {
+        String username = "";
+        username = i.user as String;
+        if (i.user == null) {
+          username = "Anonymous";
+        }
+        returnList.add([username, i.score]);
+      }
+
+      return returnList;
     } catch (e) {
       if (e is! ApiException) {
         print(

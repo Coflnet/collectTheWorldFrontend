@@ -8,26 +8,34 @@ class Profilestats extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.fromLTRB(0, 20, 0, 0),
       child: const Row(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
                 "⭐ 420 XP",
-                style: TextStyle(color: Colors.white, fontSize: 25),
+                style: TextStyle(color: Colors.white, fontSize: 20),
               ),
               Text(
                 "📷 Unique: 69",
-                style: TextStyle(color: Colors.white, fontSize: 25),
+                style: TextStyle(color: Colors.white, fontSize: 20),
               ),
-              Text(
-                "📸 Total: 69",
-                style: TextStyle(color: Colors.white, fontSize: 25),
-              )
             ],
           ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Text(
+                "📸 Total: 69",
+                style: TextStyle(color: Colors.white, fontSize: 20),
+              ),
+              Text(
+                "🏆 Top ten: 10",
+                style: TextStyle(color: Colors.white, fontSize: 20),
+              )
+            ],
+          )
         ],
       ),
     );

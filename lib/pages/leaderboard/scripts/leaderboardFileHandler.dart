@@ -32,6 +32,7 @@ class LeaderboardFileHandler {
     Directory appDir = await getApplicationDocumentsDirectory();
     String filePath = "${appDir.path}/leaderBoardDetails.json";
     File file = File(filePath);
+    file.deleteSync();
 
     if (!file.existsSync()) {
       createFile(file);
@@ -83,7 +84,6 @@ class LeaderboardFileHandler {
   }
 
   void updateCorrectData(List newList, int curSel) {
-    print("saving to $curSel new list $newList");
     switch (curSel) {
       case 1:
         dailyFakeUsers = newList;

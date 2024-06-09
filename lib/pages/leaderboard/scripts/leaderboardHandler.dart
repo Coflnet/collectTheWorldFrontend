@@ -18,6 +18,7 @@ class LeaderboardHandler {
 
     LeaderboardFileHandler().updateCorrectData(finalUsersList, selectedPageId);
 
+    print(finalUsersList);
     finalUsersList.sort((a, b) => b[1].compareTo(a[1]));
 
     return finalUsersList;

@@ -29,7 +29,7 @@ class _LeaderboardWeeklyPageState extends State<LeaderboardWeeklyPage> {
             const SizedBox(
               height: 105,
             ),
-            const LBRewardDaily(),
+            const LBRewardWeekly(),
             SizedBox(
                 height: MediaQuery.of(context).size.height / 4.5,
                 child: const LBPLmain(topUsers: [])),
@@ -66,17 +66,17 @@ class _LeaderboardWeeklyPageState extends State<LeaderboardWeeklyPage> {
   }
 }
 
-class LBRewardDaily extends StatelessWidget {
-  const LBRewardDaily({super.key});
+class LBRewardWeekly extends StatelessWidget {
+  const LBRewardWeekly({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        const Text("Top Ten",
+        const Text("Top twenty",
             textAlign: TextAlign.center,
             style: TextStyle(color: Colors.white, fontSize: 20)),
-        Text("+1000XP",
+        Text("+3000XP",
             style: TextStyle(
                 color: Colors.white.withOpacity(0.9),
                 fontSize: 25,
