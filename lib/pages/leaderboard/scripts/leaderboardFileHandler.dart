@@ -32,7 +32,6 @@ class LeaderboardFileHandler {
     Directory appDir = await getApplicationDocumentsDirectory();
     String filePath = "${appDir.path}/leaderBoardDetails.json";
     File file = File(filePath);
-    file.deleteSync();
 
     if (!file.existsSync()) {
       createFile(file);

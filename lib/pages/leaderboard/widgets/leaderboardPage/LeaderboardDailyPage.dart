@@ -57,20 +57,31 @@ class LeaderboardDailyPageState extends State<LeaderboardDailyPage> {
           child: MediaQuery.removePadding(
             context: context,
             removeTop: true,
-            child: ListView.builder(
-              shrinkWrap: true,
-              itemCount: leaderboardlist.length,
-              itemBuilder: (context, index) {
-                return LeaderBoardWidget(
-                    name: leaderboardlist[index][0],
-                    xp: leaderboardlist[index][1],
-                    index: index);
-              },
+            child: RefreshIndicator(
+              onRefresh: pullRefresh,
+              child: ListView.builder(
+                shrinkWrap: true,
+                itemCount: leaderboardlist.length,
+                itemBuilder: (context, index) {
+                  return LeaderBoardWidget(
+                      name: leaderboardlist[index][0],
+                      xp: leaderboardlist[index][1],
+                      index: index);
+                },
+              ),
             ),
           ),
         ))
       ],
     );
+  }
+
+  Future<void> pullRefresh() async {
+    List resultList = await LeaderboardHandler().refreshLeaderboard(1);
+    setState(() {
+      leaderboardlist = resultList;
+    });
+    return;
   }
 
   void loadLeaderBoard() async {

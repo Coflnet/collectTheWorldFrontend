@@ -18,7 +18,6 @@ class LeaderboardHandler {
 
     LeaderboardFileHandler().updateCorrectData(finalUsersList, selectedPageId);
 
-    print(finalUsersList);
     finalUsersList.sort((a, b) => b[1].compareTo(a[1]));
 
     return finalUsersList;
@@ -38,5 +37,16 @@ class LeaderboardHandler {
       return returnResult;
     }
     return [];
+  }
+
+  Future<List> refreshLeaderboard(int selection) async {
+    var leaderBoardData =
+        await LeaderboardRequestHandler().loadLeaderBoard(selection);
+    List leaderboardFileData =
+        await LeaderboardFileHandler().getLeaderBoardData(selection);
+    leaderboardFileData.addAll(leaderBoardData);
+    leaderboardFileData.sort((a, b) => b[1].compareTo(a[1]));
+    List returnList = leaderboardFileData.take(10).toList();
+    return returnList;
   }
 }
