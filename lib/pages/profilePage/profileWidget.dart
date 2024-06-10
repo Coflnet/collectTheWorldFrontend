@@ -2,7 +2,7 @@ import 'package:collect_the_world/globals/globalWidgets/baseWidget/baseWidget.da
 import 'package:collect_the_world/pages/profilePage/profilePage.dart';
 import 'package:collect_the_world/pages/profilePage/widgets/NameAndPositionWidget.dart';
 import 'package:collect_the_world/pages/profilePage/widgets/profileImageWidget.dart';
-import 'package:collect_the_world/pages/profilePage/widgets/profileStats.dart';
+import 'package:collect_the_world/pages/profilePage/widgets/linkButtons/profileStats/profileStats.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

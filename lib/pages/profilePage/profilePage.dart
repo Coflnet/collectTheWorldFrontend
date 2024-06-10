@@ -26,7 +26,6 @@ class ProfilePage extends StatelessWidget {
               FloatingActionButtonLocation.centerDocked,
           body: Stack(
             children: [
-              ConformationPopup(),
               const BackgroundGradiant(),
               Column(
                 children: [

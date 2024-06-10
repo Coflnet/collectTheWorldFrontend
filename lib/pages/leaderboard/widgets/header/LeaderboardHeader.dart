@@ -1,4 +1,8 @@
+import 'dart:ffi';
+
+import 'package:collect_the_world/pages/leaderboard/widgets/containers/leaderBoardWidget/leaderboardDivider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:provider/provider.dart';
 
 class PageChangeNotifer extends ChangeNotifier {
@@ -32,26 +36,34 @@ class LeaderboardHeaderState extends State<LeaderboardHeader> {
   Widget build(BuildContext context) {
     Provider.of<PageChangeNotifer>(context, listen: false).setPageState(this);
     return Container(
-      decoration: BoxDecoration(color: Colors.blueGrey[800]),
+      decoration: const BoxDecoration(color: Color.fromRGBO(21, 31, 51, 1)),
       height: 90,
       child: Container(
         margin: const EdgeInsets.only(top: 30),
         child: Stack(
+          alignment: Alignment.bottomCenter,
           children: [
-            Container(
-              margin: const EdgeInsets.only(top: 13),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: <Widget>[
-                  Text("Daily",
-                      style: nameTextStyle(sel: 1, cur: currentSelection)),
-                  Text("Weekly",
-                      style: nameTextStyle(sel: 2, cur: currentSelection)),
-                  Text("All Time",
-                      style: nameTextStyle(sel: 3, cur: currentSelection))
-                ],
-              ),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  margin: const EdgeInsets.only(top: 13),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      Text("Daily",
+                          style: nameTextStyle(sel: 1, cur: currentSelection)),
+                      Text("Weekly",
+                          style: nameTextStyle(sel: 2, cur: currentSelection)),
+                      Text("All Time",
+                          style: nameTextStyle(sel: 3, cur: currentSelection))
+                    ],
+                  ),
+                ),
+              ],
             ),
+            const LeaderboardDivider(),
             AnimatedPositioned(
               duration: const Duration(milliseconds: 300),
               curve: Curves.easeOutCubic,
@@ -89,5 +101,21 @@ class LeaderboardHeaderState extends State<LeaderboardHeader> {
       default:
         return 0;
     }
+  }
+}
+
+class LeaderboardHeaderDivider extends StatelessWidget {
+  const LeaderboardHeaderDivider({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Align(
+      alignment: Alignment.bottomCenter,
+      child: Container(
+        width: double.infinity,
+        height: 1.5,
+        color: Colors.grey,
+      ),
+    );
   }
 }
