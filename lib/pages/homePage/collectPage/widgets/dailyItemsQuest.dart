@@ -1,4 +1,5 @@
 import 'package:collect_the_world/globals/globalWidgets/attentionWidget/attentionWidget.dart';
+import 'package:collect_the_world/globals/globalWidgets/baseWidget/baseWidget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -19,9 +20,9 @@ class DailyItemsQuestState extends State<DailyItemsQuest> {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.fromLTRB(24, 14, 24, 0),
-      child: AttentionWidget(
+      child: baseWidget(
           child: Container(
-        margin: const EdgeInsets.fromLTRB(18, 16, 24, 12),
+        margin: const EdgeInsets.fromLTRB(18, 16, 24, 18),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [

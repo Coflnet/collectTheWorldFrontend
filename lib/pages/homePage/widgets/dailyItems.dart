@@ -1,10 +1,69 @@
+import 'package:collect_the_world/pages/homePage/widgets/dailyItemPopup.dart';
+import 'package:custom_pop_up_menu/custom_pop_up_menu.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class DailyItems extends StatelessWidget {
+class DailyItems extends StatefulWidget {
   final int itemCollectCount;
-
   const DailyItems({super.key, required this.itemCollectCount});
+
+  @override
+  _DailyItemsState createState() => _DailyItemsState();
+}
+
+class _DailyItemsState extends State<DailyItems>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+
+  double opacity = 0.0;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      duration: const Duration(milliseconds: 900),
+      vsync: this,
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return CustomPopupMenu(
+        menuOnChange: handleMenuChange,
+        verticalMargin: -20,
+        barrierColor: Colors.transparent,
+        position: PreferredPosition.top,
+        menuBuilder: () => AnimatedOpacity(
+              opacity: opacity,
+              duration: const Duration(milliseconds: 900),
+              child: const ClipRRect(
+                child: IntrinsicWidth(child: DailyItemPopup()),
+              ),
+            ),
+        pressType: PressType.singleClick,
+        child: DailyItemsContent(
+          itemCollectCount: widget.itemCollectCount,
+        ));
+  }
+
+  void handleMenuChange(bool changeState) {
+    if (changeState) {
+      setState(() {
+        opacity = 1.0;
+        _controller.forward();
+      });
+      return;
+    }
+    setState(() {
+      opacity = 0.0;
+      _controller.reverse();
+    });
+  }
+}
+
+class DailyItemsContent extends StatelessWidget {
+  final int itemCollectCount;
+  const DailyItemsContent({super.key, required this.itemCollectCount});
 
   @override
   Widget build(BuildContext context) {

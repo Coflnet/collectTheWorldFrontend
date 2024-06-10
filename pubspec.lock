@@ -113,6 +113,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.8"
+  custom_pop_up_menu:
+    dependency: "direct main"
+    description:
+      name: custom_pop_up_menu
+      sha256: eeac484c6ddffffb25e803dc2a5cc9381e700a29f074e9fcc76fe36b62fde850
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.2.4"
   custom_timer:
     dependency: "direct main"
     description:
@@ -376,6 +384,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.8"
+  popup:
+    dependency: "direct main"
+    description:
+      name: popup
+      sha256: ffff2985b5c66bd7d6c9162c593df01ad8e896860e4b3a0a71644405fcd8d373
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.1"
   provider:
     dependency: "direct main"
     description:
@@ -392,6 +408,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.0"
+  show_more_text_popup:
+    dependency: "direct main"
+    description:
+      name: show_more_text_popup
+      sha256: "02dbd3db7f10961453904c12e8322bd1364bc513e9cbb6a8e0a8874728a9d504"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.3.0"
   sky_engine:
     dependency: transitive
     description: flutter
