@@ -11,13 +11,12 @@ class CurrentPositionState extends State<CurrentPosition> {
   @override
   Widget build(BuildContext context) {
     return Row(children: [
-      const Icon(
-        Icons.leaderboard_outlined,
-        size: 30,
-        color: Color.fromARGB(255, 48, 95, 177),
+      Image.asset(
+        "assets/Leaderboard.png",
+        scale: 3,
       ),
       Container(
-        margin: const EdgeInsets.only(left: 10),
+        margin: const EdgeInsets.only(left: 8),
         child: Text(
           "100th",
           textScaler: const TextScaler.linear(1.55),

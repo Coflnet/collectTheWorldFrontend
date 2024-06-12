@@ -13,20 +13,19 @@ class DailyStreak extends StatefulWidget {
 class DailyStreakStreak extends State<DailyStreak> {
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        const Icon(
-          Icons.local_fire_department_outlined,
-          size: 40,
-          color: Colors.orangeAccent,
-        ),
-        Text("${widget.dailStreakNum}",
-            style: TextStyle(
-              fontSize: 25,
-              color: Colors.white.withOpacity(0.9),
-              fontWeight: FontWeight.w600,
-            ))
-      ],
+    return Container(
+      margin: const EdgeInsets.only(right: 5),
+      child: Row(
+        children: [
+          const Text("🔥", style: TextStyle(fontSize: 28),),
+          Text("${widget.dailStreakNum}",
+              style: TextStyle(
+                fontSize: 25,
+                color: Colors.white.withOpacity(0.9),
+                fontWeight: FontWeight.w600,
+              ))
+        ],
+      ),
     );
   }
 }

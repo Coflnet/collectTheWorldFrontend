@@ -13,9 +13,9 @@ class _ProfileStatsWidgetState extends State<ProfileStatsWidget> {
     return const DefaultTextStyle(
       style: TextStyle(
           color: Colors.white,
-          fontSize: 21,
-          fontWeight: FontWeight.w900,
-          fontFamily: "Rukik-RLight"),
+          fontSize: 20,
+          fontWeight: FontWeight.w600,
+          fontFamily: "Rukik-Light"),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
@@ -24,15 +24,15 @@ class _ProfileStatsWidgetState extends State<ProfileStatsWidget> {
             children: [
               Text("⭐ 420 XP"),
               SizedBox(height: 8),
-              Text("📷 Unique: 69"),
+              Text("📷 Unique 69"),
             ],
           ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Text("📸 Total: 69"),
+              Text("📸 Total 69"),
               SizedBox(height: 8),
-              Text("🏆 Top ten: 10")
+              Text("🏆 Top ten 10")
             ],
           )
         ],

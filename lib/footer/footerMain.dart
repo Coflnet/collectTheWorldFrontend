@@ -25,7 +25,7 @@ class Footer extends StatelessWidget {
             IconButton(
               iconSize: 45,
               icon: const Icon(Icons.home_outlined,
-                  color: Color.fromRGBO(138, 172, 206, 1)),
+                  color: Color.fromRGBO(80, 173, 255, 1)),
               onPressed: () => {
                 Haptics.vibrate(HapticsType.light),
                 Navigator.push(
@@ -44,7 +44,7 @@ class Footer extends StatelessWidget {
             IconButton(
               iconSize: 40,
               icon: const Icon(Icons.paste_rounded,
-                color: Color.fromRGBO(110, 137, 164, 1)),
+                color: Color.fromRGBO(0, 145, 255, 1)),
               onPressed: () => {
                 Haptics.vibrate(HapticsType.light),
                 Navigator.push(
@@ -66,7 +66,7 @@ class Footer extends StatelessWidget {
             IconButton(
               iconSize: 45,
               icon: const Icon(Icons.leaderboard_outlined,
-                  color: Color.fromRGBO(110, 137, 164, 1)),
+                  color: Color.fromRGBO(0, 145, 255, 1)),
               onPressed: () => {
                 Haptics.vibrate(HapticsType.light),
                 Navigator.push(
@@ -86,7 +86,7 @@ class Footer extends StatelessWidget {
               iconSize: 50,
               icon: const Icon(
                 Icons.person_outline,
-                color: Color.fromRGBO(110, 137, 164, 1),
+                color: Color.fromRGBO(0, 145, 255, 1),
               ),
               onPressed: () => {
                 Haptics.vibrate(HapticsType.light),

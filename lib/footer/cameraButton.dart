@@ -7,6 +7,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'dart:ui';
 
+import 'package:hexcolor/hexcolor.dart';
+
 class CameraButtonFooter extends StatefulWidget {
   const CameraButtonFooter({super.key});
 
@@ -35,15 +37,19 @@ class CameraButtonState extends State<CameraButtonFooter> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.fromLTRB(0, 10, 5, 0),
+        decoration: BoxDecoration(
+            color: const Color.fromRGBO(150, 89, 177, 1),
+            borderRadius: BorderRadius.circular(16)),
+        margin: const EdgeInsets.fromLTRB(0, 10, 5, 17),
+        padding: EdgeInsets.all(4),
         child: IconButton(
           alignment: Alignment.bottomCenter,
-          iconSize: 55,
+          iconSize: 45,
           onPressed: () {
             loadCameraScene();
           },
           icon: const Icon(Icons.camera_alt_outlined),
-          color: const Color.fromARGB(255, 163, 195, 230), // Icon color
+          color: HexColor("#B3A7B7"), // Icon color
         ));
   }
 
