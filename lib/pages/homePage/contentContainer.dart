@@ -6,6 +6,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ContentContainer extends StatelessWidget {
+  final int collectionPercentage;
+
+  const ContentContainer({super.key, required this.collectionPercentage});
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -17,7 +21,7 @@ class ContentContainer extends StatelessWidget {
               child: Column(
                 children: [
                   CollectItemWidget(),
-                  const DailyItems(itemCollectCount: 3)
+                  DailyItems(itemCollectCount: collectionPercentage)
                 ],
               )),
           Expanded(

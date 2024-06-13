@@ -29,6 +29,7 @@ part 'auth/http_basic_auth.dart';
 part 'auth/http_bearer_auth.dart';
 
 part 'api/auth_api.dart';
+part 'api/challenge_api.dart';
 part 'api/image_api.dart';
 part 'api/leaderboard_api.dart';
 part 'api/object_api.dart';
@@ -41,6 +42,8 @@ part 'model/board_names.dart';
 part 'model/captured_image.dart';
 part 'model/captured_image_with_download_url.dart';
 part 'model/category.dart';
+part 'model/challenge.dart';
+part 'model/challenge_response.dart';
 part 'model/collectable_object.dart';
 part 'model/profile.dart';
 part 'model/skip_response.dart';

@@ -16,10 +16,54 @@ class StatsApi {
 
   final ApiClient apiClient;
 
-  /// Performs an HTTP 'GET /stats/daily_exp' operation and returns the [Response].
+  /// Performs an HTTP 'GET /api/stats/all' operation and returns the [Response].
+  Future<Response> getAllStatsWithHttpInfo() async {
+    // ignore: prefer_const_declarations
+    final path = r'/api/stats/all';
+
+    // ignore: prefer_final_locals
+    Object? postBody;
+
+    final queryParams = <QueryParam>[];
+    final headerParams = <String, String>{};
+    final formParams = <String, String>{};
+
+    const contentTypes = <String>[];
+
+
+    return apiClient.invokeAPI(
+      path,
+      'GET',
+      queryParams,
+      postBody,
+      headerParams,
+      formParams,
+      contentTypes.isEmpty ? null : contentTypes.first,
+    );
+  }
+
+  Future<List<Stat>?> getAllStats() async {
+    final response = await getAllStatsWithHttpInfo();
+    if (response.statusCode >= HttpStatus.badRequest) {
+      throw ApiException(response.statusCode, await _decodeBodyBytes(response));
+    }
+    // When a remote server returns no body with a status of 204, we shall not decode it.
+    // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
+    // FormatException when trying to decode an empty string.
+    if (response.body.isNotEmpty && response.statusCode != HttpStatus.noContent) {
+      final responseBody = await _decodeBodyBytes(response);
+      return (await apiClient.deserializeAsync(responseBody, 'List<Stat>') as List)
+        .cast<Stat>()
+        .toList(growable: false);
+
+    }
+    return null;
+  }
+
+  /// Performs an HTTP 'GET /api/stats/stat/daily_exp' operation and returns the [Response].
   Future<Response> getDailyExpStatsWithHttpInfo() async {
     // ignore: prefer_const_declarations
-    final path = r'/stats/daily_exp';
+    final path = r'/api/stats/stat/daily_exp';
 
     // ignore: prefer_final_locals
     Object? postBody;
@@ -57,13 +101,13 @@ class StatsApi {
     return null;
   }
 
-  /// Performs an HTTP 'GET /stats/{statName}' operation and returns the [Response].
+  /// Performs an HTTP 'GET /api/stats/stat/{statName}' operation and returns the [Response].
   /// Parameters:
   ///
   /// * [String] statName (required):
   Future<Response> getStatWithHttpInfo(String statName,) async {
     // ignore: prefer_const_declarations
-    final path = r'/stats/{statName}'
+    final path = r'/api/stats/stat/{statName}'
       .replaceAll('{statName}', statName);
 
     // ignore: prefer_final_locals
@@ -105,10 +149,14 @@ class StatsApi {
     return null;
   }
 
-  /// Performs an HTTP 'GET /stats' operation and returns the [Response].
-  Future<Response> getStatsWithHttpInfo() async {
+  /// Performs an HTTP 'GET /api/stats/user/{userId}' operation and returns the [Response].
+  /// Parameters:
+  ///
+  /// * [String] userId (required):
+  Future<Response> getUserStatsWithHttpInfo(String userId,) async {
     // ignore: prefer_const_declarations
-    final path = r'/stats';
+    final path = r'/api/stats/user/{userId}'
+      .replaceAll('{userId}', userId);
 
     // ignore: prefer_final_locals
     Object? postBody;
@@ -131,8 +179,11 @@ class StatsApi {
     );
   }
 
-  Future<List<Stat>?> getStats() async {
-    final response = await getStatsWithHttpInfo();
+  /// Parameters:
+  ///
+  /// * [String] userId (required):
+  Future<List<Stat>?> getUserStats(String userId,) async {
+    final response = await getUserStatsWithHttpInfo(userId,);
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }
@@ -149,10 +200,10 @@ class StatsApi {
     return null;
   }
 
-  /// Performs an HTTP 'GET /stats/weekly_exp' operation and returns the [Response].
+  /// Performs an HTTP 'GET /api/stats/stat/weekly_exp' operation and returns the [Response].
   Future<Response> getWeeklyExpStatsWithHttpInfo() async {
     // ignore: prefer_const_declarations
-    final path = r'/stats/weekly_exp';
+    final path = r'/api/stats/stat/weekly_exp';
 
     // ignore: prefer_final_locals
     Object? postBody;

@@ -3,6 +3,8 @@ import 'dart:ui';
 
 import 'package:camera/camera.dart';
 import 'package:collect_the_world/background/backgroundGradiant.dart';
+import 'package:collect_the_world/generatedCode/api.dart';
+import 'package:collect_the_world/globals/globalScripts/cachingScripts/challengeCaching.dart';
 import 'package:collect_the_world/globals/globalScripts/cachingScripts/listCaching.dart';
 import 'package:collect_the_world/globals/globalScripts/systems/authClient.dart';
 import 'package:collect_the_world/pages/homePage/cameraScene/pages/cameraScene.dart';
@@ -44,6 +46,7 @@ class HomePage extends StatefulWidget {
 class HomePageState extends State<HomePage> {
   LoadDailyStreak dailyStreak = LoadDailyStreak();
   int dailyStreakNum = 0;
+  int dailyQuestCompletion = 0;
 
   @override
   initState() {
@@ -53,8 +56,17 @@ class HomePageState extends State<HomePage> {
     ListCaching().loadCache();
     ListCaching().checkIfItemUpdated();
     dailyStreak.loadStreak();
+    loadChallenge();
     setState(() {
       dailyStreakNum = globalStreakFile.streak;
+    });
+  }
+
+  void loadChallenge() async {
+    Challenge dailyChallenge = await ChallengeCaching().getDailyChallenge();
+
+    setState(() {
+      dailyQuestCompletion = dailyChallenge.progress!;
     });
   }
 
@@ -69,7 +81,7 @@ class HomePageState extends State<HomePage> {
             const BackgroundGradiant(),
             CustomHeader(dailStreakNum: dailyStreakNum),
             const ConformationPopup(),
-            ContentContainer(),
+            ContentContainer(collectionPercentage: dailyQuestCompletion,),
             const Footer(),
           ]),
         ),

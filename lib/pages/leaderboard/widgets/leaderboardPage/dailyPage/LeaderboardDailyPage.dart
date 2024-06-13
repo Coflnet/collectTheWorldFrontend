@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:collect_the_world/generatedCode/api.dart';
+import 'package:collect_the_world/globals/globalScripts/cachingScripts/challengeCaching.dart';
 import 'package:collect_the_world/globals/globalScripts/systems/authClient.dart';
 import 'package:collect_the_world/pages/leaderboard/widgets/leaderboardPage/dailyPage/leaderboardDailyContent.dart';
 import 'package:flutter/cupertino.dart';
@@ -17,6 +18,14 @@ class LeaderboardDailyPage extends StatefulWidget {
 }
 
 class LeaderboardDailyPageState extends State<LeaderboardDailyPage> {
+  @override
+  void initState() {
+    super.initState();
+    testStatsApi();
+    testLeaderBoardAPi();
+    testChallengeApi();
+  }
+
   void testStatsApi() async {
     token = (await Authclient().tokenRequest())!;
     var authclient = HttpBearerAuth();
@@ -24,8 +33,23 @@ class LeaderboardDailyPageState extends State<LeaderboardDailyPage> {
     final client = ApiClient(
         basePath: "https://ctw.coflnet.com", authentication: authclient);
     final apiInstance = StatsApi(client);
-    final result = await apiInstance.getStats();
+    final result = await apiInstance.getAllStats();
     print(result);
+  }
+
+  void testLeaderBoardAPi() async {
+    token = (await Authclient().tokenRequest())!;
+    var authclient = HttpBearerAuth();
+    authclient.accessToken = token;
+    final client = ApiClient(
+        basePath: "https://ctw.coflnet.com", authentication: authclient);
+    final apiInstaince = LeaderboardApi(client);
+    final result = await apiInstaince.getProfile();
+    print("$result result ");
+  }
+
+  void testChallengeApi() async {
+    ChallengeCaching().loadChallengeData();
   }
 
   @override

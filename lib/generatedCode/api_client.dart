@@ -194,6 +194,10 @@ class ApiClient {
           return CapturedImageWithDownloadUrl.fromJson(value);
         case 'Category':
           return Category.fromJson(value);
+        case 'Challenge':
+          return Challenge.fromJson(value);
+        case 'ChallengeResponse':
+          return ChallengeResponse.fromJson(value);
         case 'CollectableObject':
           return CollectableObject.fromJson(value);
         case 'Profile':
