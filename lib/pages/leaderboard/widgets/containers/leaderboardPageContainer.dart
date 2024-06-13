@@ -1,5 +1,5 @@
 import 'package:collect_the_world/pages/leaderboard/widgets/header/LeaderboardHeader.dart';
-import 'package:collect_the_world/pages/leaderboard/widgets/leaderboardPage/LeaderboardDailyPage.dart';
+import 'package:collect_the_world/pages/leaderboard/widgets/leaderboardPage/dailyPage/LeaderboardDailyPage.dart';
 import 'package:collect_the_world/pages/leaderboard/widgets/leaderboardPage/leaderboardAllTimePage.dart';
 import 'package:collect_the_world/pages/leaderboard/widgets/leaderboardPage/leaderboardWeeklyPage.dart';
 import 'package:flutter/material.dart';

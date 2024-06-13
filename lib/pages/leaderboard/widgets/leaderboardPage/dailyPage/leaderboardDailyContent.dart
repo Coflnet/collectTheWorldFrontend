@@ -1,40 +1,27 @@
-import 'package:collect_the_world/generatedCode/api.dart';
-import 'package:collect_the_world/globals/globalScripts/systems/authClient.dart';
-import 'package:collect_the_world/globals/globalWidgets/baseWidget/baseWidget.dart';
 import 'package:collect_the_world/pages/leaderboard/scripts/leaderboardHandler.dart';
 import 'package:collect_the_world/pages/leaderboard/widgets/containers/leaderBoardWidget/leaderBoardWidget.dart';
 import 'package:collect_the_world/pages/leaderboard/widgets/containers/leaderBoardWidget/leaderboardDivider.dart';
 import 'package:collect_the_world/pages/leaderboard/widgets/containers/leaderboardPlacement/LBPLmain.dart';
+import 'package:collect_the_world/pages/leaderboard/widgets/leaderboardPage/dailyPage/LeaderboardDailyPage.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
-class LeaderboardDailyPage extends StatefulWidget {
-  const LeaderboardDailyPage({super.key});
+class LeaderboardDailyContent extends StatefulWidget {
+  const LeaderboardDailyContent({Key? key}) : super(key: key);
 
   @override
-  LeaderboardDailyPageState createState() => LeaderboardDailyPageState();
+  _LeaderboardDailyContentState createState() =>
+      _LeaderboardDailyContentState();
 }
 
-class LeaderboardDailyPageState extends State<LeaderboardDailyPage> {
+class _LeaderboardDailyContentState extends State<LeaderboardDailyContent> {
   @override
   void initState() {
     super.initState();
     loadLeaderBoard();
   }
 
-  void testStatsApi() async {
-    token = (await Authclient().tokenRequest())!;
-    var authclient = HttpBearerAuth();
-    authclient.accessToken = token;
-    final client = ApiClient(
-        basePath: "https://ctw.coflnet.com", authentication: authclient);
-    final apiInstance = StatsApi(client);
-    final result = await apiInstance.getStats();
-    print(result);
-  }
-
   List leaderboardlist = [];
-
+  
   @override
   Widget build(BuildContext context) {
     return Column(
