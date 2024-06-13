@@ -11,9 +11,9 @@ class ProfilePopup extends StatefulWidget {
 class ProfilePopupState extends State<ProfilePopup> {
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return const Column(
       mainAxisAlignment: MainAxisAlignment.end,
-      children: <Widget>[Profilewidget()],
+      children: <Widget>[ProfileWidget()],
     );
   }
 }

@@ -1,4 +1,4 @@
-import 'package:collect_the_world/pages/homePage/widgets/collectItemWidget.dart';
+import 'package:collect_the_world/pages/homePage/widgets/collectItemWidget/collectItemWidget.dart';
 import 'package:collect_the_world/pages/homePage/widgets/dailyBonuses.dart';
 import 'package:collect_the_world/pages/homePage/widgets/dailyItems.dart';
 import 'package:collect_the_world/pages/homePage/widgets/globalTask.dart';

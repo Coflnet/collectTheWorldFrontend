@@ -24,6 +24,7 @@ class LeaderboardDailyPageState extends State<LeaderboardDailyPage> {
     testStatsApi();
     testLeaderBoardAPi();
     testChallengeApi();
+    testSkipApi();
   }
 
   void testStatsApi() async {
@@ -46,6 +47,17 @@ class LeaderboardDailyPageState extends State<LeaderboardDailyPage> {
     final apiInstaince = LeaderboardApi(client);
     final result = await apiInstaince.getProfile();
     print("$result result ");
+  }
+
+  void testSkipApi() async {
+    token = (await Authclient().tokenRequest())!;
+    var authclient = HttpBearerAuth();
+    authclient.accessToken = token;
+    final client = ApiClient(
+        basePath: "https://ctw.coflnet.com", authentication: authclient);
+    final apiInstance = SkipApi(client);
+    final result = await apiInstance.available();
+    print(result);
   }
 
   void testChallengeApi() async {

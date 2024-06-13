@@ -51,7 +51,7 @@ class LeaderBoardWidgetState extends State<LeaderBoardWidget>
     return TextButton(
       style: TextButton.styleFrom(
         splashFactory: NoSplash.splashFactory,
-        surfaceTintColor: Colors.transparent,        
+        surfaceTintColor: Colors.transparent,
         padding: const EdgeInsets.fromLTRB(16, 28, 16, 0),
       ),
       onPressed: () {
@@ -81,7 +81,7 @@ class LeaderBoardWidgetState extends State<LeaderBoardWidget>
                     position: _offsetAnimation,
                     child: Container(
                         margin: const EdgeInsets.only(top: 10),
-                        child: Profilewidget()),
+                        child: const ProfileWidget()),
                   )
                 : const SizedBox.shrink(),
           ),

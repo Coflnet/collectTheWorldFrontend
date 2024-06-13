@@ -6,9 +6,13 @@ import 'package:path_provider/path_provider.dart';
 int streak = 0;
 DateTime lastUpdate = DateTime.now();
 DateTime currentDayTime = DateTime.now();
+bool alreadyLoaded = false;
 
 class LoadDailyStreak {
   void loadStreak() async {
+    if (alreadyLoaded) {
+      return;
+    }
     DateTime now = DateTime.now();
     Directory appDir = await getApplicationDocumentsDirectory();
     String filePath = "${appDir.path}/dailyStreak.json";
@@ -26,13 +30,13 @@ class LoadDailyStreak {
       await file.writeAsString(jsonFileData);
     }
 
-
     var fileDataJson = file.readAsStringSync();
     var fileData = jsonDecode(fileDataJson);
 
     streak = fileData["dailyStreak"];
     currentDayTime = DateTime.parse(fileData["currentDayTime"]);
     checkStreakTime();
+    alreadyLoaded = true;
   }
 
   void checkStreakTime() {
@@ -59,5 +63,9 @@ class LoadDailyStreak {
     currentDayTime = DateTime(now.year, now.month, now.day, 47, 59, 59);
     currentDayTime = DateTime(now.year, now.month, now.day, 23, 59, 59);
     saveStreakData();
+  }
+
+  int getStreak() {
+    return streak;
   }
 }

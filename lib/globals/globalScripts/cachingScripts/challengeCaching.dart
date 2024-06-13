@@ -46,12 +46,13 @@ class ChallengeCaching {
 
   void createFile(file) async {
     file.createSync();
-    var fileData = {"dailyChallenge": Challenge};
+    var fileData = {"dailyChallenge": Challenge().toString()};
     var jsonFileData = jsonEncode(fileData);
     await file.writeAsString(jsonFileData);
   }
 
   Future<Challenge> getDailyChallenge() async {
+
     if (dailyChallenge == null) {
       int number = await loadChallengeData();
     }

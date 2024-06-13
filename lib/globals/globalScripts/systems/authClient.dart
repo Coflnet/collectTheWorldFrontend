@@ -9,10 +9,13 @@ import 'package:random_string_generator/random_string_generator.dart';
 String token = "";
 var secret = "";
 final client = ApiClient(basePath: "https://ctw.coflnet.com");
+bool alreadyLoaded = false;
 
 class Authclient {
   Future<String?> initClient() async {
-    print("helokhskjad\nhelokhskjad\nhelokhskjad\nhelokhskjad\n");
+    if (alreadyLoaded) {
+      return token;
+    }
     Directory appDir = await getApplicationDocumentsDirectory();
     String filePath = "${appDir.path}/clientDetail.json";
     File file = File(filePath);
@@ -22,8 +25,6 @@ class Authclient {
     }
 
     if (!await file.exists()) {
-      print(
-          "ljwehrkuwherklhwethqwiouh\nljwehrkuwherklhwethqwiouh\nljwehrkuwherklhwethqwiouh\n");
       file.createSync(recursive: true);
       var fileData = {"token": "", "secret": ""};
       var jsonFileData = jsonEncode(fileData);

@@ -1,3 +1,4 @@
+import 'package:collect_the_world/globals/globalScripts/systems/dailyStreak.dart';
 import 'package:collect_the_world/globals/globalWidgets/baseWidget/baseWidget.dart';
 import 'package:collect_the_world/pages/profilePage/profilePage.dart';
 import 'package:collect_the_world/pages/profilePage/widgets/NameAndPositionWidget.dart';
@@ -5,40 +6,70 @@ import 'package:collect_the_world/pages/profilePage/widgets/profileImageWidget.d
 import 'package:collect_the_world/pages/profilePage/widgets/linkButtons/profileStats/profileStats.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:hexcolor/hexcolor.dart';
 
-class Profilewidget extends StatelessWidget {
+class ProfileWidget extends StatefulWidget {
+  const ProfileWidget({Key? key}) : super(key: key);
+
+  @override
+  _ProfileWidgetState createState() => _ProfileWidgetState();
+}
+
+class _ProfileWidgetState extends State<ProfileWidget> {
+  int streak = 0;
+  @override
+  void initState() {
+    super.initState();
+    setState(() {
+      streak = LoadDailyStreak().getStreak();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.all(10),
       child: baseWidget(
-          child: Container(
-        margin: const EdgeInsets.fromLTRB(24, 20, 24, 20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          child: Stack(
+        alignment: Alignment.topRight,
+        children: [
+          Container(
+            margin: const EdgeInsets.fromLTRB(24, 20, 24, 20),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Profileimagewidget(),
-                const Row(
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Icon(
-                      Icons.local_fire_department_outlined,
-                      color: Colors.orangeAccent,
-                      size: 35,
+                    Profileimagewidget(),
+                    Row(
+                      children: [
+                        const Icon(
+                          Icons.local_fire_department_outlined,
+                          color: Colors.orangeAccent,
+                          size: 35,
+                        ),
+                        Text(
+                          "$streak",
+                          style: const TextStyle(
+                              color: Colors.white, fontSize: 25),
+                        )
+                      ],
                     ),
-                    Text(
-                      "69",
-                      style: TextStyle(color: Colors.white, fontSize: 25),
-                    )
                   ],
                 ),
+                Profilestats()
               ],
             ),
-            Profilestats()
-          ],
-        ),
+          ),
+          IconButton(
+              onPressed: () {},
+              icon: Icon(
+                Icons.settings,
+                size: 40,
+                color: HexColor("aaa9ad"),
+              )),
+        ],
       )),
     );
   }

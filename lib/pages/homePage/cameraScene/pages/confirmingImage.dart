@@ -4,9 +4,11 @@ import 'dart:io';
 import 'dart:isolate';
 
 import 'package:collect_the_world/generatedCode/api.dart';
+import 'package:collect_the_world/globals/globalScripts/systems/itemToFindUpdater.dart';
 import 'package:collect_the_world/globals/globalWidgets/header/dailyStreak.dart';
 import 'package:collect_the_world/pages/homePage/cameraScene/confirm/widgets/confettiWidget.dart';
 import 'package:confetti/confetti.dart';
+import 'package:flutter/rendering.dart';
 import 'package:http/http.dart' as http;
 import 'package:collect_the_world/globals/globalScripts/cameraController.dart'
     as cam;
@@ -107,7 +109,8 @@ class ConfirmingimagePageState extends State<ConfirmingimagePage> {
       return;
     }
     var image = await globals.image!.readAsBytes();
-    var url = Uri.parse("https://ctw.coflnet.com/api/images/apple");
+    var url = Uri.parse(
+        "https://ctw.coflnet.com/api/images/${widget.searchBarContent}");
 
     var request = http.MultipartRequest("POST", url);
     var token = (await authclie.Authclient().tokenRequest())!;
@@ -122,20 +125,24 @@ class ConfirmingimagePageState extends State<ConfirmingimagePage> {
     var response = await request.send();
 
     if (response.statusCode == 200) {
-      print("Successfull upload of image!");
-      confettiController.play();
-      if (dailyStreakScript.lastUpdate.isAfter(DateTime.now())) {
-        dailyStreakScript.streak = 0;
-        dailyStreakScript.LoadDailyStreak().updateDayTimes();
-      }
-      dailyStreakScript.streak += 1;
-      dailyStreakScript.LoadDailyStreak().updateDayTimes();
-      setState(() {
-        isLoading = false;
-      });
+      successfullReqeust();
     } else {
       print('Failed to upload image. Status code: ${response.statusCode}');
     }
+  }
+
+  void successfullReqeust() {
+    confettiController.play();
+    ItemToFindHandler().handleNewRemaingSkip();
+    if (dailyStreakScript.lastUpdate.isAfter(DateTime.now())) {
+      dailyStreakScript.streak = 0;
+      dailyStreakScript.LoadDailyStreak().updateDayTimes();
+    }
+    dailyStreakScript.streak += 1;
+    dailyStreakScript.LoadDailyStreak().updateDayTimes();
+    setState(() {
+      isLoading = false;
+    });
   }
 
   void descriptionEndpoint() async {

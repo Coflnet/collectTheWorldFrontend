@@ -8,17 +8,17 @@ import 'package:collect_the_world/generatedCode/api.dart';
 import 'package:collect_the_world/globals/globalScripts/systems/authClient.dart';
 import 'package:path_provider/path_provider.dart';
 
-class ListCaching {
-  late dynamic cache = {};
-  late DateTime lastUpdate = DateTime.now();
+dynamic cache = {};
+DateTime lastUpdate = DateTime.now();
+bool alreadyRequested = false;
 
+class ListCaching {
   Future<Set> getCache() async {
     return await loadCache();
   }
 
   Future<Set> loadCache() async {
     if (cache.isNotEmpty) {
-      print("returning\nreturning\nreturning\nreturning\n");
       return cache.toSet();
     }
 
@@ -44,7 +44,6 @@ class ListCaching {
 
   Future<Set> checkUpdateTime() async {
     if (cache.isEmpty) {
-      print("request\nrequest\nrequest\nrequest\nrequest\nrequest\n");
       return await reguestNewList();
     }
     return cache.toSet();
@@ -99,6 +98,9 @@ class ListCaching {
   }
 
   void checkIfItemUpdated() {
-    reguestNewList();
+    if (!alreadyRequested) {
+      reguestNewList();
+      alreadyRequested = true;
+    }
   }
 }

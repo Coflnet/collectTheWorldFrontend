@@ -52,7 +52,6 @@ class HomePageState extends State<HomePage> {
   initState() {
     super.initState();
     authclie.Authclient().initClient();
-    initCamera();
     ListCaching().loadCache();
     ListCaching().checkIfItemUpdated();
     dailyStreak.loadStreak();

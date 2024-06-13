@@ -1,4 +1,4 @@
-import 'package:collect_the_world/globals/globalWidgets/header/currentPosition.dart';
+import 'package:collect_the_world/globals/globalWidgets/header/currentSkips.dart';
 import 'package:collect_the_world/globals/globalWidgets/header/dailyStreak.dart';
 import 'package:collect_the_world/globals/globalWidgets/header/xpwidget.dart';
 import 'package:flutter/cupertino.dart';
@@ -30,7 +30,7 @@ class CustomHeader extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                CurrentPosition(),
+                CurrentSkips(),
                 DailyStreak(dailStreakNum: dailStreakNum,),
                 XpWidget(),
               ],

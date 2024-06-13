@@ -12,7 +12,7 @@ class NameAndPositionWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           const Text(
-            "Tentamens",
+            "Anonymous",
             style: TextStyle(color: Colors.white, fontSize: 18),
           ),
           Container(

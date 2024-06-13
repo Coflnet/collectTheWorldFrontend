@@ -10,6 +10,8 @@ import 'package:collect_the_world/globals/globalScripts/cameraController.dart'
     as cam;
 import 'package:collect_the_world/globals/globalWidgets/baseWidget/baseWidget.dart';
 import 'package:collect_the_world/pages/homePage/contentContainer.dart';
+import 'package:collect_the_world/pages/homePage/widgets/collectItemWidget/collectItemCameraButton.dart';
+import 'package:collect_the_world/pages/homePage/widgets/collectItemWidget/collectItemSkip.dart';
 import 'package:collect_the_world/pages/homePage/widgets/dailyItems.dart';
 import 'package:collect_the_world/popups/conformationPopup/conformationPopup.dart';
 import 'package:flutter/cupertino.dart';
@@ -83,6 +85,7 @@ class CollectItemWidgetState extends State<CollectItemWidget> {
                           color: Colors.white, size: 45),
                 ),
                 SkipButton(
+                  itemName: itemName,
                   parentCallBack: skipConfirmed,
                   parentCallBackStarted: skipStarted,
                 )
@@ -90,7 +93,7 @@ class CollectItemWidgetState extends State<CollectItemWidget> {
             ),
           ),
         ),
-        CameraButton()
+        const CameraButton()
       ],
     )));
   }
@@ -102,105 +105,12 @@ class CollectItemWidgetState extends State<CollectItemWidget> {
   }
 
   void skipConfirmed() {
+    ItemToFindHandler().reduceRemaingSkips();
     ItemToFindHandler().fetchNewItem().then((newItemName) {
       setState(() {
         itemName = newItemName!;
         loaded = true;
       });
     });
-  }
-}
-
-class SkipButton extends StatelessWidget {
-  final VoidCallback parentCallBack;
-  final VoidCallback parentCallBackStarted;
-  const SkipButton(
-      {super.key,
-      required this.parentCallBack,
-      required this.parentCallBackStarted});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.fromLTRB(0, 8, 4, 8),
-      width: 110,
-      decoration: BoxDecoration(
-          gradient: const LinearGradient(
-              begin: Alignment.centerLeft,
-              end: Alignment.centerRight,
-              colors: [
-                Color.fromRGBO(77, 65, 138, 1),
-                Color.fromRGBO(77, 65, 138, 1)
-              ]),
-          borderRadius: BorderRadius.circular(16)),
-      child: TextButton(
-        onPressed: () => {
-          Provider.of<PopupNotifier>(context, listen: false)
-              .appear(skipConfirmed, parentCallBackStarted)
-        },
-        child: const Text(
-          "Skip item",
-          style: TextStyle(
-              color: Colors.white,
-              fontSize: 15,
-              fontWeight: FontWeight.w700,
-              fontFamily: "Fredoka-SemiExpanded"),
-        ),
-      ),
-    );
-  }
-
-  void skipConfirmed() {
-    parentCallBack();
-  }
-}
-
-class CameraButton extends StatelessWidget {
-  const CameraButton({super.key});
-  @override
-  Widget build(BuildContext context) {
-    return Expanded(
-      flex: 2,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Container(
-            margin: const EdgeInsets.fromLTRB(0, 14, 12, 0),
-            width: 85,
-            height: 85,
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(50),
-                color: const Color.fromARGB(255, 238, 226, 255),
-                boxShadow: const [
-                  BoxShadow(
-                    spreadRadius: -5,
-                    color: Colors.black38,
-                    offset: Offset(10, 10),
-                    blurRadius: 40
-                  )
-                ]),
-            child: IconButton(
-                onPressed: () => changeToCameraScene(context),
-                icon: const Icon(
-                  Icons.camera_alt_outlined,
-                  size: 50,
-                  color: Colors.black,
-                )),
-          ),
-        ],
-      ),
-    );
-  }
-
-  void changeToCameraScene(context) async {
-    var newcontoller = await cam.initCamera();
-    Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) => CameraScreen(
-                  controller: newcontoller!,
-                  dailyWeeklyItem: true,
-                  isItemToFind: true,
-                )));
   }
 }
