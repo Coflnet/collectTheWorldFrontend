@@ -182,6 +182,8 @@ class ApiClient {
           return valueString == 'true' || valueString == '1';
         case 'DateTime':
           return value is DateTime ? value : DateTime.tryParse(value);
+        case 'ActiveMultiplier':
+          return ActiveMultiplier.fromJson(value);
         case 'AnonymousLoginRequest':
           return AnonymousLoginRequest.fromJson(value);
         case 'BoardEntry':
@@ -200,8 +202,12 @@ class ApiClient {
           return ChallengeResponse.fromJson(value);
         case 'CollectableObject':
           return CollectableObject.fromJson(value);
+        case 'MultiplierResponse':
+          return MultiplierResponse.fromJson(value);
         case 'Profile':
           return Profile.fromJson(value);
+        case 'PublicProfile':
+          return PublicProfile.fromJson(value);
         case 'SkipResponse':
           return SkipResponse.fromJson(value);
         case 'SkipsAvailable':

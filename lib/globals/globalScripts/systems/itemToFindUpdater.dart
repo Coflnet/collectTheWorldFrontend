@@ -19,9 +19,8 @@ class ItemToFindHandler {
     Directory appDir = await getApplicationDocumentsDirectory();
     String filePath = "${appDir.path}/itemDetails.json";
     File file = File(filePath);
-
     if (!file.existsSync()) {
-      createFile(file);
+      await createFile(file);
     }
 
     var fileDataJson = file.readAsStringSync();
@@ -71,7 +70,7 @@ class ItemToFindHandler {
         return "There's a error";
       }
       if (e.code == 401) {
-      await Authclient().generateToken();
+        await Authclient().generateToken();
         return await getNewItem();
       }
 
@@ -80,7 +79,7 @@ class ItemToFindHandler {
     }
   }
 
-  void createFile(file) async {
+  Future<void> createFile(file) async {
     file.createSync();
     var fileData = {"currentItem": "", "skips": 2};
     var jsonFileData = jsonEncode(fileData);

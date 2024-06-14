@@ -4,6 +4,7 @@ import 'package:collect_the_world/globals/globalScripts/systems/itemToFindUpdate
 import 'package:collect_the_world/popups/conformationPopup/conformationPopup.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:hexcolor/hexcolor.dart';
 import 'package:provider/provider.dart';
 
 class SkipButton extends StatelessWidget {
@@ -22,12 +23,12 @@ class SkipButton extends StatelessWidget {
       margin: const EdgeInsets.fromLTRB(0, 8, 4, 8),
       width: 110,
       decoration: BoxDecoration(
-          gradient: const LinearGradient(
+          gradient: LinearGradient(
               begin: Alignment.centerLeft,
               end: Alignment.centerRight,
               colors: [
-                Color.fromRGBO(77, 65, 138, 1),
-                Color.fromRGBO(77, 65, 138, 1)
+                HexColor("#6430FF"),
+                HexColor("#6430FF"),
               ]),
           borderRadius: BorderRadius.circular(16)),
       child: TextButton(
@@ -49,7 +50,6 @@ class SkipButton extends StatelessWidget {
   }
 
   void buttonPressedSkip(context) async {
-    print("hello");
     remainingSkips = await ItemToFindHandler().getRemainingSkips();
     Provider.of<PopupNotifier>(context, listen: false)
         .appear(skipConfirmed, parentCallBackStarted, itemName, remainingSkips);

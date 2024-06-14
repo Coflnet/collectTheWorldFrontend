@@ -1,4 +1,5 @@
 import 'package:collect_the_world/globals/globalWidgets/baseWidget/baseWidget.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class GlobalTask extends StatelessWidget {
@@ -7,10 +8,11 @@ class GlobalTask extends StatelessWidget {
     return Expanded(
       child: Container(
         margin: const EdgeInsets.only(top: 16),
-        child: const baseWidget(
+        child: baseWidget(
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Row(
+              const Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text("🌎 Global Quest",
@@ -18,7 +20,12 @@ class GlobalTask extends StatelessWidget {
                       style: TextStyle(
                           color: Colors.white, fontWeight: FontWeight.w600)),
                 ],
-              )
+              ),
+              const Text(
+                "🚧 In development 👷",
+                style: TextStyle(color: Colors.white, fontSize: 28, fontWeight: FontWeight.w600),
+              ),
+              Container(height: 20,)
             ],
           ),
         ),

@@ -1,9 +1,15 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:collect_the_world/generatedCode/api.dart';
+import 'package:collect_the_world/globals/globalScripts/cachingScripts/multiplierCaching.dart';
 import 'package:collect_the_world/globals/globalWidgets/baseWidget/baseWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 class DailyBonuses extends StatelessWidget {
+  final List<ActiveMultiplier> multiplierList;
+
+  const DailyBonuses({super.key, required this.multiplierList});
+
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -11,7 +17,7 @@ class DailyBonuses extends StatelessWidget {
         margin: const EdgeInsets.only(top: 16),
         child: baseWidget(
             child: Container(
-          margin: EdgeInsets.fromLTRB(16,12,16,16),
+          margin: EdgeInsets.fromLTRB(16, 12, 16, 16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
@@ -25,14 +31,26 @@ class DailyBonuses extends StatelessWidget {
                       fontWeight: FontWeight.w700),
                 ),
               ),
-              const Expanded(
+              Expanded(
                 child: Row(
                   children: [
-                    BonusWidget(multi: "1.25X", name: "Food"),
-                    SizedBox(width: 12),
-                    BonusWidget(multi: "2X", name: "Plants"),
-                    SizedBox(width: 12),
-                    BonusWidget(multi: "4X", name: "indoor"),
+                    BonusWidget(
+                        multi: "1.25X",
+                        name: multiplierList.isEmpty
+                            ? multiplierList[0].category ?? "❌Error"
+                            : "Loading"),
+                    const SizedBox(width: 12),
+                    BonusWidget(
+                        multi: "2X",
+                        name: multiplierList.isEmpty
+                            ? multiplierList[1].category ?? "❌Error"
+                            : "Loading"),
+                    const SizedBox(width: 12),
+                    BonusWidget(
+                        multi: "4X",
+                        name: multiplierList.isEmpty
+                            ? multiplierList[2].category ?? "❌Error"
+                            : "Loading"),
                   ],
                 ),
               )
@@ -71,13 +89,14 @@ class BonusWidget extends StatelessWidget {
               children: [
                 Text(multi,
                     style: TextStyle(
-                        fontFamily: "Robik-Light",
-                        color: Colors.white.withOpacity(0.9),
-                        fontSize: 22,
-                        fontWeight: FontWeight.w500,
-                        )),
+                      fontFamily: "Robik-Light",
+                      color: Colors.white.withOpacity(0.9),
+                      fontSize: 22,
+                      fontWeight: FontWeight.w500,
+                    )),
                 Container(
                   child: AutoSizeText(name,
+                      maxLines: 1,
                       style: const TextStyle(
                           color: Colors.white,
                           fontSize: 22,

@@ -22,9 +22,6 @@ class LeaderboardDailyPageState extends State<LeaderboardDailyPage> {
   void initState() {
     super.initState();
     testStatsApi();
-    testLeaderBoardAPi();
-    testChallengeApi();
-    testSkipApi();
   }
 
   void testStatsApi() async {
@@ -33,35 +30,9 @@ class LeaderboardDailyPageState extends State<LeaderboardDailyPage> {
     authclient.accessToken = token;
     final client = ApiClient(
         basePath: "https://ctw.coflnet.com", authentication: authclient);
-    final apiInstance = StatsApi(client);
-    final result = await apiInstance.getAllStats();
+    final apiInstance = MultiplierApi(client);
+    final result = await apiInstance.multiplier();
     print(result);
-  }
-
-  void testLeaderBoardAPi() async {
-    token = (await Authclient().tokenRequest())!;
-    var authclient = HttpBearerAuth();
-    authclient.accessToken = token;
-    final client = ApiClient(
-        basePath: "https://ctw.coflnet.com", authentication: authclient);
-    final apiInstaince = LeaderboardApi(client);
-    final result = await apiInstaince.getProfile();
-    print("$result result ");
-  }
-
-  void testSkipApi() async {
-    token = (await Authclient().tokenRequest())!;
-    var authclient = HttpBearerAuth();
-    authclient.accessToken = token;
-    final client = ApiClient(
-        basePath: "https://ctw.coflnet.com", authentication: authclient);
-    final apiInstance = SkipApi(client);
-    final result = await apiInstance.available();
-    print(result);
-  }
-
-  void testChallengeApi() async {
-    ChallengeCaching().loadChallengeData();
   }
 
   @override

@@ -6,6 +6,7 @@ import 'package:collect_the_world/background/backgroundGradiant.dart';
 import 'package:collect_the_world/generatedCode/api.dart';
 import 'package:collect_the_world/globals/globalScripts/cachingScripts/challengeCaching.dart';
 import 'package:collect_the_world/globals/globalScripts/cachingScripts/listCaching.dart';
+import 'package:collect_the_world/globals/globalScripts/cachingScripts/multiplierCaching.dart';
 import 'package:collect_the_world/globals/globalScripts/systems/authClient.dart';
 import 'package:collect_the_world/pages/homePage/cameraScene/pages/cameraScene.dart';
 import 'package:collect_the_world/pages/homePage/cameraScene/pages/confirmScene.dart';
@@ -47,25 +48,35 @@ class HomePageState extends State<HomePage> {
   LoadDailyStreak dailyStreak = LoadDailyStreak();
   int dailyStreakNum = 0;
   int dailyQuestCompletion = 0;
+  List<ActiveMultiplier> multiplierList = [
+    ActiveMultiplier(),
+    ActiveMultiplier(),
+    ActiveMultiplier()
+  ];
 
   @override
   initState() {
     super.initState();
-    authclie.Authclient().initClient();
-    ListCaching().loadCache();
-    ListCaching().checkIfItemUpdated();
-    dailyStreak.loadStreak();
-    loadChallenge();
-    setState(() {
-      dailyStreakNum = globalStreakFile.streak;
-    });
+    loadData();
   }
 
-  void loadChallenge() async {
-    Challenge dailyChallenge = await ChallengeCaching().getDailyChallenge();
+  void loadData() async {
+    await loadImportantData();
+    ListCaching().loadCache();
+    ListCaching().checkIfItemUpdated();
+  }
 
+  Future<void> loadImportantData() async {
+    await authclie.Authclient().initClient();
+    MultiplierCaching().loadMultiplier();
+    List<Challenge> dailyChallenge =
+        await ChallengeCaching().getDailyChallenge();
+    LoadDailyStreak().loadStreak();
+    print(MultiplierCaching().getMultiplier());
     setState(() {
-      dailyQuestCompletion = dailyChallenge.progress!;
+      dailyStreakNum = globalStreakFile.streak;
+      dailyQuestCompletion = dailyChallenge[0].progress!;
+      multiplierList = MultiplierCaching().getMultiplier();
     });
   }
 
@@ -80,7 +91,10 @@ class HomePageState extends State<HomePage> {
             const BackgroundGradiant(),
             CustomHeader(dailStreakNum: dailyStreakNum),
             const ConformationPopup(),
-            ContentContainer(collectionPercentage: dailyQuestCompletion,),
+            ContentContainer(
+              multiplierList: multiplierList,
+              collectionPercentage: dailyQuestCompletion,
+            ),
             const Footer(),
           ]),
         ),

@@ -38,7 +38,7 @@ class CameraButtonState extends State<CameraButtonFooter> {
   Widget build(BuildContext context) {
     return Container(
         decoration: BoxDecoration(
-            color: const Color.fromRGBO(150, 89, 177, 1),
+            color: HexColor("0057C9"),
             borderRadius: BorderRadius.circular(16)),
         margin: const EdgeInsets.fromLTRB(0, 10, 5, 17),
         padding: EdgeInsets.all(4),
@@ -49,7 +49,7 @@ class CameraButtonState extends State<CameraButtonFooter> {
             loadCameraScene();
           },
           icon: const Icon(Icons.camera_alt_outlined),
-          color: HexColor("#B3A7B7"), // Icon color
+          color: HexColor("#8D93C8"), // Icon color
         ));
   }
 

@@ -208,7 +208,7 @@ class LeaderboardApi {
     );
   }
 
-  Future<Profile?> getProfile() async {
+  Future<PublicProfile?> getProfile() async {
     final response = await getProfileWithHttpInfo();
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
@@ -217,7 +217,7 @@ class LeaderboardApi {
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
     if (response.body.isNotEmpty && response.statusCode != HttpStatus.noContent) {
-      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'Profile',) as Profile;
+      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'PublicProfile',) as PublicProfile;
     
     }
     return null;
@@ -274,13 +274,13 @@ class LeaderboardApi {
   /// Performs an HTTP 'POST /api/leaderboard/profile' operation and returns the [Response].
   /// Parameters:
   ///
-  /// * [Profile] profile:
-  Future<Response> setProfileWithHttpInfo({ Profile? profile, }) async {
+  /// * [PublicProfile] publicProfile:
+  Future<Response> setProfileWithHttpInfo({ PublicProfile? publicProfile, }) async {
     // ignore: prefer_const_declarations
     final path = r'/api/leaderboard/profile';
 
     // ignore: prefer_final_locals
-    Object? postBody = profile;
+    Object? postBody = publicProfile;
 
     final queryParams = <QueryParam>[];
     final headerParams = <String, String>{};
@@ -302,9 +302,9 @@ class LeaderboardApi {
 
   /// Parameters:
   ///
-  /// * [Profile] profile:
-  Future<void> setProfile({ Profile? profile, }) async {
-    final response = await setProfileWithHttpInfo( profile: profile, );
+  /// * [PublicProfile] publicProfile:
+  Future<void> setProfile({ PublicProfile? publicProfile, }) async {
+    final response = await setProfileWithHttpInfo( publicProfile: publicProfile, );
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }

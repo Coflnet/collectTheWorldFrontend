@@ -1,3 +1,4 @@
+import 'package:collect_the_world/generatedCode/api.dart';
 import 'package:collect_the_world/pages/homePage/widgets/collectItemWidget/collectItemWidget.dart';
 import 'package:collect_the_world/pages/homePage/widgets/dailyBonuses.dart';
 import 'package:collect_the_world/pages/homePage/widgets/dailyItems.dart';
@@ -7,8 +8,12 @@ import 'package:flutter/material.dart';
 
 class ContentContainer extends StatelessWidget {
   final int collectionPercentage;
+  final List<ActiveMultiplier> multiplierList;
 
-  const ContentContainer({super.key, required this.collectionPercentage});
+  const ContentContainer(
+      {super.key,
+      required this.collectionPercentage,
+      required this.multiplierList});
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +34,9 @@ class ContentContainer extends StatelessWidget {
             child: Column(
               children: [
                 GlobalTask(),
-                DailyBonuses(),
+                DailyBonuses(
+                  multiplierList: multiplierList,
+                ),
               ],
             ),
           ),
