@@ -36,6 +36,8 @@ dependencies:
   show_more_text_popup: ^0.3.0
   custom_pop_up_menu: ^1.2.4
   hexcolor: ^3.0.1
+  random_avatar: ^0.0.8
+  random_string: ^2.3.1
 
 dev_dependencies:
   flutter_test:

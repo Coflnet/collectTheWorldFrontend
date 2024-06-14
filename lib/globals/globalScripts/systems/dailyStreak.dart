@@ -17,7 +17,6 @@ class LoadDailyStreak {
     Directory appDir = await getApplicationDocumentsDirectory();
     String filePath = "${appDir.path}/dailyStreak.json";
     File file = File(filePath);
-    file.deleteSync();
 
     if (!file.existsSync()) {
       file.createSync();

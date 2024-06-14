@@ -1,4 +1,5 @@
 import 'package:collect_the_world/globals/globalScripts/systems/dailyStreak.dart';
+import 'package:collect_the_world/globals/globalScripts/systems/profilePicture.dart';
 import 'package:collect_the_world/globals/globalWidgets/baseWidget/baseWidget.dart';
 import 'package:collect_the_world/pages/profilePage/profilePage.dart';
 import 'package:collect_the_world/pages/profilePage/widgets/NameAndPositionWidget.dart';
@@ -9,7 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 
 class ProfileWidget extends StatefulWidget {
-  const ProfileWidget({Key? key}) : super(key: key);
+  const ProfileWidget({super.key});
 
   @override
   _ProfileWidgetState createState() => _ProfileWidgetState();
@@ -17,10 +18,16 @@ class ProfileWidget extends StatefulWidget {
 
 class _ProfileWidgetState extends State<ProfileWidget> {
   int streak = 0;
+  String profileString = "helloworld";
   @override
   void initState() {
     super.initState();
+  }
+
+  void loadData() async {
+    String stringProfile = await ProfilePicture().getProfileString();
     setState(() {
+      profileString = stringProfile;
       streak = LoadDailyStreak().getStreak();
     });
   }
@@ -41,7 +48,9 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Profileimagewidget(),
+                    Profileimagewidget(
+                      profileString: profileString,
+                    ),
                     Row(
                       children: [
                         const Icon(
