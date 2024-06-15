@@ -5,7 +5,11 @@ import 'package:collect_the_world/generatedCode/api.dart';
 import 'package:collect_the_world/globals/globalScripts/systems/authClient.dart';
 import 'package:path_provider/path_provider.dart';
 
-List<ActiveMultiplier> multipliers = [];
+List<ActiveMultiplier> multipliers = [
+  ActiveMultiplier(multiplier: 100),
+  ActiveMultiplier(multiplier: 100),
+  ActiveMultiplier(multiplier: 100)
+];
 bool isloaded = false;
 
 class MultiplierCaching {
@@ -25,10 +29,15 @@ class MultiplierCaching {
     final apiInstance = MultiplierApi(client);
     try {
       final result = await apiInstance.multiplier();
+      isloaded = true;
       return result?.multiplier;
     } catch (e) {
       print("error requesting multipliers in request Mulitpliers $e");
-      return [];
+      return [
+        ActiveMultiplier(multiplier: 100, category: "❌error"),
+        ActiveMultiplier(multiplier: 100, category: "❌error"),
+        ActiveMultiplier(multiplier: 100, category: "❌error")
+      ];
     }
   }
 

@@ -28,8 +28,8 @@ class CollectItemWidget extends StatefulWidget {
 }
 
 class CollectItemWidgetState extends State<CollectItemWidget> {
-  String itemName = "";
-  bool loaded = false;
+  String itemName = ItemToFindHandler().returnCurrentItem();
+  bool loaded = ItemToFindHandler().returnCurrentItem() != "";
 
   void initState() {
     super.initState();

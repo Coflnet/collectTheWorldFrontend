@@ -5,11 +5,11 @@ import 'package:collect_the_world/generatedCode/api.dart';
 import 'package:collect_the_world/globals/globalScripts/systems/authClient.dart';
 import 'package:path_provider/path_provider.dart';
 
-List<Challenge> dailyChallenge = [];
+List<Challenge> dailyChallenge = [Challenge(target: 1000)];
 
 class ChallengeCaching {
   Future<void> loadChallengeData() async {
-    if (dailyChallenge.isEmpty) {
+    if (dailyChallenge[0].target == 1000) {
       await requestChallenge();
     }
     return;
@@ -33,8 +33,16 @@ class ChallengeCaching {
     }
   }
 
+  void addDailyChallenge() {
+    if (dailyChallenge[0].progress == null) {
+      return;
+    }
+    dailyChallenge[0].progress = (dailyChallenge[0].progress ?? 0) + 1;
+  }
+
   Future<List<Challenge>> getDailyChallenge() async {
-    if (dailyChallenge.isEmpty) {
+    if (dailyChallenge[0].target == 1000) {
+      print("requesting");
       await loadChallengeData();
     }
     return dailyChallenge;

@@ -47,13 +47,9 @@ class HomePage extends StatefulWidget {
 
 class HomePageState extends State<HomePage> {
   LoadDailyStreak dailyStreak = LoadDailyStreak();
-  int dailyStreakNum = 0;
-  int dailyQuestCompletion = 0;
-  List<ActiveMultiplier> multiplierList = [
-    ActiveMultiplier(multiplier: 100),
-    ActiveMultiplier(multiplier: 100),
-    ActiveMultiplier(multiplier: 100)
-  ];
+  int dailyStreakNum = globalStreakFile.streak;
+  int dailyQuestCompletion = dailyChallenge[0].progress ?? 0;
+  List<ActiveMultiplier> multiplierList = MultiplierCaching().getMultiplier();
 
   @override
   initState() {
@@ -65,6 +61,7 @@ class HomePageState extends State<HomePage> {
     await authclie.Authclient().initClient();
     loadImportantData();
     loadChallenge();
+
     ProfilePicture().loadProfileFile();
 
     ListCaching().loadCache();
@@ -74,7 +71,6 @@ class HomePageState extends State<HomePage> {
   void loadChallenge() async {
     List<Challenge> dailyChallenge =
         await ChallengeCaching().getDailyChallenge();
-    print(dailyChallenge);
     setState(() {
       dailyQuestCompletion = dailyChallenge[0].progress!;
     });
@@ -89,7 +85,6 @@ class HomePageState extends State<HomePage> {
 
   Future<void> loadImportantData() async {
     await MultiplierCaching().loadMultiplier();
-
     setState(() {
       multiplierList = MultiplierCaching().getMultiplier();
     });

@@ -12,6 +12,12 @@ var currentItem = "nil";
 int remainingSkips = 10;
 
 class ItemToFindHandler {
+
+  String returnCurrentItem(){
+    
+    return currentItem=="nil" ? "": currentItem;
+  }
+
   Future<String> loadFileData() async {
     if (Platform.isLinux || Platform.isMacOS || Platform.isWindows) {
       return "";

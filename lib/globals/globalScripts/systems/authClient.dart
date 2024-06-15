@@ -3,6 +3,7 @@ import 'dart:io';
 import 'dart:math';
 
 import 'package:collect_the_world/generatedCode/api.dart';
+import 'package:collect_the_world/globals/globalScripts/cachingScripts/multiplierCaching.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:random_string_generator/random_string_generator.dart';
 
@@ -13,8 +14,9 @@ bool alreadyLoaded = false;
 
 class Authclient {
   Future<String?> initClient() async {
+    print(alreadyLoaded);
     if (alreadyLoaded) {
-      return token;
+    return token;
     }
     Directory appDir = await getApplicationDocumentsDirectory();
     String filePath = "${appDir.path}/clientDetail.json";
@@ -40,6 +42,7 @@ class Authclient {
     storeData();
 
     token = fileData["token"];
+    alreadyLoaded = true;
     return returnToken;
   }
 
