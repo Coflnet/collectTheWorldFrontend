@@ -4,14 +4,14 @@ import 'package:collect_the_world/pages/leaderboard/widgets/containers/leaderBoa
 import 'package:collect_the_world/pages/leaderboard/widgets/containers/leaderboardPlacement/LBPLmain.dart';
 import 'package:flutter/material.dart';
 
-class LeaderboardAllTimePage extends StatefulWidget {
-  const LeaderboardAllTimePage({super.key});
+class LeaderboardWeeklyPageContent extends StatefulWidget {
+  const LeaderboardWeeklyPageContent({Key? key}) : super(key: key);
 
   @override
-  LleaderbStateoardAllTimePage createState() => LleaderbStateoardAllTimePage();
+  _LeaderboardWeeklyPageState createState() => _LeaderboardWeeklyPageState();
 }
 
-class LleaderbStateoardAllTimePage extends State<LeaderboardAllTimePage> {
+class _LeaderboardWeeklyPageState extends State<LeaderboardWeeklyPageContent> {
   List leaderboardlist = [];
 
   @override
@@ -29,10 +29,7 @@ class LleaderbStateoardAllTimePage extends State<LeaderboardAllTimePage> {
             const SizedBox(
               height: 105,
             ),
-            const Text(
-              "All time",
-              style: TextStyle(color: Colors.white, fontSize: 25),
-            ),
+            const LBRewardWeekly(),
             SizedBox(
                 height: MediaQuery.of(context).size.height / 4.5,
                 child: const LBPLmain(topUsers: [])),
@@ -62,9 +59,30 @@ class LleaderbStateoardAllTimePage extends State<LeaderboardAllTimePage> {
   }
 
   void loadLeaderBoard() async {
-    final result = await LeaderboardHandler().getLeaderboard(3);
+    final result = await LeaderboardHandler().getLeaderboard(2);
     setState(() {
       leaderboardlist = result;
     });
+  }
+}
+
+class LBRewardWeekly extends StatelessWidget {
+  const LBRewardWeekly({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: <Widget>[
+        const Text("Top twenty",
+            textAlign: TextAlign.center,
+            style: TextStyle(color: Colors.white, fontSize: 20)),
+        Text("+3000XP",
+            style: TextStyle(
+                color: Colors.white.withOpacity(0.9),
+                fontSize: 25,
+                fontFamily: "Rukik-RLight",
+                fontWeight: FontWeight.w700))
+      ],
+    );
   }
 }

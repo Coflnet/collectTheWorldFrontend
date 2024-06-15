@@ -5,7 +5,7 @@ import 'package:collect_the_world/globals/globalWidgets/header/header.dart';
 import 'package:collect_the_world/pages/leaderboard/widgets/containers/leaderboardPageContainer.dart';
 import 'package:collect_the_world/pages/leaderboard/widgets/header/LeaderboardHeader.dart';
 import 'package:collect_the_world/pages/leaderboard/widgets/leaderboardPage/dailyPage/LeaderboardDailyPage.dart';
-import 'package:collect_the_world/pages/leaderboard/widgets/leaderboardPage/leaderboardWeeklyPage.dart';
+import 'package:collect_the_world/pages/leaderboard/widgets/leaderboardPage/weeklyPage/leaderboardWeeklyPage.dart';
 import 'package:flutter/material.dart';
 import 'package:collect_the_world/globals/globalScripts/systems/dailyStreak.dart'
     as globalStreakFile;
