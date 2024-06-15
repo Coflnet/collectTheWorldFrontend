@@ -9,14 +9,20 @@ class LBPLmain extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Row(
+    return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        SizedBox(width: 16),
-        LBplacementTwo(userInfo: ["na"]),
-        LBplacementOne(userInfo: ["NA", 1]),
-        LBplacementThree(userInfo: ["NA"]),
-        SizedBox(width: 16),
+        const SizedBox(width: 16),
+        LBplacementTwo(
+            userInfo:
+                topUsers.isNotEmpty ? topUsers[0] : ["loading", "alsoloading"]),
+        LBplacementOne(
+            userInfo:
+                topUsers.isNotEmpty ? topUsers[1] : ["loading", "alsoloading"]),
+        LBplacementThree(
+            userInfo:
+                topUsers.isNotEmpty ? topUsers[2] : ["loading", "alsoloading"]),
+        const SizedBox(width: 16),
       ],
     );
   }

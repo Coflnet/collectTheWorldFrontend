@@ -21,7 +21,7 @@ class _LeaderboardDailyContentState extends State<LeaderboardDailyContent> {
   }
 
   List leaderboardlist = [];
-  
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -34,7 +34,10 @@ class _LeaderboardDailyContentState extends State<LeaderboardDailyContent> {
             const LBRewardDaily(),
             SizedBox(
                 height: MediaQuery.of(context).size.height / 4.5,
-                child: const LBPLmain(topUsers: [])),
+                child: LBPLmain(
+                    topUsers: leaderboardlist.isNotEmpty
+                        ? leaderboardlist.take(3).toList()
+                        : [])),
             const LeaderboardDivider(),
           ],
         ),
