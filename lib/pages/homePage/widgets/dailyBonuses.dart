@@ -36,19 +36,19 @@ class DailyBonuses extends StatelessWidget {
                   children: [
                     BonusWidget(
                         multi: "1.25X",
-                        name: multiplierList.isEmpty
+                        name: multiplierList[0].multiplier != 100
                             ? multiplierList[0].category ?? "❌Error"
                             : "Loading"),
                     const SizedBox(width: 12),
                     BonusWidget(
                         multi: "2X",
-                        name: multiplierList.isEmpty
+                        name: multiplierList[1].multiplier != 100
                             ? multiplierList[1].category ?? "❌Error"
                             : "Loading"),
                     const SizedBox(width: 12),
                     BonusWidget(
                         multi: "4X",
-                        name: multiplierList.isEmpty
+                        name: multiplierList[2].multiplier != 100
                             ? multiplierList[2].category ?? "❌Error"
                             : "Loading"),
                   ],

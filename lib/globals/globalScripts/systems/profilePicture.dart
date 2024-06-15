@@ -7,16 +7,13 @@ import 'package:random_string/random_string.dart';
 String profileString = "";
 
 class ProfilePicture {
-  Future<String> getProfileString() async {
-    if (profileString != "") {
-      return profileString;
-    }
-    return await loadProfileFile();
+  String getProfileString() {
+    return profileString;
   }
 
   Future<String> loadProfileFile() async {
     Directory appDir = await getApplicationDocumentsDirectory();
-    String filePath = "${appDir.path}/dailyStreak.json";
+    String filePath = "${appDir.path}/profilePicutre.json";
     File file = File(filePath);
 
     if (!file.existsSync()) {

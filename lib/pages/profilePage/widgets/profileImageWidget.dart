@@ -16,10 +16,19 @@ class Profileimagewidget extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Container(
-            decoration: const BoxDecoration(
-                shape: BoxShape.circle, color: Colors.orangeAccent),
-            child: RandomAvatar(profileString, width: 70, height: 70),
+          TextButton(
+            style: TextButton.styleFrom(padding: EdgeInsets.all(0)),
+            onPressed: () => {},
+            child: Stack(
+              alignment: Alignment.topLeft,
+              children: [
+                Container(
+                  padding: const EdgeInsets.fromLTRB(8, 8, 0, 0),
+                  child: RandomAvatar(profileString, width: 70, height: 70),
+                ),
+                Icon(Icons.settings, size: 35, color: Colors.grey[400])
+              ],
+            ),
           ),
           const NameAndPositionWidget(),
         ],

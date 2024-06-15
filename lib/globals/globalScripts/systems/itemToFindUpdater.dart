@@ -19,6 +19,7 @@ class ItemToFindHandler {
     Directory appDir = await getApplicationDocumentsDirectory();
     String filePath = "${appDir.path}/itemDetails.json";
     File file = File(filePath);
+    file.deleteSync();
     if (!file.existsSync()) {
       await createFile(file);
     }

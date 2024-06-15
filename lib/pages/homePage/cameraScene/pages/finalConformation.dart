@@ -22,7 +22,6 @@ class FinalConformationScene extends StatelessWidget {
       body: Stack(
         children: [
           const BackgroundGradiant(),
-          FrostedGlass(),
           Column(
             children: [
               Row(

@@ -6,22 +6,33 @@ import 'package:collect_the_world/pages/homePage/widgets/collectItemWidget/colle
 import 'package:collect_the_world/pages/profilePage/profileWidget.dart';
 import 'package:collect_the_world/pages/profilePage/widgets/linkButtons/discordLinkButton.dart';
 import 'package:collect_the_world/pages/profilePage/widgets/linksWidget.dart';
+import 'package:collect_the_world/pages/profilePage/widgets/popups/editProfilePopup.dart';
 import 'package:collect_the_world/popups/conformationPopup/conformationPopup.dart';
 import 'package:flutter/material.dart';
 import 'package:collect_the_world/globals/globalScripts/systems/dailyStreak.dart'
     as globalStreakFile;
+import 'package:provider/provider.dart';
 
-class ProfilePage extends StatelessWidget {
-  const ProfilePage({
-    super.key,
-  });
+class ProfilePage extends StatefulWidget {
+  const ProfilePage({Key? key}) : super(key: key);
+
+  @override
+  _ProfilePageState createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePage> {
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
         theme: ThemeData(fontFamily: 'Poppins'),
         home: Scaffold(
-          floatingActionButton: CameraButtonFooter(),
+          floatingActionButton: const CameraButtonFooter(),
           floatingActionButtonLocation:
               FloatingActionButtonLocation.centerDocked,
           body: Stack(

@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'package:collect_the_world/background/backgroundGradiant.dart';
 import 'package:collect_the_world/pages/homePage/cameraScene/confirm/widgets/confirmButton.dart';
 import 'package:collect_the_world/pages/homePage/cameraScene/confirm/widgets/imageWidget.dart';
 import 'package:collect_the_world/pages/homePage/cameraScene/confirm/searchBar.dart';
@@ -26,14 +27,37 @@ class _ConfirmSceneMainState extends State<ConfirmSceneMain> {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          ConfirmPageSearchBar(onSearchContentChanged: updateSearchBarContent),
-          const ImageWidget(),
-        ConfirmButton(searchBarContent: searchBarContent, isHttpRequest: false, isItemToFind: widget.isItemToFind,),
-          const SizedBox(height: 80),
-        ],
+    return Scaffold(
+      body: LayoutBuilder(
+        builder: (context, constraints) {
+          return Container(
+            color: Color.fromRGBO(21, 31, 51, 1),
+            child: SingleChildScrollView(
+              child: ConstrainedBox(
+                constraints: BoxConstraints(
+                  minHeight: constraints.maxHeight,
+                ),
+                child: Padding(
+                  padding: EdgeInsets.only(
+                      bottom: MediaQuery.of(context).viewInsets.bottom),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const ImageWidget(),
+                      ConfirmPageSearchBar(
+                          onSearchContentChanged: updateSearchBarContent),
+                      ConfirmButton(
+                        searchBarContent: searchBarContent,
+                        isHttpRequest: false,
+                        isItemToFind: widget.isItemToFind,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          );
+        },
       ),
     );
   }

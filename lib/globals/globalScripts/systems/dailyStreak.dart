@@ -9,7 +9,7 @@ DateTime currentDayTime = DateTime.now();
 bool alreadyLoaded = false;
 
 class LoadDailyStreak {
-  void loadStreak() async {
+  Future<void> loadStreak() async {
     if (alreadyLoaded) {
       return;
     }
@@ -17,7 +17,6 @@ class LoadDailyStreak {
     Directory appDir = await getApplicationDocumentsDirectory();
     String filePath = "${appDir.path}/dailyStreak.json";
     File file = File(filePath);
-
     if (!file.existsSync()) {
       file.createSync();
       var fileData = {
@@ -31,6 +30,7 @@ class LoadDailyStreak {
 
     var fileDataJson = file.readAsStringSync();
     var fileData = jsonDecode(fileDataJson);
+    print(fileData);
 
     streak = fileData["dailyStreak"];
     currentDayTime = DateTime.parse(fileData["currentDayTime"]);

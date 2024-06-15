@@ -10,7 +10,7 @@ import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 
 class ConformationPopup extends StatefulWidget {
-  const ConformationPopup({Key? key}) : super(key: key);
+  const ConformationPopup({super.key});
 
   @override
   ConformationPopupState createState() => ConformationPopupState();
@@ -53,7 +53,6 @@ class ConformationPopupState extends State<ConformationPopup>
 
   void appear(VoidCallback callback, callBackStartedRef, String newitemName,
       int newremainingSkips) {
-    print("skipping");
     newItemCallback = callback;
     callBackStarted = callBackStartedRef;
     bool resultingSkips = true;

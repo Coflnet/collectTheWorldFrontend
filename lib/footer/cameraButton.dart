@@ -23,7 +23,6 @@ class CameraButtonState extends State<CameraButtonFooter> {
   @override
   void initState() {
     super.initState();
-    _initializeCamera();
   }
 
   Future<void> _initializeCamera() async {

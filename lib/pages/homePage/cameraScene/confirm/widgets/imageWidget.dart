@@ -21,16 +21,16 @@ class ImageWidgetState extends State<ImageWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.fromLTRB(70, 40, 70, 25),
+      margin: const EdgeInsets.fromLTRB(30, 40, 30, 25),
       decoration: BoxDecoration(
         border: Border.all(
-          width: 3,
+          width: 4,
           color: Colors.white24,
         ),
         borderRadius: BorderRadius.circular(20),
       ),
       child: ClipRRect(
-        borderRadius: BorderRadius.circular(15),
+        borderRadius: BorderRadius.circular(20),
         child: globals.image == null
             ? Container()
             : Image.file(

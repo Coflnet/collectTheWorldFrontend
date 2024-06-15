@@ -8,6 +8,7 @@ import 'package:collect_the_world/globals/globalScripts/cachingScripts/challenge
 import 'package:collect_the_world/globals/globalScripts/cachingScripts/listCaching.dart';
 import 'package:collect_the_world/globals/globalScripts/cachingScripts/multiplierCaching.dart';
 import 'package:collect_the_world/globals/globalScripts/systems/authClient.dart';
+import 'package:collect_the_world/globals/globalScripts/systems/profilePicture.dart';
 import 'package:collect_the_world/pages/homePage/cameraScene/pages/cameraScene.dart';
 import 'package:collect_the_world/pages/homePage/cameraScene/pages/confirmScene.dart';
 import 'package:collect_the_world/globals/globalScripts/cameraController.dart';
@@ -49,9 +50,9 @@ class HomePageState extends State<HomePage> {
   int dailyStreakNum = 0;
   int dailyQuestCompletion = 0;
   List<ActiveMultiplier> multiplierList = [
-    ActiveMultiplier(),
-    ActiveMultiplier(),
-    ActiveMultiplier()
+    ActiveMultiplier(multiplier: 100),
+    ActiveMultiplier(multiplier: 100),
+    ActiveMultiplier(multiplier: 100)
   ];
 
   @override
@@ -61,21 +62,35 @@ class HomePageState extends State<HomePage> {
   }
 
   void loadData() async {
-    await loadImportantData();
+    await authclie.Authclient().initClient();
+    loadImportantData();
+    loadChallenge();
+    ProfilePicture().loadProfileFile();
+
     ListCaching().loadCache();
     ListCaching().checkIfItemUpdated();
   }
 
-  Future<void> loadImportantData() async {
-    await authclie.Authclient().initClient();
-    MultiplierCaching().loadMultiplier();
+  void loadChallenge() async {
     List<Challenge> dailyChallenge =
         await ChallengeCaching().getDailyChallenge();
+    print(dailyChallenge);
+    setState(() {
+      dailyQuestCompletion = dailyChallenge[0].progress!;
+    });
+  }
+
+  void loadStreak(){
     LoadDailyStreak().loadStreak();
-    print(MultiplierCaching().getMultiplier());
     setState(() {
       dailyStreakNum = globalStreakFile.streak;
-      dailyQuestCompletion = dailyChallenge[0].progress!;
+    });
+  }
+
+  Future<void> loadImportantData() async {
+    await MultiplierCaching().loadMultiplier();
+    
+    setState(() {
       multiplierList = MultiplierCaching().getMultiplier();
     });
   }
@@ -169,14 +184,11 @@ class ConfirmScene extends StatelessWidget {
       home: Scaffold(
         body: Stack(children: [
           const BackgroundGradiant(),
-          const Footer(),
           ConfirmSceneMain(
             isItemToFind: isItemToFind,
           )
         ]),
-        resizeToAvoidBottomInset: false,
-        floatingActionButton: CameraButtonFooter(),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+
         backgroundColor: const Color.fromRGBO(34, 40, 49, 1),
       ),
     );

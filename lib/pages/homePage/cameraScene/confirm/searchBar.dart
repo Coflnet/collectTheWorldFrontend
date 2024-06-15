@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:hexcolor/hexcolor.dart';
 
 class ConfirmPageSearchBar extends StatefulWidget {
   final ValueChanged<String> onSearchContentChanged;
@@ -21,19 +22,27 @@ class _ConfirmPageSearchBarState extends State<ConfirmPageSearchBar> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.fromLTRB(30, 70, 30, 0),
+      margin: const EdgeInsets.fromLTRB(30, 4, 30, 5),
       child: SearchAnchor(
         builder: (BuildContext context, SearchController controller) {
           return Container(
             decoration: BoxDecoration(
-              color: Colors.white10,
+              gradient: const LinearGradient(
+                  begin: Alignment.centerRight,
+                  end: Alignment.centerLeft,
+                  colors: [
+                    Color.fromRGBO(67, 56, 107, 1),
+                    Color.fromRGBO(62, 52, 99, 1),
+                  ]),
               borderRadius: BorderRadius.circular(20),
               border: Border.all(
                   color: const Color.fromARGB(43, 255, 255, 255), width: 0.7),
             ),
             child: SearchBar(
-              textStyle: const WidgetStatePropertyAll(TextStyle(color: Colors.white)),
-              hintStyle: WidgetStatePropertyAll(TextStyle(color: Colors.white24)),
+              textStyle:
+                  const WidgetStatePropertyAll(TextStyle(color: Colors.white)),
+              hintStyle: const WidgetStatePropertyAll(
+                  TextStyle(color: Colors.white24)),
               onChanged: (newText) => {
                 widget.onSearchContentChanged(newText),
                 countCharachters(newText)
@@ -44,7 +53,9 @@ class _ConfirmPageSearchBarState extends State<ConfirmPageSearchBar> {
                       Icons.search,
                       color: Colors.white,
                     ),
-              hintText: widget.isDescrip ? "A red apple on brown table" : "",
+              hintText: widget.isDescrip
+                  ? "A red apple on brown table"
+                  : "Enter item's name",
               trailing: widget.isDescrip
                   ? [
                       searchBarTrailing(

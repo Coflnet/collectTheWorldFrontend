@@ -7,6 +7,7 @@ class NameAndPositionWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      padding: EdgeInsets.fromLTRB(0, 15, 20, 5),
       margin: const EdgeInsets.only(left: 10),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -31,7 +32,6 @@ class NameAndPositionWidget extends StatelessWidget {
                   style: TextStyle(color: Colors.white, fontSize: 20)),
             ],
           ),
-          
         ],
       ),
     );
