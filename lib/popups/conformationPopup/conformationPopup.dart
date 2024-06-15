@@ -71,7 +71,7 @@ class ConformationPopupState extends State<ConformationPopup>
   void dispose() {
     controller.dispose();
     super.dispose();
-  }
+}
 
   @override
   Widget build(BuildContext context) {

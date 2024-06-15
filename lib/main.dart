@@ -80,7 +80,7 @@ class HomePageState extends State<HomePage> {
     });
   }
 
-  void loadStreak(){
+  void loadStreak() {
     LoadDailyStreak().loadStreak();
     setState(() {
       dailyStreakNum = globalStreakFile.streak;
@@ -89,7 +89,7 @@ class HomePageState extends State<HomePage> {
 
   Future<void> loadImportantData() async {
     await MultiplierCaching().loadMultiplier();
-    
+
     setState(() {
       multiplierList = MultiplierCaching().getMultiplier();
     });
@@ -180,7 +180,7 @@ class ConfirmScene extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(fontFamily: 'Poppins'),
+      theme: ThemeData(fontFamily: 'Rubik'),
       home: Scaffold(
         body: Stack(children: [
           const BackgroundGradiant(),
@@ -188,7 +188,6 @@ class ConfirmScene extends StatelessWidget {
             isItemToFind: isItemToFind,
           )
         ]),
-
         backgroundColor: const Color.fromRGBO(34, 40, 49, 1),
       ),
     );

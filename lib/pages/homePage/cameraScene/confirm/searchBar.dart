@@ -35,11 +35,9 @@ class _ConfirmPageSearchBarState extends State<ConfirmPageSearchBar> {
                     Color.fromRGBO(62, 52, 99, 1),
                   ]),
               borderRadius: BorderRadius.circular(20),
-              border: Border.all(
-                  color: const Color.fromARGB(43, 255, 255, 255), width: 0.7),
             ),
             child: SearchBar(
-              textStyle:
+            textStyle:
                   const WidgetStatePropertyAll(TextStyle(color: Colors.white)),
               hintStyle: const WidgetStatePropertyAll(
                   TextStyle(color: Colors.white24)),

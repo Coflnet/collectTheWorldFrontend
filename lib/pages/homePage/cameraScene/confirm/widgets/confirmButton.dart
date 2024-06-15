@@ -6,6 +6,7 @@ import 'dart:convert';
 import 'dart:ui';
 import 'package:collect_the_world/pages/homePage/cameraScene/pages/finalConformation.dart';
 import 'package:flutter/material.dart';
+import 'package:hexcolor/hexcolor.dart';
 import 'package:http/http.dart' as http;
 
 String url = "http://10.0.0.19:6969";
@@ -26,21 +27,21 @@ class ConfirmButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        margin: const EdgeInsets.only(top: 20),
+        margin: const EdgeInsets.only(top: 7),
         child: Container(
+          
           width: 83,
           height: 83,
           decoration: BoxDecoration(
-            color: Colors.white10,
-            borderRadius: BorderRadius.circular(70),
-            border: Border.all(color: Colors.white12, width: 1.5),
+            color: Color.fromRGBO(99, 40, 154, 1),
+            borderRadius: BorderRadius.circular(28),
           ),
           child: IconButton(
               onPressed: () => {handleButtonPress(context)},
-              icon: const Icon(
+              icon: Icon(
                 Icons.check_rounded,
-                color: Colors.orange,
-                size: 60,
+                color: HexColor("#E9BDFF"),
+                size: 50,
               )),
         ));
   }

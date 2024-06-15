@@ -11,6 +11,7 @@ import 'package:collect_the_world/footer/cameraButton.dart';
 import 'package:collect_the_world/globals/globalScripts/cameraController.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:hexcolor/hexcolor.dart';
 
 class FinalConformationScene extends StatelessWidget {
   final String itemName;
@@ -26,13 +27,21 @@ class FinalConformationScene extends StatelessWidget {
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [const BackButton(), CreateDescription(searchBarContent: itemName,)],
+                children: [
+                  const BackButton(),
+                  CreateDescription(
+                    searchBarContent: itemName,
+                  )
+                ],
               ),
-              const Center(child: ImageWidget()),
+              const Center(
+                  child: ImageWidget(
+                sideMargin: 65,
+              )),
               ItemNameLabel(
                 itemName: itemName,
               ),
-            ConfirmButton(
+              ConfirmButton(
                 searchBarContent: itemName,
                 isHttpRequest: true,
               ),
@@ -51,27 +60,22 @@ class BackButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Align(
         alignment: Alignment.topLeft,
-        child: Container(
-          margin: const EdgeInsets.fromLTRB(15, 45, 0, 0),
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20),
-              color: Colors.white10,
-              border: Border.all(color: Colors.white12)),
-          child: IconButton(
-              onPressed: () => Navigator.of(context).pop(),
-              icon: const Icon(
+        child: TextButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            child: Container(
+              padding: const EdgeInsets.all(10),
+              margin: const EdgeInsets.fromLTRB(12, 38, 0, 0),
+              decoration: BoxDecoration(
+                  color: const Color.fromRGBO(61, 49, 102, 1),
+                  borderRadius: BorderRadius.circular(120)),
+              child: Icon(
                 Icons.arrow_back_rounded,
-                color: Colors.orange,
+                color: Colors.grey.shade200,
                 size: 40,
-              )),
-        ));
-  }
-  void changeToCameraScene(context) async {
-    Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) =>
-                CameraScreen(controller: controller, dailyWeeklyItem: true)));
+              ),
+            )));
   }
 }
 
@@ -82,13 +86,10 @@ class ItemNameLabel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.only(top: 10),
-      child: Text(
-        textAlign: TextAlign.center,
-        "This is a \n $itemName?",
-        style: const TextStyle(color: Colors.white, fontSize: 30),
-      ),
+    return Text(
+      textAlign: TextAlign.center,
+      "This is a \n $itemName?",
+      style: const TextStyle(color: Colors.white, fontSize: 28),
     );
   }
 }

@@ -11,9 +11,9 @@ class CreateDescription extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.fromLTRB(0, 45, 15, 0),
       decoration: BoxDecoration(
-          color: Colors.white10,
-          borderRadius: BorderRadius.circular(20),
-          border: Border.all(color: Colors.white12, width: 1.5)),
+        color: const Color.fromRGBO(62, 52, 99, 1),
+        borderRadius: BorderRadius.circular(20),
+      ),
       child: Stack(alignment: AlignmentDirectional.topEnd, children: [
         TextButton(
             onPressed: () => {
@@ -24,15 +24,15 @@ class CreateDescription extends StatelessWidget {
                                 searchBarContents: searchBarContent,
                               )))
                 },
-            child: const Row(
+            child: Row(
               children: [
                 Text(
                   "Add description",
-                  style: TextStyle(color: Colors.orangeAccent, fontSize: 15),
+                  style: TextStyle(color: Colors.grey.shade300, fontSize: 15),
                 ),
                 Icon(
                   Icons.add_rounded,
-                  color: Colors.orangeAccent,
+                  color: Colors.grey.shade300,
                   size: 45,
                 )
               ],

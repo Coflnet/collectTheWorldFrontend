@@ -8,10 +8,7 @@ import 'package:collect_the_world/globals/globalScripts/systems/itemToFindUpdate
 import 'package:collect_the_world/globals/globalWidgets/header/dailyStreak.dart';
 import 'package:collect_the_world/pages/homePage/cameraScene/confirm/widgets/confettiWidget.dart';
 import 'package:confetti/confetti.dart';
-import 'package:flutter/rendering.dart';
 import 'package:http/http.dart' as http;
-import 'package:collect_the_world/globals/globalScripts/cameraController.dart'
-    as cam;
 import 'package:collect_the_world/globals/globalScripts/systems/authClient.dart'
     as authclie;
 import 'package:collect_the_world/globals/globalScripts/systems/imageUploader.dart'
@@ -19,8 +16,6 @@ import 'package:collect_the_world/globals/globalScripts/systems/imageUploader.da
 import 'package:collect_the_world/background/backgroundGradiant.dart';
 import 'package:collect_the_world/footer/footerMain.dart';
 import 'package:collect_the_world/globals/globalWidgets/loadingWidget.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import "package:collect_the_world/globals/globalScripts/globals.dart"
     as globals;
