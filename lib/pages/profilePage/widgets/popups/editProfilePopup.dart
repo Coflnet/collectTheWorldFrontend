@@ -34,7 +34,7 @@ class EditProfilePopupState extends State<EditProfilePopup>
     with SingleTickerProviderStateMixin {
   bool visible = false;
   bool saveClose = true;
-  String profileString = ProfilePicture().getProfileString();
+  String profileString = ProfileRetrevial().getProfileString();
   @override
   void initState() {
     super.initState();

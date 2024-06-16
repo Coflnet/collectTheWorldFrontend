@@ -38,6 +38,7 @@ dependencies:
   hexcolor: ^3.0.1
   random_avatar: ^0.0.8
   random_string: ^2.3.1
+  ionicons: ^0.2.2
 
 dev_dependencies:
   flutter_test:

@@ -22,7 +22,7 @@ class GlobalTask extends StatelessWidget {
                 ],
               ),
               const Text(
-                "🚧 In development 👷",
+              "🚧 In development 👷",
                 style: TextStyle(color: Colors.white, fontSize: 28, fontWeight: FontWeight.w600),
               ),
               Container(height: 20,)

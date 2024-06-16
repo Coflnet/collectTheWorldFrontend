@@ -13,17 +13,16 @@ class LegalLinkButton extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-          color: Colors.white10.withOpacity(0.05),
           borderRadius: BorderRadius.circular(10),
           border: Border.all(color: Colors.white10)),
       child: TextButton(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            const Text("🏛️", textScaler: TextScaler.linear(1.8),),
+            const Text("🏛️", textScaler: TextScaler.linear(1.6),),
             const Text(
               "Legal links",
-              style: TextStyle(color: Colors.white, fontSize: 20),
+              style: TextStyle(color: Colors.white, fontSize: 18),
               textAlign: TextAlign.center,
             ),
             Container(margin: const EdgeInsets.only(left: 20),)

@@ -1,4 +1,4 @@
-import 'package:collect_the_world/pages/profilePage/widgets/linkButtons/profileStats/profileStatsWidget.dart';
+import 'package:collect_the_world/pages/profilePage/widgets/profileStats/profileStatsWidget.dart';
 import 'package:collect_the_world/pages/profilePage/widgets/linksWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';

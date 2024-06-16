@@ -4,9 +4,12 @@ import 'package:collect_the_world/footer/footerMain.dart';
 import 'package:collect_the_world/globals/globalWidgets/header/header.dart';
 import 'package:collect_the_world/pages/homePage/widgets/collectItemWidget/collectItemWidget.dart';
 import 'package:collect_the_world/pages/profilePage/profileWidget.dart';
+import 'package:collect_the_world/pages/profilePage/widgets/infoAndStats/ProfileInfo.dart';
+import 'package:collect_the_world/pages/profilePage/widgets/infoAndStats/profileStoreWidget.dart';
 import 'package:collect_the_world/pages/profilePage/widgets/linkButtons/discordLinkButton.dart';
 import 'package:collect_the_world/pages/profilePage/widgets/linksWidget.dart';
 import 'package:collect_the_world/pages/profilePage/widgets/popups/editProfilePopup.dart';
+import 'package:collect_the_world/pages/profilePage/widgets/profileDisplay/profileDisplay.dart';
 import 'package:collect_the_world/popups/conformationPopup/conformationPopup.dart';
 import 'package:flutter/material.dart';
 import 'package:collect_the_world/globals/globalScripts/systems/dailyStreak.dart'
@@ -14,14 +17,13 @@ import 'package:collect_the_world/globals/globalScripts/systems/dailyStreak.dart
 import 'package:provider/provider.dart';
 
 class ProfilePage extends StatefulWidget {
-  const ProfilePage({Key? key}) : super(key: key);
+  const ProfilePage({super.key});
 
   @override
   _ProfilePageState createState() => _ProfilePageState();
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-
   @override
   void initState() {
     super.initState();
@@ -31,24 +33,25 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     return MaterialApp(
         theme: ThemeData(fontFamily: 'Poppins'),
-        home: Scaffold(
-          floatingActionButton: const CameraButtonFooter(),
+        home: const Scaffold(
+          floatingActionButton: CameraButtonFooter(),
           floatingActionButtonLocation:
               FloatingActionButtonLocation.centerDocked,
           body: Stack(
             children: [
-              const BackgroundGradiant(),
-              Column(
-                children: [
-                  CustomHeader(dailStreakNum: globalStreakFile.streak),
-                  Container(
-                    margin: const EdgeInsets.only(top: 30),
-                  ),
-                  const ProfileWidget(),
-                  const LinksWidget(),
-                ],
+              BackgroundGradiant(),
+              SingleChildScrollView(
+                child: Column(
+                  children: [
+                    ProfileDisplay(),
+                    ProfileInfo(),
+                    ProfileStoreWidget(),
+                    LinksWidget(),
+                    SizedBox(height: 100,)
+                  ],
+                ),
               ),
-              const Footer(),
+              Footer(),
             ],
           ),
         ));

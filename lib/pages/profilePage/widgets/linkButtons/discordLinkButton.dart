@@ -9,7 +9,6 @@ class DiscordLinkButton extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-          color: Colors.white10.withOpacity(0.05),
           borderRadius: BorderRadius.circular(10),
           border: Border.all(color: Colors.white10)),
       child: TextButton(
@@ -19,11 +18,11 @@ class DiscordLinkButton extends StatelessWidget {
             const Icon(
               Icons.discord,
               color: Colors.blueAccent,
-              size: 40,
+              size: 35,
             ),
             const Text(
               "Join The Discord",
-              style: TextStyle(color: Colors.white, fontSize: 20),
+              style: TextStyle(color: Colors.white, fontSize: 18),
               textAlign: TextAlign.center,
             ),
             Container(margin: const EdgeInsets.only(left: 20),)

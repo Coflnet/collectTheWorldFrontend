@@ -14,15 +14,19 @@ class LinksWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.all(10),
+      margin: const EdgeInsets.fromLTRB(24, 16, 24, 10),
       child: const baseWidget(
         child: Column(
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: [Text("🔗 Links", style: TextStyle(color: Colors.white, fontSize: 25),)],
+              children: [
+                Text(
+                  "🔗 Links",
+                  style: TextStyle(color: Colors.white, fontSize: 25),
+                )
+              ],
             ),
-            
             DiscordLinkButton(),
             LegalLinkButton(),
           ],

@@ -5,7 +5,7 @@ import 'package:collect_the_world/pages/profilePage/profilePage.dart';
 import 'package:collect_the_world/pages/profilePage/widgets/NameAndPositionWidget.dart';
 import 'package:collect_the_world/pages/profilePage/widgets/popups/editProfilePopup.dart';
 import 'package:collect_the_world/pages/profilePage/widgets/profileImageWidget.dart';
-import 'package:collect_the_world/pages/profilePage/widgets/linkButtons/profileStats/profileStats.dart';
+import 'package:collect_the_world/pages/profilePage/widgets/profileStats/profileStats.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
@@ -20,7 +20,7 @@ class ProfileWidget extends StatefulWidget {
 
 class _ProfileWidgetState extends State<ProfileWidget> {
   int streak = 0;
-  String profileString = ProfilePicture().getProfileString();
+  String profileString = ProfileRetrevial().getProfileString();
   @override
   void initState() {
     super.initState();
