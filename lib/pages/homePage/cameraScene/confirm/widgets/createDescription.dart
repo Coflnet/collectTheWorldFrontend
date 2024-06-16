@@ -1,5 +1,6 @@
 import 'package:collect_the_world/pages/homePage/cameraScene/pages/descriptionScene.dart';
 import 'package:flutter/material.dart';
+import 'package:hexcolor/hexcolor.dart';
 
 class CreateDescription extends StatelessWidget {
   final String searchBarContent;
@@ -28,11 +29,11 @@ class CreateDescription extends StatelessWidget {
               children: [
                 Text(
                   "Add description",
-                  style: TextStyle(color: Colors.grey.shade300, fontSize: 15),
+                  style: TextStyle(color: HexColor("#F7B0FF"), fontSize: 15, fontWeight: FontWeight.w600),
                 ),
                 Icon(
                   Icons.add_rounded,
-                  color: Colors.grey.shade300,
+                  color: HexColor("#F7B0FF"),
                   size: 45,
                 )
               ],

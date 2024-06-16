@@ -1,26 +1,12 @@
 import 'dart:io';
 
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:camera/camera.dart';
 import 'package:collect_the_world/globals/globalScripts/systems/itemToFindUpdater.dart';
 import 'package:collect_the_world/globals/globalWidgets/attentionWidget/attentionWidget.dart';
-import 'package:collect_the_world/globals/globalWidgets/loadingWidget.dart';
-import 'package:collect_the_world/pages/homePage/cameraScene/pages/cameraScene.dart';
-import 'package:collect_the_world/globals/globalScripts/cameraController.dart'
-    as cam;
-import 'package:collect_the_world/globals/globalWidgets/baseWidget/baseWidget.dart';
-import 'package:collect_the_world/pages/homePage/contentContainer.dart';
 import 'package:collect_the_world/pages/homePage/widgets/collectItemWidget/collectItemCameraButton.dart';
 import 'package:collect_the_world/pages/homePage/widgets/collectItemWidget/collectItemSkip.dart';
-import 'package:collect_the_world/pages/homePage/widgets/dailyItems.dart';
-import 'package:collect_the_world/popups/conformationPopup/conformationPopup.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:collect_the_world/globals/globalKeys.dart' as globalKeys;
-import 'package:glassmorphism_ui/glassmorphism_ui.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
-import 'package:provider/provider.dart';
 
 class CollectItemWidget extends StatefulWidget {
   @override
@@ -31,6 +17,7 @@ class CollectItemWidgetState extends State<CollectItemWidget> {
   String itemName = ItemToFindHandler().returnCurrentItem();
   bool loaded = ItemToFindHandler().returnCurrentItem() != "";
 
+  @override
   void initState() {
     super.initState();
     ItemToFindHandler().getCurrentItem().then((newItemName) {

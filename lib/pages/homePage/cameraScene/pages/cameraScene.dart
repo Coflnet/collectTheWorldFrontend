@@ -33,7 +33,7 @@ class _CameraScreenState extends State<CameraScreen> {
       appBar: AppBar(
 
         backgroundColor: const Color.fromRGBO(21, 31, 51, 1),
-        iconTheme: IconThemeData(color: Colors.white),
+        iconTheme: const IconThemeData(color: Colors.white),
         foregroundColor: const Color.fromRGBO(21, 31, 51, 1),
       ),
       body: Stack(
@@ -48,6 +48,7 @@ class _CameraScreenState extends State<CameraScreen> {
       floatingActionButton: TextButton(
         onPressed: _captureImage,
         child: Container(
+          margin: const EdgeInsets.only(bottom: 55),
           padding: const EdgeInsets.all(8),
           decoration: BoxDecoration(
               color: Colors.transparent,

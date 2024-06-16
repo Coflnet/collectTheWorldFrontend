@@ -51,6 +51,7 @@ class ProfileInfo {
     var fileData = {
       "ProfileString": profileString,
       "Username": username,
+      "JoinDate": DateTime.now().toIso8601String(),
       "TopThree": topThree,
       "totalPicture": totalPicture,
       "totalUnique": totalUnique
@@ -77,7 +78,7 @@ class ProfileRetrevial {
     return username;
   }
 
-    void setProfileString(String _profileString) {
+  void setProfileString(String _profileString) {
     profileString = _profileString;
   }
 

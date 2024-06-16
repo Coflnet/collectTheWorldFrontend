@@ -93,15 +93,14 @@ class DailyItemsContent extends StatelessWidget {
                     child: LinearProgressIndicator(
                   backgroundColor: Colors.pink[50],
                   borderRadius: BorderRadius.circular(8),
-                  semanticsLabel: "hello world",
-                  value: 0.4,
+                  value: itemCollectCount == 0 ? 0 : 0 / itemCollectCount,
                   minHeight: 20,
                 )),
                 const SizedBox(
                   width: 10,
                 ),
                 Text(
-                  "7 / $itemCollectCount",
+                  "$itemCollectCount / 7",
                   style: TextStyle(
                       color: Colors.white.withOpacity(0.9),
                       fontWeight: FontWeight.w600,

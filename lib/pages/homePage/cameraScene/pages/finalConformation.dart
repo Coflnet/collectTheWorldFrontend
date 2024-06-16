@@ -72,7 +72,7 @@ class BackButton extends StatelessWidget {
                   borderRadius: BorderRadius.circular(120)),
               child: Icon(
                 Icons.arrow_back_rounded,
-                color: Colors.grey.shade200,
+                color: HexColor("#F7B0FF"),
                 size: 40,
               ),
             )));
@@ -89,7 +89,8 @@ class ItemNameLabel extends StatelessWidget {
     return Text(
       textAlign: TextAlign.center,
       "This is a \n $itemName?",
-      style: const TextStyle(color: Colors.white, fontSize: 28),
+      style: const TextStyle(
+          color: Colors.white, fontSize: 30, fontWeight: FontWeight.w600),
     );
   }
 }

@@ -51,7 +51,7 @@ class _ConfirmSceneMainState extends State<ConfirmSceneMain> {
                       Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          SizedBox(height: 30),
+                          const SizedBox(height: 30),
                           const ImageWidget(),
                           ConfirmPageSearchBar(
                               onSearchContentChanged: updateSearchBarContent),

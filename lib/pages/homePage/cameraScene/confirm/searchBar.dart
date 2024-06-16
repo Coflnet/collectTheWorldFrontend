@@ -38,7 +38,7 @@ class _ConfirmPageSearchBarState extends State<ConfirmPageSearchBar> {
             ),
             child: SearchBar(
             textStyle:
-                  const WidgetStatePropertyAll(TextStyle(color: Colors.white)),
+                  const WidgetStatePropertyAll(TextStyle(color: Colors.white, fontWeight: FontWeight.w600, fontSize: 20)),
               hintStyle: const WidgetStatePropertyAll(
                   TextStyle(color: Colors.white24)),
               onChanged: (newText) => {
@@ -50,6 +50,7 @@ class _ConfirmPageSearchBarState extends State<ConfirmPageSearchBar> {
                   : const Icon(
                       Icons.search,
                       color: Colors.white,
+                      size: 27,
                     ),
               hintText: widget.isDescrip
                   ? "A red apple on brown table"

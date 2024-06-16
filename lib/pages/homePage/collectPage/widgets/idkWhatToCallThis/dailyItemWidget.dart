@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:camera/camera.dart';
 import 'package:collect_the_world/globals/extentions/extentions.dart';
+import 'package:collect_the_world/globals/globalScripts/systems/itemToFindUpdater.dart';
 import 'package:collect_the_world/pages/homePage/cameraScene/pages/cameraScene.dart';
 import 'package:collect_the_world/pages/homePage/collectPage/widgets/idkWhatToCallThis/numberWidgetContainer.dart';
 import 'package:flutter/material.dart';
@@ -34,8 +35,8 @@ class DailyItemWidgetState extends State<DailyItemWidget> {
   Widget build(BuildContext context) {
     return Container(
       child: TextButton(
-        style:
-            TextButton.styleFrom(padding: const EdgeInsets.fromLTRB(16, 24, 16, 0)),
+        style: TextButton.styleFrom(
+            padding: const EdgeInsets.fromLTRB(16, 24, 16, 0)),
         onPressed: () {
           changeScene(context);
         },
