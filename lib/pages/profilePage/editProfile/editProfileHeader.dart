@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 
 class EditProfileHeader extends StatelessWidget {
-  const EditProfileHeader({Key? key}) : super(key: key);
+  final VoidCallback saveCallBack;
+  const EditProfileHeader({super.key, required this.saveCallBack});
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +31,7 @@ class EditProfileHeader extends StatelessWidget {
                   fontSize: 25,
                   fontWeight: FontWeight.w600)),
           TextButton(
-              onPressed: () => {},
+              onPressed: () => {saveCallBack()},
               child: Container(
                 padding: const EdgeInsets.fromLTRB(8, 4, 8, 4),
                 decoration: BoxDecoration(

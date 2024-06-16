@@ -10,12 +10,12 @@ class ProfileNameAndDate extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 24,),
+      margin: const EdgeInsets.symmetric(horizontal: 24),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Text(
-            "anonymous".capitalize(),
+            ProfileRetrevial().getUsername().capitalize(),
             style: const TextStyle(
                 color: Colors.white, fontWeight: FontWeight.w600, fontSize: 22),
           ),
@@ -23,7 +23,9 @@ class ProfileNameAndDate extends StatelessWidget {
           Text(
             "Joined ${returnMonthYear(ProfileRetrevial().getJoinDate())}",
             style: const TextStyle(
-                color: Colors.white60, fontSize: 14, fontWeight: FontWeight.w500),
+                color: Colors.white60,
+                fontSize: 14,
+                fontWeight: FontWeight.w500),
           )
         ],
       ),

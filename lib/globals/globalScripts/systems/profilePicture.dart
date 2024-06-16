@@ -46,7 +46,7 @@ class ProfileInfo {
 
   void saveFile() async {
     Directory appDir = await getApplicationDocumentsDirectory();
-    String filePath = "${appDir.path}/dailyStreak.json";
+    String filePath = "${appDir.path}/profilePicutre.json";
     File file = File(filePath);
     var fileData = {
       "ProfileString": profileString,
@@ -75,5 +75,21 @@ class ProfileRetrevial {
 
   String getUsername() {
     return username;
+  }
+
+    void setProfileString(String _profileString) {
+    profileString = _profileString;
+  }
+
+  void setTopThree(int _topThree) {
+    topThree = _topThree;
+  }
+
+  void setJoinDate(DateTime _joinDate) {
+    joinDate = _joinDate;
+  }
+
+  void setUsername(String _username) {
+    username = _username;
   }
 }
