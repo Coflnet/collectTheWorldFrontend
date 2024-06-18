@@ -59,8 +59,8 @@ class _DailyItemPageState extends State<DailyItemPage> {
                       itemCount: items.length,
                       itemBuilder: (BuildContext context, int index) {
                         return DailyItemWidget(
-                          name: items[index]["name"],
-                          xp: items[index]["xp"],
+                          name: items[index].name,
+                          xp: items[index].value,
                           index: index,
                         );
                       }),

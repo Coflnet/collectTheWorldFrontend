@@ -177,7 +177,7 @@ class ImageApi {
   ///   
   ///
   /// * [MultipartFile] file:
-  Future<CapturedImage?> uploadImage(String label, { MultipartFile? file, }) async {
+  Future<UploadImageResponse?> uploadImage(String label, { MultipartFile? file, }) async {
     final response = await uploadImageWithHttpInfo(label,  file: file, );
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
@@ -186,7 +186,7 @@ class ImageApi {
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
     if (response.body.isNotEmpty && response.statusCode != HttpStatus.noContent) {
-      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'CapturedImage',) as CapturedImage;
+      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'UploadImageResponse',) as UploadImageResponse;
     
     }
     return null;

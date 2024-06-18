@@ -54,6 +54,8 @@ part 'model/skip_response.dart';
 part 'model/skips_available.dart';
 part 'model/stat.dart';
 part 'model/token_response.dart';
+part 'model/upload_image_response.dart';
+part 'model/upload_rewards.dart';
 
 
 /// An [ApiClient] instance that uses the default values obtained from

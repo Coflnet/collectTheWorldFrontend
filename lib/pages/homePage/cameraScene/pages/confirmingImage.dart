@@ -109,7 +109,7 @@ class ConfirmingimagePageState extends State<ConfirmingimagePage> {
 
     var request = http.MultipartRequest("POST", url);
     var token = (await authclie.Authclient().tokenRequest())!;
-    print(token);
+
     request.headers["Authorization"] = 'Bearer $token';
 
     request.files.add(http.MultipartFile.fromBytes(
@@ -120,6 +120,9 @@ class ConfirmingimagePageState extends State<ConfirmingimagePage> {
     var response = await request.send();
 
     if (response.statusCode == 200) {
+      var responseString = await response.stream.bytesToString();
+      var jsonResponse = jsonDecode(responseString);
+      print(jsonResponse);
       successfullReqeust();
     } else {
       print('Failed to upload image. Status code: ${response.statusCode}');

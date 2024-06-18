@@ -35,7 +35,7 @@ class LleaderbStateoardAllTimePage extends State<LeaderboardAllTimeContent> {
             ),
             SizedBox(
                 height: MediaQuery.of(context).size.height / 4.5,
-                child: const LBPLmain(topUsers: [])),
+                child: LBPLmain(topUsers: leaderboardlist.take(3).toList())),
             const LeaderboardDivider(),
           ],
         ),
@@ -51,7 +51,7 @@ class LleaderbStateoardAllTimePage extends State<LeaderboardAllTimeContent> {
               itemBuilder: (context, index) {
                 return LeaderBoardWidget(
                     name: leaderboardlist[index][0],
-                    xp: leaderboardlist[index][1],
+                  xp: leaderboardlist[index][1],
                     index: index);
               },
             ),

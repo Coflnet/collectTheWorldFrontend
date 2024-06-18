@@ -15,10 +15,10 @@ class LBPLmain extends StatelessWidget {
         const SizedBox(width: 16),
         LBplacementTwo(
             userInfo:
-                topUsers.isNotEmpty ? topUsers[0] : ["loading", "alsoloading"]),
+                topUsers.isNotEmpty ? topUsers[1] : ["loading", "alsoloading"]),
         LBplacementOne(
             userInfo:
-                topUsers.isNotEmpty ? topUsers[1] : ["loading", "alsoloading"]),
+                topUsers.isNotEmpty ? topUsers[0] : ["loading", "alsoloading"]),
         LBplacementThree(
             userInfo:
                 topUsers.isNotEmpty ? topUsers[2] : ["loading", "alsoloading"]),

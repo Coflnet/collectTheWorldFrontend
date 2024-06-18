@@ -1,5 +1,6 @@
 import 'dart:ffi';
 
+import 'package:collect_the_world/globals/globalScripts/systems/profilePicture.dart';
 import 'package:collect_the_world/globals/globalWidgets/baseWidget/baseWidget.dart';
 import 'package:collect_the_world/pages/profilePage/widgets/infoAndStats/profileStatsWidget.dart';
 import 'package:collect_the_world/pages/profilePage/widgets/profileStats/profileStatsWidget.dart';
@@ -30,15 +31,15 @@ class ProfileStats extends StatelessWidget {
             margin: const EdgeInsets.symmetric(
               horizontal: 8,
             ),
-            child: const Row(
+            child: Row(
               children: <Widget>[
                 Expanded(
                   child: Column(
                     children: <Widget>[
                       ProfileStatsWidgetCustom(
-                          icon: "📷", name: "Unique", count: 69),
+                          icon: "📷", name: "Unique", count: ProfileRetrevial().getUnqie()),
                       ProfileStatsWidgetCustom(
-                          icon: "⭐", name: "Total XP", count: 69)
+                          icon: "⭐", name: "Total XP", count: ProfileRetrevial().getTotalXp())
                     ],
                   ),
                 ),
@@ -46,9 +47,9 @@ class ProfileStats extends StatelessWidget {
                   child: Column(
                     children: <Widget>[
                       ProfileStatsWidgetCustom(
-                          icon: "🏅", name: "Top ten", count: 69, iconSize: 28),
+                          icon: "🏅", name: "Top ten", count: ProfileRetrevial().getTopThree(), iconSize: 28),
                       ProfileStatsWidgetCustom(
-                          icon: "📸", name: "Total", count: 69)
+                          icon: "📸", name: "Total", count: ProfileRetrevial().getTotal())
                     ],
                   ),
                 )

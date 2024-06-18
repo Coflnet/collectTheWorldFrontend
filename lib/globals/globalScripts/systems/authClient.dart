@@ -11,12 +11,13 @@ String token = "";
 var secret = "";
 final client = ApiClient(basePath: "https://ctw.coflnet.com");
 bool alreadyLoaded = false;
+DateTime creationDate = DateTime.now();
 
 class Authclient {
   Future<String?> initClient() async {
     print(alreadyLoaded);
     if (alreadyLoaded) {
-    return token;
+      return token;
     }
     Directory appDir = await getApplicationDocumentsDirectory();
     String filePath = "${appDir.path}/clientDetail.json";
@@ -33,13 +34,15 @@ class Authclient {
       await file.writeAsString(jsonFileData);
       generateSecret();
       storeData();
-      
     }
     var fileDatajson = await file.readAsString();
     var fileData = await jsonDecode(fileDatajson);
+    creationDate = DateTime.parse(fileData["creationDate"]);
     secret = fileData["secret"];
+    if (creationDate.isAfter(DateTime.now())) {
+      return fileData["token"];
+    }
     var returnToken = await generateToken();
-    storeData();
 
     token = fileData["token"];
     alreadyLoaded = true;
@@ -56,9 +59,12 @@ class Authclient {
     final apiInstance = AuthApi(client);
     final loginRequest = AnonymousLoginRequest(secret: secret, locale: "en");
     try {
-      final response = await apiInstance.login(
-          anonymousLoginRequest: loginRequest);
+      final response =
+          await apiInstance.login(anonymousLoginRequest: loginRequest);
       token = response!.token!;
+      DateTime now = DateTime.now();
+      creationDate = DateTime(now.year, now.month, now.day, 23, 59, 59);
+      storeData();
       return token;
     } catch (e) {
       print("there was a error generating new token: $e");
@@ -73,13 +79,14 @@ class Authclient {
     var fileData = {
       "token": token,
       "secret": secret,
+      "creationDate": creationDate.toIso8601String(),
     };
     var fileDataJson = jsonEncode(fileData);
     file.writeAsString(fileDataJson);
   }
 
   Future<String?> tokenRequest() async {
-    if (token == ""){
+    if (token == "") {
       return await initClient();
     }
     return token;

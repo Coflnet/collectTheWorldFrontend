@@ -8,7 +8,7 @@ import 'package:collect_the_world/generatedCode/api.dart';
 import 'package:collect_the_world/globals/globalScripts/systems/authClient.dart';
 import 'package:path_provider/path_provider.dart';
 
-dynamic cache = {};
+List cache = [];
 DateTime lastUpdate = DateTime.now();
 bool alreadyRequested = false;
 
@@ -21,35 +21,18 @@ class ListCaching {
     if (cache.isNotEmpty) {
       return cache.toSet();
     }
-
-    Directory appDir = await getApplicationDocumentsDirectory();
-    String filePath = "${appDir.path}/listCache.json";
-    File file = File(filePath);
-
-    if (!file.existsSync()) {
-      file.createSync();
-
-      var fileData = {
-        "listCache": [],
-      };
-      var jsonFileData = jsonEncode(fileData);
-      await file.writeAsString(jsonFileData);
-    }
-
-    var fileDatajson = await file.readAsString();
-    var fileData = await jsonDecode(fileDatajson);
-    cache = fileData["listCache"];
-    return await checkUpdateTime();
+    reguestNewList();
+    return {};
   }
 
-  Future<Set> checkUpdateTime() async {
+  Future<List?> checkUpdateTime() async {
     if (cache.isEmpty) {
       return await reguestNewList();
     }
-    return cache.toSet();
+    return cache;
   }
 
-  Future<Set> reguestNewList() async {
+  Future<List?> reguestNewList() async {
     var token = (await authclie.Authclient().tokenRequest())!;
     var authclient = HttpBearerAuth();
     authclient.accessToken = token;
@@ -58,12 +41,15 @@ class ListCaching {
     final apiInstance = ObjectApi(client);
     List<CollectableObject>? result;
     try {
-      result = await apiInstance.getChellenge(count: 10);
+      result = await apiInstance.getDailyObject();
+      cache = result ?? [];
+      print(cache);
+      return result;
     } catch (e) {
       if (e is! ApiException) {
         print(
             'Exception when calling ObjectApi->apiObjectsCategoriesGet: $e\n');
-        return {};
+        return [];
       }
       if (e.code == 401) {
         await Authclient().generateToken();
@@ -71,19 +57,9 @@ class ListCaching {
       }
 
       print('Exception when calling ObjectApi->apiObjectsCategoriesGet: $e\n');
-      return {};
+      return [];
     }
-    Set newList = {};
-
-    for (var i in result!) {
-      var rng = Random();
-      int xp = rng.nextInt(30);
-      newList.add({"name": i.name, "xp": xp});
-    }
-    cache = newList.toList();
-    print(cache);
-    saveData();
-    return cache.toSet();
+    
   }
 
   void saveData() async {

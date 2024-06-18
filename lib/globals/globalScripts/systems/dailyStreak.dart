@@ -30,7 +30,6 @@ class LoadDailyStreak {
 
     var fileDataJson = file.readAsStringSync();
     var fileData = jsonDecode(fileDataJson);
-    print(fileData);
 
     streak = fileData["dailyStreak"];
     currentDayTime = DateTime.parse(fileData["currentDayTime"]);

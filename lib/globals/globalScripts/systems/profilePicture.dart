@@ -11,9 +11,10 @@ DateTime joinDate = DateTime.now();
 String username = "anonymous";
 int totalPicture = 0;
 int totalUnique = 0;
+int totalXp = 0;
 
 class ProfileInfo {
-  Future<String> loadProfileFile() async {
+  Future<void> loadProfileFile() async {
     Directory appDir = await getApplicationDocumentsDirectory();
     String filePath = "${appDir.path}/profilePicutre.json";
     File file = File(filePath);
@@ -26,7 +27,8 @@ class ProfileInfo {
         "JoinDate": DateTime.now().toIso8601String(),
         "TopThree": 3,
         "totalPicture": 0,
-        "totalUnique": 0
+        "totalUnique": 0,
+        "totalXp": 0,
       };
       var jsonFileData = jsonEncode(fileData);
       await file.writeAsString(jsonFileData);
@@ -37,11 +39,11 @@ class ProfileInfo {
 
     profileString = fileData["ProfileString"];
     username = fileData["Username"];
-    joinDate = DateTime.parse(fileData["JoinDate"]);
     topThree = fileData["TopThree"];
     totalUnique = fileData["totalUnique"];
     totalPicture = fileData["totalPicture"];
-    return "";
+    joinDate = DateTime.parse(fileData["JoinDate"]);
+    return;
   }
 
   void saveFile() async {
@@ -54,7 +56,8 @@ class ProfileInfo {
       "JoinDate": DateTime.now().toIso8601String(),
       "TopThree": topThree,
       "totalPicture": totalPicture,
-      "totalUnique": totalUnique
+      "totalUnique": totalUnique,
+      "totalXp": totalXp
     };
     var fileDataJson = jsonEncode(fileData);
     file.writeAsString(fileDataJson);
@@ -78,19 +81,39 @@ class ProfileRetrevial {
     return username;
   }
 
-  void setProfileString(String _profileString) {
-    profileString = _profileString;
+  int getUnqie() {
+    return totalUnique;
   }
 
-  void setTopThree(int _topThree) {
-    topThree = _topThree;
+  int getTotal() {
+    return totalPicture;
   }
 
-  void setJoinDate(DateTime _joinDate) {
-    joinDate = _joinDate;
+  int getTotalXp() {
+    return totalXp;
   }
 
-  void setUsername(String _username) {
-    username = _username;
+  void setTotalXp(int newXP) {
+    totalXp = newXP;
+  }
+
+  void setTotal(int newTotal) {
+    totalPicture = newTotal;
+  }
+
+  void setUnqiue(int newTotal) {
+    totalUnique = newTotal;
+  }
+
+  void setProfileString(String newprofileString) {
+    profileString = newprofileString;
+  }
+
+  void setTopThree(int newtopThree) {
+    topThree = topThree;
+  }
+
+  void setUsername(String newusername) {
+    username = newusername;
   }
 }

@@ -216,6 +216,10 @@ class ApiClient {
           return Stat.fromJson(value);
         case 'TokenResponse':
           return TokenResponse.fromJson(value);
+        case 'UploadImageResponse':
+          return UploadImageResponse.fromJson(value);
+        case 'UploadRewards':
+          return UploadRewards.fromJson(value);
         default:
           dynamic match;
           if (value is List && (match = _regList.firstMatch(targetType)?.group(1)) != null) {
