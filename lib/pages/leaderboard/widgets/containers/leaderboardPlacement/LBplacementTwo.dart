@@ -6,7 +6,9 @@ import 'package:random_avatar/random_avatar.dart';
 
 class LBplacementTwo extends StatelessWidget {
   final List userInfo;
-  const LBplacementTwo({super.key, required this.userInfo});
+  final int whichLeaderBoard;
+  const LBplacementTwo(
+      {super.key, required this.userInfo, required this.whichLeaderBoard});
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +23,10 @@ class LBplacementTwo extends StatelessWidget {
             decoration: BoxDecoration(
                 color: Colors.grey[400],
                 borderRadius: BorderRadius.circular(8)),
-            child: PlacementContent(userInfo: userInfo),
+            child: PlacementContent(
+              userInfo: userInfo,
+              whichLeaderBoard: whichLeaderBoard,
+            ),
           )
         ],
       ),
@@ -31,8 +36,10 @@ class LBplacementTwo extends StatelessWidget {
 
 class PlacementContent extends StatelessWidget {
   final List userInfo;
+  final int whichLeaderBoard;
 
-  const PlacementContent({super.key, required this.userInfo});
+  const PlacementContent(
+      {super.key, required this.userInfo, required this.whichLeaderBoard});
 
   @override
   Widget build(BuildContext context) {
@@ -55,8 +62,12 @@ class PlacementContent extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 9),
-        const LBplacementXpWidget(
-          count: 3000,
+        LBplacementXpWidget(
+          count: whichLeaderBoard == 0
+              ? 2000
+              : whichLeaderBoard == 1
+                  ? 3000
+                  : 0,
         )
       ],
     );

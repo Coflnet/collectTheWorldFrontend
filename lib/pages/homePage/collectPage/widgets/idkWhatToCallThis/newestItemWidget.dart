@@ -24,6 +24,8 @@ class NewestItemWidgetState extends State<NewestItemWidget> {
   late CameraController _controller;
   late List<CameraDescription> cameras;
 
+  
+
   Future<void> _initializeCamera() async {
     if (Platform.isAndroid || Platform.isIOS) {
       cameras = await availableCameras();
@@ -74,14 +76,14 @@ class NewestItemWidgetState extends State<NewestItemWidget> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             const Text(
-                              "Found by",
+                              "  Found by",
                               style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 15,
                                   fontWeight: FontWeight.w600),
                             ),
                             Text(
-                              'Tentamens',
+                              '  N/A',
                               style: TextStyle(
                                   color: Colors.white.withOpacity(0.7),
                                   fontSize: 15),

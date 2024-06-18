@@ -12,10 +12,8 @@ var currentItem = "nil";
 int remainingSkips = 10;
 
 class ItemToFindHandler {
-
-  String returnCurrentItem(){
-    
-    return currentItem=="nil" ? "": currentItem;
+  String returnCurrentItem() {
+    return currentItem == "nil" ? "" : currentItem;
   }
 
   Future<String> loadFileData() async {
@@ -25,14 +23,12 @@ class ItemToFindHandler {
     Directory appDir = await getApplicationDocumentsDirectory();
     String filePath = "${appDir.path}/itemDetails.json";
     File file = File(filePath);
-    file.deleteSync();
     if (!file.existsSync()) {
       await createFile(file);
     }
 
     var fileDataJson = file.readAsStringSync();
     var fileData = jsonDecode(fileDataJson);
-
     currentItem = fileData["currentItem"];
     remainingSkips = fileData["skips"];
     if (currentItem == "") {
@@ -43,6 +39,7 @@ class ItemToFindHandler {
 
   Future<String?> getCurrentItem() async {
     if (currentItem == "nil") {
+      print("returning");
       return await loadFileData();
     }
     if (currentItem == "") {

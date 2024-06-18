@@ -5,7 +5,9 @@ import 'package:flutter/material.dart';
 
 class LBPLmain extends StatelessWidget {
   final List topUsers;
-  const LBPLmain({super.key, required this.topUsers});
+  final int whichLeaderBoard;
+  const LBPLmain(
+      {super.key, required this.topUsers, required this.whichLeaderBoard});
 
   @override
   Widget build(BuildContext context) {
@@ -14,14 +16,18 @@ class LBPLmain extends StatelessWidget {
       children: <Widget>[
         const SizedBox(width: 16),
         LBplacementTwo(
-            userInfo:
-                topUsers.isNotEmpty ? topUsers[1] : ["loading", "alsoloading"]),
+          userInfo:
+              topUsers.isNotEmpty ? topUsers[1] : ["loading", "alsoloading"],
+          whichLeaderBoard: whichLeaderBoard,
+        ),
         LBplacementOne(
             userInfo:
-                topUsers.isNotEmpty ? topUsers[0] : ["loading", "alsoloading"]),
+                topUsers.isNotEmpty ? topUsers[0] : ["loading", "alsoloading"],
+            whichLeaderBoard: whichLeaderBoard),
         LBplacementThree(
             userInfo:
-                topUsers.isNotEmpty ? topUsers[2] : ["loading", "alsoloading"]),
+                topUsers.isNotEmpty ? topUsers[2] : ["loading", "alsoloading"],
+            whichLeaderBoard: whichLeaderBoard),
         const SizedBox(width: 16),
       ],
     );

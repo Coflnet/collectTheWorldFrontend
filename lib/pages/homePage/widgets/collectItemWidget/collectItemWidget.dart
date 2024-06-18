@@ -20,13 +20,17 @@ class CollectItemWidgetState extends State<CollectItemWidget> {
   @override
   void initState() {
     super.initState();
-    ItemToFindHandler().getCurrentItem().then((newItemName) {
-      setState(() {
-        loaded = true;
-        itemName = newItemName!;
-      });
-    });
+    loadItem();
   }
+
+  void loadItem() async {
+  String? newitem = await ItemToFindHandler().getCurrentItem();
+  setState(() {
+        loaded = true;
+        itemName = newitem ?? "";
+      });
+  }
+
 
   @override
   Widget build(BuildContext context) {

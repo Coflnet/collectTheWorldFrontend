@@ -15,7 +15,6 @@ DateTime creationDate = DateTime.now();
 
 class Authclient {
   Future<String?> initClient() async {
-    print(alreadyLoaded);
     if (alreadyLoaded) {
       return token;
     }
@@ -39,13 +38,16 @@ class Authclient {
     var fileData = await jsonDecode(fileDatajson);
     creationDate = DateTime.parse(fileData["creationDate"]);
     secret = fileData["secret"];
+
     if (creationDate.isAfter(DateTime.now())) {
+
       return fileData["token"];
     }
     var returnToken = await generateToken();
 
     token = fileData["token"];
     alreadyLoaded = true;
+
     return returnToken;
   }
 

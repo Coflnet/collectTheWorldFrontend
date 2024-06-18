@@ -35,9 +35,11 @@ class _LeaderboardDailyContentState extends State<LeaderboardDailyContent> {
             SizedBox(
                 height: MediaQuery.of(context).size.height / 4.5,
                 child: LBPLmain(
-                    topUsers: leaderboardlist.isNotEmpty
-                        ? leaderboardlist.take(3).toList()
-                        : [])),
+                  topUsers: leaderboardlist.isNotEmpty
+                      ? leaderboardlist.take(3).toList()
+                      : [],
+                  whichLeaderBoard: 0,
+                )),
             const LeaderboardDivider(),
           ],
         ),

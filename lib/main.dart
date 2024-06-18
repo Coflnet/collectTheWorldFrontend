@@ -62,9 +62,6 @@ class HomePageState extends State<HomePage> {
     loadImportantData();
     loadChallenge();
 
-    ProfileInfo().loadProfileFile();
-
-    ListCaching().loadCache();
     ListCaching().checkIfItemUpdated();
   }
 

@@ -4,10 +4,29 @@ import 'package:collect_the_world/globals/globalWidgets/header/xpwidget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class CustomHeader extends StatelessWidget {
-  final int dailStreakNum;
+import '../../globalScripts/systems/profilePicture.dart';
 
+class CustomHeader extends StatefulWidget {
+  final int dailStreakNum;
   const CustomHeader({super.key, required this.dailStreakNum});
+
+  @override
+  _HeaderState createState() => _HeaderState();
+}
+
+class _HeaderState extends State<CustomHeader> {
+  int xp = 0;
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  void loadfileData() async {
+    await ProfileInfo().loadProfileFile();
+    setState(() {
+      xp = ProfileRetrevial().getTotalXp();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,13 +50,18 @@ class CustomHeader extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 CurrentSkips(),
-                DailyStreak(dailStreakNum: dailStreakNum,),
-                XpWidget(),
+                DailyStreak(
+                  dailStreakNum: widget.dailStreakNum,
+                ),
+                XpWidget(
+                  xp: xp,
+                ),
               ],
             ),
           ),
         ],
       ),
     );
+    ;
   }
 }

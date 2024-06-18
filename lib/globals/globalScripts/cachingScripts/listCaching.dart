@@ -9,6 +9,7 @@ import 'package:collect_the_world/globals/globalScripts/systems/authClient.dart'
 import 'package:path_provider/path_provider.dart';
 
 List cache = [];
+List newestCache = [];
 DateTime lastUpdate = DateTime.now();
 bool alreadyRequested = false;
 
@@ -22,6 +23,31 @@ class ListCaching {
       return cache.toSet();
     }
     reguestNewList();
+    return {};
+  }
+
+  Set loadNewestCache() {
+    if (cache.isNotEmpty) {
+      return newestCache.toSet();
+    }
+    return {};
+  }
+
+  Future<Set> loadNewestOffset(int offset) async {
+    var token = (await authclie.Authclient().tokenRequest())!;
+    var authclient = HttpBearerAuth();
+    authclient.accessToken = token;
+    final client = ApiClient(
+        basePath: "https://ctw.coflnet.com", authentication: authclient);
+    final apiInstance = ObjectApi(client);
+
+    try {
+      List<CollectableObject>? result =
+          await apiInstance.getNewObjects(offset: offset);
+      return result?.toSet() ?? {};
+    } catch (e) {
+      print("exception loading newest list offset $e");
+    }
     return {};
   }
 
@@ -39,11 +65,11 @@ class ListCaching {
     final client = ApiClient(
         basePath: "https://ctw.coflnet.com", authentication: authclient);
     final apiInstance = ObjectApi(client);
+    reqeustNewest(apiInstance);
     List<CollectableObject>? result;
     try {
       result = await apiInstance.getDailyObject();
       cache = result ?? [];
-      print(cache);
       return result;
     } catch (e) {
       if (e is! ApiException) {
@@ -59,18 +85,16 @@ class ListCaching {
       print('Exception when calling ObjectApi->apiObjectsCategoriesGet: $e\n');
       return [];
     }
-    
   }
 
-  void saveData() async {
-    Directory appDir = await getApplicationDocumentsDirectory();
-    String filePath = "${appDir.path}/listCache.json";
-    File file = File(filePath);
-    var fileData = {
-      "listCache": cache,
-    };
-    var jsonFileData = jsonEncode(fileData);
-    await file.writeAsString(jsonFileData);
+  void reqeustNewest(ObjectApi instance) async {
+    try {
+      List<CollectableObject>? result = await instance.getNewObjects();
+      newestCache = result ?? [];
+      print(newestCache);
+    } catch (e) {
+      print("error requesting newest list $e");
+    }
   }
 
   void checkIfItemUpdated() {

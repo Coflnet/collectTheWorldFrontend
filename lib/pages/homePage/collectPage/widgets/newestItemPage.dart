@@ -14,10 +14,32 @@ class NewestItemPage extends StatefulWidget {
 class NewestItemPageState extends State<NewestItemPage> {
   final List items = [];
 
+  final controller = ScrollController();
+  int currentOffset = 0;
+
   @override
   void initState() {
     super.initState();
     requestItems();
+
+    // Setup the listener.
+    controller.addListener(() {
+      if (controller.position.atEdge) {
+        bool isTop = controller.position.pixels == 0;
+        if (isTop) {
+        } else {
+          loadMore();
+        }
+      }
+    });
+  }
+
+  void loadMore() async {
+    Set addList = await ListCaching().loadNewestOffset(currentOffset);
+    setState(() {
+      currentOffset += 10;
+      items.addAll(addList);
+    });
   }
 
   @override
@@ -58,8 +80,7 @@ class NewestItemPageState extends State<NewestItemPage> {
                         context: context,
                         removeTop: true,
                         child: ListView.builder(
-                            controller:
-                                ScrollController(initialScrollOffset: 0),
+                            controller: controller,
                             shrinkWrap: true,
                             itemCount: items.length + 1,
                             itemBuilder: (BuildContext context, int index) {
@@ -68,10 +89,10 @@ class NewestItemPageState extends State<NewestItemPage> {
                                   height: 16,
                                 );
                               } else {
-                                index = index -1;
+                                index = index - 1;
                                 return NewestItemWidget(
-                                  name: items[index]["name"],
-                                  xp: items[index]["xp"],
+                                  name: items[index].name,
+                                  xp: items[index].value,
                                   index: index,
                                 );
                               }
@@ -107,9 +128,10 @@ class NewestItemPageState extends State<NewestItemPage> {
   }
 
   void requestItems() async {
-    final newList = await ListCaching().getCache();
+    final newList = ListCaching().loadNewestCache();
     setState(() {
       items.addAll(newList);
+      currentOffset = 10;
     });
   }
 }
