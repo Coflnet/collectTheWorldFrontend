@@ -13,14 +13,20 @@ int totalPicture = 0;
 int totalUnique = 0;
 int totalXp = 0;
 
-class ProfileInfo {
+class LoadingProfileInfo {
+  void load() {
+    loadProfileFile();
+  }
+
   Future<void> loadProfileFile() async {
+    print("loading");
     Directory appDir = await getApplicationDocumentsDirectory();
     String filePath = "${appDir.path}/profilePicutre.json";
     File file = File(filePath);
 
     if (!file.existsSync()) {
       file.createSync();
+      print("creating");
       var fileData = {
         "ProfileString": randomString(15),
         "Username": "anonymous",
@@ -47,9 +53,11 @@ class ProfileInfo {
   }
 
   void saveFile() async {
+    print("saving file");
     Directory appDir = await getApplicationDocumentsDirectory();
     String filePath = "${appDir.path}/profilePicutre.json";
     File file = File(filePath);
+    print(profileString);
     var fileData = {
       "ProfileString": profileString,
       "Username": username,
@@ -66,6 +74,9 @@ class ProfileInfo {
 
 class ProfileRetrevial {
   String getProfileString() {
+    if (profileString == "") {
+      return "ohno";
+    }
     return profileString;
   }
 
@@ -106,6 +117,8 @@ class ProfileRetrevial {
   }
 
   void setProfileString(String newprofileString) {
+    print(
+        "WHY ARE WE SETTING\nWHY ARE WE SETTING\nWHY ARE WE SETTING\nWHY ARE WE SETTING\nnWHY ARE WE SETTING\nnWHY ARE WE SETTING\nnWHY ARE WE SETTING\nnWHY ARE WE SETTING\nnWHY ARE WE SETTING\nnWHY ARE WE SETTING\nnWHY ARE WE SETTING\nnWHY ARE WE SETTING\n");
     profileString = newprofileString;
   }
 

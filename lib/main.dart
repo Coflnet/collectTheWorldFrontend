@@ -55,14 +55,14 @@ class HomePageState extends State<HomePage> {
   initState() {
     super.initState();
     loadData();
+
   }
 
   void loadData() async {
     await authclie.Authclient().initClient();
     loadImportantData();
     loadChallenge();
-
-    ListCaching().checkIfItemUpdated();
+    ListCaching().checkIfItemUpdated();    
   }
 
   void loadChallenge() async {

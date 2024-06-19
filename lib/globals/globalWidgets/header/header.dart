@@ -19,10 +19,11 @@ class _HeaderState extends State<CustomHeader> {
   @override
   void initState() {
     super.initState();
+    loadfileData();
   }
 
   void loadfileData() async {
-    await ProfileInfo().loadProfileFile();
+    await LoadingProfileInfo().loadProfileFile();
     setState(() {
       xp = ProfileRetrevial().getTotalXp();
     });

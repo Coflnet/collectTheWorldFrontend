@@ -53,7 +53,7 @@ class _EditProfileMainState extends State<EditProfileMain> {
     print(username);
     ProfileRetrevial().setProfileString(profileString);
     ProfileRetrevial().setUsername(username);
-    ProfileInfo().saveFile();
+    LoadingProfileInfo().saveFile();
 
     token = (await Authclient().tokenRequest())!;
     var authclient = HttpBearerAuth();
