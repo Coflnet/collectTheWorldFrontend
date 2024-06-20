@@ -7,6 +7,7 @@ import 'package:collect_the_world/generatedCode/api.dart';
 import 'package:collect_the_world/globals/globalScripts/systems/itemToFindUpdater.dart';
 import 'package:collect_the_world/globals/globalWidgets/header/dailyStreak.dart';
 import 'package:collect_the_world/pages/homePage/cameraScene/confirm/widgets/confettiWidget.dart';
+import 'package:collect_the_world/pages/homePage/cameraScene/pages/confirmingImage/displayRewards.dart';
 import 'package:confetti/confetti.dart';
 import 'package:http/http.dart' as http;
 import 'package:collect_the_world/globals/globalScripts/systems/authClient.dart'
@@ -62,36 +63,8 @@ class ConfirmingimagePageState extends State<ConfirmingimagePage> {
         Center(
           child: CustomConfettiWidget(confettiController: confettiController),
         ),
-        Center(
-          child: Visibility(
-              visible: isLoading,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Text("XP Gained    ",
-                          textScaler: TextScaler.linear(2),
-                          style: TextStyle(color: Colors.white)),
-                      Text(xpGain,
-                          textScaler: const TextScaler.linear(3),
-                          style: const TextStyle(color: Colors.white)),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Text("Times found    ",
-                          textScaler: TextScaler.linear(2),
-                          style: TextStyle(color: Colors.white)),
-                      Text(xpGain,
-                          textScaler: const TextScaler.linear(3),
-                          style: const TextStyle(color: Colors.white)),
-                    ],
-                  )
-                ],
-              )),
+        const Center(
+          child: DisplayRewards()
         ),
         const Footer(),
       ]),
