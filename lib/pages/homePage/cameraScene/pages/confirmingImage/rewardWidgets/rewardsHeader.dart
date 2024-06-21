@@ -9,29 +9,38 @@ class RewardsHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      padding: const EdgeInsets.fromLTRB(0, 6, 0, 10),
       decoration: BoxDecoration(
           border: Border(bottom: BorderSide(color: Colors.grey[600]!))),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
-          Text(
-            "⭐ $dailyStreak",
-            style: const TextStyle(
-                color: Colors.white, fontWeight: FontWeight.w700, fontSize: 20),
+          Container(
+            margin: const EdgeInsets.only(left: 16),
+            child: Text(
+              "⭐ $dailyStreak",
+              style: const TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.w700,
+                  fontSize: 35),
+            ),
           ),
-          Row(
-            children: <Widget>[
-              const Text(
-                "🔥",
-                style: TextStyle(fontSize: 28),
-              ),
-              Text("$dailyStreak",
-                  style: TextStyle(
-                    fontSize: 25,
-                    color: Colors.white.withOpacity(0.9),
-                    fontWeight: FontWeight.w600,
-                  ))
-            ],
+          Container(
+            margin: const EdgeInsets.only(right: 16),
+            child: Row(
+              children: <Widget>[
+                const Text(
+                  "🔥",
+                  style: TextStyle(fontSize: 28),
+                ),
+                Text("$dailyStreak",
+                    style: TextStyle(
+                      fontSize: 27,
+                      color: Colors.white.withOpacity(0.9),
+                      fontWeight: FontWeight.w600,
+                    ))
+              ],
+            ),
           )
         ],
       ),

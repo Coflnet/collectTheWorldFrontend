@@ -85,7 +85,7 @@ class ItemToFindHandler {
 
   Future<void> createFile(file) async {
     file.createSync();
-    var fileData = {"currentItem": "", "skips": 2};
+  var fileData = {"currentItem": "", "skips": 2};
     var jsonFileData = jsonEncode(fileData);
     await file.writeAsString(jsonFileData);
   }
