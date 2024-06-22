@@ -1,6 +1,9 @@
+import 'package:collect_the_world/globals/globalScripts/cachingScripts/multiplierCaching.dart';
 import 'package:collect_the_world/globals/globalWidgets/baseWidget/baseWidget.dart';
 import 'package:collect_the_world/pages/homePage/cameraScene/pages/confirmingImage/rewardWidgets/baseReward.dart';
+import 'package:collect_the_world/pages/homePage/cameraScene/pages/confirmingImage/rewardWidgets/dailyItemQuestReward.dart';
 import 'package:collect_the_world/pages/homePage/cameraScene/pages/confirmingImage/rewardWidgets/dailyReward.dart';
+import 'package:collect_the_world/pages/homePage/cameraScene/pages/confirmingImage/rewardWidgets/multipliers.dart';
 import 'package:collect_the_world/pages/homePage/cameraScene/pages/confirmingImage/rewardWidgets/rewardsHeader.dart';
 import 'package:flutter/material.dart';
 
@@ -24,7 +27,9 @@ class _DisplayRewardsState extends State<DisplayRewards> {
           children: <Widget>[
             RewardsHeader(dailyStreak: 1, totalScore: 250),
             BaseReward(baseReward: 250),
+            Multipliers(multi: 1.25),
             DailyReward(progress: 2),
+            DailyItemQuestReward(progress: 3)
           ],
         ),
       )),

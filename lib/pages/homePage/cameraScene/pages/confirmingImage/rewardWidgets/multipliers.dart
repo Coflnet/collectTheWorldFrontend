@@ -1,9 +1,9 @@
 import 'package:collect_the_world/pages/homePage/cameraScene/pages/confirmingImage/rewardWidgets/rewardWidgetBase.dart';
 import 'package:flutter/material.dart';
 
-class BaseReward extends StatelessWidget {
-  final int baseReward;
-  const BaseReward({super.key, required this.baseReward});
+class Multipliers extends StatelessWidget {
+  final double multi;
+  const Multipliers({super.key, required this.multi});
 
   @override
   Widget build(BuildContext context) {
@@ -14,22 +14,21 @@ class BaseReward extends StatelessWidget {
         child: Container(
           padding: const EdgeInsets.all(6),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
-              const Text(" ⭐ ", style: TextStyle(fontSize: 38)),
+              const Text(" 💰 ", style: TextStyle(fontSize: 38)),
               Column(
-                mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Text(
-                    "$baseReward",
+                    "${multi}X",
                     style: const TextStyle(
                         color: Colors.white,
                         fontSize: 28,
                         fontWeight: FontWeight.w600),
                   ),
-                  const Text("Base reward",
-                      style: TextStyle(color: Colors.white38, fontSize: 14))
+                  const Text("Multipliers",
+                      style: TextStyle(color: Colors.white38, fontSize: 14)),
                 ],
               )
             ],

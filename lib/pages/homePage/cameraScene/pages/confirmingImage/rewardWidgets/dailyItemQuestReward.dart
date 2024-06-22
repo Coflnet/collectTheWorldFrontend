@@ -1,10 +1,9 @@
 import 'package:collect_the_world/pages/homePage/cameraScene/pages/confirmingImage/rewardWidgets/rewardWidgetBase.dart';
 import 'package:flutter/material.dart';
 
-class DailyReward extends StatelessWidget {
+class DailyItemQuestReward extends StatelessWidget {
   final int progress;
-
-  const DailyReward({super.key, required this.progress});
+  const DailyItemQuestReward({super.key, required this.progress});
 
   @override
   Widget build(BuildContext context) {
@@ -16,13 +15,13 @@ class DailyReward extends StatelessWidget {
           padding: const EdgeInsets.symmetric(vertical: 8),
           child: Row(
             children: <Widget>[
-              const Text("  🪟 ", style: TextStyle(fontSize: 38)),
+              const Text("  📜 ", style: TextStyle(fontSize: 38)),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     const Text(
-                      "Daily quest",
+                      "Item quest",
                       style: TextStyle(
                           color: Colors.white,
                           fontSize: 23,
@@ -55,5 +54,6 @@ class DailyReward extends StatelessWidget {
         ),
       ),
     );
+    ;
   }
 }
