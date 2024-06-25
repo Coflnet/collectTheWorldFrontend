@@ -48,20 +48,34 @@ class LleaderbStateoardAllTimePage extends State<LeaderboardAllTimeContent> {
           child: MediaQuery.removePadding(
             context: context,
             removeTop: true,
-            child: ListView.builder(
-              shrinkWrap: true,
-              itemCount: leaderboardlist.length,
-              itemBuilder: (context, index) {
-                return LeaderBoardWidget(
+            child: RefreshIndicator(
+              onRefresh: pullRefresh,
+              child: ListView.builder(
+                shrinkWrap: true,
+                itemCount: leaderboardlist.length,
+                itemBuilder: (context, index) {
+                  return LeaderBoardWidget(
                     name: leaderboardlist[index][0],
                     xp: leaderboardlist[index][1],
-                    index: index);
-              },
+                    index: index,
+                    profileImage: leaderboardlist[index][3] ?? "",
+                    userId: leaderboardlist[index][2] ?? "",
+                  );
+                },
+              ),
             ),
           ),
         ))
       ],
     );
+  }
+
+  Future<void> pullRefresh() async {
+    List resultList = await LeaderboardHandler().refreshLeaderboard(3);
+    setState(() {
+      leaderboardlist = resultList;
+    });
+    return;
   }
 
   void loadLeaderBoard() async {

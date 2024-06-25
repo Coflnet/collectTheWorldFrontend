@@ -8,6 +8,27 @@ class NewestItemsQuest extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+        height: 130,
+        margin: const EdgeInsets.fromLTRB(24, 14, 24, 0),
+        child: baseWidget(
+            child: Container(
+          margin: const EdgeInsets.fromLTRB(18, 16, 24, 18),
+          child: const Center(
+              child: Text(
+            "🚧 In development 👷",
+            style: TextStyle(
+                color: Colors.white, fontSize: 25, fontWeight: FontWeight.w700),
+          )),
+        )));
+  }
+}
+
+class inDev extends StatelessWidget {
+  const inDev({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
       margin: const EdgeInsets.fromLTRB(24, 14, 24, 0),
       child: baseWidget(
           child: Container(

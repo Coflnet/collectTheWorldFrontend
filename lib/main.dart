@@ -1,4 +1,5 @@
 import 'dart:ffi';
+import 'dart:io';
 import 'dart:ui';
 
 import 'package:camera/camera.dart';
@@ -15,6 +16,7 @@ import 'package:collect_the_world/globals/globalScripts/cameraController.dart';
 import 'package:collect_the_world/globals/globalScripts/systems/dailyStreak.dart';
 import 'package:collect_the_world/globals/globalWidgets/header/header.dart';
 import 'package:collect_the_world/pages/homePage/contentContainer.dart';
+import 'package:collect_the_world/pages/leaderboard/scripts/leaderboardHandler.dart';
 import 'package:collect_the_world/popups/conformationPopup/conformationPopup.dart';
 import 'package:flutter/material.dart';
 import 'package:collect_the_world/footer/footerMain.dart';
@@ -62,6 +64,9 @@ class HomePageState extends State<HomePage> {
     loadImportantData();
     loadChallenge();
     ListCaching().checkIfItemUpdated();
+    LeaderboardHandler().getLeaderboard(1);
+    sleep(const Duration(seconds: 2));
+    LeaderboardHandler().refreshLeaderboard(1);
   }
 
   void loadChallenge() async {

@@ -18,7 +18,7 @@ class RewardsHeader extends StatelessWidget {
           Container(
             margin: const EdgeInsets.only(left: 16),
             child: Text(
-              "⭐ $dailyStreak",
+              "⭐ $totalScore",
               style: const TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.w700,

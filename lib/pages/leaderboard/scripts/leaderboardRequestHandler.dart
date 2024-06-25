@@ -32,6 +32,7 @@ class LeaderboardRequestHandler {
     try {
       final result =
           await apiInstance.getLeaderboard(getLeaderBoardId(variation));
+      print(result);
       if (result == null) {
         return [];
       }
@@ -40,11 +41,11 @@ class LeaderboardRequestHandler {
 
       for (var i in result) {
         String username = "";
-        username = i.user as String;
-        if (i.user == null) {
+        username = i.user?.name as String;
+        if (i.user?.name == null) {
           username = "Anonymous";
         }
-        returnList.add([username, i.score]);
+        returnList.add([username, i.score, i.user?.userId, i.user?.avatar]);
       }
 
       return returnList;

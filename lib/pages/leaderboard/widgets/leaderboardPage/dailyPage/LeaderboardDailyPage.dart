@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:collect_the_world/generatedCode/api.dart';
 import 'package:collect_the_world/globals/globalScripts/cachingScripts/challengeCaching.dart';
 import 'package:collect_the_world/globals/globalScripts/systems/authClient.dart';
+import 'package:collect_the_world/pages/leaderboard/scripts/leaderboardHandler.dart';
 import 'package:collect_the_world/pages/leaderboard/widgets/leaderboardPage/dailyPage/leaderboardDailyContent.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
@@ -21,17 +22,19 @@ class LeaderboardDailyPageState extends State<LeaderboardDailyPage> {
   @override
   void initState() {
     super.initState();
+    LeaderboardHandler().getLeaderboard(2);
     testApi();
   }
 
   void testApi() async {
-     token = (await Authclient().tokenRequest())!;
+    token = (await Authclient().tokenRequest())!;
     var authclient = HttpBearerAuth();
     authclient.accessToken = token;
     final client = ApiClient(
         basePath: "https://ctw.coflnet.com", authentication: authclient);
-    final apiInstance = ChallengeApi(client);
-    final result = await apiInstance.challengeNoLimit();
+    final apiInstance = StatsApi(client);
+    final result =
+        await apiInstance.getUserStats("847e326b-c39b-484e-9621-c46962d04c04");
     print(result);
   }
 

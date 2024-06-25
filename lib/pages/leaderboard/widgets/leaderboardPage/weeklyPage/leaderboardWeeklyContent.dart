@@ -17,6 +17,7 @@ class _LeaderboardWeeklyPageState extends State<LeaderboardWeeklyPageContent> {
   @override
   void initState() {
     super.initState();
+    LeaderboardHandler().getLeaderboard(3);
     loadLeaderBoard();
   }
 
@@ -32,7 +33,8 @@ class _LeaderboardWeeklyPageState extends State<LeaderboardWeeklyPageContent> {
             const LBRewardWeekly(),
             SizedBox(
                 height: MediaQuery.of(context).size.height / 4.5,
-                child: LBPLmain(topUsers: leaderboardlist.take(3).toList(),
+                child: LBPLmain(
+                  topUsers: leaderboardlist.take(3).toList(),
                   whichLeaderBoard: 1,
                 )),
             const LeaderboardDivider(),
@@ -44,20 +46,34 @@ class _LeaderboardWeeklyPageState extends State<LeaderboardWeeklyPageContent> {
           child: MediaQuery.removePadding(
             context: context,
             removeTop: true,
-            child: ListView.builder(
-              shrinkWrap: true,
-              itemCount: leaderboardlist.length,
-              itemBuilder: (context, index) {
-                return LeaderBoardWidget(
+            child: RefreshIndicator(
+              onRefresh: pullRefresh,
+              child: ListView.builder(
+                shrinkWrap: true,
+                itemCount: leaderboardlist.length,
+                itemBuilder: (context, index) {
+                  return LeaderBoardWidget(
                     name: leaderboardlist[index][0],
                     xp: leaderboardlist[index][1],
-                    index: index);
-              },
+                    index: index,
+                    profileImage: leaderboardlist[index][3] ?? "",
+                    userId: leaderboardlist[index][2] ?? "",
+                  );
+                },
+              ),
             ),
           ),
         ))
       ],
     );
+  }
+
+  Future<void> pullRefresh() async {
+    List resultList = await LeaderboardHandler().refreshLeaderboard(2);
+    setState(() {
+      leaderboardlist = resultList;
+    });
+    return;
   }
 
   void loadLeaderBoard() async {

@@ -26,10 +26,16 @@ class _DisplayRewardsState extends State<DisplayRewards> {
         child: const Column(
           children: <Widget>[
             RewardsHeader(dailyStreak: 1, totalScore: 250),
-            BaseReward(baseReward: 250),
-            Multipliers(multi: 1.25),
-            DailyReward(progress: 2),
-            DailyItemQuestReward(progress: 3)
+            SingleChildScrollView(
+              child: Column(
+                children: [
+                  BaseReward(baseReward: 250),
+                  Multipliers(multi: 1.25),
+                  DailyReward(progress: 2),
+                  DailyItemQuestReward(progress: 3)
+                ],
+              ),
+            )
           ],
         ),
       )),

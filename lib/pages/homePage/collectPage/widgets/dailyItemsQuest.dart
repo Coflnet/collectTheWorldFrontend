@@ -1,6 +1,7 @@
 import 'package:collect_the_world/globals/globalWidgets/attentionWidget/attentionWidget.dart';
 import 'package:collect_the_world/globals/globalWidgets/baseWidget/baseWidget.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class DailyItemsQuest extends StatefulWidget {
@@ -15,6 +16,43 @@ class DailyItemsQuestState extends State<DailyItemsQuest> {
   void initState() {
     super.initState();
   }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 130,
+        margin: const EdgeInsets.fromLTRB(24, 14, 24, 0),
+        child: baseWidget(
+            child: Container(
+          margin: const EdgeInsets.fromLTRB(18, 16, 24, 18),
+          child: const Center(
+              child: Text(
+            "🚧 In development 👷",
+            style: TextStyle(
+                color: Colors.white, fontSize: 25, fontWeight: FontWeight.w700),
+          )),
+        )));
+  }
+}
+
+class DividerLine extends StatelessWidget {
+  final double dividingLive;
+  const DividerLine({super.key, this.dividingLive = 7});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.only(right: dividingLive),
+      width: 8,
+      height: 20,
+      decoration: BoxDecoration(
+          color: Colors.white, borderRadius: BorderRadius.circular(3)),
+    );
+  }
+}
+
+class inDev extends StatelessWidget {
+  const inDev({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -100,22 +138,6 @@ class DailyItemsQuestState extends State<DailyItemsQuest> {
           ],
         ),
       )),
-    );
-  }
-}
-
-class DividerLine extends StatelessWidget {
-  final double dividingLive;
-  const DividerLine({super.key, this.dividingLive = 7});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(right: dividingLive),
-      width: 8,
-      height: 20,
-      decoration: BoxDecoration(
-          color: Colors.white, borderRadius: BorderRadius.circular(3)),
     );
   }
 }

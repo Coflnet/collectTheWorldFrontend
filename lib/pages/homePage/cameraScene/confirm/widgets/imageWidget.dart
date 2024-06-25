@@ -12,8 +12,10 @@ class ImageWidget extends StatefulWidget {
 class ImageWidgetState extends State<ImageWidget> {
   @override
   void initState() {
-    imageCache.clear();
     super.initState();
+    imageCache.clear();
+
+    print(globals.timesTaken);
   }
 
   @override

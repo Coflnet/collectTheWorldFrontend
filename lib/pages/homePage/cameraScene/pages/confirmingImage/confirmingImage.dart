@@ -3,6 +3,7 @@ import 'dart:ffi';
 import 'dart:io';
 import 'dart:isolate';
 
+import 'package:collect_the_world/footer/cameraButton.dart';
 import 'package:collect_the_world/generatedCode/api.dart';
 import 'package:collect_the_world/globals/globalScripts/systems/itemToFindUpdater.dart';
 import 'package:collect_the_world/globals/globalWidgets/header/dailyStreak.dart';
@@ -63,11 +64,11 @@ class ConfirmingimagePageState extends State<ConfirmingimagePage> {
         Center(
           child: CustomConfettiWidget(confettiController: confettiController),
         ),
-        const Center(
-          child: DisplayRewards()
-        ),
+        const Center(child: DisplayRewards()),
         const Footer(),
       ]),
+      floatingActionButton: const CameraButtonFooter(),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
 

@@ -1,3 +1,4 @@
+import 'package:collect_the_world/globals/globalScripts/systems/profilePicture.dart';
 import 'package:collect_the_world/pages/leaderboard/widgets/containers/leaderBoardWidget/LBPositionWidget.dart';
 import 'package:collect_the_world/pages/leaderboard/widgets/containers/leaderBoardWidget/LBprofilePicture.dart';
 import 'package:collect_the_world/pages/leaderboard/widgets/containers/leaderBoardWidget/LBuserNameWidget.dart';
@@ -11,8 +12,15 @@ class LeaderBoardWidget extends StatefulWidget {
   final String name;
   final int xp;
   final int index;
+  final String profileImage;
+  final String userId;
   const LeaderBoardWidget(
-      {super.key, required this.name, this.xp = 25, required this.index});
+      {super.key,
+      required this.name,
+      this.xp = 25,
+      required this.index,
+      required this.profileImage,
+      required this.userId});
 
   @override
   LeaderBoardWidgetState createState() => LeaderBoardWidgetState();
@@ -69,7 +77,7 @@ class LeaderBoardWidgetState extends State<LeaderBoardWidget>
           Row(
             children: [
               LBPositionWidget(index: widget.index),
-              const TmpProfile(),
+              TmpProfile(profileImage: profileString),
               LBuserNameWidget(name: widget.name),
               LBxpWidget(xp: widget.xp),
             ],

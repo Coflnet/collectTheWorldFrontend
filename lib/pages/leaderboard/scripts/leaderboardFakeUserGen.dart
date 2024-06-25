@@ -31,15 +31,14 @@ class LeaderboardFakeUserGen {
     List copyNames = List.from(names);
 
     for (var i = 0; i < amountOfUserToCreate; i++) {
-      
       int randomNum = random.nextInt(copyNames.length);
       String username = copyNames[randomNum];
       copyNames.remove(username);
       int xp = generateXP(pageId);
-      List user = [username, xp];
+      List user = [username, xp, null, null];
       generatedUser.add(user);
     }
-    
+
     return generatedUser;
   }
 
@@ -53,4 +52,3 @@ class LeaderboardFakeUserGen {
     return (number / 5).round() * 5;
   }
 }
-

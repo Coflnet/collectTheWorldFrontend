@@ -5,6 +5,7 @@ import 'package:collect_the_world/globals/globalScripts/systems/authClient.dart'
 import 'package:collect_the_world/pages/leaderboard/scripts/leaderboardFakeUserGen.dart';
 import 'package:collect_the_world/pages/leaderboard/scripts/leaderboardFileHandler.dart';
 import 'package:collect_the_world/pages/leaderboard/scripts/leaderboardRequestHandler.dart';
+import 'package:intl/date_symbols.dart';
 import 'package:intl/intl.dart';
 
 class LeaderboardHandler {
@@ -46,7 +47,25 @@ class LeaderboardHandler {
         await LeaderboardFileHandler().getLeaderBoardData(selection);
     leaderboardFileData.addAll(leaderBoardData);
     leaderboardFileData.sort((a, b) => b[1].compareTo(a[1]));
-    List returnList = leaderboardFileData.take(10).toList();
+    List returnList = leaderBoardDeleteDups(leaderboardFileData);
+    returnList = returnList.take(10).toList();
     return returnList;
+  }
+
+  List leaderBoardDeleteDups(List leaderboardData) {
+    List userIds = [];
+    List newLbData = [];
+    for (List entry in leaderboardData) {
+      if (entry.length == 2) {
+        newLbData.add(entry);
+        continue;
+      }
+      if (userIds.contains(entry[2])) {
+        continue;
+      }
+      userIds.add(entry[2]);
+      newLbData.add(entry);
+    }
+    return newLbData;
   }
 }

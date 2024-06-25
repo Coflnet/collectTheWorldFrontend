@@ -32,9 +32,8 @@ class LeaderboardFileHandler {
     Directory appDir = await getApplicationDocumentsDirectory();
     String filePath = "${appDir.path}/leaderBoardDetails.json";
     File file = File(filePath);
-
     if (!file.existsSync()) {
-      createFile(file);
+      await createFile(file);
     }
 
     try {
@@ -50,16 +49,15 @@ class LeaderboardFileHandler {
     }
   }
 
-  void createFile(file) async {
+  Future<void> createFile(file) async {
     try {
       file.createSync();
       DateTime now = DateTime.now();
-      String time =
-          DateTime(now.year, now.month, now.day, 23, 59, 59).toIso8601String();
+
       var fileData = {
-        "daily": [time].toList(),
-        "weekly": [time].toList(),
-        "allTime": [time].toList()
+        "daily": [],
+        "weekly": [],
+        "allTime": []
       };
       var jsonFileData = jsonEncode(fileData);
       await file.writeAsString(jsonFileData);

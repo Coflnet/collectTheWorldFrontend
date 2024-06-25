@@ -56,9 +56,12 @@ class _LeaderboardDailyContentState extends State<LeaderboardDailyContent> {
                 itemCount: leaderboardlist.length,
                 itemBuilder: (context, index) {
                   return LeaderBoardWidget(
-                      name: leaderboardlist[index][0],
-                      xp: leaderboardlist[index][1],
-                      index: index);
+                    name: leaderboardlist[index][0],
+                    xp: leaderboardlist[index][1],
+                    index: index,
+                    profileImage: leaderboardlist[index][3] ?? "",
+                    userId: leaderboardlist[index][2] ?? "",
+                  );
                 },
               ),
             ),

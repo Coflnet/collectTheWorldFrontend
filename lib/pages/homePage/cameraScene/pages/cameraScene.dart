@@ -74,6 +74,7 @@ class _CameraScreenState extends State<CameraScreen> {
       final imagePath = filePath;
       await image.saveTo(imagePath);
       setState(() {
+        globals.timesTaken ++;
         globals.image = File(imagePath);
       });
       if (widget.dailyWeeklyItem) {
