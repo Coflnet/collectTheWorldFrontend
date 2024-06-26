@@ -20,6 +20,7 @@ class LeaderboardFileHandler {
       case 2:
         return weeklyFakeUsers;
       case 3:
+        print("case one");
         return allTimeFakeUsers;
     }
     return [];

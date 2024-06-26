@@ -17,6 +17,7 @@ class _LeaderboardWeeklyPageState extends State<LeaderboardWeeklyPageContent> {
   @override
   void initState() {
     super.initState();
+    print("getting board");
     LeaderboardHandler().getLeaderboard(3);
     loadLeaderBoard();
   }

@@ -91,7 +91,6 @@ class ListCaching {
     try {
       List<CollectableObject>? result = await instance.getNewObjects();
       newestCache = result ?? [];
-      print(newestCache);
     } catch (e) {
       print("error requesting newest list $e");
     }

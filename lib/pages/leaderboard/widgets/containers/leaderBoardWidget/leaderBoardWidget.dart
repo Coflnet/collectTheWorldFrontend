@@ -77,7 +77,7 @@ class LeaderBoardWidgetState extends State<LeaderBoardWidget>
           Row(
             children: [
               LBPositionWidget(index: widget.index),
-              TmpProfile(profileImage: profileString),
+              TmpProfile(profileImage: widget.profileImage),
               LBuserNameWidget(name: widget.name),
               LBxpWidget(xp: widget.xp),
             ],

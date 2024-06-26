@@ -22,7 +22,6 @@ class LeaderboardDailyPageState extends State<LeaderboardDailyPage> {
   @override
   void initState() {
     super.initState();
-    LeaderboardHandler().getLeaderboard(2);
     testApi();
   }
 

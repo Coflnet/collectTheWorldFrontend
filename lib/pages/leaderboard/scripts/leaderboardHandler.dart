@@ -1,15 +1,25 @@
 import 'dart:math';
 
 import 'package:collect_the_world/generatedCode/api.dart';
+import 'package:collect_the_world/globals/globalScripts/cachingScripts/listCaching.dart';
 import 'package:collect_the_world/globals/globalScripts/systems/authClient.dart';
 import 'package:collect_the_world/pages/leaderboard/scripts/leaderboardFakeUserGen.dart';
 import 'package:collect_the_world/pages/leaderboard/scripts/leaderboardFileHandler.dart';
 import 'package:collect_the_world/pages/leaderboard/scripts/leaderboardRequestHandler.dart';
+import 'package:flutter/material.dart';
 import 'package:intl/date_symbols.dart';
 import 'package:intl/intl.dart';
 
+List dailylb = [];
+List weeklylb = [];
+List alltimelb = [];
+
 class LeaderboardHandler {
   Future<List<dynamic>> getLeaderboard(int selectedPageId) async {
+    final List cachedList = checkCache(selectedPageId);
+    if (cachedList.isNotEmpty) {
+      return cachedList;
+    }
     List<dynamic> finalUsersList = [];
     List leaderboardFileData =
         await LeaderboardFileHandler().getLeaderBoardData(selectedPageId);
@@ -20,12 +30,13 @@ class LeaderboardHandler {
     LeaderboardFileHandler().updateCorrectData(finalUsersList, selectedPageId);
 
     finalUsersList.sort((a, b) => b[1].compareTo(a[1]));
-
+    saveCache(selectedPageId, finalUsersList);
     return finalUsersList;
   }
 
   Future<List> validateRealUserCount(List leaderboardFileData, int id) async {
     if (leaderboardFileData.length > 1) {
+      print("returning");
       return leaderboardFileData;
     }
 
@@ -48,6 +59,8 @@ class LeaderboardHandler {
     leaderboardFileData.addAll(leaderBoardData);
     leaderboardFileData.sort((a, b) => b[1].compareTo(a[1]));
     List returnList = leaderBoardDeleteDups(leaderboardFileData);
+    LeaderboardFileHandler().updateCorrectData(returnList, selection);
+
     returnList = returnList.take(10).toList();
     return returnList;
   }
@@ -56,7 +69,7 @@ class LeaderboardHandler {
     List userIds = [];
     List newLbData = [];
     for (List entry in leaderboardData) {
-      if (entry.length == 2) {
+      if (entry[2] == null) {
         newLbData.add(entry);
         continue;
       }
@@ -67,5 +80,28 @@ class LeaderboardHandler {
       newLbData.add(entry);
     }
     return newLbData;
+  }
+
+  List checkCache(selection) {
+    switch (selection) {
+      case 1:
+        return dailylb;
+      case 2:
+        return weeklylb;
+      case 3:
+        return alltimelb;
+    }
+    return [];
+  }
+
+  void saveCache(selection, newList) {
+    switch (selection) {
+      case 1:
+        dailylb = newList;
+      case 2:
+        weeklylb = newList;
+      case 3:
+        alltimelb = newList;
+    }
   }
 }

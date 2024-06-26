@@ -42,7 +42,6 @@ class ChallengeCaching {
 
   Future<List<Challenge>> getDailyChallenge() async {
     if (dailyChallenge[0].target == 1000) {
-      print("requesting");
       await loadChallengeData();
     }
     return dailyChallenge;
