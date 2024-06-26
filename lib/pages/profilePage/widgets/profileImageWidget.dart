@@ -8,29 +8,21 @@ import 'package:random_string/random_string.dart';
 
 class Profileimagewidget extends StatelessWidget {
   final String profileString;
-  const Profileimagewidget({super.key, required this.profileString});
+  final String username;
+  const Profileimagewidget(
+      {super.key, required this.profileString, required this.username});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          TextButton(
-            style: TextButton.styleFrom(padding: EdgeInsets.all(0)),
-            onPressed: () => {},
-            child: Stack(
-              alignment: Alignment.topLeft,
-              children: [
-                Container(
-                  padding: const EdgeInsets.fromLTRB(8, 8, 0, 0),
-                  child: RandomAvatar(profileString, width: 70, height: 70),
-                ),
-                Icon(Icons.settings, size: 35, color: Colors.grey[400])
-              ],
-            ),
+          Container(
+            padding: const EdgeInsets.fromLTRB(8, 8, 0, 0),
+            child: RandomAvatar(profileString, width: 60, height: 60),
           ),
-          const NameAndPositionWidget(),
+          NameAndPositionWidget(username: username),
         ],
       ),
     );

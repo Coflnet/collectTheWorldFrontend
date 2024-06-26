@@ -3,7 +3,6 @@ import 'package:collect_the_world/footer/cameraButton.dart';
 import 'package:collect_the_world/footer/footerMain.dart';
 import 'package:collect_the_world/globals/globalWidgets/header/header.dart';
 import 'package:collect_the_world/pages/homePage/widgets/collectItemWidget/collectItemWidget.dart';
-import 'package:collect_the_world/pages/profilePage/profileWidget.dart';
 import 'package:collect_the_world/pages/profilePage/widgets/infoAndStats/ProfileInfo.dart';
 import 'package:collect_the_world/pages/profilePage/widgets/infoAndStats/profileStoreWidget.dart';
 import 'package:collect_the_world/pages/profilePage/widgets/linkButtons/discordLinkButton.dart';

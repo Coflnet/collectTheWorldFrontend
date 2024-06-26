@@ -1,4 +1,5 @@
 import 'package:collect_the_world/globals/globalScripts/cachingScripts/listCaching.dart';
+import 'package:collect_the_world/pages/homePage/collectPage/widgets/idkWhatToCallThis/endOfScrollLoading.dart';
 import 'package:collect_the_world/pages/homePage/collectPage/widgets/idkWhatToCallThis/newestItemWidget.dart';
 import 'package:collect_the_world/pages/homePage/collectPage/widgets/idkWhatToCallThis/newestItemsQuest.dart';
 import 'package:flutter/cupertino.dart';
@@ -82,12 +83,14 @@ class NewestItemPageState extends State<NewestItemPage> {
                         child: ListView.builder(
                             controller: controller,
                             shrinkWrap: true,
-                            itemCount: items.length + 1,
+                            itemCount: items.length + 2,
                             itemBuilder: (BuildContext context, int index) {
                               if (index == 0) {
                                 return const SizedBox(
                                   height: 16,
                                 );
+                              } else if (index == items.length + 1) {
+                                return const EndOfScrollLoading();
                               } else {
                                 index = index - 1;
                                 return NewestItemWidget(

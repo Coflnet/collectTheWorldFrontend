@@ -1,36 +1,22 @@
+import 'package:collect_the_world/globals/extentions/extentions.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class NameAndPositionWidget extends StatelessWidget {
-  const NameAndPositionWidget({super.key});
+  final String username;
+  const NameAndPositionWidget({super.key, required this.username});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.fromLTRB(0, 15, 20, 5),
-      margin: const EdgeInsets.only(left: 10),
+      margin: const EdgeInsets.fromLTRB(10, 6, 0, 0),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Text(
-            "Anonymous",
-            style: TextStyle(color: Colors.white, fontSize: 18),
-          ),
-          Container(
-            height: 2,
-            width: 80,
-            color: Colors.white30,
-          ),
-          const Row(
-            children: [
-              Icon(
-                Icons.leaderboard_outlined,
-                color: Colors.blueAccent,
-                size: 21,
-              ),
-              Text(" 69th",
-                  style: TextStyle(color: Colors.white, fontSize: 20)),
-            ],
+          Text(
+            username.capitalize(),
+            style: const TextStyle(
+                color: Colors.white, fontSize: 24, fontWeight: FontWeight.w700),
           ),
         ],
       ),

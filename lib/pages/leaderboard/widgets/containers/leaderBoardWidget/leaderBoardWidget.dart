@@ -3,8 +3,8 @@ import 'package:collect_the_world/pages/leaderboard/widgets/containers/leaderBoa
 import 'package:collect_the_world/pages/leaderboard/widgets/containers/leaderBoardWidget/LBprofilePicture.dart';
 import 'package:collect_the_world/pages/leaderboard/widgets/containers/leaderBoardWidget/LBuserNameWidget.dart';
 import 'package:collect_the_world/pages/leaderboard/widgets/containers/leaderBoardWidget/LBxpWidget.dart';
-import 'package:collect_the_world/pages/leaderboard/widgets/popups/profilePopup/profilePopup.dart';
-import 'package:collect_the_world/pages/profilePage/profileWidget.dart';
+import 'package:collect_the_world/pages/leaderboard/widgets/containers/leaderBoardWidget/leaderboardInfo/leaderboardProfileStats.dart';
+import 'package:collect_the_world/pages/leaderboard/widgets/containers/leaderBoardWidget/leaderboardInfo/leaderboardProfileWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:collect_the_world/globals/extentions/extentions.dart';
 
@@ -89,7 +89,11 @@ class LeaderBoardWidgetState extends State<LeaderBoardWidget>
                     position: _offsetAnimation,
                     child: Container(
                         margin: const EdgeInsets.only(top: 10),
-                        child: const ProfileWidget()),
+                        child: LeaderboardProfileWidget(
+                          username: widget.name,
+                          profileImage: widget.profileImage,
+                          userid: widget.userId,
+                        )),
                   )
                 : const SizedBox.shrink(),
           ),
