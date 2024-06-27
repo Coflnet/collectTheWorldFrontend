@@ -8,14 +8,19 @@ import '../../globalScripts/systems/profilePicture.dart';
 
 class CustomHeader extends StatefulWidget {
   final int dailStreakNum;
-  const CustomHeader({super.key, required this.dailStreakNum});
+  final int xp;
+  const CustomHeader({
+    super.key,
+    required this.dailStreakNum,
+    required this.xp,
+  });
 
   @override
   _HeaderState createState() => _HeaderState();
 }
 
 class _HeaderState extends State<CustomHeader> {
-  int xp = 0;
+  int xp = ProfileRetrevial().getTotalXp();
   @override
   void initState() {
     super.initState();
@@ -23,7 +28,17 @@ class _HeaderState extends State<CustomHeader> {
   }
 
   void loadfileData() async {
+    print("hello world");
+
+    if (widget.xp != 0) {
+      setState(() {
+        xp = widget.xp;
+      });
+      return;
+    }
     await LoadingProfileInfo().loadProfileFile();
+    print("finnished ${ProfileRetrevial().getTotalXp()}");
+
     setState(() {
       xp = ProfileRetrevial().getTotalXp();
     });
@@ -55,7 +70,7 @@ class _HeaderState extends State<CustomHeader> {
                   dailStreakNum: widget.dailStreakNum,
                 ),
                 XpWidget(
-                  xp: xp,
+                  xp: (widget.xp == 0) ? xp : widget.xp,
                 ),
               ],
             ),

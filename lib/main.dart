@@ -53,6 +53,7 @@ class HomePageState extends State<HomePage> {
   int dailyStreakNum = globalStreakFile.streak;
   int dailyQuestCompletion = dailyChallenge[0].progress ?? 0;
   List<ActiveMultiplier> multiplierList = MultiplierCaching().getMultiplier();
+  int xp = 0;
 
   @override
   initState() {
@@ -64,10 +65,19 @@ class HomePageState extends State<HomePage> {
     await authclie.Authclient().initClient();
     loadImportantData();
     loadChallenge();
+    loadXP();
     ListCaching().checkIfItemUpdated();
     LeaderboardHandler().getLeaderboard(1);
     sleep(const Duration(seconds: 2));
     LeaderboardHandler().refreshLeaderboard(1);
+  }
+
+  void loadXP() async {
+    await LoadingProfileInfo().loadStatsFromCloud();
+    setState(() {
+      xp = ProfileRetrevial().getTotalXp();
+    });
+    print(xp);
   }
 
   void loadChallenge() async {
@@ -101,7 +111,7 @@ class HomePageState extends State<HomePage> {
           create: (context) => PopupNotifier(),
           child: Stack(children: [
             const BackgroundGradiant(),
-            CustomHeader(dailStreakNum: dailyStreakNum),
+            CustomHeader(dailStreakNum: dailyStreakNum, xp: xp),
             const ConformationPopup(),
             ContentContainer(
               multiplierList: multiplierList,

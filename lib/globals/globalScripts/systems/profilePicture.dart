@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:collect_the_world/generatedCode/api.dart';
+import 'package:collect_the_world/globals/globalScripts/systems/authClient.dart';
 import 'package:http/http.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:random_string/random_string.dart';
@@ -12,6 +14,7 @@ String username = "anonymous";
 int totalPicture = 0;
 int totalUnique = 0;
 int totalXp = 0;
+bool statsLoaded = false;
 
 class LoadingProfileInfo {
   void load() {
@@ -19,19 +22,17 @@ class LoadingProfileInfo {
   }
 
   Future<void> loadProfileFile() async {
-    print("loading");
     Directory appDir = await getApplicationDocumentsDirectory();
     String filePath = "${appDir.path}/profilePicutre.json";
     File file = File(filePath);
 
     if (!file.existsSync()) {
       file.createSync();
-      print("creating");
       var fileData = {
         "ProfileString": randomString(15),
         "Username": "anonymous",
         "JoinDate": DateTime.now().toIso8601String(),
-        "TopThree": 3,
+        "TopThree": 0,
         "totalPicture": 0,
         "totalUnique": 0,
         "totalXp": 0,
@@ -48,16 +49,36 @@ class LoadingProfileInfo {
     topThree = fileData["TopThree"];
     totalUnique = fileData["totalUnique"];
     totalPicture = fileData["totalPicture"];
+    totalXp = fileData["totalXp"];
     joinDate = DateTime.parse(fileData["JoinDate"]);
     return;
   }
 
+  Future<void> loadStatsFromCloud() async {
+    if (statsLoaded) {
+      return;
+    }
+    statsLoaded = true;
+    token = (await Authclient().tokenRequest())!;
+    var authclient = HttpBearerAuth();
+    authclient.accessToken = token;
+    final client = ApiClient(
+        basePath: "https://ctw.coflnet.com", authentication: authclient);
+    final apiInstance = StatsApi(client);
+    try {
+      final result = await apiInstance.getAllStats();
+      totalXp = result![0].value ?? totalXp;
+      
+      saveFile();
+    } catch (e) {
+      print("error requesting stats in profile picture $e");
+    }
+  }
+
   void saveFile() async {
-    print("saving file");
     Directory appDir = await getApplicationDocumentsDirectory();
     String filePath = "${appDir.path}/profilePicutre.json";
     File file = File(filePath);
-    print(profileString);
     var fileData = {
       "ProfileString": profileString,
       "Username": username,
