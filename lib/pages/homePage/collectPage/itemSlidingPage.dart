@@ -1,8 +1,10 @@
 import 'package:collect_the_world/pages/homePage/collectPage/widgets/dailyItemPage.dart';
+import 'package:collect_the_world/pages/homePage/collectPage/widgets/idkWhatToCallThis/itemSlidingPageHeader.dart';
 import 'package:collect_the_world/pages/homePage/collectPage/widgets/newestItemPage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:provider/provider.dart';
 
 class Selectedpage extends StatefulWidget {
   const Selectedpage({super.key});
@@ -43,6 +45,8 @@ class SelectedPageState extends State<Selectedpage> {
           controller: pageController,
           itemCount: pages.length,
           onPageChanged: (index) {
+            Provider.of<PageChangeNotifer>(context, listen: false)
+                .changePage(index + 1);
             setState(() {
               currentSelection = index;
             });

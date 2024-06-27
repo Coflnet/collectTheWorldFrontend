@@ -15,6 +15,7 @@ import 'package:collect_the_world/pages/homePage/cameraScene/pages/confirmScene.
 import 'package:collect_the_world/globals/globalScripts/cameraController.dart';
 import 'package:collect_the_world/globals/globalScripts/systems/dailyStreak.dart';
 import 'package:collect_the_world/globals/globalWidgets/header/header.dart';
+import 'package:collect_the_world/pages/homePage/collectPage/widgets/idkWhatToCallThis/itemSlidingPageHeader.dart';
 import 'package:collect_the_world/pages/homePage/contentContainer.dart';
 import 'package:collect_the_world/pages/leaderboard/scripts/leaderboardHandler.dart';
 import 'package:collect_the_world/popups/conformationPopup/conformationPopup.dart';
@@ -125,19 +126,22 @@ class CapturePage extends StatelessWidget {
     return MaterialApp(
       theme: ThemeData(fontFamily: 'Rubik'),
       home: Scaffold(
-        body: Stack(children: [
-          const BackgroundGradiant(),
-          const Column(
-            children: [
-              SizedBox(
-                height: 125,
-              ),
-              Expanded(child: Selectedpage())
-            ],
-          ),
-          CustomHeader(dailStreakNum: globalStreakFile.streak),
-          const Footer(),
-        ]),
+        body: ChangeNotifierProvider(
+          create: (context) => PageChangeNotifer(),
+          child: const Stack(children: [
+            BackgroundGradiant(),
+            Column(
+              children: [
+                SizedBox(
+                  height: 125,
+                ),
+                Expanded(child: Selectedpage())
+              ],
+            ),
+            SlidingPageHeader(),
+            Footer(),
+          ]),
+        ),
         floatingActionButton: const CameraButtonFooter(),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         backgroundColor: const Color.fromRGBO(34, 40, 49, 1),

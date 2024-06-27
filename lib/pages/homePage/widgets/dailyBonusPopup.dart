@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-class DailyItemPopup extends StatelessWidget {
-  const DailyItemPopup({super.key});
+class DailyBonusPopup extends StatelessWidget {
+const DailyBonusPopup({ super.key });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context){
     return Container(
       padding: const EdgeInsets.fromLTRB(8, 5, 8, 5),
       decoration: BoxDecoration(
@@ -14,18 +14,18 @@ class DailyItemPopup extends StatelessWidget {
       child: const Column(
         children: [
           Text(
-            "Collect 7 images",
+            "Collect items that correspond to a catagory",
             style: TextStyle(
-                fontSize: 17,
+                fontSize: 16,
                 fontWeight: FontWeight.w700,
                 color: Colors.white70),
           ),
           Text(
-            "Rewards 1000XP",
+            "Rewards the respective multiplier",
             style: TextStyle(
-                fontSize: 14,
+                fontSize: 15,
                 fontWeight: FontWeight.w600,
-                color: Colors.white70),
+                color: Colors.white60),
           ),
         ],
       ),

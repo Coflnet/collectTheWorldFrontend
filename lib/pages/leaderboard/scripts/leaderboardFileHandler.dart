@@ -7,6 +7,8 @@ bool fileLoadedYet = false;
 List dailyFakeUsers = [];
 List weeklyFakeUsers = [];
 List allTimeFakeUsers = [];
+List placements = [];
+
 
 class LeaderboardFileHandler {
   Future<List> getLeaderBoardData(int id) async {
@@ -20,7 +22,6 @@ class LeaderboardFileHandler {
       case 2:
         return weeklyFakeUsers;
       case 3:
-        print("case one");
         return allTimeFakeUsers;
     }
     return [];
@@ -58,7 +59,11 @@ class LeaderboardFileHandler {
       var fileData = {
         "daily": [],
         "weekly": [],
-        "allTime": []
+        "allTime": [],
+        "dailyPos": [],
+        "weeklyPos": [],
+        "allTimePos": [],
+        
       };
       var jsonFileData = jsonEncode(fileData);
       await file.writeAsString(jsonFileData);

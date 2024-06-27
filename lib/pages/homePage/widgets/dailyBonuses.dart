@@ -2,6 +2,8 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:collect_the_world/generatedCode/api.dart';
 import 'package:collect_the_world/globals/globalScripts/cachingScripts/multiplierCaching.dart';
 import 'package:collect_the_world/globals/globalWidgets/baseWidget/baseWidget.dart';
+import 'package:collect_the_world/pages/homePage/widgets/dailyBonusPopup.dart';
+import 'package:custom_pop_up_menu/custom_pop_up_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
@@ -13,50 +15,58 @@ class DailyBonuses extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: Container(
-        margin: const EdgeInsets.only(top: 16),
-        child: baseWidget(
-            child: Container(
-          margin: EdgeInsets.fromLTRB(16, 12, 16, 16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Container(
-                margin: const EdgeInsets.only(bottom: 12),
-                child: const Text(
-                  "🏵️ Bonuses",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 25,
-                      fontWeight: FontWeight.w700),
+      child: CustomPopupMenu(
+        menuBuilder: () => const ClipRRect(child: DailyBonusPopup()),
+        position: PreferredPosition.top,
+        pressType: PressType.singleClick,
+        verticalMargin: -20,
+        barrierColor: Colors.transparent,
+
+        child: Container(
+          margin: const EdgeInsets.only(top: 16),
+          child: baseWidget(
+              child: Container(
+            margin: EdgeInsets.fromLTRB(16, 12, 16, 16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Container(
+                  margin: const EdgeInsets.only(bottom: 12),
+                  child: const Text(
+                    "🏵️ Bonuses",
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 25,
+                        fontWeight: FontWeight.w700),
+                  ),
                 ),
-              ),
-              Expanded(
-                child: Row(
-                  children: [
-                    BonusWidget(
-                        multi: "1.25X",
-                        name: multiplierList[0].multiplier != 100
-                            ? multiplierList[0].category ?? "❌Error"
-                            : "Loading"),
-                    const SizedBox(width: 12),
-                    BonusWidget(
-                        multi: "2X",
-                        name: multiplierList[1].multiplier != 100
-                            ? multiplierList[1].category ?? "❌Error"
-                            : "Loading"),
-                    const SizedBox(width: 12),
-                    BonusWidget(
-                        multi: "4X",
-                        name: multiplierList[2].multiplier != 100
-                            ? multiplierList[2].category ?? "❌Error"
-                            : "Loading"),
-                  ],
-                ),
-              )
-            ],
-          ),
-        )),
+                Expanded(
+                  child: Row(
+                    children: [
+                      BonusWidget(
+                          multi: "1.25X",
+                          name: multiplierList[0].multiplier != 100
+                              ? multiplierList[0].category ?? "❌Error"
+                              : "Loading"),
+                      const SizedBox(width: 12),
+                      BonusWidget(
+                          multi: "2X",
+                          name: multiplierList[1].multiplier != 100
+                              ? multiplierList[1].category ?? "❌Error"
+                              : "Loading"),
+                      const SizedBox(width: 12),
+                      BonusWidget(
+                          multi: "4X",
+                          name: multiplierList[2].multiplier != 100
+                              ? multiplierList[2].category ?? "❌Error"
+                              : "Loading"),
+                    ],
+                  ),
+                )
+              ],
+            ),
+          )),
+        ),
       ),
     );
   }

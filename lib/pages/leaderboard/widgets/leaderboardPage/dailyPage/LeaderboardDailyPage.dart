@@ -64,29 +64,23 @@ class LeaderboardDailyJumpToState extends State<LeaderboardDailyJumpTo> {
 
   @override
   Widget build(BuildContext context) {
-    return TextButton(
-        onPressed: () {
-          setState(() {
-            clickState = !clickState;
-          });
-        },
-        child: Container(
-          width: 65,
-          height: 65,
-          margin: const EdgeInsets.fromLTRB(0, 0, 16, 90),
-          decoration: BoxDecoration(
-              color: const Color.fromRGBO(112, 48, 172, 1),
-              borderRadius: BorderRadius.circular(80)),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              clickState
-                  ? const LeaderboardDailyJumpToContent(type: true)
-                  : LoadingAnimationWidget.inkDrop(
-                      color: Colors.white, size: 37)
-            ],
-          ),
-        ));
+    return Container(
+      width: 65,
+      height: 65,
+      margin: const EdgeInsets.fromLTRB(0, 0, 16, 90),
+      decoration: BoxDecoration(
+          color: const Color.fromRGBO(112, 48, 172, 1),
+          borderRadius: BorderRadius.circular(80)),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          clickState
+              ? const LeaderboardDailyJumpToContent(type: true)
+              : LoadingAnimationWidget.inkDrop(
+                  color: Colors.white, size: 37)
+        ],
+      ),
+    );
   }
 }
 
