@@ -5,17 +5,25 @@ import 'package:collect_the_world/popups/conformationPopup/conformationPopup.dar
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:provider/provider.dart';
 
-class SkipButton extends StatelessWidget {
+class CollectItemSkip extends StatefulWidget {
   final VoidCallback parentCallBack;
   final VoidCallback parentCallBackStarted;
   final String itemName;
-  const SkipButton(
+  const CollectItemSkip(
       {super.key,
       required this.parentCallBack,
       required this.parentCallBackStarted,
       required this.itemName});
+
+  @override
+  _CollectItemSkipState createState() => _CollectItemSkipState();
+}
+
+class _CollectItemSkipState extends State<CollectItemSkip> {
+  bool loading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -31,27 +39,31 @@ class SkipButton extends StatelessWidget {
                 HexColor("#6430FF"),
               ]),
           borderRadius: BorderRadius.circular(16)),
-      child: TextButton(
-        onPressed: () => {buttonPressedSkip(context)},
-        child: const Text(
-          "Skip item",
-          style: TextStyle(
-              color: Colors.white,
-              fontSize: 15,
-              fontWeight: FontWeight.w700,
-              fontFamily: "Fredoka-SemiExpanded"),
-        ),
+      child: Container(
+        child: loading
+            ? LoadingAnimationWidget.inkDrop(color: Colors.white, size: 20)
+            : TextButton(
+                onPressed: () async {
+                  setState(() {
+                    loading = true;
+                  });
+                  await ItemToFindHandler().skipItem(widget.itemName);
+                  skipConfirmed();
+                },
+                child: const Text(
+                  "Skip item",
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 15,
+                      fontWeight: FontWeight.w700,
+                      fontFamily: "Fredoka-SemiExpanded"),
+                ),
+              ),
       ),
     );
   }
 
   void skipConfirmed() {
-    parentCallBack();
-  }
-
-  void buttonPressedSkip(context) async {
-    remainingSkips = await ItemToFindHandler().getRemainingSkips();
-    Provider.of<PopupNotifier>(context, listen: false)
-        .appear(skipConfirmed, parentCallBackStarted, itemName, remainingSkips);
+    widget.parentCallBack();
   }
 }

@@ -73,7 +73,6 @@ class _LeaderboardDailyContentState extends State<LeaderboardDailyContent> {
 
   Future<void> pullRefresh() async {
     List resultList = await LeaderboardHandler().refreshLeaderboard(1);
-    print(resultList);
     setState(() {
       leaderboardlist = resultList;
     });

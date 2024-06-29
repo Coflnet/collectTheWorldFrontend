@@ -99,7 +99,7 @@ class ConfirmingimagePageState extends State<ConfirmingimagePage> {
       print(jsonResponse);
       successfullReqeust();
     } else {
-      print('Failed to upload image. Status code: ${response.statusCode}');
+      print('Failed to upload image. Status code: $response');
     }
   }
 

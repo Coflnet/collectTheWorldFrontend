@@ -27,6 +27,7 @@ class LeaderboardHandler {
     finalUsersList =
         await validateRealUserCount(leaderboardFileData, selectedPageId);
 
+    finalUsersList = leaderBoardDeleteDups(finalUsersList);
     LeaderboardFileHandler().updateCorrectData(finalUsersList, selectedPageId);
 
     finalUsersList.sort((a, b) => b[1].compareTo(a[1]));
@@ -36,7 +37,6 @@ class LeaderboardHandler {
 
   Future<List> validateRealUserCount(List leaderboardFileData, int id) async {
     if (leaderboardFileData.length > 1) {
-      print("returning");
       return leaderboardFileData;
     }
 

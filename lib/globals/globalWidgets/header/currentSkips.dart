@@ -4,25 +4,16 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class CurrentSkips extends StatefulWidget {
+  final int remainingSkips;
+  const CurrentSkips({super.key, required this.remainingSkips});
+
+  
+
   @override
   CurrentPositionState createState() => CurrentPositionState();
 }
 
 class CurrentPositionState extends State<CurrentSkips> {
-  int intRemainSkips = 2;
-
-  @override
-  void initState() {
-    super.initState();
-    loadRemainingSkips();
-  }
-
-  void loadRemainingSkips() async {
-    int newRemaining = await ItemToFindHandler().getRemainingSkips();
-    setState(() {
-      intRemainSkips = newRemaining;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {

@@ -3,10 +3,13 @@ import 'dart:io';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:collect_the_world/globals/globalScripts/systems/itemToFindUpdater.dart';
 import 'package:collect_the_world/globals/globalWidgets/attentionWidget/attentionWidget.dart';
+import 'package:collect_the_world/globals/globalWidgets/header/header.dart';
 import 'package:collect_the_world/pages/homePage/widgets/collectItemWidget/collectItemCameraButton.dart';
 import 'package:collect_the_world/pages/homePage/widgets/collectItemWidget/collectItemSkip.dart';
+import 'package:collect_the_world/pages/homePage/widgets/collectItemWidget/noRemainingSkips.dart';
 import 'package:flutter/material.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
+import 'package:provider/provider.dart';
 
 class CollectItemWidget extends StatefulWidget {
   @override
@@ -15,6 +18,7 @@ class CollectItemWidget extends StatefulWidget {
 
 class CollectItemWidgetState extends State<CollectItemWidget> {
   String itemName = ItemToFindHandler().returnCurrentItem();
+  int remainingSkips = ItemToFindHandler().returnRamaingSkips();
   bool loaded = ItemToFindHandler().returnCurrentItem() != "";
 
   @override
@@ -24,13 +28,13 @@ class CollectItemWidgetState extends State<CollectItemWidget> {
   }
 
   void loadItem() async {
-  String? newitem = await ItemToFindHandler().getCurrentItem();
-  setState(() {
-        loaded = true;
-        itemName = newitem ?? "";
-      });
+    String? newitem = await ItemToFindHandler().getCurrentItem();
+    setState(() {
+      remainingSkips = ItemToFindHandler().returnRamaingSkips();
+      loaded = true;
+      itemName = newitem ?? "";
+    });
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -75,11 +79,13 @@ class CollectItemWidgetState extends State<CollectItemWidget> {
                       : LoadingAnimationWidget.inkDrop(
                           color: Colors.white, size: 45),
                 ),
-                SkipButton(
-                  itemName: itemName,
-                  parentCallBack: skipConfirmed,
-                  parentCallBackStarted: skipStarted,
-                )
+                (remainingSkips == 0)
+                    ? const NoRemainingSkips()
+                    : CollectItemSkip(
+                        itemName: itemName,
+                        parentCallBack: skipConfirmed,
+                        parentCallBackStarted: skipStarted,
+                      )
               ],
             ),
           ),
@@ -95,13 +101,13 @@ class CollectItemWidgetState extends State<CollectItemWidget> {
     });
   }
 
-  void skipConfirmed() {
+  void skipConfirmed() async {
     ItemToFindHandler().reduceRemaingSkips();
-    ItemToFindHandler().fetchNewItem().then((newItemName) {
-      setState(() {
-        itemName = newItemName!;
-        loaded = true;
-      });
+    String? newItemName = await ItemToFindHandler().fetchNewItem();
+    setState(() {
+      itemName = newItemName!;
+      loaded = true;
     });
+    Provider.of<SkipChangeNotifier>(context, listen: false).appear();
   }
 }

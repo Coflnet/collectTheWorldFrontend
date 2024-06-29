@@ -7,6 +7,7 @@ import 'package:custom_pop_up_menu/custom_pop_up_menu.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:hexcolor/hexcolor.dart';
 import 'package:provider/provider.dart';
 
 class ConformationPopup extends StatefulWidget {
@@ -71,7 +72,7 @@ class ConformationPopupState extends State<ConformationPopup>
   void dispose() {
     controller.dispose();
     super.dispose();
-}
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -86,7 +87,17 @@ class ConformationPopupState extends State<ConformationPopup>
         children: [
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: baseWidget(
+            child: Container(
+                decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                        begin: Alignment.centerLeft,
+                        end: Alignment.centerRight,
+                        colors: [
+                          HexColor("#8146E0"),
+                          HexColor("#854CE0"),
+                          HexColor("#8D5AE0")
+                        ]),
+                    borderRadius: BorderRadius.circular(12)),
                 child: remainingSkips
                     ? Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -118,27 +129,29 @@ class ConformationPopupState extends State<ConformationPopup>
                           Row(
                             children: [
                               Container(
-                                  margin: const EdgeInsets.fromLTRB(6, 6, 6, 6),
-                                  decoration: BoxDecoration(
-                                      color: Colors.white10,
-                                      border: Border.all(color: Colors.white12),
-                                      borderRadius: BorderRadius.circular(15)),
-                                  child: IconButton(
-                                      onPressed: () async {
-                                        callBackStarted();
-                                        setState(() {
-                                          topPosition = -100;
-                                          controller.reverse();
-                                        });
-                                        await ItemToFindHandler()
-                                            .skipItem(itemName);
-                                        newItemCallback();
-                                      },
-                                      icon: const Icon(
-                                        Icons.check,
-                                        size: 32,
-                                        color: Color.fromRGBO(127, 97, 194, 1),
-                                      ))),
+                                margin: const EdgeInsets.fromLTRB(6, 6, 8, 6),
+                                decoration: BoxDecoration(
+                                    color: HexColor("#0071FD"),
+                                    borderRadius: BorderRadius.circular(36)),
+                                child: IconButton(
+                                    style: IconButton.styleFrom(
+                                        padding: const EdgeInsets.all(0)),
+                                    onPressed: () async {
+                                      callBackStarted();
+                                      setState(() {
+                                        topPosition = -100;
+                                        controller.reverse();
+                                      });
+                                      await ItemToFindHandler()
+                                          .skipItem(itemName);
+                                      newItemCallback();
+                                    },
+                                    icon: const Icon(
+                                      Icons.check_rounded,
+                                      size: 40,
+                                      color: Colors.white,
+                                    )),
+                              ),
                             ],
                           )
                         ],

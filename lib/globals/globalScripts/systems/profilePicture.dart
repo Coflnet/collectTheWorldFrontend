@@ -67,7 +67,7 @@ class LoadingProfileInfo {
     final apiInstance = StatsApi(client);
     try {
       final result = await apiInstance.getAllStats();
-      totalXp = result![0].value ?? totalXp;
+      totalXp = result![1].value ?? totalXp;
       
       saveFile();
     } catch (e) {

@@ -77,7 +77,6 @@ class HomePageState extends State<HomePage> {
     setState(() {
       xp = ProfileRetrevial().getTotalXp();
     });
-    print(xp);
   }
 
   void loadChallenge() async {
@@ -107,8 +106,11 @@ class HomePageState extends State<HomePage> {
     return MaterialApp(
       theme: ThemeData(fontFamily: 'Rubik'),
       home: Scaffold(
-        body: ChangeNotifierProvider(
-          create: (context) => PopupNotifier(),
+        body: MultiProvider(
+          providers: [
+            ChangeNotifierProvider(create: (context) => PopupNotifier()),
+            ChangeNotifierProvider(create: (context) => SkipChangeNotifier())
+          ],
           child: Stack(children: [
             const BackgroundGradiant(),
             CustomHeader(dailStreakNum: dailyStreakNum, xp: xp),
