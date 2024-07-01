@@ -9,6 +9,7 @@ import 'package:collect_the_world/globals/globalScripts/systems/itemToFindUpdate
 import 'package:collect_the_world/globals/globalWidgets/header/dailyStreak.dart';
 import 'package:collect_the_world/pages/homePage/cameraScene/confirm/widgets/confettiWidget.dart';
 import 'package:collect_the_world/pages/homePage/cameraScene/pages/confirmingImage/displayRewards.dart';
+import 'package:collect_the_world/pages/homePage/cameraScene/pages/confirmingImage/rewardWidgets/header/rewardTopWidget.dart';
 import 'package:confetti/confetti.dart';
 import 'package:http/http.dart' as http;
 import 'package:collect_the_world/globals/globalScripts/systems/authClient.dart'
@@ -42,7 +43,15 @@ class ConfirmingimagePage extends StatefulWidget {
 class ConfirmingimagePageState extends State<ConfirmingimagePage> {
   bool isLoading = true;
   late ConfettiController confettiController;
-  String xpGain = "XP +50";
+
+  int totalReward = 0;
+  int baseReward = 0;
+  int remainingSkips = 0;
+  int streak = 0;
+  double multi = 0;
+  int dailyQuestProgress = 0;
+  int timesCollected = 0;
+  int dailyReward = 0;
 
   @override
   void initState() {
@@ -64,7 +73,23 @@ class ConfirmingimagePageState extends State<ConfirmingimagePage> {
         Center(
           child: CustomConfettiWidget(confettiController: confettiController),
         ),
-        const Center(child: DisplayRewards()),
+        Center(
+            child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: <Widget>[
+            const SizedBox(),
+            RewardTopWidget(
+                streak: streak, score: totalReward, skips: remainingSkips),
+            DisplayRewards(
+              baseReward: baseReward,
+              multi: multi,
+              dailyQuestProgress: dailyQuestProgress,
+              timesCollected: timesCollected,
+              dailyReward: dailyReward,
+            ),
+            const SizedBox(),
+          ],
+        )),
         const Footer(),
       ]),
       floatingActionButton: const CameraButtonFooter(),
@@ -97,21 +122,23 @@ class ConfirmingimagePageState extends State<ConfirmingimagePage> {
       var responseString = await response.stream.bytesToString();
       var jsonResponse = jsonDecode(responseString);
       print(jsonResponse);
+      setState(() {
+        baseReward = jsonResponse["rewards"]["imageBonus"] ?? 69;
+        totalReward = jsonResponse["rewards"]["total"] ?? 69;
+        multi = (jsonResponse["rewards"]["multiplier"] == 0)
+            ? 1.0
+            : jsonResponse["rewards"]["multiplier"] ?? 69;
+      });
       successfullReqeust();
     } else {
-      print('Failed to upload image. Status code: $response');
+      print(
+          'Failed to upload image. Status code: ${await response.stream.bytesToString()}\n${response.statusCode}');
     }
   }
 
   void successfullReqeust() {
     confettiController.play();
     ItemToFindHandler().handleNewRemaingSkip();
-    if (dailyStreakScript.lastUpdate.isAfter(DateTime.now())) {
-      dailyStreakScript.streak = 0;
-      dailyStreakScript.LoadDailyStreak().updateDayTimes();
-    }
-    dailyStreakScript.streak += 1;
-    dailyStreakScript.LoadDailyStreak().updateDayTimes();
     setState(() {
       isLoading = false;
     });

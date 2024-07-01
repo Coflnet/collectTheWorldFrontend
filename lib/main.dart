@@ -18,6 +18,7 @@ import 'package:collect_the_world/globals/globalWidgets/header/header.dart';
 import 'package:collect_the_world/pages/homePage/collectPage/widgets/idkWhatToCallThis/itemSlidingPageHeader.dart';
 import 'package:collect_the_world/pages/homePage/contentContainer.dart';
 import 'package:collect_the_world/pages/leaderboard/scripts/leaderboardHandler.dart';
+import 'package:collect_the_world/pages/onboarding/onboardingMain.dart';
 import 'package:collect_the_world/popups/conformationPopup/conformationPopup.dart';
 import 'package:flutter/material.dart';
 import 'package:collect_the_world/footer/footerMain.dart';

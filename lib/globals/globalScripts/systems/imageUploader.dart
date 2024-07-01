@@ -6,8 +6,7 @@ import "package:collect_the_world/globals/globalScripts/globals.dart"
 import 'package:collect_the_world/globals/globalScripts/systems/authClient.dart'
     as authclie;
 import 'package:collect_the_world/globals/globalScripts/systems/authClient.dart';
-import 'package:collect_the_world/globals/globalScripts/systems/dailyStreak.dart'
-    as dailyStreakScript;
+
 import 'package:http/http.dart' as http;
 
 
@@ -39,12 +38,6 @@ class imageUploader {
 
       objectId = jsonResponse["id"];
 
-      if (dailyStreakScript.lastUpdate.isAfter(DateTime.now())) {
-        dailyStreakScript.streak = 0;
-        dailyStreakScript.LoadDailyStreak().updateDayTimes();
-      }
-      dailyStreakScript.streak += 1;
-      dailyStreakScript.LoadDailyStreak().updateDayTimes();
     } else {
       if (response.statusCode == 401) {
         await Authclient().generateToken();

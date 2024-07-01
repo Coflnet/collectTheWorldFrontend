@@ -15,6 +15,7 @@ int totalPicture = 0;
 int totalUnique = 0;
 int totalXp = 0;
 bool statsLoaded = false;
+int dailyStreak = 0;
 
 class LoadingProfileInfo {
   void load() {
@@ -36,6 +37,7 @@ class LoadingProfileInfo {
         "totalPicture": 0,
         "totalUnique": 0,
         "totalXp": 0,
+        "dailyStreak": 0,
       };
       var jsonFileData = jsonEncode(fileData);
       await file.writeAsString(jsonFileData);
@@ -51,6 +53,7 @@ class LoadingProfileInfo {
     totalPicture = fileData["totalPicture"];
     totalXp = fileData["totalXp"];
     joinDate = DateTime.parse(fileData["JoinDate"]);
+    dailyStreak = fileData["dailyStreak"];
     return;
   }
 
@@ -66,9 +69,16 @@ class LoadingProfileInfo {
         basePath: "https://ctw.coflnet.com", authentication: authclient);
     final apiInstance = StatsApi(client);
     try {
-      final result = await apiInstance.getAllStats();
-      totalXp = result![1].value ?? totalXp;
+      final List<Stat>? result = await apiInstance.getAllStats();
+      if (result == null) {
+        return;
+      }
+
+      totalXp = result[result.indexWhere((result) => result.statName == "exp")]
+              .value ??
+          0;
       
+
       saveFile();
     } catch (e) {
       print("error requesting stats in profile picture $e");
@@ -123,6 +133,10 @@ class ProfileRetrevial {
 
   int getTotalXp() {
     return totalXp;
+  }
+
+  int getStreak() {
+    return dailyStreak;
   }
 
   void setTotalXp(int newXP) {
