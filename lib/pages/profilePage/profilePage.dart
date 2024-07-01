@@ -11,8 +11,6 @@ import 'package:collect_the_world/pages/profilePage/widgets/popups/editProfilePo
 import 'package:collect_the_world/pages/profilePage/widgets/profileDisplay/profileDisplay.dart';
 import 'package:collect_the_world/popups/conformationPopup/conformationPopup.dart';
 import 'package:flutter/material.dart';
-import 'package:collect_the_world/globals/globalScripts/systems/dailyStreak.dart'
-    as globalStreakFile;
 import 'package:provider/provider.dart';
 
 class ProfilePage extends StatefulWidget {

@@ -1,6 +1,5 @@
 
 
-import 'package:collect_the_world/globals/globalScripts/systems/dailyStreak.dart';
 import 'package:collect_the_world/globals/globalScripts/systems/profilePicture.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +12,7 @@ const ProfileStreakInfo({ Key? key }) : super(key: key);
     return Row(
         children: [
           const Text("🔥", style: TextStyle(fontSize: 28),),
-          Text("${ProfileRetrevial().get()}",
+          Text("${ProfileRetrevial().getStreak()}",
               style: TextStyle(
                 fontSize: 25,
                 color: Colors.white.withOpacity(0.9),

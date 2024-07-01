@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:collect_the_world/generatedCode/api.dart';
 import 'package:collect_the_world/globals/globalScripts/systems/authClient.dart';
+import 'package:collect_the_world/globals/globalScripts/systems/itemToFindUpdater.dart';
 import 'package:http/http.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:random_string/random_string.dart';
@@ -16,6 +17,7 @@ int totalUnique = 0;
 int totalXp = 0;
 bool statsLoaded = false;
 int dailyStreak = 0;
+int skipsRemaining = 0;
 
 class LoadingProfileInfo {
   void load() {
@@ -38,6 +40,7 @@ class LoadingProfileInfo {
         "totalUnique": 0,
         "totalXp": 0,
         "dailyStreak": 0,
+        "skipsRemaining": 0,
       };
       var jsonFileData = jsonEncode(fileData);
       await file.writeAsString(jsonFileData);
@@ -46,14 +49,15 @@ class LoadingProfileInfo {
     var fileDataJson = file.readAsStringSync();
     var fileData = jsonDecode(fileDataJson);
 
-    profileString = fileData["ProfileString"];
-    username = fileData["Username"];
-    topThree = fileData["TopThree"];
-    totalUnique = fileData["totalUnique"];
-    totalPicture = fileData["totalPicture"];
-    totalXp = fileData["totalXp"];
+    profileString = fileData["ProfileString"] ?? "";
+    username = fileData["Username"] ?? "";
+    topThree = fileData["TopThree"] ?? 0;
+    totalUnique = fileData["totalUnique"] ?? 0;
+    totalPicture = fileData["totalPicture"] ?? 0;
+    totalXp = fileData["totalXp"] ?? 0;
     joinDate = DateTime.parse(fileData["JoinDate"]);
-    dailyStreak = fileData["dailyStreak"];
+    dailyStreak = fileData["dailyStreak"] ?? 0;
+    print(dailyStreak);
     return;
   }
 
@@ -70,6 +74,7 @@ class LoadingProfileInfo {
     final apiInstance = StatsApi(client);
     try {
       final List<Stat>? result = await apiInstance.getAllStats();
+      print(result);
       if (result == null) {
         return;
       }
@@ -77,12 +82,37 @@ class LoadingProfileInfo {
       totalXp = result[result.indexWhere((result) => result.statName == "exp")]
               .value ??
           0;
-      
-
+      assignTopThee(result);
+      totalPicture = result[result
+                  .indexWhere((result) => result.statName == "images_uploaded")]
+              .value ??
+          0;
+      totalUnique = result[result.indexWhere(
+                  (result) => result.statName == "unique_images_uploaded")]
+              .value ??
+          0;
+      dailyStreak = result[result.indexWhere(
+                  (result) => result.statName == "collection_streak")]
+              .value ??
+          0;
+      remainingSkips = result[result
+                  .indexWhere((result) => result.statName == "skips_available")]
+              .value ??
+          0;
       saveFile();
     } catch (e) {
       print("error requesting stats in profile picture $e");
     }
+  }
+
+  void assignTopThee(List result) {
+    topThree = result[result.indexWhere(
+                (result) => result.statName == "daily_leaderboard_top10")]
+            .value ??
+        0 +
+            result[result.indexWhere(
+                    (result) => result.statName == "weekly_leaderboard_top10")]
+                .value;
   }
 
   void saveFile() async {
@@ -96,7 +126,9 @@ class LoadingProfileInfo {
       "TopThree": topThree,
       "totalPicture": totalPicture,
       "totalUnique": totalUnique,
-      "totalXp": totalXp
+      "totalXp": totalXp,
+      "dailyStreak": dailyStreak,
+      "skipsRemaining": skipsRemaining,
     };
     var fileDataJson = jsonEncode(fileData);
     file.writeAsString(fileDataJson);
@@ -139,6 +171,18 @@ class ProfileRetrevial {
     return dailyStreak;
   }
 
+  int getSkips() {
+    return remainingSkips;
+  }
+
+  void setSkips(int newSkips) {
+    remainingSkips = newSkips;
+  }
+
+  void setStreak(int newDailyStreak) {
+    dailyStreak = newDailyStreak;
+  }
+
   void setTotalXp(int newXP) {
     totalXp = newXP;
   }
@@ -152,8 +196,6 @@ class ProfileRetrevial {
   }
 
   void setProfileString(String newprofileString) {
-    print(
-        "WHY ARE WE SETTING\nWHY ARE WE SETTING\nWHY ARE WE SETTING\nWHY ARE WE SETTING\nnWHY ARE WE SETTING\nnWHY ARE WE SETTING\nnWHY ARE WE SETTING\nnWHY ARE WE SETTING\nnWHY ARE WE SETTING\nnWHY ARE WE SETTING\nnWHY ARE WE SETTING\nnWHY ARE WE SETTING\n");
     profileString = newprofileString;
   }
 

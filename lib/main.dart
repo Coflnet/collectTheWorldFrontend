@@ -9,11 +9,11 @@ import 'package:collect_the_world/globals/globalScripts/cachingScripts/challenge
 import 'package:collect_the_world/globals/globalScripts/cachingScripts/listCaching.dart';
 import 'package:collect_the_world/globals/globalScripts/cachingScripts/multiplierCaching.dart';
 import 'package:collect_the_world/globals/globalScripts/systems/authClient.dart';
+import 'package:collect_the_world/globals/globalScripts/systems/itemToFindUpdater.dart';
 import 'package:collect_the_world/globals/globalScripts/systems/profilePicture.dart';
 import 'package:collect_the_world/pages/homePage/cameraScene/pages/cameraScene.dart';
 import 'package:collect_the_world/pages/homePage/cameraScene/pages/confirmScene.dart';
 import 'package:collect_the_world/globals/globalScripts/cameraController.dart';
-import 'package:collect_the_world/globals/globalScripts/systems/dailyStreak.dart';
 import 'package:collect_the_world/globals/globalWidgets/header/header.dart';
 import 'package:collect_the_world/pages/homePage/collectPage/widgets/idkWhatToCallThis/itemSlidingPageHeader.dart';
 import 'package:collect_the_world/pages/homePage/contentContainer.dart';
@@ -24,8 +24,6 @@ import 'package:flutter/material.dart';
 import 'package:collect_the_world/footer/footerMain.dart';
 import 'package:collect_the_world/pages/homePage/collectPage/itemSlidingPage.dart';
 import 'package:collect_the_world/footer/cameraButton.dart';
-import 'package:collect_the_world/globals/globalScripts/systems/dailyStreak.dart'
-    as globalStreakFile;
 import 'package:collect_the_world/globals/globalKeys.dart' as globalKeys;
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -50,8 +48,7 @@ class HomePage extends StatefulWidget {
 }
 
 class HomePageState extends State<HomePage> {
-  LoadDailyStreak dailyStreak = LoadDailyStreak();
-  int dailyStreakNum = globalStreakFile.streak;
+  int dailyStreakNum = ProfileRetrevial().getStreak();
   int dailyQuestCompletion = dailyChallenge[0].progress ?? 0;
   List<ActiveMultiplier> multiplierList = MultiplierCaching().getMultiplier();
   int xp = 0;
@@ -75,7 +72,10 @@ class HomePageState extends State<HomePage> {
 
   void loadXP() async {
     await LoadingProfileInfo().loadStatsFromCloud();
+    ItemToFindHandler().setRemainingSkips(ProfileRetrevial().getSkips());
+    ItemToFindHandler().saveData();
     setState(() {
+      dailyStreakNum = ProfileRetrevial().getStreak();
       xp = ProfileRetrevial().getTotalXp();
     });
   }
@@ -85,13 +85,6 @@ class HomePageState extends State<HomePage> {
         await ChallengeCaching().getDailyChallenge();
     setState(() {
       dailyQuestCompletion = dailyChallenge[0].progress!;
-    });
-  }
-
-  void loadStreak() {
-    LoadDailyStreak().loadStreak();
-    setState(() {
-      dailyStreakNum = globalStreakFile.streak;
     });
   }
 

@@ -7,8 +7,7 @@ import 'package:collect_the_world/pages/leaderboard/widgets/header/LeaderboardHe
 import 'package:collect_the_world/pages/leaderboard/widgets/leaderboardPage/dailyPage/LeaderboardDailyPage.dart';
 import 'package:collect_the_world/pages/leaderboard/widgets/leaderboardPage/weeklyPage/leaderboardWeeklyPage.dart';
 import 'package:flutter/material.dart';
-import 'package:collect_the_world/globals/globalScripts/systems/dailyStreak.dart'
-    as globalStreakFile;
+
 import 'package:provider/provider.dart';
 
 class LeaderboardMain extends StatefulWidget {

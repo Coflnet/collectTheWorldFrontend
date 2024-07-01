@@ -22,8 +22,7 @@ import 'package:collect_the_world/globals/globalWidgets/loadingWidget.dart';
 import 'package:flutter/material.dart';
 import "package:collect_the_world/globals/globalScripts/globals.dart"
     as globals;
-import 'package:collect_the_world/globals/globalScripts/systems/dailyStreak.dart'
-    as dailyStreakScript;
+
 
 class ConfirmingimagePage extends StatefulWidget {
   final String searchBarContent;
@@ -138,7 +137,6 @@ class ConfirmingimagePageState extends State<ConfirmingimagePage> {
 
   void successfullReqeust() {
     confettiController.play();
-    ItemToFindHandler().handleNewRemaingSkip();
     setState(() {
       isLoading = false;
     });

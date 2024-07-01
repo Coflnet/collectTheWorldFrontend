@@ -38,6 +38,7 @@ class _HeaderState extends State<CustomHeader> {
   int remainingSkips = (ItemToFindHandler().returnRamaingSkips() == 10)
       ? 2
       : ItemToFindHandler().returnRamaingSkips();
+  int dailyStreak = 0;
   @override
   void initState() {
     super.initState();
@@ -45,6 +46,7 @@ class _HeaderState extends State<CustomHeader> {
   }
 
   void loadfileData() async {
+
     if (widget.xp != 0) {
       setState(() {
         xp = widget.xp;
@@ -55,6 +57,7 @@ class _HeaderState extends State<CustomHeader> {
 
     setState(() {
       xp = ProfileRetrevial().getTotalXp();
+      dailyStreak = ProfileRetrevial().getStreak();
     });
   }
 
@@ -89,7 +92,7 @@ class _HeaderState extends State<CustomHeader> {
               children: [
                 CurrentSkips(remainingSkips: remainingSkips),
                 DailyStreak(
-                  dailStreakNum: widget.dailStreakNum,
+                  dailyStreak: (widget.dailStreakNum == 0) ? dailyStreak: widget.dailStreakNum,
                 ),
                 XpWidget(
                   xp: (widget.xp == 0) ? xp : widget.xp,
@@ -100,6 +103,5 @@ class _HeaderState extends State<CustomHeader> {
         ],
       ),
     );
-    ;
   }
 }
