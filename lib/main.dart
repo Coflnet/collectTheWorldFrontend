@@ -20,6 +20,7 @@ import 'package:collect_the_world/pages/homePage/contentContainer.dart';
 import 'package:collect_the_world/pages/leaderboard/scripts/leaderboardHandler.dart';
 import 'package:collect_the_world/pages/onboarding/onboardingMain.dart';
 import 'package:collect_the_world/popups/conformationPopup/conformationPopup.dart';
+import 'package:collect_the_world/popups/conformationPopup/infoPopup/InfoPopupMain.dart';
 import 'package:flutter/material.dart';
 import 'package:collect_the_world/footer/footerMain.dart';
 import 'package:collect_the_world/pages/homePage/collectPage/itemSlidingPage.dart';
@@ -114,6 +115,7 @@ class HomePageState extends State<HomePage> {
               collectionPercentage: dailyQuestCompletion,
             ),
             const Footer(),
+            Center(child: InfoPopupMain(variation: 1, visible: true))
           ]),
         ),
         backgroundColor: const Color.fromRGBO(34, 40, 49, 1),
