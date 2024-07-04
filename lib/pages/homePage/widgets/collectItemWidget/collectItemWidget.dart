@@ -101,7 +101,7 @@ class CollectItemWidgetState extends State<CollectItemWidget> {
     });
   }
 
-  void skipConfirmed() async {
+  Future<void> skipConfirmed() async {
     ItemToFindHandler().reduceRemaingSkips();
     String? newItemName = await ItemToFindHandler().fetchNewItem();
     setState(() {

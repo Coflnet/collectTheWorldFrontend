@@ -7,6 +7,7 @@ import 'package:camera/camera.dart';
 import 'package:collect_the_world/main.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:path_provider/path_provider.dart';
 
 class CameraScreen extends StatefulWidget {
@@ -26,12 +27,13 @@ class CameraScreen extends StatefulWidget {
 }
 
 class _CameraScreenState extends State<CameraScreen> {
+  bool capturing = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color.fromRGBO(21, 31, 51, 1),
       appBar: AppBar(
-
         backgroundColor: const Color.fromRGBO(21, 31, 51, 1),
         iconTheme: const IconThemeData(color: Colors.white),
         foregroundColor: const Color.fromRGBO(21, 31, 51, 1),
@@ -45,16 +47,21 @@ class _CameraScreenState extends State<CameraScreen> {
           CameraPreview(widget.controller)
         ],
       ),
-      floatingActionButton: TextButton(
-        onPressed: _captureImage,
-        child: Container(
-          margin: const EdgeInsets.only(bottom: 55),
-          padding: const EdgeInsets.all(8),
-          decoration: BoxDecoration(
-              color: Colors.transparent,
-              border: Border.all(color: Colors.grey.shade300, width: 3),
-              borderRadius: BorderRadius.circular(120)),
-          child:  Icon(Icons.camera, color: Colors.grey[300], size: 70),
+      floatingActionButton: Container(
+        margin: const EdgeInsets.only(bottom: 55),
+        child: TextButton(
+          onPressed: _captureImage,
+          child: Container(
+            padding: const EdgeInsets.all(8),
+            decoration: BoxDecoration(
+                color: Colors.transparent,
+                border: Border.all(color: Colors.grey.shade300, width: 3),
+                borderRadius: BorderRadius.circular(120)),
+            child: capturing
+                ? LoadingAnimationWidget.inkDrop(
+                    color: Colors.grey[300]!, size: 55)
+                : Icon(Icons.camera, color: Colors.grey[300], size: 70),
+          ),
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
@@ -62,6 +69,9 @@ class _CameraScreenState extends State<CameraScreen> {
   }
 
   Future<void> _captureImage() async {
+    setState(() {
+      capturing = true;
+    });
     try {
       final directory = await getTemporaryDirectory();
       String filePath = '${directory.path}/captured_image.jpg';
@@ -74,7 +84,7 @@ class _CameraScreenState extends State<CameraScreen> {
       final imagePath = filePath;
       await image.saveTo(imagePath);
       setState(() {
-        globals.timesTaken ++;
+        globals.timesTaken++;
         globals.image = File(imagePath);
       });
       if (widget.dailyWeeklyItem) {

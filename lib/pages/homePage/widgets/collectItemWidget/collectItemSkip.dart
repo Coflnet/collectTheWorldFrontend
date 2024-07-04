@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:collect_the_world/globals/globalScripts/cachingScripts/multiplierCaching.dart';
 import 'package:collect_the_world/globals/globalScripts/systems/itemToFindUpdater.dart';
 import 'package:collect_the_world/popups/conformationPopup/conformationPopup.dart';
 import 'package:flutter/cupertino.dart';
@@ -8,8 +9,10 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:provider/provider.dart';
 
+typedef FutureCallback = Future<void> Function();
+
 class CollectItemSkip extends StatefulWidget {
-  final VoidCallback parentCallBack;
+  final FutureCallback parentCallBack;
   final VoidCallback parentCallBackStarted;
   final String itemName;
   const CollectItemSkip(
@@ -41,7 +44,10 @@ class _CollectItemSkipState extends State<CollectItemSkip> {
           borderRadius: BorderRadius.circular(16)),
       child: Container(
         child: loading
-            ? LoadingAnimationWidget.inkDrop(color: Colors.white, size: 20)
+            ? Container(
+                padding: const EdgeInsets.all(8),
+                child: LoadingAnimationWidget.inkDrop(
+                    color: Colors.white, size: 35))
             : TextButton(
                 onPressed: () async {
                   setState(() {
@@ -63,7 +69,10 @@ class _CollectItemSkipState extends State<CollectItemSkip> {
     );
   }
 
-  void skipConfirmed() {
-    widget.parentCallBack();
+  void skipConfirmed() async {
+    await widget.parentCallBack();
+    setState(() {
+      loading = !loading;
+    });
   }
 }

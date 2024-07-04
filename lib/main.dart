@@ -11,6 +11,7 @@ import 'package:collect_the_world/globals/globalScripts/cachingScripts/multiplie
 import 'package:collect_the_world/globals/globalScripts/systems/authClient.dart';
 import 'package:collect_the_world/globals/globalScripts/systems/itemToFindUpdater.dart';
 import 'package:collect_the_world/globals/globalScripts/systems/profilePicture.dart';
+import 'package:collect_the_world/globals/globalScripts/systems/serverSideData/serverSideData.dart';
 import 'package:collect_the_world/pages/homePage/cameraScene/pages/cameraScene.dart';
 import 'package:collect_the_world/pages/homePage/cameraScene/pages/confirmScene.dart';
 import 'package:collect_the_world/globals/globalScripts/cameraController.dart';
@@ -54,6 +55,8 @@ class HomePageState extends State<HomePage> {
   List<ActiveMultiplier> multiplierList = MultiplierCaching().getMultiplier();
   int xp = 0;
 
+  bool floatingVisible = true;
+
   @override
   initState() {
     super.initState();
@@ -65,6 +68,7 @@ class HomePageState extends State<HomePage> {
     loadImportantData();
     loadChallenge();
     loadXP();
+    ServerSideData().loadFileData();
     ListCaching().checkIfItemUpdated();
     LeaderboardHandler().getLeaderboard(1);
     sleep(const Duration(seconds: 2));
@@ -115,14 +119,26 @@ class HomePageState extends State<HomePage> {
               collectionPercentage: dailyQuestCompletion,
             ),
             const Footer(),
-            Center(child: InfoPopupMain(variation: 1, visible: true))
+            Center(
+                child: InfoPopupMain(
+              variation: 1,
+              visible: false,
+              flip: flipFloatingVisible,
+            ))
           ]),
         ),
         backgroundColor: const Color.fromRGBO(34, 40, 49, 1),
-        floatingActionButton: const CameraButtonFooter(),
+        floatingActionButton: Visibility(
+            visible: floatingVisible, child: const CameraButtonFooter()),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       ),
     );
+  }
+
+  void flipFloatingVisible() {
+    setState(() {
+      floatingVisible = !floatingVisible;
+    });
   }
 }
 

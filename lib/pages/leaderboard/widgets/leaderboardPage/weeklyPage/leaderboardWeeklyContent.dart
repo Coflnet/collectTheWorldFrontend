@@ -1,3 +1,4 @@
+import 'package:collect_the_world/globals/globalScripts/systems/serverSideData/serverSideData.dart';
 import 'package:collect_the_world/pages/leaderboard/scripts/leaderboardHandler.dart';
 import 'package:collect_the_world/pages/leaderboard/widgets/containers/leaderBoardWidget/leaderBoardWidget.dart';
 import 'package:collect_the_world/pages/leaderboard/widgets/containers/leaderBoardWidget/leaderboardDivider.dart';
@@ -94,7 +95,7 @@ class LBRewardWeekly extends StatelessWidget {
         const Text("Top twenty",
             textAlign: TextAlign.center,
             style: TextStyle(color: Colors.white, fontSize: 20)),
-        Text("+3000XP",
+        Text("+${ServerSideData().getLeaderboardBaseRewards[1]}XP",
             style: TextStyle(
                 color: Colors.white.withOpacity(0.9),
                 fontSize: 25,

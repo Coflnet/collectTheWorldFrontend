@@ -1,3 +1,4 @@
+import 'package:collect_the_world/globals/globalScripts/systems/serverSideData/serverSideData.dart';
 import 'package:collect_the_world/pages/leaderboard/scripts/leaderboardHandler.dart';
 import 'package:collect_the_world/pages/leaderboard/widgets/containers/leaderBoardWidget/leaderBoardWidget.dart';
 import 'package:collect_the_world/pages/leaderboard/widgets/containers/leaderBoardWidget/leaderboardDivider.dart';
@@ -6,7 +7,7 @@ import 'package:collect_the_world/pages/leaderboard/widgets/leaderboardPage/dail
 import 'package:flutter/material.dart';
 
 class LeaderboardDailyContent extends StatefulWidget {
-  const LeaderboardDailyContent({Key? key}) : super(key: key);
+  const LeaderboardDailyContent({super.key});
 
   @override
   _LeaderboardDailyContentState createState() =>
@@ -97,7 +98,7 @@ class LBRewardDaily extends StatelessWidget {
         const Text("Top ten",
             textAlign: TextAlign.center,
             style: TextStyle(color: Colors.white, fontSize: 20)),
-        Text("+1000XP",
+        Text("+${ServerSideData().getLeaderboardBaseRewards[0]}XP",
             style: TextStyle(
                 color: Colors.white.withOpacity(0.9),
                 fontSize: 25,

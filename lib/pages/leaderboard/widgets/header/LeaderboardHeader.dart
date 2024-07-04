@@ -85,7 +85,6 @@ class LeaderboardHeaderState extends State<LeaderboardHeader> {
 
   void changePageSel(int id) {
     setState(() {
-      print("changing id");
       currentSelection = id;
     });
   }

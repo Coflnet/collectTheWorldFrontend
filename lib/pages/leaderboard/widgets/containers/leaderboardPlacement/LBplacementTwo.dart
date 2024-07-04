@@ -1,4 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:collect_the_world/globals/globalScripts/systems/serverSideData/serverSideData.dart';
 import 'package:collect_the_world/pages/leaderboard/widgets/containers/leaderBoardWidget/LBprofilePicture.dart';
 import 'package:collect_the_world/pages/leaderboard/widgets/containers/leaderboardPlacement/LBplacementXpWidget.dart';
 import 'package:flutter/material.dart';
@@ -64,9 +65,9 @@ class PlacementContent extends StatelessWidget {
         const SizedBox(height: 9),
         LBplacementXpWidget(
           count: whichLeaderBoard == 0
-              ? 2000
+              ? ServerSideData().getLeaderboardTopThree[0][1]
               : whichLeaderBoard == 1
-                  ? 3000
+                  ? ServerSideData().getLeaderboardTopThree[1][1]
                   : 0,
         )
       ],

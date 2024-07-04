@@ -7,9 +7,10 @@ import 'package:glassmorphism_ui/glassmorphism_ui.dart';
 class InfoPopupMain extends StatefulWidget {
   final bool visible;
   final int variation;
+  final VoidCallback flip;
 
   const InfoPopupMain(
-      {super.key, required this.variation, required this.visible});
+      {super.key, required this.variation, required this.visible, required this.flip});
 
   @override
   _InfoPopupMainState createState() => _InfoPopupMainState();
@@ -21,7 +22,7 @@ class _InfoPopupMainState extends State<InfoPopupMain> {
   @override
   Widget build(BuildContext context) {
     return Visibility(
-      visible: (visible) || (widget.visible),
+      visible: (visible) && (widget.visible),
       child: BackdropFilter(
         filter: ImageFilter.blur(sigmaX: 4.0, sigmaY: 4.0),
         child: Container(
@@ -39,6 +40,9 @@ class _InfoPopupMainState extends State<InfoPopupMain> {
   }
 
   void disapear() {
-    print("ello");
+    widget.flip();
+    setState(() {
+      visible = false;
+    });
   }
 }

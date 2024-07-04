@@ -23,7 +23,6 @@ import 'package:flutter/material.dart';
 import "package:collect_the_world/globals/globalScripts/globals.dart"
     as globals;
 
-
 class ConfirmingimagePage extends StatefulWidget {
   final String searchBarContent;
   final bool isDescription;
@@ -69,26 +68,29 @@ class ConfirmingimagePageState extends State<ConfirmingimagePage> {
         Center(
           child: Loadingwidget(isVisible: isLoading),
         ),
+        Visibility(
+          visible: !isLoading,
+          child: Center(
+              child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: <Widget>[
+              const SizedBox(),
+              RewardTopWidget(
+                  streak: streak, score: totalReward, skips: remainingSkips),
+              DisplayRewards(
+                baseReward: baseReward,
+                multi: multi,
+                dailyQuestProgress: dailyQuestProgress,
+                timesCollected: timesCollected,
+                dailyReward: dailyReward,
+              ),
+              const SizedBox(),
+            ],
+          )),
+        ),
         Center(
           child: CustomConfettiWidget(confettiController: confettiController),
         ),
-        Center(
-            child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[
-            const SizedBox(),
-            RewardTopWidget(
-                streak: streak, score: totalReward, skips: remainingSkips),
-            DisplayRewards(
-              baseReward: baseReward,
-              multi: multi,
-              dailyQuestProgress: dailyQuestProgress,
-              timesCollected: timesCollected,
-              dailyReward: dailyReward,
-            ),
-            const SizedBox(),
-          ],
-        )),
         const Footer(),
       ]),
       floatingActionButton: const CameraButtonFooter(),

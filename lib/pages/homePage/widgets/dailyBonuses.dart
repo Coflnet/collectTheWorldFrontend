@@ -1,6 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:collect_the_world/generatedCode/api.dart';
 import 'package:collect_the_world/globals/globalScripts/cachingScripts/multiplierCaching.dart';
+import 'package:collect_the_world/globals/globalScripts/systems/serverSideData/serverSideData.dart';
 import 'package:collect_the_world/globals/globalWidgets/baseWidget/baseWidget.dart';
 import 'package:collect_the_world/pages/homePage/widgets/dailyBonusPopup.dart';
 import 'package:custom_pop_up_menu/custom_pop_up_menu.dart';
@@ -21,12 +22,11 @@ class DailyBonuses extends StatelessWidget {
         pressType: PressType.singleClick,
         verticalMargin: -20,
         barrierColor: Colors.transparent,
-
         child: Container(
           margin: const EdgeInsets.only(top: 16),
           child: baseWidget(
               child: Container(
-            margin: EdgeInsets.fromLTRB(16, 12, 16, 16),
+            margin: const EdgeInsets.fromLTRB(16, 12, 16, 16),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
@@ -44,19 +44,19 @@ class DailyBonuses extends StatelessWidget {
                   child: Row(
                     children: [
                       BonusWidget(
-                          multi: "1.25X",
+                          multi: "${ServerSideData().getDailyBonuses[0]}x",
                           name: multiplierList[0].multiplier != 100
                               ? multiplierList[0].category ?? "❌Error"
                               : "Loading"),
                       const SizedBox(width: 12),
                       BonusWidget(
-                          multi: "2X",
+                          multi: "${ServerSideData().getDailyBonuses[1]}x",
                           name: multiplierList[1].multiplier != 100
                               ? multiplierList[1].category ?? "❌Error"
                               : "Loading"),
                       const SizedBox(width: 12),
                       BonusWidget(
-                          multi: "4X",
+                          multi: "${ServerSideData().getDailyBonuses[2]}x",
                           name: multiplierList[2].multiplier != 100
                               ? multiplierList[2].category ?? "❌Error"
                               : "Loading"),
