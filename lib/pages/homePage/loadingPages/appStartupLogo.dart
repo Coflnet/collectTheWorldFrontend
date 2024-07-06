@@ -1,5 +1,6 @@
 import 'package:collect_the_world/globals/globalScripts/cachingScripts/challengeCaching.dart';
 import 'package:collect_the_world/globals/globalScripts/cachingScripts/listCaching.dart';
+import 'package:collect_the_world/globals/globalScripts/cachingScripts/placementCaching.dart';
 import 'package:collect_the_world/globals/globalScripts/systems/authClient.dart';
 import 'package:collect_the_world/globals/globalScripts/systems/profilePicture.dart';
 import 'package:collect_the_world/globals/globalScripts/systems/serverSideData/serverSideData.dart';
@@ -29,6 +30,7 @@ class _AppStartupLogoState extends State<AppStartupLogo> {
     ListCaching().checkIfItemUpdated();
     ChallengeCaching().getDailyChallenge();
     await LoadingProfileInfo().loadStatsFromCloud();
+    placementCaching().loadPlacements();
     Navigator.pushReplacement(
         context,
         PageRouteBuilder(

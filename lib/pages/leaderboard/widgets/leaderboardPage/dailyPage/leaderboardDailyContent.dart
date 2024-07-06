@@ -21,7 +21,7 @@ class _LeaderboardDailyContentState extends State<LeaderboardDailyContent> {
   void initState() {
     super.initState();
     loadLeaderBoard();
-    print(leaderboardlist);
+    LeaderboardHandler().getLeaderboard(2);
   }
 
   bool isEmpty = true;

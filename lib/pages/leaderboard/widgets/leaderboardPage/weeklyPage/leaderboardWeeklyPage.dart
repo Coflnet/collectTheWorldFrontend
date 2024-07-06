@@ -1,3 +1,5 @@
+import 'package:collect_the_world/globals/extentions/extentions.dart';
+import 'package:collect_the_world/globals/globalScripts/cachingScripts/placementCaching.dart';
 import 'package:collect_the_world/pages/leaderboard/widgets/leaderboardPage/weeklyPage/leaderboardWeeklyContent.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -60,9 +62,9 @@ class LeaderboardDailyJumpToContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return type
-        ? const Text(
-            "69th",
-            style: TextStyle(color: Colors.white, fontSize: 18),
+        ? Text(
+            (placementCaching().getWeekly == 0 ? "NA" : placementCaching().getWeekly.ordinal),
+            style: const TextStyle(color: Colors.white, fontSize: 18),
           )
         : Icon(
             Icons.arrow_upward_rounded,

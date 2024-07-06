@@ -1,3 +1,5 @@
+import 'package:collect_the_world/globals/extentions/extentions.dart';
+import 'package:collect_the_world/globals/globalScripts/cachingScripts/placementCaching.dart';
 import 'package:collect_the_world/pages/leaderboard/widgets/leaderboardPage/allTimePage/leaderboardAllTimeContent.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -61,8 +63,8 @@ class LeaderboardWeeklyJAlltimeontent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return type
-        ? const Text(
-            "69th",
+        ? Text(
+            (placementCaching().getAlltime == 0 ? "NA" : placementCaching().getAlltime.ordinal),
             style: TextStyle(color: Colors.white, fontSize: 18),
           )
         : Icon(

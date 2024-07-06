@@ -1,7 +1,9 @@
 import 'dart:math';
 
 import 'package:collect_the_world/generatedCode/api.dart';
+import 'package:collect_the_world/globals/extentions/extentions.dart';
 import 'package:collect_the_world/globals/globalScripts/cachingScripts/challengeCaching.dart';
+import 'package:collect_the_world/globals/globalScripts/cachingScripts/placementCaching.dart';
 import 'package:collect_the_world/globals/globalScripts/systems/authClient.dart';
 import 'package:collect_the_world/pages/leaderboard/scripts/leaderboardHandler.dart';
 import 'package:collect_the_world/pages/leaderboard/widgets/leaderboardPage/dailyPage/leaderboardDailyContent.dart';
@@ -10,6 +12,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
+import 'package:ordinal_formatter/ordinal_formatter.dart';
 
 class LeaderboardDailyPage extends StatefulWidget {
   const LeaderboardDailyPage({super.key});
@@ -76,8 +79,7 @@ class LeaderboardDailyJumpToState extends State<LeaderboardDailyJumpTo> {
         children: <Widget>[
           clickState
               ? const LeaderboardDailyJumpToContent(type: true)
-              : LoadingAnimationWidget.inkDrop(
-                  color: Colors.white, size: 37)
+              : LoadingAnimationWidget.inkDrop(color: Colors.white, size: 37)
         ],
       ),
     );
@@ -91,9 +93,9 @@ class LeaderboardDailyJumpToContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return type
-        ? const Text(
-            "",
-            style: TextStyle(color: Colors.white, fontSize: 18),
+        ? Text(
+            (placementCaching().getDaily == 0 ? "NA" : placementCaching().getDaily.ordinal),
+            style: const TextStyle(color: Colors.white, fontSize: 18),
           )
         : Icon(
             Icons.arrow_upward_rounded,
