@@ -47,7 +47,7 @@ class PlacementContent extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        RandomAvatar("loading", width: 48, height: 48),
+        RandomAvatar(userInfo[3] ?? "loading", width: 48, height: 48),
         const SizedBox(
           height: 8,
         ),

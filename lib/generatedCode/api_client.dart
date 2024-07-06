@@ -208,6 +208,8 @@ class ApiClient {
           return Profile.fromJson(value);
         case 'PublicProfile':
           return PublicProfile.fromJson(value);
+        case 'RankSummary':
+          return RankSummary.fromJson(value);
         case 'SkipResponse':
           return SkipResponse.fromJson(value);
         case 'SkipsAvailable':
@@ -220,6 +222,8 @@ class ApiClient {
           return UploadImageResponse.fromJson(value);
         case 'UploadRewards':
           return UploadRewards.fromJson(value);
+        case 'UploadStats':
+          return UploadStats.fromJson(value);
         default:
           dynamic match;
           if (value is List && (match = _regList.firstMatch(targetType)?.group(1)) != null) {

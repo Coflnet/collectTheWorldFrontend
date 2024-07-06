@@ -10,12 +10,12 @@
 
 part of openapi.api;
 
-class UploadImageResponse {
-  /// Returns a new [UploadImageResponse] instance.
-  UploadImageResponse({
-    this.image,
-    this.rewards,
-    this.stats,
+class RankSummary {
+  /// Returns a new [RankSummary] instance.
+  RankSummary({
+    this.dailyRank,
+    this.weeklyRank,
+    this.overallRank,
   });
 
   ///
@@ -24,7 +24,7 @@ class UploadImageResponse {
   /// source code must fall back to having a nullable type.
   /// Consider adding a "default:" property in the specification file to hide this note.
   ///
-  CapturedImage? image;
+  int? dailyRank;
 
   ///
   /// Please note: This property should have been non-nullable! Since the specification file
@@ -32,7 +32,7 @@ class UploadImageResponse {
   /// source code must fall back to having a nullable type.
   /// Consider adding a "default:" property in the specification file to hide this note.
   ///
-  UploadRewards? rewards;
+  int? weeklyRank;
 
   ///
   /// Please note: This property should have been non-nullable! Since the specification file
@@ -40,48 +40,48 @@ class UploadImageResponse {
   /// source code must fall back to having a nullable type.
   /// Consider adding a "default:" property in the specification file to hide this note.
   ///
-  UploadStats? stats;
+  int? overallRank;
 
   @override
-  bool operator ==(Object other) => identical(this, other) || other is UploadImageResponse &&
-    other.image == image &&
-    other.rewards == rewards &&
-    other.stats == stats;
+  bool operator ==(Object other) => identical(this, other) || other is RankSummary &&
+    other.dailyRank == dailyRank &&
+    other.weeklyRank == weeklyRank &&
+    other.overallRank == overallRank;
 
   @override
   int get hashCode =>
     // ignore: unnecessary_parenthesis
-    (image == null ? 0 : image!.hashCode) +
-    (rewards == null ? 0 : rewards!.hashCode) +
-    (stats == null ? 0 : stats!.hashCode);
+    (dailyRank == null ? 0 : dailyRank!.hashCode) +
+    (weeklyRank == null ? 0 : weeklyRank!.hashCode) +
+    (overallRank == null ? 0 : overallRank!.hashCode);
 
   @override
-  String toString() => 'UploadImageResponse[image=$image, rewards=$rewards, stats=$stats]';
+  String toString() => 'RankSummary[dailyRank=$dailyRank, weeklyRank=$weeklyRank, overallRank=$overallRank]';
 
   Map<String, dynamic> toJson() {
     final json = <String, dynamic>{};
-    if (this.image != null) {
-      json[r'image'] = this.image;
+    if (this.dailyRank != null) {
+      json[r'dailyRank'] = this.dailyRank;
     } else {
-      json[r'image'] = null;
+      json[r'dailyRank'] = null;
     }
-    if (this.rewards != null) {
-      json[r'rewards'] = this.rewards;
+    if (this.weeklyRank != null) {
+      json[r'weeklyRank'] = this.weeklyRank;
     } else {
-      json[r'rewards'] = null;
+      json[r'weeklyRank'] = null;
     }
-    if (this.stats != null) {
-      json[r'stats'] = this.stats;
+    if (this.overallRank != null) {
+      json[r'overallRank'] = this.overallRank;
     } else {
-      json[r'stats'] = null;
+      json[r'overallRank'] = null;
     }
     return json;
   }
 
-  /// Returns a new [UploadImageResponse] instance and imports its values from
+  /// Returns a new [RankSummary] instance and imports its values from
   /// [value] if it's a [Map], null otherwise.
   // ignore: prefer_constructors_over_static_methods
-  static UploadImageResponse? fromJson(dynamic value) {
+  static RankSummary? fromJson(dynamic value) {
     if (value is Map) {
       final json = value.cast<String, dynamic>();
 
@@ -90,26 +90,26 @@ class UploadImageResponse {
       // Note 2: this code is stripped in release mode!
       assert(() {
         requiredKeys.forEach((key) {
-          assert(json.containsKey(key), 'Required key "UploadImageResponse[$key]" is missing from JSON.');
-          assert(json[key] != null, 'Required key "UploadImageResponse[$key]" has a null value in JSON.');
+          assert(json.containsKey(key), 'Required key "RankSummary[$key]" is missing from JSON.');
+          assert(json[key] != null, 'Required key "RankSummary[$key]" has a null value in JSON.');
         });
         return true;
       }());
 
-      return UploadImageResponse(
-        image: CapturedImage.fromJson(json[r'image']),
-        rewards: UploadRewards.fromJson(json[r'rewards']),
-        stats: UploadStats.fromJson(json[r'stats']),
+      return RankSummary(
+        dailyRank: mapValueOfType<int>(json, r'dailyRank'),
+        weeklyRank: mapValueOfType<int>(json, r'weeklyRank'),
+        overallRank: mapValueOfType<int>(json, r'overallRank'),
       );
     }
     return null;
   }
 
-  static List<UploadImageResponse> listFromJson(dynamic json, {bool growable = false,}) {
-    final result = <UploadImageResponse>[];
+  static List<RankSummary> listFromJson(dynamic json, {bool growable = false,}) {
+    final result = <RankSummary>[];
     if (json is List && json.isNotEmpty) {
       for (final row in json) {
-        final value = UploadImageResponse.fromJson(row);
+        final value = RankSummary.fromJson(row);
         if (value != null) {
           result.add(value);
         }
@@ -118,12 +118,12 @@ class UploadImageResponse {
     return result.toList(growable: growable);
   }
 
-  static Map<String, UploadImageResponse> mapFromJson(dynamic json) {
-    final map = <String, UploadImageResponse>{};
+  static Map<String, RankSummary> mapFromJson(dynamic json) {
+    final map = <String, RankSummary>{};
     if (json is Map && json.isNotEmpty) {
       json = json.cast<String, dynamic>(); // ignore: parameter_assignments
       for (final entry in json.entries) {
-        final value = UploadImageResponse.fromJson(entry.value);
+        final value = RankSummary.fromJson(entry.value);
         if (value != null) {
           map[entry.key] = value;
         }
@@ -132,14 +132,14 @@ class UploadImageResponse {
     return map;
   }
 
-  // maps a json object with a list of UploadImageResponse-objects as value to a dart map
-  static Map<String, List<UploadImageResponse>> mapListFromJson(dynamic json, {bool growable = false,}) {
-    final map = <String, List<UploadImageResponse>>{};
+  // maps a json object with a list of RankSummary-objects as value to a dart map
+  static Map<String, List<RankSummary>> mapListFromJson(dynamic json, {bool growable = false,}) {
+    final map = <String, List<RankSummary>>{};
     if (json is Map && json.isNotEmpty) {
       // ignore: parameter_assignments
       json = json.cast<String, dynamic>();
       for (final entry in json.entries) {
-        map[entry.key] = UploadImageResponse.listFromJson(entry.value, growable: growable,);
+        map[entry.key] = RankSummary.listFromJson(entry.value, growable: growable,);
       }
     }
     return map;

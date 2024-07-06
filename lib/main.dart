@@ -18,6 +18,7 @@ import 'package:collect_the_world/globals/globalScripts/cameraController.dart';
 import 'package:collect_the_world/globals/globalWidgets/header/header.dart';
 import 'package:collect_the_world/pages/homePage/collectPage/widgets/idkWhatToCallThis/itemSlidingPageHeader.dart';
 import 'package:collect_the_world/pages/homePage/contentContainer.dart';
+import 'package:collect_the_world/pages/homePage/loadingPages/appStartupLoading.dart';
 import 'package:collect_the_world/pages/leaderboard/scripts/leaderboardHandler.dart';
 import 'package:collect_the_world/pages/onboarding/onboardingMain.dart';
 import 'package:collect_the_world/popups/conformationPopup/conformationPopup.dart';
@@ -39,7 +40,7 @@ void main() {
     statusBarIconBrightness: Brightness.light,
     systemNavigationBarColor: Color.fromRGBO(21, 31, 51, 1),
   ));
-  runApp(const HomePage());
+  runApp(const AppStartupLoading());
 }
 
 class HomePage extends StatefulWidget {
@@ -64,12 +65,9 @@ class HomePageState extends State<HomePage> {
   }
 
   void loadData() async {
-    await authclie.Authclient().initClient();
     loadImportantData();
     loadChallenge();
     loadXP();
-    ServerSideData().loadFileData();
-    ListCaching().checkIfItemUpdated();
     LeaderboardHandler().getLeaderboard(1);
     sleep(const Duration(seconds: 2));
     LeaderboardHandler().refreshLeaderboard(1);

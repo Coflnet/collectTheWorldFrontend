@@ -21,11 +21,8 @@ class LeaderboardHandler {
       return cachedList;
     }
     List<dynamic> finalUsersList = [];
-    List leaderboardFileData =
-        await LeaderboardFileHandler().getLeaderBoardData(selectedPageId);
-
     finalUsersList =
-        await validateRealUserCount(leaderboardFileData, selectedPageId);
+        await LeaderboardFileHandler().getLeaderBoardData(selectedPageId);
 
     finalUsersList = leaderBoardDeleteDups(finalUsersList);
     LeaderboardFileHandler().updateCorrectData(finalUsersList, selectedPageId);
@@ -54,14 +51,13 @@ class LeaderboardHandler {
   Future<List> refreshLeaderboard(int selection) async {
     var leaderBoardData =
         await LeaderboardRequestHandler().loadLeaderBoard(selection);
-    List leaderboardFileData =
-        await LeaderboardFileHandler().getLeaderBoardData(selection);
-    leaderboardFileData.addAll(leaderBoardData);
-    leaderboardFileData.sort((a, b) => b[1].compareTo(a[1]));
-    List returnList = leaderBoardDeleteDups(leaderboardFileData);
+    leaderBoardData.sort((a, b) => b[1].compareTo(a[1]));
+    List returnList = leaderBoardDeleteDups(leaderBoardData);
     LeaderboardFileHandler().updateCorrectData(returnList, selection);
 
+    saveCache(selection, returnList);
     returnList = returnList.take(10).toList();
+    
     return returnList;
   }
 

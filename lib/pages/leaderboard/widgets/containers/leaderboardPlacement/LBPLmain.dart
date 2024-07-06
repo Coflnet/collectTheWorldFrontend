@@ -16,17 +16,20 @@ class LBPLmain extends StatelessWidget {
       children: <Widget>[
         const SizedBox(width: 16),
         LBplacementTwo(
-          userInfo:
-              topUsers.isNotEmpty ? topUsers[1] : ["loading", "alsoloading"],
+          userInfo: (topUsers.length >= 2)
+              ? topUsers[1]
+              : ["None", null, null, "loading"],
           whichLeaderBoard: whichLeaderBoard,
         ),
         LBplacementOne(
-            userInfo:
-                topUsers.isNotEmpty ? topUsers[0] : ["loading", "alsoloading"],
+            userInfo: topUsers.isNotEmpty
+                ? topUsers[0]
+                : ["None", null, null, "loading"],
             whichLeaderBoard: whichLeaderBoard),
         LBplacementThree(
-            userInfo:
-                topUsers.isNotEmpty ? topUsers[2] : ["loading", "alsoloading"],
+            userInfo: (topUsers.length >= 3)
+                ? topUsers[2]
+                : ["None", null, null, "loading"],
             whichLeaderBoard: whichLeaderBoard),
         const SizedBox(width: 16),
       ],

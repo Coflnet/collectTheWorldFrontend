@@ -36,6 +36,7 @@ part 'api/multiplier_api.dart';
 part 'api/object_api.dart';
 part 'api/skip_api.dart';
 part 'api/stats_api.dart';
+part 'api/word_api.dart';
 
 part 'model/active_multiplier.dart';
 part 'model/anonymous_login_request.dart';
@@ -50,12 +51,14 @@ part 'model/collectable_object.dart';
 part 'model/multiplier_response.dart';
 part 'model/profile.dart';
 part 'model/public_profile.dart';
+part 'model/rank_summary.dart';
 part 'model/skip_response.dart';
 part 'model/skips_available.dart';
 part 'model/stat.dart';
 part 'model/token_response.dart';
 part 'model/upload_image_response.dart';
 part 'model/upload_rewards.dart';
+part 'model/upload_stats.dart';
 
 
 /// An [ApiClient] instance that uses the default values obtained from

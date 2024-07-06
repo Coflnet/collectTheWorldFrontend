@@ -80,6 +80,7 @@ class LleaderbStateoardAllTimePage extends State<LeaderboardAllTimeContent> {
 
   void loadLeaderBoard() async {
     final result = await LeaderboardHandler().getLeaderboard(3);
+    print(result);
     setState(() {
       leaderboardlist = result;
     });

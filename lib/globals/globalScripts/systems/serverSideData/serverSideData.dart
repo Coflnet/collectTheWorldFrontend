@@ -18,6 +18,7 @@ class ServerSideData {
     Directory appDir = await getApplicationDocumentsDirectory();
     String filePath = "${appDir.path}/serverSideData.json";
     File file = File(filePath);
+    file.deleteSync();
     if (!file.existsSync()) {
       await createFile(file);
     }
@@ -25,9 +26,6 @@ class ServerSideData {
     var fileDataJson = file.readAsStringSync();
     var fileData = jsonDecode(fileDataJson);
 
-    if (fileData["dailyBonusesList"].isEmpty()) {
-      return;
-    }
     dailyBonusesList = fileData["dailyBonusesList"] ?? dailyBonusesList;
     leaderboardBaseRewardsList =
         fileData["leaderboardBaseRewardsList"] ?? leaderboardBaseRewardsList;
@@ -38,9 +36,9 @@ class ServerSideData {
   Future<void> createFile(file) async {
     file.createSync();
     var fileData = {
-      "dailyBonusesList": [],
-      "leaderboardBaseRewardsList": [],
-      "leaderboardTopThree": []
+      "dailyBonusesList": dailyBonusesList,
+      "leaderboardBaseRewardsList": leaderboardBaseRewardsList,
+      "leaderboardTopThree": leaderboardTopThree
     };
     var jsonFileData = jsonEncode(fileData);
     await file.writeAsString(jsonFileData);

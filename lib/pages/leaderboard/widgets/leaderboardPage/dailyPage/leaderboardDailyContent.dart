@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:collect_the_world/globals/globalScripts/systems/serverSideData/serverSideData.dart';
 import 'package:collect_the_world/pages/leaderboard/scripts/leaderboardHandler.dart';
 import 'package:collect_the_world/pages/leaderboard/widgets/containers/leaderBoardWidget/leaderBoardWidget.dart';
@@ -19,9 +21,11 @@ class _LeaderboardDailyContentState extends State<LeaderboardDailyContent> {
   void initState() {
     super.initState();
     loadLeaderBoard();
+    print(leaderboardlist);
   }
 
-  List leaderboardlist = [];
+  bool isEmpty = true;
+  List leaderboardlist = [[]];
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +40,7 @@ class _LeaderboardDailyContentState extends State<LeaderboardDailyContent> {
             SizedBox(
                 height: MediaQuery.of(context).size.height / 4.5,
                 child: LBPLmain(
-                  topUsers: leaderboardlist.isNotEmpty
+                  topUsers: (leaderboardlist.isNotEmpty && !isEmpty)
                       ? leaderboardlist.take(3).toList()
                       : [],
                   whichLeaderBoard: 0,
@@ -56,13 +60,23 @@ class _LeaderboardDailyContentState extends State<LeaderboardDailyContent> {
                 shrinkWrap: true,
                 itemCount: leaderboardlist.length,
                 itemBuilder: (context, index) {
-                  return LeaderBoardWidget(
-                    name: leaderboardlist[index][0],
-                    xp: leaderboardlist[index][1],
-                    index: index,
-                    profileImage: leaderboardlist[index][3] ?? "",
-                    userId: leaderboardlist[index][2] ?? "",
-                  );
+                  return isEmpty
+                      ? const Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                              "Be the first",
+                              style: TextStyle(color: Colors.white, fontSize: 35),
+                            ),
+                        ],
+                      )
+                      : LeaderBoardWidget(
+                          name: leaderboardlist[index][0],
+                          xp: leaderboardlist[index][1],
+                          index: index,
+                          profileImage: leaderboardlist[index][3] ?? "",
+                          userId: leaderboardlist[index][2] ?? "",
+                        );
                 },
               ),
             ),
@@ -75,7 +89,8 @@ class _LeaderboardDailyContentState extends State<LeaderboardDailyContent> {
   Future<void> pullRefresh() async {
     List resultList = await LeaderboardHandler().refreshLeaderboard(1);
     setState(() {
-      leaderboardlist = resultList;
+      leaderboardlist = (resultList.isEmpty) ? [[]] : resultList;
+      isEmpty = resultList.isEmpty;
     });
     return;
   }
@@ -83,7 +98,8 @@ class _LeaderboardDailyContentState extends State<LeaderboardDailyContent> {
   void loadLeaderBoard() async {
     final result = await LeaderboardHandler().getLeaderboard(1);
     setState(() {
-      leaderboardlist = result;
+      leaderboardlist = (result.isEmpty) ? [[]] : result;
+      isEmpty = result.isEmpty;
     });
   }
 }
