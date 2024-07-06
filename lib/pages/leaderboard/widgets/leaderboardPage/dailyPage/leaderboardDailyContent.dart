@@ -1,11 +1,13 @@
 import 'dart:ffi';
 
 import 'package:collect_the_world/globals/globalScripts/systems/serverSideData/serverSideData.dart';
+import 'package:collect_the_world/pages/homePage/collectPage/widgets/idkWhatToCallThis/endOfScrollLoading.dart';
 import 'package:collect_the_world/pages/leaderboard/scripts/leaderboardHandler.dart';
 import 'package:collect_the_world/pages/leaderboard/widgets/containers/leaderBoardWidget/leaderBoardWidget.dart';
 import 'package:collect_the_world/pages/leaderboard/widgets/containers/leaderBoardWidget/leaderboardDivider.dart';
 import 'package:collect_the_world/pages/leaderboard/widgets/containers/leaderboardPlacement/LBPLmain.dart';
 import 'package:collect_the_world/pages/leaderboard/widgets/leaderboardPage/dailyPage/LeaderboardDailyPage.dart';
+import 'package:collect_the_world/pages/leaderboard/widgets/leaderboardPage/dailyPage/beTheFirstDailyWidget.dart';
 import 'package:flutter/material.dart';
 
 class LeaderboardDailyContent extends StatefulWidget {
@@ -17,11 +19,35 @@ class LeaderboardDailyContent extends StatefulWidget {
 }
 
 class _LeaderboardDailyContentState extends State<LeaderboardDailyContent> {
+  final controller = ScrollController();
+  int currentOffset = 0;
+
   @override
   void initState() {
     super.initState();
     loadLeaderBoard();
     LeaderboardHandler().getLeaderboard(2);
+    controller.addListener(() {
+      if (controller.position.atEdge) {
+        bool isTop = controller.position.pixels == 0;
+        if (isTop) {
+        } else {
+          loadMore();
+        }
+      }
+    });
+  }
+
+  void loadMore() async {
+    if (leaderboardlist.length < 10) {
+      return;
+    }
+    List addList =
+        await LeaderboardHandler().getLeaderboardOffset(1, currentOffset + 10);
+    setState(() {
+      leaderboardlist.addAll(addList);
+      currentOffset += 10;
+    });
   }
 
   bool isEmpty = true;
@@ -61,22 +87,16 @@ class _LeaderboardDailyContentState extends State<LeaderboardDailyContent> {
                 itemCount: leaderboardlist.length,
                 itemBuilder: (context, index) {
                   return isEmpty
-                      ? const Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                              "Be the first",
-                              style: TextStyle(color: Colors.white, fontSize: 35),
-                            ),
-                        ],
-                      )
-                      : LeaderBoardWidget(
-                          name: leaderboardlist[index][0],
-                          xp: leaderboardlist[index][1],
-                          index: index,
-                          profileImage: leaderboardlist[index][3] ?? "",
-                          userId: leaderboardlist[index][2] ?? "",
-                        );
+                      ? BeTheFirstDailyWidget()
+                      : (leaderboardlist.length == index && index > 10)
+                          ? const EndOfScrollLoading()
+                          : LeaderBoardWidget(
+                              name: leaderboardlist[index][0],
+                              xp: leaderboardlist[index][1],
+                              index: index,
+                              profileImage: leaderboardlist[index][3] ?? "",
+                              userId: leaderboardlist[index][2] ?? "",
+                            );
                 },
               ),
             ),

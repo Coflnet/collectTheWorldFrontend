@@ -14,12 +14,35 @@ class LeaderboardWeeklyPageContent extends StatefulWidget {
 
 class _LeaderboardWeeklyPageState extends State<LeaderboardWeeklyPageContent> {
   List leaderboardlist = [];
+  final controller = ScrollController();
+  int currentOffset = 0;
 
   @override
   void initState() {
     super.initState();
     LeaderboardHandler().getLeaderboard(3);
     loadLeaderBoard();
+    controller.addListener(() {
+      if (controller.position.atEdge) {
+        bool isTop = controller.position.pixels == 0;
+        if (isTop) {
+        } else {
+          loadMore();
+        }
+      }
+    });
+  }
+
+  void loadMore() async {
+    if (leaderboardlist.length < 10){
+      return;
+    }
+    List addList =
+        await LeaderboardHandler().getLeaderboardOffset(2, currentOffset + 10);
+    setState(() {
+      leaderboardlist.addAll(addList);
+      currentOffset += 10;
+    });
   }
 
   @override

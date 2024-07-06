@@ -22,7 +22,7 @@ class LeaderboardRequestHandler {
     return "null";
   }
 
-  Future<List> loadLeaderBoard(int variation) async {
+  Future<List> loadLeaderBoard(int variation, {int offset = 0}) async {
     token = (await Authclient().tokenRequest())!;
     var authclient = HttpBearerAuth();
     authclient.accessToken = token;
@@ -31,7 +31,7 @@ class LeaderboardRequestHandler {
     final apiInstance = LeaderboardApi(client);
     try {
       final result =
-          await apiInstance.getLeaderboard(getLeaderBoardId(variation));
+          await apiInstance.getLeaderboard(getLeaderBoardId(variation), offset: offset);
       if (result == null) {
         return [];
       }

@@ -57,8 +57,14 @@ class LeaderboardHandler {
 
     saveCache(selection, returnList);
     returnList = returnList.take(10).toList();
-    
+
     return returnList;
+  }
+
+  Future<List> getLeaderboardOffset(int selection, int offset) async {
+    var leaderbaordData = await LeaderboardRequestHandler()
+        .loadLeaderBoard(selection, offset: offset);
+    return leaderbaordData;
   }
 
   List leaderBoardDeleteDups(List leaderboardData) {

@@ -12,12 +12,36 @@ class LeaderboardAllTimeContent extends StatefulWidget {
 }
 
 class LleaderbStateoardAllTimePage extends State<LeaderboardAllTimeContent> {
+  final controller = ScrollController();
+  int currentOffset = 0;
+
   List leaderboardlist = [];
 
   @override
   void initState() {
     super.initState();
     loadLeaderBoard();
+    controller.addListener(() {
+      if (controller.position.atEdge) {
+        bool isTop = controller.position.pixels == 0;
+        if (isTop) {
+        } else {
+          loadMore();
+        }
+      }
+    });
+  }
+
+  void loadMore() async {
+    if (leaderboardlist.length < 10){
+      return;
+    }
+    List addList =
+        await LeaderboardHandler().getLeaderboardOffset(1, currentOffset + 10);
+    setState(() {
+      leaderboardlist.addAll(addList);
+      currentOffset += 10;
+    });
   }
 
   @override
