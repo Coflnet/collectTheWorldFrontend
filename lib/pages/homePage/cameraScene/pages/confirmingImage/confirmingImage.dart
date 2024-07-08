@@ -73,7 +73,7 @@ class ConfirmingimagePageState extends State<ConfirmingimagePage> {
           child: Center(
               child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[
+            children: <Widget>[
               const SizedBox(),
               RewardTopWidget(
                   streak: streak, score: totalReward, skips: remainingSkips),
@@ -91,7 +91,7 @@ class ConfirmingimagePageState extends State<ConfirmingimagePage> {
         Center(
           child: CustomConfettiWidget(confettiController: confettiController),
         ),
-        const Footer(),
+        Visibility(visible: isLoading, child: const Footer()),
       ]),
       floatingActionButton: const CameraButtonFooter(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,

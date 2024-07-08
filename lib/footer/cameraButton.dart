@@ -40,7 +40,7 @@ class CameraButtonState extends State<CameraButtonFooter> {
             color: HexColor("0057C9"),
             borderRadius: BorderRadius.circular(16)),
         margin: const EdgeInsets.fromLTRB(0, 10, 5, 17),
-        padding: EdgeInsets.all(4),
+        padding: const EdgeInsets.all(4),
         child: IconButton(
           alignment: Alignment.bottomCenter,
           iconSize: 45,

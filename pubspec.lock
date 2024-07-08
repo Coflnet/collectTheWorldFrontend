@@ -312,6 +312,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.2.2"
+  jwt_decoder:
+    dependency: "direct main"
+    description:
+      name: jwt_decoder
+      sha256: "54774aebf83f2923b99e6416b4ea915d47af3bde56884eb622de85feabbc559f"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.1"
   leak_tracker:
     dependency: transitive
     description:
@@ -352,6 +360,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.2.1"
+  mailto:
+    dependency: "direct main"
+    description:
+      name: mailto
+      sha256: f8c5ce39e0eaa94a856795b2855af7f66aac37f7c3b70ac5c26ab00b94685445
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.0"
   matcher:
     dependency: transitive
     description:
@@ -384,14 +400,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.0"
-  ordinal_formatter:
-    dependency: "direct main"
-    description:
-      name: ordinal_formatter
-      sha256: "542589e8ac1e22a0c82f9377daa68531d8bee3229c3f9883fb034f8dd372c1e2"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.1.4"
   path:
     dependency: transitive
     description:
@@ -609,10 +617,10 @@ packages:
     dependency: "direct main"
     description:
       name: url_launcher
-      sha256: "6ce1e04375be4eed30548f10a315826fd933c1e493206eab82eed01f438c8d2e"
+      sha256: "21b704ce5fa560ea9f3b525b43601c678728ba46725bab9b01187b4831377ed3"
       url: "https://pub.dev"
     source: hosted
-    version: "6.2.6"
+    version: "6.3.0"
   url_launcher_android:
     dependency: transitive
     description:

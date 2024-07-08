@@ -18,6 +18,7 @@ int totalXp = 0;
 bool statsLoaded = false;
 int dailyStreak = 0;
 int skipsRemaining = 0;
+bool legalDone = false;
 
 class LoadingProfileInfo {
   void load() {
@@ -41,6 +42,7 @@ class LoadingProfileInfo {
         "totalXp": 0,
         "dailyStreak": 0,
         "skipsRemaining": 0,
+        "legalDone": false
       };
       var jsonFileData = jsonEncode(fileData);
       await file.writeAsString(jsonFileData);
@@ -57,7 +59,7 @@ class LoadingProfileInfo {
     totalXp = fileData["totalXp"] ?? 0;
     joinDate = DateTime.parse(fileData["JoinDate"]);
     dailyStreak = fileData["dailyStreak"] ?? 0;
-    print(dailyStreak);
+    legalDone = fileData["legalDone"] ?? false;
     return;
   }
 
@@ -74,7 +76,6 @@ class LoadingProfileInfo {
     final apiInstance = StatsApi(client);
     try {
       final List<Stat>? result = await apiInstance.getAllStats();
-      print(result);
       if (result == null) {
         return;
       }
@@ -136,6 +137,9 @@ class LoadingProfileInfo {
 }
 
 class ProfileRetrevial {
+  bool get getLegalDone => legalDone;
+  set setLegalDone(newValue) => legalDone = newValue;
+
   String getProfileString() {
     if (profileString == "") {
       return "ohno";

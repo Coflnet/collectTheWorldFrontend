@@ -4,6 +4,7 @@ import 'dart:math';
 
 import 'package:collect_the_world/generatedCode/api.dart';
 import 'package:collect_the_world/globals/globalScripts/cachingScripts/multiplierCaching.dart';
+import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:random_string_generator/random_string_generator.dart';
 
@@ -22,10 +23,6 @@ class Authclient {
     String filePath = "${appDir.path}/clientDetail.json";
     File file = File(filePath);
 
-    if (!await appDir.exists()) {
-      await appDir.create(recursive: true);
-    }
-
     if (!await file.exists()) {
       file.createSync(recursive: true);
       var fileData = {"token": "", "secret": ""};
@@ -36,16 +33,17 @@ class Authclient {
     }
     var fileDatajson = await file.readAsString();
     var fileData = await jsonDecode(fileDatajson);
-    creationDate = DateTime.parse(fileData["creationDate"]);
     secret = fileData["secret"];
 
-    if (creationDate.isAfter(DateTime.now())) {
-
-      return fileData["token"];
-    }
-    var returnToken = await generateToken();
-
     token = fileData["token"];
+
+    if (!JwtDecoder.isExpired(token)) {
+      alreadyLoaded = true;
+
+      return token;
+    }
+
+    var returnToken = await generateToken();
     alreadyLoaded = true;
 
     return returnToken;
@@ -64,8 +62,6 @@ class Authclient {
       final response =
           await apiInstance.login(anonymousLoginRequest: loginRequest);
       token = response!.token!;
-      DateTime now = DateTime.now();
-      creationDate = DateTime(now.year, now.month, now.day, 23, 59, 59);
       storeData();
       return token;
     } catch (e) {

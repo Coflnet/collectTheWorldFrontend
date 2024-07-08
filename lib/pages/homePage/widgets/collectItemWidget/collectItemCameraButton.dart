@@ -6,7 +6,7 @@ import 'package:collect_the_world/pages/homePage/cameraScene/pages/cameraScene.d
 import 'package:flutter/material.dart';
 
 class CameraButton extends StatefulWidget {
-  const CameraButton({Key? key}) : super(key: key);
+  const CameraButton({super.key});
 
   @override
   _CollectItemCameraButtonState createState() =>

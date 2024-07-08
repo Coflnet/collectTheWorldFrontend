@@ -12,7 +12,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
-import 'package:ordinal_formatter/ordinal_formatter.dart';
 
 class LeaderboardDailyPage extends StatefulWidget {
   const LeaderboardDailyPage({super.key});

@@ -55,6 +55,8 @@ class HomePageState extends State<HomePage> {
   int dailyQuestCompletion = dailyChallenge[0].progress ?? 0;
   List<ActiveMultiplier> multiplierList = MultiplierCaching().getMultiplier();
   int xp = 0;
+  bool popupVisible = false;
+  int variation = 1;
 
   bool floatingVisible = true;
 
@@ -68,9 +70,19 @@ class HomePageState extends State<HomePage> {
     loadImportantData();
     loadChallenge();
     loadXP();
+    handleLegalConfirming();
     LeaderboardHandler().getLeaderboard(1);
     sleep(const Duration(seconds: 2));
     LeaderboardHandler().refreshLeaderboard(1);
+  }
+
+  void handleLegalConfirming() {
+    if (!ProfileRetrevial().getLegalDone) {
+      setState(() {
+        popupVisible = true;
+        variation = 3;
+      });
+    }
   }
 
   void loadXP() async {
@@ -119,8 +131,8 @@ class HomePageState extends State<HomePage> {
             const Footer(),
             Center(
                 child: InfoPopupMain(
-              variation: 1,
-              visible: false,
+              variation: variation,
+              visible: popupVisible,
               flip: flipFloatingVisible,
             ))
           ]),
