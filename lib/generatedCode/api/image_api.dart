@@ -68,6 +68,46 @@ class ImageApi {
     return null;
   }
 
+  /// Performs an HTTP 'DELETE /api/images/{id}' operation and returns the [Response].
+  /// Parameters:
+  ///
+  /// * [String] id (required):
+  Future<Response> deleteImageWithHttpInfo(String id,) async {
+    // ignore: prefer_const_declarations
+    final path = r'/api/images/{id}'
+      .replaceAll('{id}', id);
+
+    // ignore: prefer_final_locals
+    Object? postBody;
+
+    final queryParams = <QueryParam>[];
+    final headerParams = <String, String>{};
+    final formParams = <String, String>{};
+
+    const contentTypes = <String>[];
+
+
+    return apiClient.invokeAPI(
+      path,
+      'DELETE',
+      queryParams,
+      postBody,
+      headerParams,
+      formParams,
+      contentTypes.isEmpty ? null : contentTypes.first,
+    );
+  }
+
+  /// Parameters:
+  ///
+  /// * [String] id (required):
+  Future<void> deleteImage(String id,) async {
+    final response = await deleteImageWithHttpInfo(id,);
+    if (response.statusCode >= HttpStatus.badRequest) {
+      throw ApiException(response.statusCode, await _decodeBodyBytes(response));
+    }
+  }
+
   /// Get image metadata with download url
   ///
   /// Note: This method returns the HTTP [Response].
@@ -133,7 +173,9 @@ class ImageApi {
   ///   
   ///
   /// * [MultipartFile] file:
-  Future<Response> uploadImageWithHttpInfo(String label, { MultipartFile? file, }) async {
+  ///
+  /// * [bool] licenseImage:
+  Future<Response> uploadImageWithHttpInfo(String label, { MultipartFile? file, bool? licenseImage, }) async {
     // ignore: prefer_const_declarations
     final path = r'/api/images/{label}'
       .replaceAll('{label}', label);
@@ -153,6 +195,10 @@ class ImageApi {
       hasFields = true;
       mp.fields[r'file'] = file.field;
       mp.files.add(file);
+    }
+    if (licenseImage != null) {
+      hasFields = true;
+      mp.fields[r'licenseImage'] = parameterToString(licenseImage);
     }
     if (hasFields) {
       postBody = mp;
@@ -177,8 +223,10 @@ class ImageApi {
   ///   
   ///
   /// * [MultipartFile] file:
-  Future<UploadImageResponse?> uploadImage(String label, { MultipartFile? file, }) async {
-    final response = await uploadImageWithHttpInfo(label,  file: file, );
+  ///
+  /// * [bool] licenseImage:
+  Future<UploadImageResponse?> uploadImage(String label, { MultipartFile? file, bool? licenseImage, }) async {
+    final response = await uploadImageWithHttpInfo(label,  file: file, licenseImage: licenseImage, );
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }

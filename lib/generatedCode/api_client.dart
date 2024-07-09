@@ -202,6 +202,10 @@ class ApiClient {
           return ChallengeResponse.fromJson(value);
         case 'CollectableObject':
           return CollectableObject.fromJson(value);
+        case 'ConsentData':
+          return ConsentData.fromJson(value);
+        case 'ExpChange':
+          return ExpChange.fromJson(value);
         case 'MultiplierResponse':
           return MultiplierResponse.fromJson(value);
         case 'Profile':

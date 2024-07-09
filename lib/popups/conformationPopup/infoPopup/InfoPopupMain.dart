@@ -36,7 +36,7 @@ class _InfoPopupMainState extends State<InfoPopupMain> {
     return Visibility(
       visible: (visible) && (widget.visible),
       child: BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: 4.0, sigmaY: 4.0),
+        filter: ImageFilter.blur(sigmaX: 4.0, sigmaY: 4.0),
           child: Container(
             width: double.infinity,
             height: double.infinity,
