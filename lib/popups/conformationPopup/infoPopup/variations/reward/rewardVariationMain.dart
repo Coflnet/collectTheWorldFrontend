@@ -7,9 +7,10 @@ import 'package:flutter/material.dart';
 
 class RewardVariationMain extends StatefulWidget {
   final String reward;
+  final String body;
   final VoidCallback disapear;
   const RewardVariationMain(
-      {super.key, required this.reward, required this.disapear});
+      {super.key, required this.reward, required this.disapear, required this.body});
 
   @override
   _RewardVariationMainState createState() => _RewardVariationMainState();
@@ -42,10 +43,10 @@ class _RewardVariationMainState extends State<RewardVariationMain> {
                 children: <Widget>[
                   const RewardVariationHeader(),
                   const SizedBox(height: 8),
-                  const Text(
+                  Text(
                     textAlign: TextAlign.center,
-                    "For placing top ten in daily leaderboard you have been awarded",
-                    style: TextStyle(
+                    widget.body,
+                    style: const TextStyle(
                         fontFamily: "Rubik-Light",
                         color: Colors.white,
                         fontSize: 23,

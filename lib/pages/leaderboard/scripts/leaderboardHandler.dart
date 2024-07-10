@@ -14,6 +14,8 @@ List dailylb = [];
 List weeklylb = [];
 List alltimelb = [];
 
+List firstLoad = [false, false, false];
+
 class LeaderboardHandler {
   Future<List<dynamic>> getLeaderboard(int selectedPageId) async {
     final List cachedList = checkCache(selectedPageId);
@@ -48,7 +50,12 @@ class LeaderboardHandler {
     return [];
   }
 
-  Future<List> refreshLeaderboard(int selection) async {
+  Future<List> refreshLeaderboard(int selection, {bool first = false}) async {
+    if (firstLoad[selection -1] && first) {
+      return [];
+    }
+
+    firstLoad[selection -1] = true;
     var leaderBoardData =
         await LeaderboardRequestHandler().loadLeaderBoard(selection);
     leaderBoardData.sort((a, b) => b[1].compareTo(a[1]));

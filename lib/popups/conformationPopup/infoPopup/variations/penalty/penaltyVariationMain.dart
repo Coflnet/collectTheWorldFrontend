@@ -5,10 +5,10 @@ import 'package:flutter/material.dart';
 
 class PenaltyVariationMain extends StatefulWidget {
   final String penalty;
+  final String body;
   final VoidCallback disapear;
   const PenaltyVariationMain(
-      {Key? key, required this.penalty, required this.disapear})
-      : super(key: key);
+      {super.key, required this.penalty, required this.disapear, required this.body});
 
   @override
   _PenaltyVariationMainState createState() => _PenaltyVariationMainState();
@@ -28,10 +28,10 @@ class _PenaltyVariationMainState extends State<PenaltyVariationMain> {
             children: <Widget>[
               const PenaltyVariationHeader(),
               const SizedBox(height: 8),
-              const Text(
+              Text(
                 textAlign: TextAlign.center,
-                "For uploading a incorrect image you have deducted",
-                style: TextStyle(
+                widget.body,
+                style: const TextStyle(
                     fontFamily: "Rubik-Light",
                     color: Colors.white,
                     fontSize: 23,

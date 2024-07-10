@@ -20,7 +20,7 @@ class _LeaderboardWeeklyPageState extends State<LeaderboardWeeklyPageContent> {
   @override
   void initState() {
     super.initState();
-    LeaderboardHandler().getLeaderboard(3);
+    LeaderboardHandler().refreshLeaderboard(3, first: true);
     loadLeaderBoard();
     controller.addListener(() {
       if (controller.position.atEdge) {

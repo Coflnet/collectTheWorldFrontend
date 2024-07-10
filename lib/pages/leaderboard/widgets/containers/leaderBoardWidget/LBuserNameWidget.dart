@@ -11,7 +11,7 @@ class LBuserNameWidget extends StatelessWidget {
       child: Container(
         margin: const EdgeInsets.only(left: 10),
         child: Text(
-          name.capitalize(),
+          (name == "Unknown") ? "Anonymous" : name.capitalize(),
           style: const TextStyle(
               color: Color.fromARGB(255, 255, 243, 247),
               fontSize: 18,

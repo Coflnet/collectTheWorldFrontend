@@ -27,6 +27,7 @@ class _LeaderboardDailyContentState extends State<LeaderboardDailyContent> {
     super.initState();
     loadLeaderBoard();
     LeaderboardHandler().getLeaderboard(2);
+    LeaderboardHandler().refreshLeaderboard(2, first: true);
     controller.addListener(() {
       if (controller.position.atEdge) {
         bool isTop = controller.position.pixels == 0;
