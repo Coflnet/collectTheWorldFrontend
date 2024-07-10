@@ -18,10 +18,19 @@ class LegalMoreOptionsSetting extends StatefulWidget {
 
 class _LegalMoreOptionsSettingState extends State<LegalMoreOptionsSetting> {
   bool isSwitched = true;
+
+  @override
+  void initState() {
+    super.initState();
+    setState(() {
+      isSwitched = LegalChangeUploader().getWhich(widget.which);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(bottom: 16),
+      margin: const EdgeInsets.only(bottom: 16),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
@@ -48,6 +57,7 @@ class _LegalMoreOptionsSettingState extends State<LegalMoreOptionsSetting> {
               value: isSwitched,
               onChanged: (value) => {
                     LegalChangeUploader().makeChange(widget.which, value),
+                    LegalChangeUploader().setIsChanged = true,
                     setState(() {
                       isSwitched = value;
                     })

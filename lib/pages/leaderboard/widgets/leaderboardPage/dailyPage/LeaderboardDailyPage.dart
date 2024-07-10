@@ -33,9 +33,8 @@ class LeaderboardDailyPageState extends State<LeaderboardDailyPage> {
     authclient.accessToken = token;
     final client = ApiClient(
         basePath: "https://ctw.coflnet.com", authentication: authclient);
-    final apiInstance = StatsApi(client);
-    final result =
-        await apiInstance.getUserStats("847e326b-c39b-484e-9621-c46962d04c04");
+    final apiInstance = ExpApi(client);
+    final result = await apiInstance.getExpChanges();
     print(result);
   }
 

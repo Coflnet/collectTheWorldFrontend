@@ -32,7 +32,9 @@ class _LegalVariationMainState extends State<LegalVariationMain> {
                     moreOptions: updateMoreOptions,
                     penalty: widget.penalty,
                     disapear: widget.disapear)
-                : LegalMoreOptionsPage()));
+                : LegalMoreOptionsPage(
+                    disapear: widget.disapear,
+                  )));
   }
 
   void updateMoreOptions() {

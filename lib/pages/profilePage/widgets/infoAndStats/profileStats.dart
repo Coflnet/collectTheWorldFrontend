@@ -15,7 +15,7 @@ class ProfileStats extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.fromLTRB(24, 16, 24, 0),
+      margin: const EdgeInsets.fromLTRB(24, 18, 24, 0),
       child: baseWidget(
           child: Column(
         children: <Widget>[

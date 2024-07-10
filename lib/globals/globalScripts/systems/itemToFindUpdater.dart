@@ -130,7 +130,6 @@ class ItemToFindHandler {
 
   void setRemainingSkips(int requestRemainingSkips) {
     remainingSkips = requestRemainingSkips;
-    print(remainingSkips);
   }
 
   void reduceRemaingSkips() {

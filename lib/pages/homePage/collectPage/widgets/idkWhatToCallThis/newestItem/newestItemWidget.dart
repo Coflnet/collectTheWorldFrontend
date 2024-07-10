@@ -4,6 +4,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:camera/camera.dart';
 import 'package:collect_the_world/globals/extentions/extentions.dart';
 import 'package:collect_the_world/pages/homePage/cameraScene/pages/cameraScene.dart';
+import 'package:collect_the_world/pages/homePage/collectPage/widgets/idkWhatToCallThis/newestItem/newestItemFoundBy.dart';
 import 'package:collect_the_world/pages/homePage/collectPage/widgets/idkWhatToCallThis/numberWidgetContainer.dart';
 import 'package:collect_the_world/pages/profilePage/widgets/profileImageWidget.dart';
 import 'package:flutter/material.dart';
@@ -67,31 +68,8 @@ class NewestItemWidgetState extends State<NewestItemWidget> {
                           ),
                         ),
                       ),
-                      ItemNameWidget(name: widget.name),
-                      TextButton(
-                        style: TextButton.styleFrom(
-                            padding: const EdgeInsets.all(0)),
-                        onPressed: () {},
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const Text(
-                              "  Found by",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w600),
-                            ),
-                            Text(
-                              '  N/A',
-                              style: TextStyle(
-                                  color: Colors.white.withOpacity(0.7),
-                                  fontSize: 15),
-                            )
-                          ],
-                        ),
-                      ),
-                      const Expanded(child: SizedBox()),
+                      Expanded(child: ItemNameWidget(name: widget.name)),
+                      const NewestItemFoundBy(),
                       NumberWidgetContainer(xpCount: widget.xp)
                     ],
                   ),

@@ -1,3 +1,4 @@
+import 'package:collect_the_world/globals/globalScripts/systems/legalChangeUploader.dart';
 import 'package:collect_the_world/popups/conformationPopup/infoPopup/variations/legal/legalOptionsButton.dart';
 import 'package:collect_the_world/popups/conformationPopup/infoPopup/variations/legal/legalScrollContainer.dart';
 import 'package:collect_the_world/popups/conformationPopup/infoPopup/variations/legal/legalVariationButton.dart';
@@ -64,7 +65,7 @@ class _LegalVariationFirstPageState extends State<LegalVariationFirstPage> {
                         isDone: true,
                       ),
                       LegalVariationButton(
-                        disapear: widget.disapear,
+                        disapear: disapearCallBack,
                         buttonText: "Accept",
                         isDone: inDone,
                       ),
@@ -76,6 +77,12 @@ class _LegalVariationFirstPageState extends State<LegalVariationFirstPage> {
         ],
       ),
     );
+  }
+
+  void disapearCallBack() {
+    LegalChangeUploader().setIsChanged = true;
+    LegalChangeUploader().submiteChanges();
+    widget.disapear();
   }
 
   void finnishedScrolling() {

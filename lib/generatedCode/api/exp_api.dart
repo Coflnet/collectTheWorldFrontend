@@ -16,10 +16,10 @@ class ExpApi {
 
   final ApiClient apiClient;
 
-  /// Performs an HTTP 'GET /exp/history' operation and returns the [Response].
+  /// Performs an HTTP 'GET /api/exp/history' operation and returns the [Response].
   Future<Response> getExpChangesWithHttpInfo() async {
     // ignore: prefer_const_declarations
-    final path = r'/exp/history';
+    final path = r'/api/exp/history';
 
     // ignore: prefer_final_locals
     Object? postBody;

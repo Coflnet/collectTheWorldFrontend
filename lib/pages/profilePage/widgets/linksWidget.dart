@@ -14,7 +14,7 @@ class LinksWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.fromLTRB(24, 16, 24, 10),
+      margin: const EdgeInsets.fromLTRB(24, 18, 24, 10),
       child: const baseWidget(
         child: Column(
           children: [

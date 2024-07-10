@@ -1,7 +1,10 @@
 import 'package:collect_the_world/generatedCode/api.dart';
 import 'package:collect_the_world/globals/globalScripts/systems/authClient.dart';
+import 'package:collect_the_world/globals/globalScripts/systems/legalChangeUploader.dart';
 import 'package:collect_the_world/globals/globalScripts/systems/profilePicture.dart';
+import 'package:collect_the_world/pages/profilePage/editProfile/editLegalProfileWidgets/editProfilePrivacy.dart';
 import 'package:collect_the_world/pages/profilePage/editProfile/editProfileHeader.dart';
+import 'package:collect_the_world/pages/profilePage/editProfile/editProfileWidgets/editProfileNotifications.dart';
 import 'package:collect_the_world/pages/profilePage/editProfile/editUsernameProfile.dart';
 import 'package:collect_the_world/pages/profilePage/editProfile/generateNewProfilePic.dart';
 import 'package:collect_the_world/pages/profilePage/profilePage.dart';
@@ -20,28 +23,38 @@ class EditProfileMain extends StatefulWidget {
 class _EditProfileMainState extends State<EditProfileMain> {
   String profileString = ProfileRetrevial().getProfileString();
   String username = ProfileRetrevial().getUsername();
+  bool privacyChanges = false;
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(fontFamily: 'Rubik'),
       home: Scaffold(
-        body: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
+        body: Stack(
           children: [
+            SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  const SizedBox(height: 100),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[RandomAvatar(profileString, width: 120)],
+                  ),
+                  const SizedBox(height: 8),
+                  GenerateNewProfilePic(generate: generateCallBack),
+                  EditUsernameProfile(
+                    usernameChange: changeUsername,
+                  ),
+                  const EditProfileNotifications(),
+                  const EditProfilePrivacy(),
+                ],
+              ),
+            ),
             EditProfileHeader(saveCallBack: saveProfileInfo),
-            const SizedBox(
-              height: 15,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[RandomAvatar(profileString, width: 120)],
-            ),
-            const SizedBox(height: 8),
-            GenerateNewProfilePic(generate: generateCallBack),
-            EditUsernameProfile(
-              usernameChange: changeUsername,
-            )
           ],
         ),
         backgroundColor: const Color.fromRGBO(21, 31, 51, 1),
@@ -49,10 +62,13 @@ class _EditProfileMainState extends State<EditProfileMain> {
     );
   }
 
+  void isChange() {}
+
   void saveProfileInfo() async {
-    print(username);
     ProfileRetrevial().setProfileString(profileString);
     ProfileRetrevial().setUsername(username);
+    LegalChangeUploader().submiteChanges();
+
     LoadingProfileInfo().saveFile();
 
     token = (await Authclient().tokenRequest())!;

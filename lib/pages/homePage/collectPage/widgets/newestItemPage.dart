@@ -1,7 +1,7 @@
 import 'package:collect_the_world/globals/globalScripts/cachingScripts/listCaching.dart';
 import 'package:collect_the_world/pages/homePage/collectPage/widgets/idkWhatToCallThis/endOfScrollLoading.dart';
-import 'package:collect_the_world/pages/homePage/collectPage/widgets/idkWhatToCallThis/newestItemWidget.dart';
-import 'package:collect_the_world/pages/homePage/collectPage/widgets/idkWhatToCallThis/newestItemsQuest.dart';
+import 'package:collect_the_world/pages/homePage/collectPage/widgets/idkWhatToCallThis/newestItem/newestItemWidget.dart';
+import 'package:collect_the_world/pages/homePage/collectPage/widgets/idkWhatToCallThis/newestItem/newestItemsQuest.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

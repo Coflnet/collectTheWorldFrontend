@@ -3,7 +3,8 @@ import 'package:collect_the_world/popups/conformationPopup/infoPopup/variations/
 import 'package:flutter/material.dart';
 
 class LegalMoreOptionsPage extends StatelessWidget {
-  const LegalMoreOptionsPage({super.key});
+  final VoidCallback disapear;
+  const LegalMoreOptionsPage({super.key, required this.disapear});
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +48,10 @@ class LegalMoreOptionsPage extends StatelessWidget {
                         color: const Color.fromRGBO(119, 80, 119, 1),
                         borderRadius: BorderRadius.circular(8)),
                     child: TextButton(
-                        onPressed: () => {LegalChangeUploader().submiteChanges()},
+                        onPressed: () => {
+                              LegalChangeUploader().submiteChanges(),
+                              disapear()
+                            },
                         child: const Text(
                           "Confirm",
                           style: TextStyle(

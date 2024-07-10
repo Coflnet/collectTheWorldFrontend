@@ -10,11 +10,11 @@ import 'package:collect_the_world/globals/globalScripts/cachingScripts/listCachi
 import 'package:collect_the_world/globals/globalScripts/cachingScripts/multiplierCaching.dart';
 import 'package:collect_the_world/globals/globalScripts/systems/authClient.dart';
 import 'package:collect_the_world/globals/globalScripts/systems/itemToFindUpdater.dart';
+import 'package:collect_the_world/globals/globalScripts/systems/legalChangeUploader.dart';
 import 'package:collect_the_world/globals/globalScripts/systems/profilePicture.dart';
 import 'package:collect_the_world/globals/globalScripts/systems/serverSideData/serverSideData.dart';
 import 'package:collect_the_world/pages/homePage/cameraScene/pages/cameraScene.dart';
 import 'package:collect_the_world/pages/homePage/cameraScene/pages/confirmScene.dart';
-import 'package:collect_the_world/globals/globalScripts/cameraController.dart';
 import 'package:collect_the_world/globals/globalWidgets/header/header.dart';
 import 'package:collect_the_world/pages/homePage/collectPage/widgets/idkWhatToCallThis/itemSlidingPageHeader.dart';
 import 'package:collect_the_world/pages/homePage/contentContainer.dart';
@@ -66,18 +66,20 @@ class HomePageState extends State<HomePage> {
     loadData();
   }
 
+  void loadpopup() {
+
+  }
+
   void loadData() async {
     loadImportantData();
     loadChallenge();
     loadXP();
     handleLegalConfirming();
-    LeaderboardHandler().getLeaderboard(1);
-    sleep(const Duration(seconds: 2));
-    LeaderboardHandler().refreshLeaderboard(1);
+
   }
 
   void handleLegalConfirming() {
-    if (!ProfileRetrevial().getLegalDone) {
+    if (!LegalChangeUploader().getAlreadyAgreed) {
       setState(() {
         popupVisible = true;
         variation = 3;

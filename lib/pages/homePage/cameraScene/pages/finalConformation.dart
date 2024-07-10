@@ -8,7 +8,6 @@ import 'package:collect_the_world/pages/homePage/cameraScene/confirm/widgets/cre
 import 'package:collect_the_world/pages/homePage/cameraScene/confirm/widgets/imageWidget.dart';
 import 'package:collect_the_world/pages/homePage/cameraScene/pages/cameraScene.dart';
 import 'package:collect_the_world/footer/cameraButton.dart';
-import 'package:collect_the_world/globals/globalScripts/cameraController.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';

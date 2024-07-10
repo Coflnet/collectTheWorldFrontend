@@ -10,12 +10,14 @@ class EditProfileHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(top: 37),
-      height: 60,
+      height: 97,
+      padding: const EdgeInsets.only(bottom: 5),
       decoration: BoxDecoration(
+          color: const Color.fromRGBO(21, 31, 51, 1),
           border: Border(
               bottom: BorderSide(color: Colors.grey[500] ?? Colors.grey))),
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.end,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
           IconButton(

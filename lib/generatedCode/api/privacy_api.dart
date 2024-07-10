@@ -16,10 +16,10 @@ class PrivacyApi {
 
   final ApiClient apiClient;
 
-  /// Performs an HTTP 'GET /privacy' operation and returns the [Response].
+  /// Performs an HTTP 'GET /api/privacy' operation and returns the [Response].
   Future<Response> getConsentWithHttpInfo() async {
     // ignore: prefer_const_declarations
-    final path = r'/privacy';
+    final path = r'/api/privacy';
 
     // ignore: prefer_final_locals
     Object? postBody;
@@ -57,13 +57,13 @@ class PrivacyApi {
     return null;
   }
 
-  /// Performs an HTTP 'POST /privacy' operation and returns the [Response].
+  /// Performs an HTTP 'POST /api/privacy' operation and returns the [Response].
   /// Parameters:
   ///
   /// * [ConsentData] consentData:
   Future<Response> saveConsentWithHttpInfo({ ConsentData? consentData, }) async {
     // ignore: prefer_const_declarations
-    final path = r'/privacy';
+    final path = r'/api/privacy';
 
     // ignore: prefer_final_locals
     Object? postBody = consentData;

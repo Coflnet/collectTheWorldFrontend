@@ -16,7 +16,7 @@ class EditUsernameProfile extends StatelessWidget {
       children: <Widget>[
         const SizedBox(height: 8),
         Container(
-          margin: EdgeInsets.only(left: 16),
+          margin: EdgeInsets.only(left: 24),
           child: const Text(
             "Username",
             style: TextStyle(
@@ -27,10 +27,10 @@ class EditUsernameProfile extends StatelessWidget {
         Row(
           children: <Widget>[
             Container(
-                margin: const EdgeInsets.only(left: 16),
+                margin: const EdgeInsets.only(left: 24),
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 height: 50,
-                width: MediaQuery.sizeOf(context).width * 0.93,
+                width: MediaQuery.sizeOf(context).width * 0.87,
                 decoration: BoxDecoration(
                   gradient: const LinearGradient(
                       begin: Alignment.centerRight,

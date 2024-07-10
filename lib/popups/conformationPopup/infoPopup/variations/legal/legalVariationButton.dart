@@ -49,7 +49,10 @@ class LegalVariationButton extends StatelessWidget {
           child: Icon(
             Icons.lock_outline,
             color: Colors.grey[300],
-            shadows: [Shadow(color: Colors.black38, offset: Offset(2,4), blurRadius: 10)],
+            shadows: const [
+              Shadow(
+                  color: Colors.black38, offset: Offset(2, 4), blurRadius: 10)
+            ],
             size: 50,
           ),
         ),
