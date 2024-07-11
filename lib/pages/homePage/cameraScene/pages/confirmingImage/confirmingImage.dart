@@ -6,6 +6,7 @@ import 'dart:isolate';
 import 'package:collect_the_world/footer/cameraButton.dart';
 import 'package:collect_the_world/generatedCode/api.dart';
 import 'package:collect_the_world/globals/globalScripts/systems/itemToFindUpdater.dart';
+import 'package:collect_the_world/globals/globalScripts/systems/profilePicture.dart';
 import 'package:collect_the_world/globals/globalWidgets/header/dailyStreak.dart';
 import 'package:collect_the_world/pages/homePage/cameraScene/confirm/widgets/confettiWidget.dart';
 import 'package:collect_the_world/pages/homePage/cameraScene/pages/confirmingImage/displayRewards.dart';
@@ -88,12 +89,13 @@ class ConfirmingimagePageState extends State<ConfirmingimagePage> {
             ],
           )),
         ),
+        Visibility(visible: !isLoading, child: const Footer()),
         Center(
           child: CustomConfettiWidget(confettiController: confettiController),
         ),
-        Visibility(visible: isLoading, child: const Footer()),
       ]),
-      floatingActionButton: const CameraButtonFooter(),
+      floatingActionButton:
+          Visibility(visible: !isLoading, child: const CameraButtonFooter()),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
@@ -122,13 +124,23 @@ class ConfirmingimagePageState extends State<ConfirmingimagePage> {
     if (response.statusCode == 200) {
       var responseString = await response.stream.bytesToString();
       var jsonResponse = jsonDecode(responseString);
+      var rewards = jsonResponse["rewards"];
       print(jsonResponse);
       setState(() {
-        baseReward = jsonResponse["rewards"]["imageBonus"] ?? 69;
-        totalReward = jsonResponse["rewards"]["total"] ?? 69;
-        multi = (jsonResponse["rewards"]["multiplier"] == 0)
-            ? 1.0
-            : jsonResponse["rewards"]["multiplier"] ?? 69;
+        baseReward = rewards["imageReward"] ?? 69;
+        totalReward = rewards["total"] ?? 69;
+        multi =
+            (rewards["multiplier"] == 0) ? 1.0 : rewards["multiplier"] ?? 69;
+
+        streak = ProfileRetrevial().getStreak();
+        if (jsonResponse["stats"]["extendedStreak"]) {
+          streak++;
+          ProfileRetrevial().setStreak(streak);
+          LoadingProfileInfo().saveFile();
+        }
+
+        timesCollected = jsonResponse["stats"]["collectedTimes"];
+        dailyQuestProgress = rewards["dailyItemReward"];
       });
       successfullReqeust();
     } else {

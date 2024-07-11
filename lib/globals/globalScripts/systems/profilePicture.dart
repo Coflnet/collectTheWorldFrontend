@@ -60,6 +60,7 @@ class LoadingProfileInfo {
     joinDate = DateTime.parse(fileData["JoinDate"]);
     dailyStreak = fileData["dailyStreak"] ?? 0;
     legalDone = fileData["legalDone"] ?? false;
+    print(joinDate);
     return;
   }
 
@@ -123,7 +124,7 @@ class LoadingProfileInfo {
     var fileData = {
       "ProfileString": profileString,
       "Username": username,
-      "JoinDate": DateTime.now().toIso8601String(),
+      "JoinDate": joinDate,
       "TopThree": topThree,
       "totalPicture": totalPicture,
       "totalUnique": totalUnique,

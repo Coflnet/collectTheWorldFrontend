@@ -2,6 +2,7 @@ import 'package:collect_the_world/globals/globalScripts/cachingScripts/challenge
 import 'package:collect_the_world/globals/globalScripts/cachingScripts/listCaching.dart';
 import 'package:collect_the_world/globals/globalScripts/cachingScripts/placementCaching.dart';
 import 'package:collect_the_world/globals/globalScripts/systems/authClient.dart';
+import 'package:collect_the_world/globals/globalScripts/systems/infoPopupHandler.dart';
 import 'package:collect_the_world/globals/globalScripts/systems/legalChangeUploader.dart';
 import 'package:collect_the_world/globals/globalScripts/systems/profilePicture.dart';
 import 'package:collect_the_world/globals/globalScripts/systems/serverSideData/serverSideData.dart';
@@ -29,6 +30,7 @@ class _AppStartupLogoState extends State<AppStartupLogo> {
   void loadData() async {
     await Authclient().initClient();
     ServerSideData().loadFileData();
+    InfoPopupHandler().requestPopup();
     ListCaching().checkIfItemUpdated();
     ChallengeCaching().getDailyChallenge();
     LeaderboardHandler().refreshLeaderboard(1);

@@ -15,24 +15,26 @@ class InfoPopupMain extends StatefulWidget {
   final bool visible;
   final int variation;
   final VoidCallback flip;
+  final VoidCallback visFlip;
 
   const InfoPopupMain(
       {super.key,
       required this.variation,
       required this.visible,
-      required this.flip});
+      required this.flip,
+      required this.visFlip});
 
   @override
   _InfoPopupMainState createState() => _InfoPopupMainState();
 }
 
 class _InfoPopupMainState extends State<InfoPopupMain> {
-  bool visible = true;
+  bool visible = false;
   bool flipVisible = false;
   // 1 reward. 2 penilty. 3 legal
 
   late Timer timer;
-  List popupData = [ExpChange(change: 0,description: "", source_: "")];
+  List popupData = [ExpChange(change: 0, description: "", source_: "")];
 
   @override
   void initState() {
@@ -51,13 +53,16 @@ class _InfoPopupMainState extends State<InfoPopupMain> {
     if (widget.visible) {
       return;
     }
-    print(popupData);
+    widget.flip();
+    setState(() {
+      visible = true;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Visibility(
-      visible: (visible) && (widget.visible),
+      visible: (visible) || (widget.visible),
       child: BackdropFilter(
           filter: ImageFilter.blur(sigmaX: 4.0, sigmaY: 4.0),
           child: Container(
@@ -93,6 +98,12 @@ class _InfoPopupMainState extends State<InfoPopupMain> {
   }
 
   void disapear() {
+    if (popupData.length > 1) {
+      setState(() {
+        popupData = popupData.removeAt(0);
+      });
+      return;
+    }
     widget.flip();
     setState(() {
       visible = false;

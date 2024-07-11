@@ -32,6 +32,7 @@ class LeaderboardRequestHandler {
     try {
       final result =
           await apiInstance.getLeaderboard(getLeaderBoardId(variation), offset: offset);
+      print(result);
       if (result == null) {
         return [];
       }

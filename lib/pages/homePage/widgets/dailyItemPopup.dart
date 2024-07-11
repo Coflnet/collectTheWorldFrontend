@@ -21,7 +21,7 @@ class DailyItemPopup extends StatelessWidget {
                 color: Colors.white70),
           ),
           Text(
-            "Rewards 1000XP",
+            "Rewards 100XP",
             style: TextStyle(
                 fontSize: 14,
                 fontWeight: FontWeight.w600,

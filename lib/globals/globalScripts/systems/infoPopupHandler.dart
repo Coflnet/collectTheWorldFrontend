@@ -15,12 +15,11 @@ class InfoPopupHandler {
     final apiInstance = ExpApi(client);
     try {
       final result = await apiInstance.getExpChanges() ?? [ExpChange()];
+
       if (result.isEmpty) {
         return;
       }
-      if (result[0] != ExpChange()) {
-        return;
-      }
+      
       for (var info in result) {
         if (allAcceptedTypes.contains(info.source_)) {
           newInfo.add(info);

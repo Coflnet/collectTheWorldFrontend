@@ -66,16 +66,13 @@ class HomePageState extends State<HomePage> {
     loadData();
   }
 
-  void loadpopup() {
-
-  }
+  void loadpopup() {}
 
   void loadData() async {
     loadImportantData();
     loadChallenge();
     loadXP();
     handleLegalConfirming();
-
   }
 
   void handleLegalConfirming() {
@@ -133,6 +130,7 @@ class HomePageState extends State<HomePage> {
             const Footer(),
             Center(
                 child: InfoPopupMain(
+              visFlip: flipPopupVisible,
               variation: variation,
               visible: popupVisible,
               flip: flipFloatingVisible,
@@ -145,6 +143,12 @@ class HomePageState extends State<HomePage> {
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       ),
     );
+  }
+
+  void flipPopupVisible() {
+    setState(() {
+      popupVisible = !popupVisible;
+    });
   }
 
   void flipFloatingVisible() {
