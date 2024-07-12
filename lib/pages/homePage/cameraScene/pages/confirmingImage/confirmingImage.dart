@@ -12,7 +12,7 @@ import 'package:collect_the_world/globals/globalWidgets/header/dailyStreak.dart'
 import 'package:collect_the_world/pages/homePage/cameraScene/confirm/widgets/confettiWidget.dart';
 import 'package:collect_the_world/pages/homePage/cameraScene/pages/confirmingImage/displayRewards.dart';
 import 'package:collect_the_world/pages/homePage/cameraScene/pages/confirmingImage/error/confirmingImageError.dart';
-import 'package:collect_the_world/pages/homePage/cameraScene/pages/confirmingImage/rewardWidgets/header/rewardTopWidget.dart';
+import 'package:collect_the_world/pages/homePage/cameraScene/pages/confirmingImage/rewardWidgets/dailyReward/header/rewardTopWidget.dart';
 import 'package:confetti/confetti.dart';
 import 'package:http/http.dart' as http;
 import 'package:collect_the_world/globals/globalScripts/systems/authClient.dart'
@@ -145,7 +145,6 @@ class ConfirmingimagePageState extends State<ConfirmingimagePage> {
         }
 
         timesCollected = jsonResponse["stats"]["collectedTimes"];
-        dailyQuestProgress = rewards["dailyItemReward"];
 
         remainingSkips = ItemToFindHandler().returnRamaingSkips();
         if (rewards["addedSkip"]) {

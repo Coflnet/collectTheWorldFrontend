@@ -1,7 +1,7 @@
 import 'package:collect_the_world/globals/globalWidgets/baseWidget/baseWidget.dart';
-import 'package:collect_the_world/pages/homePage/cameraScene/pages/confirmingImage/rewardWidgets/header/confirmingImageSkips.dart';
-import 'package:collect_the_world/pages/homePage/cameraScene/pages/confirmingImage/rewardWidgets/header/confirmingImageStreak.dart';
-import 'package:collect_the_world/pages/homePage/cameraScene/pages/confirmingImage/rewardWidgets/header/confirmingImageXp.dart';
+import 'package:collect_the_world/pages/homePage/cameraScene/pages/confirmingImage/rewardWidgets/dailyReward/header/confirmingImageSkips.dart';
+import 'package:collect_the_world/pages/homePage/cameraScene/pages/confirmingImage/rewardWidgets/dailyReward/header/confirmingImageStreak.dart';
+import 'package:collect_the_world/pages/homePage/cameraScene/pages/confirmingImage/rewardWidgets/dailyReward/header/confirmingImageXp.dart';
 import 'package:flutter/material.dart';
 
 class RewardTopWidget extends StatelessWidget {

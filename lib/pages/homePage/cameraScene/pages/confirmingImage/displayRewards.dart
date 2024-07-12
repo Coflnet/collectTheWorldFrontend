@@ -1,9 +1,10 @@
+import 'package:collect_the_world/globals/globalScripts/cachingScripts/challengeCaching.dart';
 import 'package:collect_the_world/globals/globalScripts/cachingScripts/multiplierCaching.dart';
 import 'package:collect_the_world/globals/globalWidgets/baseWidget/baseWidget.dart';
 import 'package:collect_the_world/pages/homePage/cameraScene/pages/confirmingImage/rewardWidgets/baseReward.dart';
 import 'package:collect_the_world/pages/homePage/cameraScene/pages/confirmingImage/rewardWidgets/dailyItemQuestReward.dart';
-import 'package:collect_the_world/pages/homePage/cameraScene/pages/confirmingImage/rewardWidgets/dailyReward.dart';
-import 'package:collect_the_world/pages/homePage/cameraScene/pages/confirmingImage/rewardWidgets/header/rewardTopWidget.dart';
+import 'package:collect_the_world/pages/homePage/cameraScene/pages/confirmingImage/rewardWidgets/dailyReward/dailyReward.dart';
+import 'package:collect_the_world/pages/homePage/cameraScene/pages/confirmingImage/rewardWidgets/dailyReward/header/rewardTopWidget.dart';
 import 'package:collect_the_world/pages/homePage/cameraScene/pages/confirmingImage/rewardWidgets/multipliers.dart';
 import 'package:collect_the_world/pages/homePage/cameraScene/pages/confirmingImage/rewardWidgets/rewardsHeader.dart';
 import 'package:collect_the_world/pages/homePage/cameraScene/pages/confirmingImage/rewardWidgets/timesCollectedWidget.dart';
@@ -29,6 +30,16 @@ class DisplayRewards extends StatefulWidget {
 }
 
 class _DisplayRewardsState extends State<DisplayRewards> {
+  int dailyQuest = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    setState(() {
+      dailyQuest = ChallengeCaching().getChallengeData[0].progress!;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -45,7 +56,7 @@ class _DisplayRewardsState extends State<DisplayRewards> {
                 children: [
                   BaseReward(baseReward: widget.baseReward),
                   Multipliers(multi: widget.multi),
-                  DailyReward(progress: widget.dailyReward),
+                  DailyReward(progress: 8),
                   TimesCollectedWidget(timesCollected: widget.timesCollected),
                   DailyItemQuestReward(progress: widget.dailyQuestProgress)
                 ],

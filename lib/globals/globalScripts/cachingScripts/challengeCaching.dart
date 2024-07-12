@@ -45,4 +45,6 @@ class ChallengeCaching {
     }
     return dailyChallenge;
   }
+
+  get getChallengeData => dailyChallenge;
 }
