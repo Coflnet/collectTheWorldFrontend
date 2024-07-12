@@ -39,7 +39,6 @@ class ItemToFindHandler {
 
   Future<String?> getCurrentItem() async {
     if (currentItem == "nil") {
-      print("returning");
       return await loadFileData();
     }
     if (currentItem == "") {
@@ -85,7 +84,7 @@ class ItemToFindHandler {
 
   Future<void> createFile(file) async {
     file.createSync();
-  var fileData = {"currentItem": "", "skips": 2};
+    var fileData = {"currentItem": "", "skips": 2};
     var jsonFileData = jsonEncode(fileData);
     await file.writeAsString(jsonFileData);
   }

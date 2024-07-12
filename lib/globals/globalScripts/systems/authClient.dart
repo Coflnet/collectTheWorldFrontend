@@ -24,12 +24,13 @@ class Authclient {
     File file = File(filePath);
 
     if (!await file.exists()) {
-      file.createSync(recursive: true);
+      file.createSync();
       var fileData = {"token": "", "secret": ""};
       var jsonFileData = jsonEncode(fileData);
       await file.writeAsString(jsonFileData);
       generateSecret();
-      storeData();
+      await generateToken();
+      await storeData();
     }
     var fileDatajson = await file.readAsString();
     var fileData = await jsonDecode(fileDatajson);
@@ -37,12 +38,13 @@ class Authclient {
 
     token = fileData["token"];
 
+
+
     if (!JwtDecoder.isExpired(token)) {
       alreadyLoaded = true;
 
       return token;
     }
-
     var returnToken = await generateToken();
     alreadyLoaded = true;
 
@@ -70,7 +72,7 @@ class Authclient {
     }
   }
 
-  void storeData() async {
+  Future<void> storeData() async {
     Directory appDir = await getApplicationDocumentsDirectory();
     String filePath = "${appDir.path}/clientDetail.json";
     File file = File(filePath);

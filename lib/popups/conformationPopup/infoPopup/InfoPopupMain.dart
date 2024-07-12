@@ -101,6 +101,7 @@ class _InfoPopupMainState extends State<InfoPopupMain> {
   }
 
   void disapear() {
+    
     if (popupData.length > 1) {
       setState(() {
         popupData.removeAt(0);
@@ -109,6 +110,9 @@ class _InfoPopupMainState extends State<InfoPopupMain> {
       return;
     }
     widget.flip();
+    if (widget.visible == true) {
+      widget.visFlip();
+    }
     InfoPopupHandler().setNewInfo = [];
     setState(() {
       visible = false;

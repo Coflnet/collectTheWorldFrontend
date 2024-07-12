@@ -18,7 +18,6 @@ class ServerSideData {
     Directory appDir = await getApplicationDocumentsDirectory();
     String filePath = "${appDir.path}/serverSideData.json";
     File file = File(filePath);
-    file.deleteSync();
     if (!file.existsSync()) {
       await createFile(file);
     }

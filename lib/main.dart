@@ -78,6 +78,7 @@ class HomePageState extends State<HomePage> {
   void handleLegalConfirming() {
     if (!LegalChangeUploader().getAlreadyAgreed) {
       setState(() {
+        floatingVisible = false;
         popupVisible = true;
         variation = 3;
       });
