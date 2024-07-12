@@ -31,6 +31,7 @@ class _AppStartupLogoState extends State<AppStartupLogo> {
     await Authclient().initClient();
     ServerSideData().loadFileData();
     InfoPopupHandler().requestPopup();
+    InfoPopupHandler().loadFileData();
     ListCaching().checkIfItemUpdated();
     ChallengeCaching().getDailyChallenge();
     LeaderboardHandler().refreshLeaderboard(1);

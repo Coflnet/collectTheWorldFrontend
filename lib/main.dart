@@ -88,6 +88,7 @@ class HomePageState extends State<HomePage> {
     await LoadingProfileInfo().loadStatsFromCloud();
     ItemToFindHandler().setRemainingSkips(ProfileRetrevial().getSkips());
     ItemToFindHandler().saveData();
+
     setState(() {
       dailyStreakNum = ProfileRetrevial().getStreak();
       xp = ProfileRetrevial().getTotalXp();

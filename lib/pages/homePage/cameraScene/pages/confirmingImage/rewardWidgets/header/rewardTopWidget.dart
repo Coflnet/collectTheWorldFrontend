@@ -1,7 +1,4 @@
 import 'package:collect_the_world/globals/globalWidgets/baseWidget/baseWidget.dart';
-import 'package:collect_the_world/globals/globalWidgets/header/currentSkips.dart';
-import 'package:collect_the_world/globals/globalWidgets/header/dailyStreak.dart';
-import 'package:collect_the_world/globals/globalWidgets/header/xpwidget.dart';
 import 'package:collect_the_world/pages/homePage/cameraScene/pages/confirmingImage/rewardWidgets/header/confirmingImageSkips.dart';
 import 'package:collect_the_world/pages/homePage/cameraScene/pages/confirmingImage/rewardWidgets/header/confirmingImageStreak.dart';
 import 'package:collect_the_world/pages/homePage/cameraScene/pages/confirmingImage/rewardWidgets/header/confirmingImageXp.dart';

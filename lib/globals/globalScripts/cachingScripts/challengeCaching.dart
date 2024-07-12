@@ -24,7 +24,6 @@ class ChallengeCaching {
     final apiInstance = ChallengeApi(client);
     try {
       final result = await apiInstance.challenge();
-      print(result);
       dailyChallenge = result!.challenges!;
       return 0;
     } catch (e) {

@@ -5,11 +5,13 @@ import 'dart:isolate';
 
 import 'package:collect_the_world/footer/cameraButton.dart';
 import 'package:collect_the_world/generatedCode/api.dart';
+import 'package:collect_the_world/globals/globalScripts/systems/authClient.dart';
 import 'package:collect_the_world/globals/globalScripts/systems/itemToFindUpdater.dart';
 import 'package:collect_the_world/globals/globalScripts/systems/profilePicture.dart';
 import 'package:collect_the_world/globals/globalWidgets/header/dailyStreak.dart';
 import 'package:collect_the_world/pages/homePage/cameraScene/confirm/widgets/confettiWidget.dart';
 import 'package:collect_the_world/pages/homePage/cameraScene/pages/confirmingImage/displayRewards.dart';
+import 'package:collect_the_world/pages/homePage/cameraScene/pages/confirmingImage/error/confirmingImageError.dart';
 import 'package:collect_the_world/pages/homePage/cameraScene/pages/confirmingImage/rewardWidgets/header/rewardTopWidget.dart';
 import 'package:confetti/confetti.dart';
 import 'package:http/http.dart' as http;
@@ -41,6 +43,8 @@ class ConfirmingimagePage extends StatefulWidget {
 
 class ConfirmingimagePageState extends State<ConfirmingimagePage> {
   bool isLoading = true;
+  bool errorPopup = false;
+  String errorId = "";
   late ConfettiController confettiController;
 
   int totalReward = 0;
@@ -89,6 +93,7 @@ class ConfirmingimagePageState extends State<ConfirmingimagePage> {
             ],
           )),
         ),
+        Visibility(visible: errorPopup, child: const ConfirmingImageError()),
         Visibility(visible: !isLoading, child: const Footer()),
         Center(
           child: CustomConfettiWidget(confettiController: confettiController),
@@ -110,7 +115,7 @@ class ConfirmingimagePageState extends State<ConfirmingimagePage> {
         "https://ctw.coflnet.com/api/images/${widget.searchBarContent}");
 
     var request = http.MultipartRequest("POST", url);
-    var token = (await authclie.Authclient().tokenRequest())!;
+    var token = (await Authclient().tokenRequest())!;
 
     request.headers["Authorization"] = 'Bearer $token';
 
@@ -127,7 +132,7 @@ class ConfirmingimagePageState extends State<ConfirmingimagePage> {
       var rewards = jsonResponse["rewards"];
       print(jsonResponse);
       setState(() {
-        baseReward = rewards["imageReward"] ?? 69;
+        baseReward = rewards["baseReward"] ?? 69;
         totalReward = rewards["total"] ?? 69;
         multi =
             (rewards["multiplier"] == 0) ? 1.0 : rewards["multiplier"] ?? 69;
@@ -141,9 +146,20 @@ class ConfirmingimagePageState extends State<ConfirmingimagePage> {
 
         timesCollected = jsonResponse["stats"]["collectedTimes"];
         dailyQuestProgress = rewards["dailyItemReward"];
+
+        remainingSkips = ItemToFindHandler().returnRamaingSkips();
+        if (rewards["addedSkip"]) {
+          remainingSkips++;
+          ItemToFindHandler().setRemainingSkips(remainingSkips);
+        }
       });
       successfullReqeust();
     } else {
+      final errorResponse = await response.stream.toSet();
+      print(errorResponse);
+      setState(() {
+        errorPopup = true;
+      });
       print(
           'Failed to upload image. Status code: ${await response.stream.bytesToString()}\n${response.statusCode}');
     }

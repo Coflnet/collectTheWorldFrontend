@@ -125,6 +125,7 @@ class ItemToFindHandler {
   }
 
   int returnRamaingSkips() {
+    print(remainingSkips);
     return remainingSkips;
   }
 

@@ -53,6 +53,9 @@ class _InfoPopupMainState extends State<InfoPopupMain> {
     if (widget.visible) {
       return;
     }
+    if ((InfoPopupHandler().getNewInfo.isEmpty)) {
+      return;
+    }
     widget.flip();
     setState(() {
       visible = true;
@@ -100,11 +103,13 @@ class _InfoPopupMainState extends State<InfoPopupMain> {
   void disapear() {
     if (popupData.length > 1) {
       setState(() {
-        popupData = popupData.removeAt(0);
+        popupData.removeAt(0);
       });
+      InfoPopupHandler().setNewInfo = popupData;
       return;
     }
     widget.flip();
+    InfoPopupHandler().setNewInfo = [];
     setState(() {
       visible = false;
     });
