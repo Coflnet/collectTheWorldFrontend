@@ -20,6 +20,7 @@ class _DailyItemsState extends State<DailyItems>
   @override
   void initState() {
     super.initState();
+    print(widget.itemCollectCount);
     _controller = AnimationController(
       duration: const Duration(milliseconds: 900),
       vsync: this,

@@ -1,4 +1,5 @@
 import 'package:collect_the_world/pages/homePage/cameraScene/pages/confirmingImage/rewardWidgets/dailyReward/dailyCompleted.dart';
+import 'package:collect_the_world/pages/homePage/cameraScene/pages/confirmingImage/rewardWidgets/dailyReward/dailyRewardDisplay.dart';
 import 'package:collect_the_world/pages/homePage/cameraScene/pages/confirmingImage/rewardWidgets/dailyReward/dailyRewardXp.dart';
 import 'package:collect_the_world/pages/homePage/cameraScene/pages/confirmingImage/rewardWidgets/rewardWidgetBase.dart';
 import 'package:flutter/material.dart';
@@ -37,28 +38,9 @@ class DailyReward extends StatelessWidget {
                       ],
                     ),
                     Container(
-                      child: (progress > 7)
-                          ? const DailyCompleted()
-                          : Row(
-                              children: [
-                                Flexible(
-                                  child: LinearProgressIndicator(
-                                    backgroundColor: Colors.pink[50],
-                                    borderRadius: const BorderRadius.only(
-                                        topLeft: Radius.circular(8),
-                                        bottomLeft: Radius.circular(8)),
-                                    value: progress / 7,
-                                    minHeight: 22,
-                                  ),
-                                ),
-                                Image.asset(
-                                  "assets/treasureChestGold.png",
-                                  scale: 3.3,
-                                ),
-                                const SizedBox(width: 16)
-                              ],
-                            ),
-                    ),
+                        child: (progress > 7)
+                            ? const DailyCompleted()
+                            : DailyRewardDisplay(progress: progress))
                   ],
                 ),
               ),

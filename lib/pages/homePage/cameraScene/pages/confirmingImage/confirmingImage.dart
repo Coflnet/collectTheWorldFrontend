@@ -5,6 +5,7 @@ import 'dart:isolate';
 
 import 'package:collect_the_world/footer/cameraButton.dart';
 import 'package:collect_the_world/generatedCode/api.dart';
+import 'package:collect_the_world/globals/globalScripts/cachingScripts/challengeCaching.dart';
 import 'package:collect_the_world/globals/globalScripts/systems/authClient.dart';
 import 'package:collect_the_world/globals/globalScripts/systems/itemToFindUpdater.dart';
 import 'package:collect_the_world/globals/globalScripts/systems/profilePicture.dart';
@@ -30,12 +31,14 @@ class ConfirmingimagePage extends StatefulWidget {
   final String searchBarContent;
   final bool isDescription;
   final String description;
+  final bool isDailyWeekly;
 
   const ConfirmingimagePage(
       {super.key,
       required this.searchBarContent,
       this.isDescription = false,
-      this.description = ""});
+      this.description = "",
+      this.isDailyWeekly = false});
 
   @override
   ConfirmingimagePageState createState() => ConfirmingimagePageState();
@@ -55,6 +58,7 @@ class ConfirmingimagePageState extends State<ConfirmingimagePage> {
   int dailyQuestProgress = 0;
   int timesCollected = 0;
   int dailyReward = 0;
+  String errorMessage = "";
 
   @override
   void initState() {
@@ -93,7 +97,11 @@ class ConfirmingimagePageState extends State<ConfirmingimagePage> {
             ],
           )),
         ),
-        Visibility(visible: errorPopup, child: const ConfirmingImageError()),
+        Visibility(
+            visible: errorPopup,
+            child: ConfirmingImageError(
+              errorMessage: errorMessage,
+            )),
         Visibility(visible: !isLoading, child: const Footer()),
         Center(
           child: CustomConfettiWidget(confettiController: confettiController),
@@ -137,6 +145,9 @@ class ConfirmingimagePageState extends State<ConfirmingimagePage> {
         multi =
             (rewards["multiplier"] == 0) ? 1.0 : rewards["multiplier"] ?? 69;
 
+        if (rewards["isCurrent"]) {
+          multi++;
+        }
         streak = ProfileRetrevial().getStreak();
         if (jsonResponse["stats"]["extendedStreak"]) {
           streak++;
@@ -147,6 +158,8 @@ class ConfirmingimagePageState extends State<ConfirmingimagePage> {
         timesCollected = jsonResponse["stats"]["collectedTimes"];
 
         remainingSkips = ItemToFindHandler().returnRamaingSkips();
+        dailyQuestProgress = ChallengeCaching().getChallengeData[0].progress!;
+        dailyQuestProgress++;
         if (rewards["addedSkip"]) {
           remainingSkips++;
           ItemToFindHandler().setRemainingSkips(remainingSkips);
@@ -158,6 +171,7 @@ class ConfirmingimagePageState extends State<ConfirmingimagePage> {
       print(errorResponse);
       setState(() {
         errorPopup = true;
+        errorMessage = errorResponse.toString();
       });
       print(
           'Failed to upload image. Status code: ${await response.stream.bytesToString()}\n${response.statusCode}');
@@ -166,6 +180,11 @@ class ConfirmingimagePageState extends State<ConfirmingimagePage> {
 
   void successfullReqeust() {
     confettiController.play();
+    if (widget.isDailyWeekly) {
+      ItemToFindHandler().fetchNewItem();
+    }
+    ChallengeCaching().requestChallenge();
+
     setState(() {
       isLoading = false;
     });

@@ -9,13 +9,14 @@ class LeaderboardRequestHandler {
     String formatedDate = formatter.format(now);
     switch (variation) {
       case 1:
-        return "exp_daily_$formatedDate";
+      print("exp_daily_$formatedDate");
+        return "daily";
       case 2:
         int currentWeekday = now.weekday;
         DateTime firstDayOfWeek =
             now.subtract(Duration(days: currentWeekday - 1));
         formatedDate = formatter.format(firstDayOfWeek);
-        return "exp_weekly_$formatedDate";
+        return "weekly";
       case 3:
         return "exp_overall";
     }
@@ -32,7 +33,6 @@ class LeaderboardRequestHandler {
     try {
       final result =
           await apiInstance.getLeaderboard(getLeaderBoardId(variation), offset: offset);
-      print(result);
       if (result == null) {
         return [];
       }

@@ -14,7 +14,9 @@ import 'package:hexcolor/hexcolor.dart';
 
 class FinalConformationScene extends StatelessWidget {
   final String itemName;
-  const FinalConformationScene({super.key, required this.itemName});
+  final bool isDailyWeekly;
+  const FinalConformationScene(
+      {super.key, required this.itemName, this.isDailyWeekly = false});
 
   @override
   Widget build(BuildContext context) {
@@ -43,6 +45,7 @@ class FinalConformationScene extends StatelessWidget {
               ConfirmButton(
                 searchBarContent: itemName,
                 isHttpRequest: true,
+                isDailyWeekly: isDailyWeekly,
               ),
             ],
           ),

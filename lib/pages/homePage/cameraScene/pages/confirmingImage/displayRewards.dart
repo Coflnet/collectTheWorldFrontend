@@ -48,21 +48,21 @@ class _DisplayRewardsState extends State<DisplayRewards> {
       child: baseWidget(
           child: Container(
         padding: const EdgeInsets.all(8),
-        child: Column(
-          children: <Widget>[
-            SingleChildScrollView(
-              child: Column(
+        child: SingleChildScrollView(
+          child: Column(
+            children: <Widget>[
+              Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   BaseReward(baseReward: widget.baseReward),
                   Multipliers(multi: widget.multi),
-                  DailyReward(progress: 8),
+                  DailyReward(progress: widget.dailyQuestProgress),
                   TimesCollectedWidget(timesCollected: widget.timesCollected),
                   DailyItemQuestReward(progress: widget.dailyQuestProgress)
                 ],
-              ),
-            )
-          ],
+              )
+            ],
+          ),
         ),
       )),
     );

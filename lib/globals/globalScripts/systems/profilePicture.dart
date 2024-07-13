@@ -80,40 +80,26 @@ class LoadingProfileInfo {
         return;
       }
 
-      totalXp = result[result.indexWhere((result) => result.statName == "exp")]
-              .value ??
-          0;
-      assignTopThee(result);
-      totalPicture = result[result
-                  .indexWhere((result) => result.statName == "images_uploaded")]
-              .value ??
-          0;
-      totalUnique = result[result.indexWhere(
-                  (result) => result.statName == "unique_images_uploaded")]
-              .value ??
-          0;
-      dailyStreak = result[result.indexWhere(
-                  (result) => result.statName == "collection_streak")]
-              .value ??
-          0;
-      remainingSkips = result[result
-                  .indexWhere((result) => result.statName == "skips_available")]
-              .value ??
-          0;
+      totalXp = getStatValue(result, 'exp');
+      totalPicture = getStatValue(result, 'images_uploaded');
+      totalUnique = getStatValue(result, 'unique_images_uploaded');
+      dailyStreak = getStatValue(result, 'collection_streak');
+      remainingSkips = getStatValue(result, 'skips_available');
+      topThree = getStatValue(result, "daily_leaderboard_top10") +
+          getStatValue(result, "weekly_leaderboard_top10");
+
       saveFile();
     } catch (e) {
-      print("error requesting stats in profile picture $e");
+      print("error in profile picture $e");
     }
   }
 
-  void assignTopThee(List result) {
-    topThree = result[result.indexWhere(
-                (result) => result.statName == "daily_leaderboard_top10")]
-            .value ??
-        0 +
-            result[result.indexWhere(
-                    (result) => result.statName == "weekly_leaderboard_top10")]
-                .value;
+  int getStatValue(List result, String statName) {
+    int index = result.indexWhere((item) => item.statName == statName);
+    if (index == -1) {
+      return 0;
+    }
+    return result[index].value ?? 0;
   }
 
   void saveFile() async {
@@ -168,6 +154,7 @@ class ProfileRetrevial {
   }
 
   int getTotalXp() {
+    print(totalXp);
     return totalXp;
   }
 

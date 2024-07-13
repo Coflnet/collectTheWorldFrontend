@@ -16,20 +16,21 @@ class ConfirmButton extends StatelessWidget {
   final bool isHttpRequest;
   final bool isItemToFind;
   final bool isDescription;
+  final bool isDailyWeekly;
 
   const ConfirmButton(
       {super.key,
       required this.searchBarContent,
       required this.isHttpRequest,
       this.isItemToFind = false,
-      this.isDescription = false});
+      this.isDescription = false,
+      this.isDailyWeekly = false});
 
   @override
   Widget build(BuildContext context) {
     return Container(
         margin: const EdgeInsets.only(top: 7),
         child: Container(
-          
           width: 83,
           height: 83,
           decoration: BoxDecoration(
@@ -68,6 +69,7 @@ class ConfirmButton extends StatelessWidget {
         MaterialPageRoute(
             builder: (context) => ConfirmingimagePage(
                   searchBarContent: searchBarContent,
+                  isDailyWeekly: isDailyWeekly,
                 )));
     return;
   }

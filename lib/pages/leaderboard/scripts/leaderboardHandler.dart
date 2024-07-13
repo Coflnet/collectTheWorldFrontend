@@ -54,7 +54,6 @@ class LeaderboardHandler {
     if (firstLoad[selection -1] && first) {
       return [];
     }
-
     firstLoad[selection -1] = true;
     var leaderBoardData =
         await LeaderboardRequestHandler().loadLeaderBoard(selection);

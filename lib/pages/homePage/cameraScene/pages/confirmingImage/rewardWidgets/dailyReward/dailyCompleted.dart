@@ -5,16 +5,18 @@ class DailyCompleted extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Row(
+    return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
         Text(
           "Completed",
           style: TextStyle(
-              color: Colors.white, fontWeight: FontWeight.w500, fontSize: 22),
+              color: Colors.grey[400],
+              fontWeight: FontWeight.w500,
+              fontSize: 22),
         ),
-        SizedBox(width: 30)
+        const SizedBox(width: 30)
       ],
     );
   }

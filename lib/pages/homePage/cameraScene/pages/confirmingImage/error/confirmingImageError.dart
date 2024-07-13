@@ -1,8 +1,11 @@
 import 'package:collect_the_world/globals/globalWidgets/baseWidget/baseWidget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class ConfirmingImageError extends StatelessWidget {
-  const ConfirmingImageError({super.key});
+  final String errorMessage;
+
+  const ConfirmingImageError({super.key, required this.errorMessage});
 
   @override
   Widget build(BuildContext context) {
@@ -14,14 +17,15 @@ class ConfirmingImageError extends StatelessWidget {
           child: Column(
             children: <Widget>[
               const Text(
-                  "There was an error that we encountered if this continues make an report in the our discord and provide the id below"),
+                  "There was an error that we encountered if this continues make an report in the our discord and provide message below"),
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 8),
                 decoration: BoxDecoration(
                     color: const Color.fromRGBO(119, 80, 119, 1),
                     borderRadius: BorderRadius.circular(8)),
                 child: TextButton(
-                  onPressed: () => {},
+                  onPressed: () =>
+                      {Clipboard.setData(ClipboardData(text: errorMessage))},
                   child: const Text("Copy error id",
                       style: const TextStyle(
                           color: Colors.white,

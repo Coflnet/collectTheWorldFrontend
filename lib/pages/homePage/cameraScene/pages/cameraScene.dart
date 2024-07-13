@@ -97,8 +97,10 @@ class _CameraScreenState extends State<CameraScreen> {
         Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) =>
-                    FinalConformationScene(itemName: widget.itemName)));
+                builder: (context) => FinalConformationScene(
+                      itemName: widget.itemName,
+                      isDailyWeekly: true,
+                    )));
         return;
       }
 
