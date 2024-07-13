@@ -1,14 +1,15 @@
 import 'package:custom_timer/custom_timer.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class TimerCountDownWidget extends StatefulWidget {
-  const TimerCountDownWidget({Key? key}) : super(key: key);
+class DailyStreakCountDown extends StatefulWidget {
+  const DailyStreakCountDown({Key? key}) : super(key: key);
 
   @override
-  _TimerCountDownWidgetState createState() => _TimerCountDownWidgetState();
+  _DailyStreakCountDownState createState() => _DailyStreakCountDownState();
 }
 
-class _TimerCountDownWidgetState extends State<TimerCountDownWidget>
+class _DailyStreakCountDownState extends State<DailyStreakCountDown>
     with SingleTickerProviderStateMixin {
   late CustomTimerController controller;
 
@@ -27,33 +28,24 @@ class _TimerCountDownWidgetState extends State<TimerCountDownWidget>
   }
 
   @override
-  @override
-  void dispose() {
-    controller.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.only(top: 8),
-      child: CustomTimer(
-        controller: controller,
-        builder: (p1, p2) {
-          return Text("${p2.hours}:${p2.minutes}:${p2.seconds}",
-              style: const TextStyle(
-                fontSize: 40,
-                  color: Colors.white,
-                  fontWeight: FontWeight.w700));
-        },
-      ),
+    TextStyle baseStyle = const TextStyle(
+        color: Colors.white, fontWeight: FontWeight.w600, fontSize: 24);
+    return Column(
+      children: <Widget>[
+        Text("resets in", style: baseStyle),
+        CustomTimer(
+            controller: controller,
+            builder: (p1, p2) {
+              return Text("${p2.hours}:${p2.minutes}:${p2.seconds}", style: baseStyle,);
+            })
+      ],
     );
   }
 
   Duration getUtcCountDown() {
     DateTime nowUtc = DateTime.now().toUtc();
 
-    // Calculate the next occurrence of 00:00 UTC
     DateTime nextMidnightUtc = DateTime.utc(
       nowUtc.year,
       nowUtc.month,

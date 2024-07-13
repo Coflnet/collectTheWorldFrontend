@@ -5,7 +5,8 @@ import 'package:flutter/material.dart';
 class GlobalTask extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Expanded(
+    return Flexible(
+      flex: 1,
       child: Container(
         margin: const EdgeInsets.only(top: 16),
         child: baseWidget(

@@ -51,15 +51,15 @@ class LoadingProfileInfo {
     var fileDataJson = file.readAsStringSync();
     var fileData = jsonDecode(fileDataJson);
 
-    profileString = fileData["ProfileString"] ?? "";
-    username = fileData["Username"] ?? "";
-    topThree = fileData["TopThree"] ?? 0;
-    totalUnique = fileData["totalUnique"] ?? 0;
-    totalPicture = fileData["totalPicture"] ?? 0;
-    totalXp = fileData["totalXp"] ?? 0;
+    profileString = fileData["ProfileString"];
+    username = fileData["Username"];
+    topThree = fileData["TopThree"];
+    totalUnique = fileData["totalUnique"];
+    totalPicture = fileData["totalPicture"];
+    totalXp = fileData["totalXp"];
     joinDate = DateTime.parse(fileData["JoinDate"]);
-    dailyStreak = fileData["dailyStreak"] ?? 0;
-    legalDone = fileData["legalDone"] ?? false;
+    dailyStreak = fileData["dailyStreak"];
+    legalDone = fileData["legalDone"];
     return;
   }
 
@@ -116,6 +116,7 @@ class LoadingProfileInfo {
       "totalXp": totalXp,
       "dailyStreak": dailyStreak,
       "skipsRemaining": skipsRemaining,
+      "legalDone": legalDone
     };
     var fileDataJson = jsonEncode(fileData);
     file.writeAsString(fileDataJson);
@@ -154,7 +155,6 @@ class ProfileRetrevial {
   }
 
   int getTotalXp() {
-    print(totalXp);
     return totalXp;
   }
 

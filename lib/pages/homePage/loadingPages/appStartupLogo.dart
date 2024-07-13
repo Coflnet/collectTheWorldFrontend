@@ -31,6 +31,7 @@ class _AppStartupLogoState extends State<AppStartupLogo> {
   void loadData() async {
     await Authclient().initClient();
     ItemToFindHandler().loadFileData();
+    ItemToFindHandler().requestRemainingSkips();
     ServerSideData().loadFileData();
     InfoPopupHandler().requestPopup();
     InfoPopupHandler().loadFileData();
@@ -65,7 +66,7 @@ class _AppStartupLogoState extends State<AppStartupLogo> {
           height: 250,
           decoration: const BoxDecoration(
               image: DecorationImage(
-                fit: BoxFit.cover,
+                  fit: BoxFit.cover,
                   image: AssetImage(
                       "assets/images/logoVersionOneLogoTransparent.png"))),
         ),

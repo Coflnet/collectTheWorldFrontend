@@ -10,12 +10,14 @@ import 'package:flutter/widgets.dart';
 
 class DailyBonuses extends StatelessWidget {
   final List<ActiveMultiplier> multiplierList;
+  final double maxHeight;
 
-  const DailyBonuses({super.key, required this.multiplierList});
+  const DailyBonuses(
+      {super.key, required this.multiplierList, required this.maxHeight});
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
+    return SizedBox(
       child: CustomPopupMenu(
         menuBuilder: () => const ClipRRect(child: DailyBonusPopup()),
         position: PreferredPosition.top,
@@ -23,6 +25,7 @@ class DailyBonuses extends StatelessWidget {
         verticalMargin: -20,
         barrierColor: Colors.transparent,
         child: Container(
+          height: 300,
           margin: const EdgeInsets.only(top: 16),
           child: baseWidget(
               child: Container(
@@ -92,6 +95,7 @@ class BonusWidget extends StatelessWidget {
                 ]),
             borderRadius: BorderRadius.circular(12)),
         child: Container(
+          padding: EdgeInsets.only(bottom: 8),
           child: TextButton(
             onPressed: () => {},
             child: Column(

@@ -62,6 +62,7 @@ class ItemToFindHandler {
 
     try {
       final result = await api_instance.getNextObject();
+      print(result);
       String? name = result?.name;
       currentItem = name!;
       saveData();
@@ -151,6 +152,7 @@ class ItemToFindHandler {
     final apiInstance = SkipApi(client);
     try {
       final result = await apiInstance.available();
+      remainingSkips = result?.total ?? 0;
       return result?.total;
     } catch (e) {
       if (e is! ApiException) {

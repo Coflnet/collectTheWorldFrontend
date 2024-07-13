@@ -142,8 +142,9 @@ class ConfirmingimagePageState extends State<ConfirmingimagePage> {
       setState(() {
         baseReward = rewards["baseReward"] ?? 69;
         totalReward = rewards["total"] ?? 69;
-        multi =
-            (rewards["multiplier"] == 0) ? 1.0 : rewards["multiplier"] ?? 69;
+        multi = (rewards["multiplier"] == 0)
+            ? 1.0
+            : rewards["multiplier"].toDouble() ?? 69;
 
         if (rewards["isCurrent"]) {
           multi++;

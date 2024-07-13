@@ -9,10 +9,10 @@ class DailyRewardXp extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.only(right: 14),
       child: Text(
-        "+500 XP",
+        "+1000 XP",
         style: TextStyle(
             color: (progress == 7) ? Colors.white : Colors.transparent,
-            fontSize: 22,
+            fontSize: 18,
             fontWeight: FontWeight.w600),
       ),
     );

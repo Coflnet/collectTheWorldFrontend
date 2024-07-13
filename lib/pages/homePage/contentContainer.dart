@@ -18,30 +18,31 @@ class ContentContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.fromLTRB(24, 133, 24, 95),
-      child: Column(
-        children: [
-          Expanded(
-              flex: 4,
-              child: Column(
-                children: [
-                  CollectItemWidget(),
-                  DailyItems(itemCollectCount: collectionPercentage)
-                ],
-              )),
-          Expanded(
-            flex: 6,
-            child: Column(
+        margin: const EdgeInsets.fromLTRB(24, 133, 24, 0),
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            final maxHeight = constraints.maxHeight;
+            return Column(
               children: [
-                GlobalTask(),
-                DailyBonuses(
-                  multiplierList: multiplierList,
+                SizedBox(
+                  height: (maxHeight / 4).clamp(130, 800),
+                  child: CollectItemWidget(constaints: maxHeight),
                 ),
+                DailyItems(itemCollectCount: collectionPercentage),
+                GlobalTask(),
+                SizedBox(
+                  height: (maxHeight / 4).clamp(100, 400),
+                  child: DailyBonuses(
+                    maxHeight: maxHeight,
+                    multiplierList: multiplierList,
+                  ),
+                ),
+                SizedBox(
+                  height: 95,
+                )
               ],
-            ),
-          ),
-        ],
-      ),
-    );
+            );
+          },
+        ));
   }
 }
