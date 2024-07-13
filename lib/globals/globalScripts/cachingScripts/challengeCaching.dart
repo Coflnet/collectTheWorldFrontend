@@ -25,6 +25,7 @@ class ChallengeCaching {
     try {
       final result = await apiInstance.challenge();
       dailyChallenge = result!.challenges!;
+      print(dailyChallenge);
       return 0;
     } catch (e) {
       print("error in challengeCaching fetching $e");

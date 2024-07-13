@@ -16,6 +16,7 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.6
+
   flutter_swipe_detector: ^2.0.0
   http: ^1.2.1
   flutter_glow: ^0.3.0
@@ -42,6 +43,7 @@ dependencies:
   flutter_local_notifications: ^17.1.2
   jwt_decoder: ^2.0.1
   mailto: ^2.0.0
+  flutter_launcher_icons: ^0.13.1
 
 dev_dependencies:
   flutter_test:
@@ -61,6 +63,7 @@ flutter:
   uses-material-design: true
   assets:
     - assets/
+    - assets/images/logoVersionOneLogoTransparent.png
 
   fonts:
     - family: Poppins
@@ -77,7 +80,16 @@ flutter:
         - asset: fonts/static/Rubik-Regular.ttf
     - family: Robik-Light
       fonts:
-      - asset: fonts/static/Rubik-Medium.ttf
+        - asset: fonts/static/Rubik-Medium.ttf
     - family: Rukik-RLight
       fonts:
-      - asset: fonts/static/Rubik-Light.ttf
+        - asset: fonts/static/Rubik-Light.ttf
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  remove_aplha: true
+  image_path: "assets/images/logoVersionOneLogo.png"
+  adaptive_icon_foreground: "assets/images/logoVersionOneLogo.png"
+  adaptive_icon_background: "assets/images/logoVersionOneLogo.png"
+  min_sdk_android: 21 # android min sdk min:16, default 21

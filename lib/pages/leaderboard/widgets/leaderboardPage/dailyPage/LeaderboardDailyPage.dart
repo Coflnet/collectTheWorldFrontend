@@ -24,18 +24,6 @@ class LeaderboardDailyPageState extends State<LeaderboardDailyPage> {
   @override
   void initState() {
     super.initState();
-    testApi();
-  }
-
-  void testApi() async {
-    token = (await Authclient().tokenRequest())!;
-    var authclient = HttpBearerAuth();
-    authclient.accessToken = token;
-    final client = ApiClient(
-        basePath: "https://ctw.coflnet.com", authentication: authclient);
-    final apiInstance = ExpApi(client);
-    final result = await apiInstance.getExpChanges();
-    print(result);
   }
 
   @override

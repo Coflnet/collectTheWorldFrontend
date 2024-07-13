@@ -56,10 +56,20 @@ class _AppStartupLogoState extends State<AppStartupLogo> {
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedScale(
-      scale: scale,
-      duration: const Duration(microseconds: 500),
-      child: const Text("📷", style: TextStyle(fontSize: 30)),
+    return Center(
+      child: AnimatedScale(
+        scale: scale,
+        duration: const Duration(microseconds: 500),
+        child: Container(
+          width: 250,
+          height: 250,
+          decoration: const BoxDecoration(
+              image: DecorationImage(
+                fit: BoxFit.cover,
+                  image: AssetImage(
+                      "assets/images/logoVersionOneLogoTransparent.png"))),
+        ),
+      ),
     );
   }
 }
