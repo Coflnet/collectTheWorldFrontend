@@ -10,15 +10,16 @@
 
 part of openapi.api;
 
-class ExpChange {
-  /// Returns a new [ExpChange] instance.
-  ExpChange({
+class ChangeEvent {
+  /// Returns a new [ChangeEvent] instance.
+  ChangeEvent({
     this.userId,
     this.time,
     this.change,
     this.source_,
     this.reference,
     this.description,
+    this.type,
   });
 
   ///
@@ -51,14 +52,23 @@ class ExpChange {
 
   String? description;
 
+  ///
+  /// Please note: This property should have been non-nullable! Since the specification file
+  /// does not include a default value (using the "default:" property), however, the generated
+  /// source code must fall back to having a nullable type.
+  /// Consider adding a "default:" property in the specification file to hide this note.
+  ///
+  ChangeType? type;
+
   @override
-  bool operator ==(Object other) => identical(this, other) || other is ExpChange &&
+  bool operator ==(Object other) => identical(this, other) || other is ChangeEvent &&
     other.userId == userId &&
     other.time == time &&
     other.change == change &&
     other.source_ == source_ &&
     other.reference == reference &&
-    other.description == description;
+    other.description == description &&
+    other.type == type;
 
   @override
   int get hashCode =>
@@ -68,10 +78,11 @@ class ExpChange {
     (change == null ? 0 : change!.hashCode) +
     (source_ == null ? 0 : source_!.hashCode) +
     (reference == null ? 0 : reference!.hashCode) +
-    (description == null ? 0 : description!.hashCode);
+    (description == null ? 0 : description!.hashCode) +
+    (type == null ? 0 : type!.hashCode);
 
   @override
-  String toString() => 'ExpChange[userId=$userId, time=$time, change=$change, source_=$source_, reference=$reference, description=$description]';
+  String toString() => 'ChangeEvent[userId=$userId, time=$time, change=$change, source_=$source_, reference=$reference, description=$description, type=$type]';
 
   Map<String, dynamic> toJson() {
     final json = <String, dynamic>{};
@@ -105,13 +116,18 @@ class ExpChange {
     } else {
       json[r'description'] = null;
     }
+    if (this.type != null) {
+      json[r'type'] = this.type;
+    } else {
+      json[r'type'] = null;
+    }
     return json;
   }
 
-  /// Returns a new [ExpChange] instance and imports its values from
+  /// Returns a new [ChangeEvent] instance and imports its values from
   /// [value] if it's a [Map], null otherwise.
   // ignore: prefer_constructors_over_static_methods
-  static ExpChange? fromJson(dynamic value) {
+  static ChangeEvent? fromJson(dynamic value) {
     if (value is Map) {
       final json = value.cast<String, dynamic>();
 
@@ -120,29 +136,30 @@ class ExpChange {
       // Note 2: this code is stripped in release mode!
       assert(() {
         requiredKeys.forEach((key) {
-          assert(json.containsKey(key), 'Required key "ExpChange[$key]" is missing from JSON.');
-          assert(json[key] != null, 'Required key "ExpChange[$key]" has a null value in JSON.');
+          assert(json.containsKey(key), 'Required key "ChangeEvent[$key]" is missing from JSON.');
+          assert(json[key] != null, 'Required key "ChangeEvent[$key]" has a null value in JSON.');
         });
         return true;
       }());
 
-      return ExpChange(
+      return ChangeEvent(
         userId: mapValueOfType<String>(json, r'userId'),
         time: mapDateTime(json, r'time', r''),
         change: mapValueOfType<int>(json, r'change'),
         source_: mapValueOfType<String>(json, r'source'),
         reference: mapValueOfType<String>(json, r'reference'),
         description: mapValueOfType<String>(json, r'description'),
+        type: ChangeType.fromJson(json[r'type']),
       );
     }
     return null;
   }
 
-  static List<ExpChange> listFromJson(dynamic json, {bool growable = false,}) {
-    final result = <ExpChange>[];
+  static List<ChangeEvent> listFromJson(dynamic json, {bool growable = false,}) {
+    final result = <ChangeEvent>[];
     if (json is List && json.isNotEmpty) {
       for (final row in json) {
-        final value = ExpChange.fromJson(row);
+        final value = ChangeEvent.fromJson(row);
         if (value != null) {
           result.add(value);
         }
@@ -151,12 +168,12 @@ class ExpChange {
     return result.toList(growable: growable);
   }
 
-  static Map<String, ExpChange> mapFromJson(dynamic json) {
-    final map = <String, ExpChange>{};
+  static Map<String, ChangeEvent> mapFromJson(dynamic json) {
+    final map = <String, ChangeEvent>{};
     if (json is Map && json.isNotEmpty) {
       json = json.cast<String, dynamic>(); // ignore: parameter_assignments
       for (final entry in json.entries) {
-        final value = ExpChange.fromJson(entry.value);
+        final value = ChangeEvent.fromJson(entry.value);
         if (value != null) {
           map[entry.key] = value;
         }
@@ -165,14 +182,14 @@ class ExpChange {
     return map;
   }
 
-  // maps a json object with a list of ExpChange-objects as value to a dart map
-  static Map<String, List<ExpChange>> mapListFromJson(dynamic json, {bool growable = false,}) {
-    final map = <String, List<ExpChange>>{};
+  // maps a json object with a list of ChangeEvent-objects as value to a dart map
+  static Map<String, List<ChangeEvent>> mapListFromJson(dynamic json, {bool growable = false,}) {
+    final map = <String, List<ChangeEvent>>{};
     if (json is Map && json.isNotEmpty) {
       // ignore: parameter_assignments
       json = json.cast<String, dynamic>();
       for (final entry in json.entries) {
-        map[entry.key] = ExpChange.listFromJson(entry.value, growable: growable,);
+        map[entry.key] = ChangeEvent.listFromJson(entry.value, growable: growable,);
       }
     }
     return map;

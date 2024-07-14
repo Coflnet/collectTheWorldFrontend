@@ -114,7 +114,6 @@ class LegalChangeUploader {
     }
   }
 
-  set userId(String value) => optionsChosen.userId = value;
   set givenAt(DateTime value) => optionsChosen.givenAt = value;
   set targetedAds(bool value) => optionsChosen.targetedAds = value;
   set tracking(bool value) => optionsChosen.tracking = value;
@@ -122,7 +121,6 @@ class LegalChangeUploader {
   set allowResell(bool value) => optionsChosen.allowResell = value;
   set newService(bool value) => optionsChosen.newService = value;
   set setIsChanged(bool value) => isChanged = value;
-  String? get getuserId => optionsChosen.userId;
   DateTime? get getgivenAt => optionsChosen.givenAt;
   bool? get gettargetedAds => optionsChosen.targetedAds;
   bool? get gettracking => optionsChosen.tracking;

@@ -15,6 +15,7 @@ class UploadStats {
   UploadStats({
     this.extendedStreak,
     this.collectedTimes,
+    this.isNoItem,
   });
 
   ///
@@ -25,6 +26,7 @@ class UploadStats {
   ///
   bool? extendedStreak;
 
+  /// How many times the image was collected before
   ///
   /// Please note: This property should have been non-nullable! Since the specification file
   /// does not include a default value (using the "default:" property), however, the generated
@@ -33,19 +35,30 @@ class UploadStats {
   ///
   int? collectedTimes;
 
+  /// label is not able to be collected, maybe scrambled
+  ///
+  /// Please note: This property should have been non-nullable! Since the specification file
+  /// does not include a default value (using the "default:" property), however, the generated
+  /// source code must fall back to having a nullable type.
+  /// Consider adding a "default:" property in the specification file to hide this note.
+  ///
+  bool? isNoItem;
+
   @override
   bool operator ==(Object other) => identical(this, other) || other is UploadStats &&
     other.extendedStreak == extendedStreak &&
-    other.collectedTimes == collectedTimes;
+    other.collectedTimes == collectedTimes &&
+    other.isNoItem == isNoItem;
 
   @override
   int get hashCode =>
     // ignore: unnecessary_parenthesis
     (extendedStreak == null ? 0 : extendedStreak!.hashCode) +
-    (collectedTimes == null ? 0 : collectedTimes!.hashCode);
+    (collectedTimes == null ? 0 : collectedTimes!.hashCode) +
+    (isNoItem == null ? 0 : isNoItem!.hashCode);
 
   @override
-  String toString() => 'UploadStats[extendedStreak=$extendedStreak, collectedTimes=$collectedTimes]';
+  String toString() => 'UploadStats[extendedStreak=$extendedStreak, collectedTimes=$collectedTimes, isNoItem=$isNoItem]';
 
   Map<String, dynamic> toJson() {
     final json = <String, dynamic>{};
@@ -58,6 +71,11 @@ class UploadStats {
       json[r'collectedTimes'] = this.collectedTimes;
     } else {
       json[r'collectedTimes'] = null;
+    }
+    if (this.isNoItem != null) {
+      json[r'isNoItem'] = this.isNoItem;
+    } else {
+      json[r'isNoItem'] = null;
     }
     return json;
   }
@@ -83,6 +101,7 @@ class UploadStats {
       return UploadStats(
         extendedStreak: mapValueOfType<bool>(json, r'extendedStreak'),
         collectedTimes: mapValueOfType<int>(json, r'collectedTimes'),
+        isNoItem: mapValueOfType<bool>(json, r'isNoItem'),
       );
     }
     return null;

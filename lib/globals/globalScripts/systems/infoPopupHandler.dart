@@ -18,9 +18,9 @@ class InfoPopupHandler {
     authclient.accessToken = token;
     final client = ApiClient(
         basePath: "https://ctw.coflnet.com", authentication: authclient);
-    final apiInstance = ExpApi(client);
+    final apiInstance = EventsApi(client);
     try {
-      final result = await apiInstance.getExpChanges() ?? [ExpChange()];
+      final result = await apiInstance.getExpChanges() ?? [ChangeEvent()];
 
       if (result.isEmpty) {
         return;

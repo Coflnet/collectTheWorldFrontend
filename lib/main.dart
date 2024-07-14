@@ -71,6 +71,7 @@ class HomePageState extends State<HomePage> {
   void loadData() async {
     loadImportantData();
     loadChallenge();
+    LoadingProfileInfo().loadLeaderboardProfile();
     loadXP();
     handleLegalConfirming();
   }

@@ -13,7 +13,6 @@ part of openapi.api;
 class ConsentData {
   /// Returns a new [ConsentData] instance.
   ConsentData({
-    this.userId,
     this.givenAt,
     this.targetedAds,
     this.tracking,
@@ -22,20 +21,7 @@ class ConsentData {
     this.newService,
   });
 
-  ///
-  /// Please note: This property should have been non-nullable! Since the specification file
-  /// does not include a default value (using the "default:" property), however, the generated
-  /// source code must fall back to having a nullable type.
-  /// Consider adding a "default:" property in the specification file to hide this note.
-  ///
-  String? userId;
-
-  ///
-  /// Please note: This property should have been non-nullable! Since the specification file
-  /// does not include a default value (using the "default:" property), however, the generated
-  /// source code must fall back to having a nullable type.
-  /// Consider adding a "default:" property in the specification file to hide this note.
-  ///
+  /// When the consent was given, updated when storing
   DateTime? givenAt;
 
   /// Accepted all targeting
@@ -55,7 +41,6 @@ class ConsentData {
 
   @override
   bool operator ==(Object other) => identical(this, other) || other is ConsentData &&
-    other.userId == userId &&
     other.givenAt == givenAt &&
     other.targetedAds == targetedAds &&
     other.tracking == tracking &&
@@ -66,7 +51,6 @@ class ConsentData {
   @override
   int get hashCode =>
     // ignore: unnecessary_parenthesis
-    (userId == null ? 0 : userId!.hashCode) +
     (givenAt == null ? 0 : givenAt!.hashCode) +
     (targetedAds == null ? 0 : targetedAds!.hashCode) +
     (tracking == null ? 0 : tracking!.hashCode) +
@@ -75,15 +59,10 @@ class ConsentData {
     (newService == null ? 0 : newService!.hashCode);
 
   @override
-  String toString() => 'ConsentData[userId=$userId, givenAt=$givenAt, targetedAds=$targetedAds, tracking=$tracking, analytics=$analytics, allowResell=$allowResell, newService=$newService]';
+  String toString() => 'ConsentData[givenAt=$givenAt, targetedAds=$targetedAds, tracking=$tracking, analytics=$analytics, allowResell=$allowResell, newService=$newService]';
 
   Map<String, dynamic> toJson() {
     final json = <String, dynamic>{};
-    if (this.userId != null) {
-      json[r'userId'] = this.userId;
-    } else {
-      json[r'userId'] = null;
-    }
     if (this.givenAt != null) {
       json[r'givenAt'] = this.givenAt!.toUtc().toIso8601String();
     } else {
@@ -136,7 +115,6 @@ class ConsentData {
       }());
 
       return ConsentData(
-        userId: mapValueOfType<String>(json, r'userId'),
         givenAt: mapDateTime(json, r'givenAt', r''),
         targetedAds: mapValueOfType<bool>(json, r'targetedAds'),
         tracking: mapValueOfType<bool>(json, r'tracking'),

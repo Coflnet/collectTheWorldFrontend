@@ -15,8 +15,9 @@ class UploadRewards {
   UploadRewards({
     this.total,
     this.multiplier,
-    this.imageBonus,
+    this.baseReward,
     this.isCurrent,
+    this.addedSkip,
     this.unique,
     this.dailyItemReward,
     this.dailyQuestReward,
@@ -44,7 +45,7 @@ class UploadRewards {
   /// source code must fall back to having a nullable type.
   /// Consider adding a "default:" property in the specification file to hide this note.
   ///
-  int? imageBonus;
+  int? baseReward;
 
   ///
   /// Please note: This property should have been non-nullable! Since the specification file
@@ -53,6 +54,15 @@ class UploadRewards {
   /// Consider adding a "default:" property in the specification file to hide this note.
   ///
   bool? isCurrent;
+
+  /// Rewarded a skip for the upload
+  ///
+  /// Please note: This property should have been non-nullable! Since the specification file
+  /// does not include a default value (using the "default:" property), however, the generated
+  /// source code must fall back to having a nullable type.
+  /// Consider adding a "default:" property in the specification file to hide this note.
+  ///
+  bool? addedSkip;
 
   /// Has never been uploaded before
   ///
@@ -85,8 +95,9 @@ class UploadRewards {
   bool operator ==(Object other) => identical(this, other) || other is UploadRewards &&
     other.total == total &&
     other.multiplier == multiplier &&
-    other.imageBonus == imageBonus &&
+    other.baseReward == baseReward &&
     other.isCurrent == isCurrent &&
+    other.addedSkip == addedSkip &&
     other.unique == unique &&
     other.dailyItemReward == dailyItemReward &&
     other.dailyQuestReward == dailyQuestReward;
@@ -96,14 +107,15 @@ class UploadRewards {
     // ignore: unnecessary_parenthesis
     (total == null ? 0 : total!.hashCode) +
     (multiplier == null ? 0 : multiplier!.hashCode) +
-    (imageBonus == null ? 0 : imageBonus!.hashCode) +
+    (baseReward == null ? 0 : baseReward!.hashCode) +
     (isCurrent == null ? 0 : isCurrent!.hashCode) +
+    (addedSkip == null ? 0 : addedSkip!.hashCode) +
     (unique == null ? 0 : unique!.hashCode) +
     (dailyItemReward == null ? 0 : dailyItemReward!.hashCode) +
     (dailyQuestReward == null ? 0 : dailyQuestReward!.hashCode);
 
   @override
-  String toString() => 'UploadRewards[total=$total, multiplier=$multiplier, imageBonus=$imageBonus, isCurrent=$isCurrent, unique=$unique, dailyItemReward=$dailyItemReward, dailyQuestReward=$dailyQuestReward]';
+  String toString() => 'UploadRewards[total=$total, multiplier=$multiplier, baseReward=$baseReward, isCurrent=$isCurrent, addedSkip=$addedSkip, unique=$unique, dailyItemReward=$dailyItemReward, dailyQuestReward=$dailyQuestReward]';
 
   Map<String, dynamic> toJson() {
     final json = <String, dynamic>{};
@@ -117,15 +129,20 @@ class UploadRewards {
     } else {
       json[r'multiplier'] = null;
     }
-    if (this.imageBonus != null) {
-      json[r'imageBonus'] = this.imageBonus;
+    if (this.baseReward != null) {
+      json[r'baseReward'] = this.baseReward;
     } else {
-      json[r'imageBonus'] = null;
+      json[r'baseReward'] = null;
     }
     if (this.isCurrent != null) {
       json[r'isCurrent'] = this.isCurrent;
     } else {
       json[r'isCurrent'] = null;
+    }
+    if (this.addedSkip != null) {
+      json[r'addedSkip'] = this.addedSkip;
+    } else {
+      json[r'addedSkip'] = null;
     }
     if (this.unique != null) {
       json[r'unique'] = this.unique;
@@ -166,8 +183,9 @@ class UploadRewards {
       return UploadRewards(
         total: mapValueOfType<int>(json, r'total'),
         multiplier: mapValueOfType<double>(json, r'multiplier'),
-        imageBonus: mapValueOfType<int>(json, r'imageBonus'),
+        baseReward: mapValueOfType<int>(json, r'baseReward'),
         isCurrent: mapValueOfType<bool>(json, r'isCurrent'),
+        addedSkip: mapValueOfType<bool>(json, r'addedSkip'),
         unique: mapValueOfType<bool>(json, r'unique'),
         dailyItemReward: mapValueOfType<int>(json, r'dailyItemReward'),
         dailyQuestReward: mapValueOfType<int>(json, r'dailyQuestReward'),

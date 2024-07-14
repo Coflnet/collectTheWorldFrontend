@@ -200,12 +200,14 @@ class ApiClient {
           return Challenge.fromJson(value);
         case 'ChallengeResponse':
           return ChallengeResponse.fromJson(value);
+        case 'ChangeEvent':
+          return ChangeEvent.fromJson(value);
+        case 'ChangeType':
+          return ChangeTypeTypeTransformer().decode(value);
         case 'CollectableObject':
           return CollectableObject.fromJson(value);
         case 'ConsentData':
           return ConsentData.fromJson(value);
-        case 'ExpChange':
-          return ExpChange.fromJson(value);
         case 'MultiplierResponse':
           return MultiplierResponse.fromJson(value);
         case 'Profile':

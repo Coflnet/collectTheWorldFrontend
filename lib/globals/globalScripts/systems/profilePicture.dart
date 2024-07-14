@@ -94,6 +94,26 @@ class LoadingProfileInfo {
     }
   }
 
+  void loadLeaderboardProfile() async {
+    if (profileString != "") {
+      return;
+    }
+    token = (await Authclient().tokenRequest())!;
+    var authclient = HttpBearerAuth();
+    authclient.accessToken = token;
+    final client = ApiClient(
+        basePath: "https://ctw.coflnet.com", authentication: authclient);
+    final apiInstance = LeaderboardApi(client);
+    try {
+      final result = await apiInstance.getProfile();
+      profileString = result?.avatar ?? "";
+      username = result?.name ?? "";
+      saveFile();
+    } catch (e) {
+      print("erroring loading leaderboard profile profilePicture $e");
+    }
+  }
+
   int getStatValue(List result, String statName) {
     int index = result.indexWhere((item) => item.statName == statName);
     if (index == -1) {

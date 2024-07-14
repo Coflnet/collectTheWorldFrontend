@@ -11,15 +11,18 @@
 part of openapi.api;
 
 
-class ExpApi {
-  ExpApi([ApiClient? apiClient]) : apiClient = apiClient ?? defaultApiClient;
+class EventsApi {
+  EventsApi([ApiClient? apiClient]) : apiClient = apiClient ?? defaultApiClient;
 
   final ApiClient apiClient;
 
-  /// Performs an HTTP 'GET /api/exp/history' operation and returns the [Response].
-  Future<Response> getExpChangesWithHttpInfo() async {
+  /// Performs an HTTP 'GET /api/events/history' operation and returns the [Response].
+  /// Parameters:
+  ///
+  /// * [DateTime] since:
+  Future<Response> getExpChangesWithHttpInfo({ DateTime? since, }) async {
     // ignore: prefer_const_declarations
-    final path = r'/api/exp/history';
+    final path = r'/api/events/history';
 
     // ignore: prefer_final_locals
     Object? postBody;
@@ -27,6 +30,10 @@ class ExpApi {
     final queryParams = <QueryParam>[];
     final headerParams = <String, String>{};
     final formParams = <String, String>{};
+
+    if (since != null) {
+      queryParams.addAll(_queryParams('', 'since', since));
+    }
 
     const contentTypes = <String>[];
 
@@ -42,8 +49,11 @@ class ExpApi {
     );
   }
 
-  Future<List<ExpChange>?> getExpChanges() async {
-    final response = await getExpChangesWithHttpInfo();
+  /// Parameters:
+  ///
+  /// * [DateTime] since:
+  Future<List<ChangeEvent>?> getExpChanges({ DateTime? since, }) async {
+    final response = await getExpChangesWithHttpInfo( since: since, );
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }
@@ -52,8 +62,8 @@ class ExpApi {
     // FormatException when trying to decode an empty string.
     if (response.body.isNotEmpty && response.statusCode != HttpStatus.noContent) {
       final responseBody = await _decodeBodyBytes(response);
-      return (await apiClient.deserializeAsync(responseBody, 'List<ExpChange>') as List)
-        .cast<ExpChange>()
+      return (await apiClient.deserializeAsync(responseBody, 'List<ChangeEvent>') as List)
+        .cast<ChangeEvent>()
         .toList(growable: false);
 
     }

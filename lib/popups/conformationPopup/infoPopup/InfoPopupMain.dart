@@ -34,7 +34,7 @@ class _InfoPopupMainState extends State<InfoPopupMain> {
   // 1 reward. 2 penilty. 3 legal
 
   late Timer timer;
-  List popupData = [ExpChange(change: 0, description: "", source_: "")];
+  List popupData = [ChangeEvent(change: 0, description: "", source_: "")];
 
   @override
   void initState() {
