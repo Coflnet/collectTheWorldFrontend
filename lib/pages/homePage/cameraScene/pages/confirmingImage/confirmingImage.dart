@@ -13,6 +13,7 @@ import 'package:collect_the_world/globals/globalWidgets/header/dailyStreak.dart'
 import 'package:collect_the_world/pages/homePage/cameraScene/confirm/widgets/confettiWidget.dart';
 import 'package:collect_the_world/pages/homePage/cameraScene/pages/confirmingImage/displayRewards.dart';
 import 'package:collect_the_world/pages/homePage/cameraScene/pages/confirmingImage/error/confirmingImageError.dart';
+import 'package:collect_the_world/pages/homePage/cameraScene/pages/confirmingImage/error/confirmingImageNotReal.dart';
 import 'package:collect_the_world/pages/homePage/cameraScene/pages/confirmingImage/rewardWidgets/dailyReward/header/rewardTopWidget.dart';
 import 'package:confetti/confetti.dart';
 import 'package:http/http.dart' as http;
@@ -49,6 +50,9 @@ class ConfirmingimagePageState extends State<ConfirmingimagePage> {
   bool errorPopup = false;
   String errorId = "";
   late ConfettiController confettiController;
+
+  bool footerVisible = false;
+  bool isValid = false;
 
   int totalReward = 0;
   int baseReward = 0;
@@ -102,13 +106,14 @@ class ConfirmingimagePageState extends State<ConfirmingimagePage> {
             child: ConfirmingImageError(
               errorMessage: errorMessage,
             )),
-        Visibility(visible: !isLoading, child: const Footer()),
+        Visibility(visible: isValid, child: const ConfirmingImageNotReal()),
+        Visibility(visible: footerVisible, child: const Footer()),
         Center(
           child: CustomConfettiWidget(confettiController: confettiController),
         ),
       ]),
       floatingActionButton:
-          Visibility(visible: !isLoading, child: const CameraButtonFooter()),
+          Visibility(visible: footerVisible, child: const CameraButtonFooter()),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
@@ -138,8 +143,16 @@ class ConfirmingimagePageState extends State<ConfirmingimagePage> {
       var responseString = await response.stream.bytesToString();
       var jsonResponse = jsonDecode(responseString);
       var rewards = jsonResponse["rewards"];
-      print(jsonResponse);
+      if (jsonResponse["stats"]["isNoItem"]) {
+        setState(() {
+          isValid = true;
+          footerVisible = true;
+        });
+        return;
+      }
       setState(() {
+        footerVisible = true;
+
         baseReward = rewards["baseReward"] ?? 69;
         totalReward = rewards["total"] ?? 69;
         multi = (rewards["multiplier"] == 0)
