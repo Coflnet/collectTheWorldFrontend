@@ -1,4 +1,5 @@
 import 'package:collect_the_world/globals/globalWidgets/baseWidget/baseWidget.dart';
+import 'package:collect_the_world/pages/profilePage/editProfile/connectAccountWidgets/connectAccountMain.dart';
 import 'package:collect_the_world/popups/conformationPopup/infoPopup/variations/legal/LegalMoreOptionsSetting.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -55,6 +56,7 @@ class EditProfilePrivacy extends StatelessWidget {
                   header: "Allow",
                   which: 6,
                 ),
+                ConnectAccountMain()
               ],
             ),
           )),

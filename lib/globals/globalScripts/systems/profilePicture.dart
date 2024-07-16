@@ -19,6 +19,7 @@ bool statsLoaded = false;
 int dailyStreak = 0;
 int skipsRemaining = 0;
 bool legalDone = false;
+bool isConnected = false;
 
 class LoadingProfileInfo {
   void load() {
@@ -60,6 +61,7 @@ class LoadingProfileInfo {
     joinDate = DateTime.parse(fileData["JoinDate"]);
     dailyStreak = fileData["dailyStreak"];
     legalDone = fileData["legalDone"];
+    isConnected = fileData["isConnected"] ?? false;
     return;
   }
 
@@ -136,7 +138,8 @@ class LoadingProfileInfo {
       "totalXp": totalXp,
       "dailyStreak": dailyStreak,
       "skipsRemaining": skipsRemaining,
-      "legalDone": legalDone
+      "legalDone": legalDone,
+      "isConnected": isConnected
     };
     var fileDataJson = jsonEncode(fileData);
     file.writeAsString(fileDataJson);
@@ -144,6 +147,8 @@ class LoadingProfileInfo {
 }
 
 class ProfileRetrevial {
+  bool get getIsConnected => isConnected;
+  set setIsConnected(newValue) => isConnected = newValue;
   bool get getLegalDone => legalDone;
   set setLegalDone(newValue) => legalDone = newValue;
 

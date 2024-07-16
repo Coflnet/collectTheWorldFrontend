@@ -24,7 +24,7 @@ class ConfirmingImageNotReal extends StatelessWidget {
                   "The name of the item you uploaded doesn't appear to be a real item",
                   style: TextStyle(
                       color: Colors.white,
-                      fontWeight: FontWeight.w600,
+                    fontWeight: FontWeight.w600,
                       fontSize: 20),
                 ),
                 const SizedBox(height: 16),

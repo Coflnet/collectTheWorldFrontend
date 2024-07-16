@@ -2,8 +2,11 @@ import 'package:collect_the_world/generatedCode/api.dart';
 import 'package:collect_the_world/globals/globalScripts/systems/authClient.dart';
 import 'package:collect_the_world/globals/globalScripts/systems/legalChangeUploader.dart';
 import 'package:collect_the_world/globals/globalScripts/systems/profilePicture.dart';
+import 'package:collect_the_world/pages/profilePage/editProfile/connectAccountWidgets/connectAccountMain.dart';
 import 'package:collect_the_world/pages/profilePage/editProfile/editLegalProfileWidgets/editProfilePrivacy.dart';
 import 'package:collect_the_world/pages/profilePage/editProfile/editProfileHeader.dart';
+import 'package:collect_the_world/pages/profilePage/editProfile/editProfileWidgets/deleteProfilePopup.dart';
+import 'package:collect_the_world/pages/profilePage/editProfile/editProfileWidgets/deleteProfileWidget.dart';
 import 'package:collect_the_world/pages/profilePage/editProfile/editProfileWidgets/editProfileNotifications.dart';
 import 'package:collect_the_world/pages/profilePage/editProfile/editUsernameProfile.dart';
 import 'package:collect_the_world/pages/profilePage/editProfile/generateNewProfilePic.dart';
@@ -24,6 +27,7 @@ class _EditProfileMainState extends State<EditProfileMain> {
   String profileString = ProfileRetrevial().getProfileString();
   String username = ProfileRetrevial().getUsername();
   bool privacyChanges = false;
+  bool deletePopup = false;
 
   @override
   Widget build(BuildContext context) {
@@ -51,9 +55,13 @@ class _EditProfileMainState extends State<EditProfileMain> {
                   ),
                   const EditProfileNotifications(),
                   const EditProfilePrivacy(),
+                  DeleteProfileWidget(callBack: deleteAccountCallBack)
                 ],
               ),
             ),
+            Visibility(
+                visible: deletePopup,
+                child: DeleteProfilePopup(close: closePopup)),
             EditProfileHeader(saveCallBack: saveProfileInfo),
           ],
         ),
@@ -62,7 +70,17 @@ class _EditProfileMainState extends State<EditProfileMain> {
     );
   }
 
-  void isChange() {}
+  void closePopup() {
+    setState(() {
+      deletePopup = false;
+    });
+  }
+
+  void deleteAccountCallBack() {
+    setState(() {
+      deletePopup = true;
+    });
+  }
 
   void saveProfileInfo() async {
     ProfileRetrevial().setProfileString(profileString);

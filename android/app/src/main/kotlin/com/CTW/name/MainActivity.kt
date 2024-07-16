@@ -1,4 +1,4 @@
-package com.example.collect_the_world
+package com.CTW.name
 
 import io.flutter.embedding.android.FlutterActivity
 
