@@ -100,6 +100,16 @@ class ItemToFindHandler {
     file.writeAsString(fileDataJson);
   }
 
+  void deleteAccount() async {
+    Directory appDir = await getApplicationDocumentsDirectory();
+    String filePath = "${appDir.path}/itemDetails.json";
+    File file = File(filePath);
+    var fileData = {"currentItem": "", "skips": 2};
+
+    var fileDataJson = jsonEncode(fileData);
+    file.writeAsString(fileDataJson);
+  }
+
   Future<int> skipItem(String itemName) async {
     token = (await authclie.Authclient().tokenRequest())!;
     var authclient = HttpBearerAuth();

@@ -38,8 +38,6 @@ class Authclient {
 
     token = fileData["token"];
 
-
-
     if (!JwtDecoder.isExpired(token)) {
       alreadyLoaded = true;
 
@@ -76,13 +74,22 @@ class Authclient {
     Directory appDir = await getApplicationDocumentsDirectory();
     String filePath = "${appDir.path}/clientDetail.json";
     File file = File(filePath);
-    var fileData = {
+  var fileData = {
       "token": token,
       "secret": secret,
       "creationDate": creationDate.toIso8601String(),
     };
     var fileDataJson = jsonEncode(fileData);
     file.writeAsString(fileDataJson);
+  }
+
+  void deleteAccount() async {
+    Directory appDir = await getApplicationDocumentsDirectory();
+    String filePath = "${appDir.path}/clientDetail.json";
+    File file = File(filePath);
+    var fileData = {"token": "", "secret": ""};
+    var jsonFileData = jsonEncode(fileData);
+    await file.writeAsString(jsonFileData);
   }
 
   Future<String?> tokenRequest() async {

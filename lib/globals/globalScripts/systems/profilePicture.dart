@@ -144,6 +144,8 @@ class LoadingProfileInfo {
     var fileDataJson = jsonEncode(fileData);
     file.writeAsString(fileDataJson);
   }
+
+  
 }
 
 class ProfileRetrevial {

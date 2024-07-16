@@ -80,6 +80,24 @@ class LegalChangeUploader {
     file.writeAsString(fileDataJson);
   }
 
+  void deleteAccount() async {
+    Directory appDir = await getApplicationDocumentsDirectory();
+    String filePath = "${appDir.path}/legalInfo.json";
+    File file = File(filePath);
+    var fileData = {
+      "options": ConsentData(
+              targetedAds: true,
+              tracking: true,
+              allowResell: true,
+              analytics: true,
+              newService: true)
+          .toJson(),
+      "alreadyAgreed": false,
+    };
+    var jsonFileData = jsonEncode(fileData);
+    file.writeAsString(jsonFileData);
+  }
+
   void makeChange(int whichOne, value) {
     switch (whichOne) {
       case 1:
