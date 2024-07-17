@@ -44,7 +44,7 @@ class _ConnectAccountContentState extends State<ConnectAccountContent> {
               fontWeight: FontWeight.w600,
               fontSize: 18),
         ),
-        (!ProfileRetrevial().getIsConnected)
+        (ProfileRetrevial().getIsConnected)
             ? const AlreadySignedIn()
             : Column(
                 children: <Widget>[
