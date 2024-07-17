@@ -29,7 +29,7 @@ if (flutterVersionName == null) {
 // }
 
 android {
-    namespace "com.CTW.name"
+    namespace "com.coflnet.collect_the_world"
     compileSdk flutter.compileSdkVersion
     ndkVersion flutter.ndkVersion
 
@@ -77,4 +77,5 @@ flutter {
     source '../..'
 }
 
-dependencies {}
+dependencies {
+}

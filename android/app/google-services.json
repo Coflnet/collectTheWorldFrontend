@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "655575590413",
+    "project_id": "collect-the-world-429522",
+    "storage_bucket": "collect-the-world-429522.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:655575590413:android:d9cc26bfe6ef1b0d165744",
+        "android_client_info": {
+          "package_name": "com.coflnet.collect_the_world"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBmWsUyXblHp9Bpmep0Tk2vlZkNMKhjRm8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

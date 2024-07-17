@@ -57,7 +57,7 @@ class GoogleSigninOption extends StatelessWidget {
 
     GoogleSignIn _googleSignIn = GoogleSignIn(
       serverClientId:
-          "704293295517-pif4khtjug1328cd5li0vbdii13ckjgf.apps.googleusercontent.com",
+          "655575590413-kke7ii4fdb7o2gve3nuvvc6dkd1aasrb.apps.googleusercontent.com",
       scopes: scopes,
     );
     try {
