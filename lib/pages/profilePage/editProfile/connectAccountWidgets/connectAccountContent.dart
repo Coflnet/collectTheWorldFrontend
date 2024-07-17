@@ -16,6 +16,7 @@ class ConnectAccountContent extends StatefulWidget {
 
 class _ConnectAccountContentState extends State<ConnectAccountContent> {
   bool isIOS = true;
+  bool isShown = ProfileRetrevial().getIsConnected;
 
   @override
   void initState() {
@@ -44,16 +45,24 @@ class _ConnectAccountContentState extends State<ConnectAccountContent> {
               fontWeight: FontWeight.w600,
               fontSize: 18),
         ),
-        (ProfileRetrevial().getIsConnected)
+        (isShown)
             ? const AlreadySignedIn()
             : Column(
                 children: <Widget>[
                   const SizedBox(height: 8),
-                  const GoogleSigninOption(),
+                  GoogleSigninOption(callback: updateVisible,),
                   Visibility(visible: isIOS, child: const AppleSigninOption())
                 ],
               )
       ],
     );
+  }
+
+  void updateVisible(){
+    print(ProfileRetrevial().getIsConnected);
+    setState(() {
+      isShown = ProfileRetrevial().getIsConnected;
+    });
+    LoadingProfileInfo().saveFile();
   }
 }

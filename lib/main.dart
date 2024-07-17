@@ -4,7 +4,6 @@ import 'dart:ui';
 
 import 'package:camera/camera.dart';
 import 'package:collect_the_world/background/backgroundGradiant.dart';
-import 'package:collect_the_world/firebase_options.dart';
 import 'package:collect_the_world/generatedCode/api.dart';
 import 'package:collect_the_world/globals/globalScripts/cachingScripts/challengeCaching.dart';
 import 'package:collect_the_world/globals/globalScripts/cachingScripts/listCaching.dart';
@@ -24,7 +23,6 @@ import 'package:collect_the_world/pages/leaderboard/scripts/leaderboardHandler.d
 import 'package:collect_the_world/pages/onboarding/onboardingMain.dart';
 import 'package:collect_the_world/popups/conformationPopup/conformationPopup.dart';
 import 'package:collect_the_world/popups/conformationPopup/infoPopup/InfoPopupMain.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:collect_the_world/footer/footerMain.dart';
 import 'package:collect_the_world/pages/homePage/collectPage/itemSlidingPage.dart';
@@ -34,6 +32,9 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:collect_the_world/globals/globalScripts/systems/authClient.dart'
     as authclie;
+
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
 void main() {
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(

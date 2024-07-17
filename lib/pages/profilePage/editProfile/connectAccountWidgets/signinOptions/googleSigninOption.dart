@@ -1,10 +1,14 @@
+import 'package:collect_the_world/generatedCode/api.dart';
+import 'package:collect_the_world/globalScripts/systems/authClient.dart';
+import 'package:collect_the_world/globals/globalScripts/systems/profilePicture.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:hexcolor/hexcolor.dart';
 
 class GoogleSigninOption extends StatelessWidget {
-  const GoogleSigninOption({Key? key}) : super(key: key);
+  final VoidCallback callback;
+  const GoogleSigninOption({super.key, required this.callback});
 
   @override
   Widget build(BuildContext context) {
@@ -56,14 +60,38 @@ class GoogleSigninOption extends StatelessWidget {
     ];
 
     GoogleSignIn _googleSignIn = GoogleSignIn(
-      serverClientId:
-          "655575590413-kke7ii4fdb7o2gve3nuvvc6dkd1aasrb.apps.googleusercontent.com",
       scopes: scopes,
     );
     try {
-      await _googleSignIn.signIn();
+      final result = await _googleSignIn.signIn();
+      final auth = await result?.authentication;
+      if (auth == null) {
+        return;
+      }
+      updateData(auth.accessToken ?? "");
     } catch (e) {
       print("error signing in with google $e");
+    }
+  }
+
+  void updateData(String tokenSet) async {
+    token = (await Authclient().tokenRequest())!;
+    var authclient = HttpBearerAuth();
+    authclient.accessToken = token;
+    final client = ApiClient(
+        basePath: "https://ctw.coflnet.com", authentication: authclient);
+
+    final apiInstance = AuthApi(client);
+    try {
+      final result = await apiInstance.connectGoogle(
+          authToken: AuthToken(token: tokenSet));
+      print(result);
+      
+      callback();
+    } catch (e) {
+      ProfileRetrevial().setIsConnected(true);
+      callback();
+      print("error connecting google account $e");
     }
   }
 }

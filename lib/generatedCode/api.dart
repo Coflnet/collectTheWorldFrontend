@@ -42,6 +42,7 @@ part 'api/word_api.dart';
 
 part 'model/active_multiplier.dart';
 part 'model/anonymous_login_request.dart';
+part 'model/auth_token.dart';
 part 'model/board_entry.dart';
 part 'model/board_names.dart';
 part 'model/captured_image.dart';

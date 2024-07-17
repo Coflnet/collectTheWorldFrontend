@@ -150,9 +150,13 @@ class LoadingProfileInfo {
 
 class ProfileRetrevial {
   bool get getIsConnected => isConnected;
-  set setIsConnected(newValue) => isConnected = newValue;
   bool get getLegalDone => legalDone;
   set setLegalDone(newValue) => legalDone = newValue;
+
+  void setIsConnected(bool newValue) {
+    isConnected = newValue;
+  }
+
 
   String getProfileString() {
     if (profileString == "") {

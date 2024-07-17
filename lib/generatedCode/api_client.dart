@@ -186,6 +186,8 @@ class ApiClient {
           return ActiveMultiplier.fromJson(value);
         case 'AnonymousLoginRequest':
           return AnonymousLoginRequest.fromJson(value);
+        case 'AuthToken':
+          return AuthToken.fromJson(value);
         case 'BoardEntry':
           return BoardEntry.fromJson(value);
         case 'BoardNames':
