@@ -1,3 +1,6 @@
+import 'package:collect_the_world/generatedCode/api.dart';
+import 'package:collect_the_world/globals/globalScripts/systems/accountDeletionHandler.dart';
+import 'package:collect_the_world/globals/globalScripts/systems/authClient.dart';
 import 'package:collect_the_world/globals/globalWidgets/baseWidget/baseWidget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -40,7 +43,7 @@ class DeleteProfilePopup extends StatelessWidget {
                         color: const Color.fromRGBO(119, 80, 119, 1),
                         borderRadius: BorderRadius.circular(12)),
                     child: TextButton(
-                        onPressed: close,
+                        onPressed: deleteAccount,
                         child: Text(
                           "🛑Delete Account🛑",
                           style: TextStyle(
@@ -63,12 +66,30 @@ class DeleteProfilePopup extends StatelessWidget {
                               fontWeight: FontWeight.w600,
                               fontSize: 20),
                         ))),
-                SizedBox(height: 16)
+                const SizedBox(height: 16)
               ],
             ),
           ),
         ),
       ),
     );
+  }
+
+  void deleteAccount() async {
+    var token = (await Authclient().tokenRequest())!;
+    var authclient = HttpBearerAuth();
+    authclient.accessToken = token;
+    final client = ApiClient(
+        basePath: "https://ctw.coflnet.com", authentication: authclient);
+
+    final apiInstance = PrivacyApi(client);
+
+    try {
+      final result = await apiInstance.deleteAccount();
+      accountDeletionHandler().deleteFrontEndData();
+      close();
+    } catch (e) {
+      print("error deleting account $e");
+    }
   }
 }

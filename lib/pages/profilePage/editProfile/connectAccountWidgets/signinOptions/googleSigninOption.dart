@@ -1,5 +1,6 @@
 import 'package:collect_the_world/generatedCode/api.dart';
-import 'package:collect_the_world/globalScripts/systems/authClient.dart';
+import 'package:collect_the_world/globals/globalScripts/systems/accountDeletionHandler.dart';
+import 'package:collect_the_world/globals/globalScripts/systems/authClient.dart';
 import 'package:collect_the_world/globals/globalScripts/systems/profilePicture.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -85,8 +86,6 @@ class GoogleSigninOption extends StatelessWidget {
     try {
       final result = await apiInstance.connectGoogle(
           authToken: AuthToken(token: tokenSet));
-      print(result);
-      
       callback();
     } catch (e) {
       ProfileRetrevial().setIsConnected(true);

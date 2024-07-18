@@ -16,6 +16,39 @@ class PrivacyApi {
 
   final ApiClient apiClient;
 
+  /// Performs an HTTP 'POST /api/account/deletion/abort' operation and returns the [Response].
+  Future<Response> abortDeletionWithHttpInfo() async {
+    // ignore: prefer_const_declarations
+    final path = r'/api/account/deletion/abort';
+
+    // ignore: prefer_final_locals
+    Object? postBody;
+
+    final queryParams = <QueryParam>[];
+    final headerParams = <String, String>{};
+    final formParams = <String, String>{};
+
+    const contentTypes = <String>[];
+
+
+    return apiClient.invokeAPI(
+      path,
+      'POST',
+      queryParams,
+      postBody,
+      headerParams,
+      formParams,
+      contentTypes.isEmpty ? null : contentTypes.first,
+    );
+  }
+
+  Future<void> abortDeletion() async {
+    final response = await abortDeletionWithHttpInfo();
+    if (response.statusCode >= HttpStatus.badRequest) {
+      throw ApiException(response.statusCode, await _decodeBodyBytes(response));
+    }
+  }
+
   /// Performs an HTTP 'DELETE /api/account' operation and returns the [Response].
   Future<Response> deleteAccountWithHttpInfo() async {
     // ignore: prefer_const_declarations
@@ -98,7 +131,7 @@ class PrivacyApi {
     return null;
   }
 
-  /// Performs an HTTP 'DELETE /api/account/deletion' operation and returns the [Response].
+  /// Performs an HTTP 'GET /api/account/deletion' operation and returns the [Response].
   Future<Response> getDeletiontimeWithHttpInfo() async {
     // ignore: prefer_const_declarations
     final path = r'/api/account/deletion';
@@ -115,7 +148,7 @@ class PrivacyApi {
 
     return apiClient.invokeAPI(
       path,
-      'DELETE',
+      'GET',
       queryParams,
       postBody,
       headerParams,

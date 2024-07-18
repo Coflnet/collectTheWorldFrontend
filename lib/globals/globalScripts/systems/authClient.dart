@@ -38,6 +38,14 @@ class Authclient {
 
     token = fileData["token"];
 
+    if (token == "") {
+      generateSecret();
+      await generateToken();
+      await storeData();
+
+      token = fileData["token"];
+    }
+
     if (!JwtDecoder.isExpired(token)) {
       alreadyLoaded = true;
 
@@ -74,7 +82,7 @@ class Authclient {
     Directory appDir = await getApplicationDocumentsDirectory();
     String filePath = "${appDir.path}/clientDetail.json";
     File file = File(filePath);
-  var fileData = {
+    var fileData = {
       "token": token,
       "secret": secret,
       "creationDate": creationDate.toIso8601String(),
