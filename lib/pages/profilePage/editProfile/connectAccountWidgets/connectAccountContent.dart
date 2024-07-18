@@ -15,7 +15,7 @@ class ConnectAccountContent extends StatefulWidget {
 }
 
 class _ConnectAccountContentState extends State<ConnectAccountContent> {
-  bool isIOS = true;
+  bool isIOS = false;
   bool isShown = ProfileRetrevial().getIsConnected;
 
   @override

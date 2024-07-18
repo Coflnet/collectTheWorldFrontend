@@ -21,7 +21,7 @@ class DeleteProfilePopup extends StatelessWidget {
             child: Column(
               children: <Widget>[
                 const Text(
-                  "⚠️ THIS CAN'T BE UNDONE⚠️",
+                  "⚠️PROCEED WITH CAUTION⚠️",
                   style: TextStyle(
                       color: Colors.redAccent,
                       fontWeight: FontWeight.w800,
@@ -29,7 +29,7 @@ class DeleteProfilePopup extends StatelessWidget {
                 ),
                 const Text(
                   textAlign: TextAlign.center,
-                  "by proceeding we will erase \nall of your personal data stored\n by Collect Whe World\n this process can not be undone",
+                  "by proceeding we will erase \nall of your personal data stored\n by Collect Whe World\n their will be a grace period\n of 3 days and you can contact support\n either in discord or our email",
                   style: TextStyle(
                       color: Colors.white, fontWeight: FontWeight.w600),
                 ),
