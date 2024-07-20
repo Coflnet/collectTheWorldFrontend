@@ -95,30 +95,27 @@ class BonusWidget extends StatelessWidget {
                 ]),
             borderRadius: BorderRadius.circular(12)),
         child: Container(
-          padding: EdgeInsets.only(bottom: 8),
-          child: TextButton(
-            onPressed: () => {},
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(multi,
-                    style: TextStyle(
-                      fontFamily: "Robik-Light",
-                      color: Colors.white.withOpacity(0.9),
-                      fontSize: 22,
-                      fontWeight: FontWeight.w500,
-                    )),
-                Container(
-                  child: AutoSizeText(name,
-                      maxLines: 1,
-                      style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 22,
-                          fontWeight: FontWeight.w600)),
-                ),
-                const SizedBox(height: 10)
-              ],
-            ),
+          padding: const EdgeInsets.symmetric(vertical: 8),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(multi,
+                  style: TextStyle(
+                    fontFamily: "Robik-Light",
+                    color: Colors.white.withOpacity(0.9),
+                    fontSize: 22,
+                    fontWeight: FontWeight.w500,
+                  )),
+              Container(
+                child: AutoSizeText(name,
+                    maxLines: 1,
+                    style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 22,
+                        fontWeight: FontWeight.w600)),
+              ),
+              const SizedBox(height: 10)
+            ],
           ),
         ),
       ),
