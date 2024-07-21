@@ -167,37 +167,6 @@ class HomePageState extends State<HomePage> {
   }
 }
 
-class CapturePage extends StatelessWidget {
-  const CapturePage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(fontFamily: 'Rubik'),
-      home: Scaffold(
-        body: ChangeNotifierProvider(
-          create: (context) => PageChangeNotifer(),
-          child: const Stack(children: [
-            BackgroundGradiant(),
-            Column(
-              children: [
-                SizedBox(
-                  height: 125,
-                ),
-                Expanded(child: Selectedpage())
-              ],
-            ),
-            SlidingPageHeader(),
-            Footer(),
-          ]),
-        ),
-        floatingActionButton: const CameraButtonFooter(),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        backgroundColor: const Color.fromRGBO(34, 40, 49, 1),
-      ),
-    );
-  }
-}
 
 class CameraScene extends StatelessWidget {
   final CameraController controller;

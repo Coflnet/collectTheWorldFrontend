@@ -1,6 +1,7 @@
 import 'dart:ffi';
 
 import 'package:collect_the_world/pages/leaderboard/widgets/containers/leaderBoardWidget/leaderboardDivider.dart';
+import 'package:collect_the_world/pages/leaderboard/widgets/containers/leaderboardPageContainer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:provider/provider.dart';
@@ -37,7 +38,7 @@ class LeaderboardHeaderState extends State<LeaderboardHeader> {
     Provider.of<PageChangeNotifer>(context, listen: false).setPageState(this);
     return Container(
       decoration: const BoxDecoration(color: Color.fromRGBO(21, 31, 51, 1)),
-      height: 90,
+      height: 98,
       child: Container(
         margin: const EdgeInsets.only(top: 30),
         child: Stack(
@@ -52,12 +53,39 @@ class LeaderboardHeaderState extends State<LeaderboardHeader> {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
-                      Text("Daily",
-                          style: nameTextStyle(sel: 1, cur: currentSelection)),
-                      Text("Weekly",
-                          style: nameTextStyle(sel: 2, cur: currentSelection)),
-                      Text("All Time",
-                          style: nameTextStyle(sel: 3, cur: currentSelection))
+                      TextButton(
+                        style: TextButton.styleFrom(
+                            padding: const EdgeInsets.all(0)),
+                        onPressed: () => Provider.of<PageChangeBackNotifer>(
+                                context,
+                                listen: false)
+                            .changePage(0),
+                        child: Text("Daily",
+                            style:
+                                nameTextStyle(sel: 1, cur: currentSelection)),
+                      ),
+                      TextButton(
+                        style: TextButton.styleFrom(
+                            padding: const EdgeInsets.all(0)),
+                        onPressed: () => Provider.of<PageChangeBackNotifer>(
+                                context,
+                                listen: false)
+                            .changePage(1),
+                        child: Text("Weekly",
+                            style:
+                                nameTextStyle(sel: 2, cur: currentSelection)),
+                      ),
+                      TextButton(
+                        style: TextButton.styleFrom(
+                            padding: const EdgeInsets.all(0)),
+                        onPressed: () => Provider.of<PageChangeBackNotifer>(
+                                context,
+                                listen: false)
+                            .changePage(2),
+                        child: Text("All Time",
+                            style:
+                                nameTextStyle(sel: 3, cur: currentSelection)),
+                      )
                     ],
                   ),
                 ),

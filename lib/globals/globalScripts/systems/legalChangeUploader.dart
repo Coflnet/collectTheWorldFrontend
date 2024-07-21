@@ -10,6 +10,17 @@ bool isChanged = false;
 bool alreadyAgrreed = false;
 
 class LegalChangeUploader {
+  void decline() {
+    optionsChosen = ConsentData(
+        targetedAds: false,
+        tracking: false,
+        analytics: false,
+        allowResell: false,
+        newService: false);
+
+    submiteChanges();
+  }
+
   void submiteChanges() async {
     if (!isChanged) {
       return;

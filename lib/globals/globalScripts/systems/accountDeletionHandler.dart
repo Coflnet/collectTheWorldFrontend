@@ -12,7 +12,7 @@ class accountDeletionHandler {
     ProfileRetrevial().setUnqiue(0);
     ProfileRetrevial().setProfileString("");
     ProfileRetrevial().setTopThree(0);
-    ProfileRetrevial().setUsername("");
+    ProfileRetrevial().setUsername("Anonymous");
     LoadingProfileInfo().saveFile();
     Authclient().deleteAccount();
     ItemToFindHandler().deleteAccount();

@@ -38,12 +38,11 @@ class Authclient {
 
     token = fileData["token"];
 
-    if (token == "") {
+    if (secret == "") {
+      print("gening");
       generateSecret();
-      await generateToken();
+      token = await generateToken() ?? "";
       await storeData();
-
-      token = fileData["token"];
     }
 
     if (!JwtDecoder.isExpired(token)) {

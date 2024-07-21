@@ -1,9 +1,13 @@
+import 'dart:io';
+
 import 'package:collect_the_world/generatedCode/api.dart';
 import 'package:collect_the_world/globals/globalScripts/systems/accountDeletionHandler.dart';
 import 'package:collect_the_world/globals/globalScripts/systems/authClient.dart';
 import 'package:collect_the_world/globals/globalWidgets/baseWidget/baseWidget.dart';
+import 'package:collect_the_world/pages/homePage/loadingPages/appStartupLoading.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:restart/restart.dart';
 
 class DeleteProfilePopup extends StatelessWidget {
   final VoidCallback close;
@@ -83,7 +87,6 @@ class DeleteProfilePopup extends StatelessWidget {
         basePath: "https://ctw.coflnet.com", authentication: authclient);
 
     final apiInstance = PrivacyApi(client);
-
     try {
       final result = await apiInstance.deleteAccount();
       accountDeletionHandler().deleteFrontEndData();
