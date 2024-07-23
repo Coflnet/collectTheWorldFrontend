@@ -80,6 +80,7 @@ class _LegalVariationFirstPageState extends State<LegalVariationFirstPage> {
   }
 
   void dicline() {
+    LegalChangeUploader().setIsChanged = true;
     LegalChangeUploader().decline();
     widget.disapear();
   }

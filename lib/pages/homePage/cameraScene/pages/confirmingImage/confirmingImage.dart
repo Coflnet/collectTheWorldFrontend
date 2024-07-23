@@ -181,14 +181,15 @@ class ConfirmingimagePageState extends State<ConfirmingimagePage> {
       });
       successfullReqeust();
     } else {
-      final errorResponse = await response.stream.toSet();
+      final errorResponse = await response.stream.bytesToString();
       print(errorResponse);
       setState(() {
         errorPopup = true;
+        footerVisible = true;
         errorMessage = errorResponse.toString();
       });
       print(
-          'Failed to upload image. Status code: ${await response.stream.bytesToString()}\n${response.statusCode}');
+          'Failed to upload image. Status code: ${errorResponse}\n${response.statusCode}');
     }
   }
 
