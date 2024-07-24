@@ -38,7 +38,7 @@ class _DailyItemPageState extends State<DailyItemPage> {
           ),
         ),
         const TimerCountDownWidget(),
-        const DailyItemsQuest(),
+        const SizedBox(height: 16),
         Container(
           margin: const EdgeInsets.fromLTRB(8, 16, 8, 0),
           decoration: BoxDecoration(

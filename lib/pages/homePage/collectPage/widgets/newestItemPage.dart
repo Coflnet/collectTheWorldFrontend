@@ -51,7 +51,7 @@ class NewestItemPageState extends State<NewestItemPage> {
           child: Column(
             children: <Widget>[
               const SizedBox(
-                height: 8,
+                height: 12,
               ),
               Text(
                 'Newest items',
@@ -64,7 +64,6 @@ class NewestItemPageState extends State<NewestItemPage> {
               const SizedBox(
                 height: 16,
               ),
-              const NewestItemsQuest(),
               Container(
                 margin: const EdgeInsets.fromLTRB(8, 24, 8, 0),
                 decoration: BoxDecoration(
