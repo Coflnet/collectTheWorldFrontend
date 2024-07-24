@@ -16,7 +16,7 @@ class LeaderboardWeeklyPage extends StatelessWidget {
         LeaderboardWeeklyPageContent(),
         Column(
           mainAxisAlignment: MainAxisAlignment.end,
-          children: <Widget>[LeaderboardWeeklyJumpTo()],
+          children: <Widget>[],
         )
       ],
     );
@@ -35,21 +35,24 @@ class LeaderboardDailyJumpToState extends State<LeaderboardWeeklyJumpTo> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 65,
-      height: 65,
-      margin: const EdgeInsets.fromLTRB(0, 0, 16, 90),
-      decoration: BoxDecoration(
-          color: const Color.fromRGBO(112, 48, 172, 1),
-          borderRadius: BorderRadius.circular(80)),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          clickState
-              ? const LeaderboardDailyJumpToContent(type: true)
-              : LoadingAnimationWidget.inkDrop(
-                  color: Colors.white, size: 37)
-        ],
+    return Visibility(
+      visible: placementCaching().getWeekly != 0,
+      child: Container(
+        width: 65,
+        height: 65,
+        margin: const EdgeInsets.fromLTRB(0, 0, 16, 90),
+        decoration: BoxDecoration(
+            color: const Color.fromRGBO(112, 48, 172, 1),
+            borderRadius: BorderRadius.circular(80)),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            clickState
+                ? const LeaderboardDailyJumpToContent(type: true)
+                : LoadingAnimationWidget.inkDrop(
+                    color: Colors.white, size: 37)
+          ],
+        ),
       ),
     );
   }
@@ -61,15 +64,17 @@ class LeaderboardDailyJumpToContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return type
-        ? Text(
-            (placementCaching().getWeekly == 0 ? "NA" : placementCaching().getWeekly.ordinal),
-            style: const TextStyle(color: Colors.white, fontSize: 18),
-          )
-        : Icon(
-            Icons.arrow_upward_rounded,
-            color: Colors.pink[50],
-            size: 40,
-          );
+    return Visibility(
+      child: type
+          ? Text(
+              (placementCaching().getWeekly == 0 ? "N" : placementCaching().getWeekly.ordinal),
+              style: const TextStyle(color: Colors.white, fontSize: 18),
+            )
+          : Icon(
+              Icons.arrow_upward_rounded,
+              color: Colors.pink[50],
+              size: 40,
+            ),
+    );
   }
 }

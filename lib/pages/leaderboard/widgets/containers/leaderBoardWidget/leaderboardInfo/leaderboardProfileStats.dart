@@ -29,6 +29,9 @@ class _LeaderboardProfileStatsState extends State<LeaderboardProfileStats> {
   }
 
   void loadProfileStats() async {
+    if (widget.profileID == "1"){
+      return;
+    }
     token = (await Authclient().tokenRequest())!;
     var authclient = HttpBearerAuth();
     authclient.accessToken = token;

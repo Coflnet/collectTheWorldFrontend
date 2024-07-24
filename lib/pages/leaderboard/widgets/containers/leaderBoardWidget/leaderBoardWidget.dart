@@ -89,10 +89,13 @@ class LeaderBoardWidgetState extends State<LeaderBoardWidget>
                     position: _offsetAnimation,
                     child: Container(
                         margin: const EdgeInsets.only(top: 10),
-                        child: LeaderboardProfileWidget(
-                          username: widget.name,
-                          profileImage: widget.profileImage,
-                          userid: widget.userId,
+                        child: Container(
+                          margin: const EdgeInsets.all(10),
+                          child: LeaderboardProfileWidget(
+                            username: widget.name,
+                            profileImage: widget.profileImage,
+                            userid: widget.userId,
+                          ),
                         )),
                   )
                 : const SizedBox.shrink(),
