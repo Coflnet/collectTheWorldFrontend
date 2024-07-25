@@ -6,7 +6,9 @@ import 'dart:isolate';
 import 'package:collect_the_world/footer/cameraButton.dart';
 import 'package:collect_the_world/generatedCode/api.dart';
 import 'package:collect_the_world/globals/globalScripts/cachingScripts/challengeCaching.dart';
+import 'package:collect_the_world/globals/globalScripts/globals.dart';
 import 'package:collect_the_world/globals/globalScripts/systems/authClient.dart';
+import 'package:collect_the_world/globals/globalScripts/systems/gallerySaving.dart';
 import 'package:collect_the_world/globals/globalScripts/systems/itemToFindUpdater.dart';
 import 'package:collect_the_world/globals/globalScripts/systems/profilePicture.dart';
 import 'package:collect_the_world/globals/globalWidgets/header/dailyStreak.dart';
@@ -143,6 +145,7 @@ class ConfirmingimagePageState extends State<ConfirmingimagePage> {
       var responseString = await response.stream.bytesToString();
       var jsonResponse = jsonDecode(responseString);
       var rewards = jsonResponse["rewards"];
+      print(jsonResponse);
       if (jsonResponse["stats"]["isNoItem"]) {
         setState(() {
           isValid = true;
@@ -150,6 +153,9 @@ class ConfirmingimagePageState extends State<ConfirmingimagePage> {
         });
         return;
       }
+      Globals().setImageId = jsonResponse["image"]["id"];
+      Globals().setImageName = widget.searchBarContent;
+      gallerySaving().saveImageThumbNail();
       setState(() {
         footerVisible = true;
 
