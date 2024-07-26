@@ -1,4 +1,5 @@
 import 'package:collect_the_world/generatedCode/api.dart';
+import 'package:collect_the_world/pages/homePage/collectPage/widgets/idkWhatToCallThis/gallery/galleryMain.dart';
 import 'package:collect_the_world/pages/homePage/widgets/collectItemWidget/collectItemWidget.dart';
 import 'package:collect_the_world/pages/homePage/widgets/dailyBonuses.dart';
 import 'package:collect_the_world/pages/homePage/widgets/dailyItems.dart';
@@ -29,7 +30,7 @@ class ContentContainer extends StatelessWidget {
                   child: CollectItemWidget(constaints: maxHeight),
                 ),
                 DailyItems(itemCollectCount: collectionPercentage),
-                GlobalTask(),
+                const GalleryMain(),
                 SizedBox(
                   height: (maxHeight / 4).clamp(100, 400),
                   child: DailyBonuses(

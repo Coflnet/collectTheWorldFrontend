@@ -34,6 +34,7 @@ late Database db;
 List first5Thumbnails = [];
 
 class gallerySaving {
+  get getThumbNail => thumbNail;
   void loadDataBase() async {
     db = await openDatabase(
       join(
@@ -78,4 +79,6 @@ class gallerySaving {
         imageBytes: resizedBytes);
     db.insert("thumbNails", insertData.toMap());
   }
+
+  get getFirstFive => first5Thumbnails;
 }
