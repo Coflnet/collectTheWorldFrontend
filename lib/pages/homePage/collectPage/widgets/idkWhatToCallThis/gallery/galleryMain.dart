@@ -15,20 +15,26 @@ class _GalleryMainState extends State<GalleryMain> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 20,
-        margin: const EdgeInsets.fromLTRB(24, 14, 24, 0),
-        child: baseWidget(
-          child: Column(
-            children: <Widget>[
-              const Text("🖼️ Gallery"),
-              ListView(
-                scrollDirection: Axis.horizontal,
-                children: [
-                ],
-              )
-            ],
-          ),
-        ));
+    return Flexible(
+      child: Container(
+          width: MediaQuery.sizeOf(context).width,
+          margin: const EdgeInsets.fromLTRB(24, 14, 24, 0),
+          child: baseWidget(
+            child: Column(
+              children: <Widget>[
+                const Text("🖼️ Gallery"),
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      GalleryHomePagePreview(thumbNailData: gallerImages[0])
+                    ],
+                  ),
+                )
+              ],
+            ),
+          )),
+    );
   }
 }

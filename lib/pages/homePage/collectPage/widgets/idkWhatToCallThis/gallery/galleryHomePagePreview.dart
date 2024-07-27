@@ -11,10 +11,17 @@ class GalleryHomePagePreview extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 120,
-      child: thumbNailData is Array ? Container() : Column(
-        children: <Widget>[Image.memory(thumbNailData.imageBytes, height: 120,)],
-      ),
+      padding: const EdgeInsets.all(8),
+      child: thumbNailData is Array
+          ? Container()
+          : Column(
+              children: <Widget>[
+                Image.memory(
+                  thumbNailData.imageBytes,
+                  fit: BoxFit.fitHeight,
+                )
+              ],
+            ),
     );
   }
 }

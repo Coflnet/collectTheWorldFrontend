@@ -59,6 +59,12 @@ class gallerySaving {
           } in first5Thumbnails)
         thumbNail(imageBytes: imageBytes, name: name, created: created, id: id)
     ];
+    if (first5Thumbnails.length == 5){
+      return;
+      }
+    for (var i = 0; i < first5Thumbnails.length - 5; i++) {
+      first5Thumbnails.add([]);
+    }
   }
 
   void saveImageThumbNail() async {
