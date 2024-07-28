@@ -69,6 +69,7 @@ class DailyItemsContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: 80,
       margin: const EdgeInsets.only(top: 16),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16),

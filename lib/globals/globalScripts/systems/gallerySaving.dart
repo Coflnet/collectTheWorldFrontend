@@ -59,10 +59,10 @@ class gallerySaving {
           } in first5Thumbnails)
         thumbNail(imageBytes: imageBytes, name: name, created: created, id: id)
     ];
-    if (first5Thumbnails.length == 5){
+    if (first5Thumbnails.length == 5) {
       return;
-      }
-    for (var i = 0; i < first5Thumbnails.length - 5; i++) {
+    }
+    for (var i = 0; i < 5 - first5Thumbnails.length ; i++) {
       first5Thumbnails.add([]);
     }
   }
@@ -86,5 +86,11 @@ class gallerySaving {
     db.insert("thumbNails", insertData.toMap());
   }
 
+  Future<List> loadWithOffset(int offset) async {
+    return  await db.query("thumbNails", orderBy: "created", limit: 20, offset: offset);
+    
+  }
+
   get getFirstFive => first5Thumbnails;
 }
+

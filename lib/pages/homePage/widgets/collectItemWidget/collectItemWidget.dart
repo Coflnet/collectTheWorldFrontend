@@ -12,9 +12,8 @@ import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:provider/provider.dart';
 
 class CollectItemWidget extends StatefulWidget {
-  final double constaints;
 
-  const CollectItemWidget({super.key, required this.constaints});
+  const CollectItemWidget({super.key});
   @override
   CollectItemWidgetState createState() => CollectItemWidgetState();
 }

@@ -18,32 +18,35 @@ class ContentContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        margin: const EdgeInsets.fromLTRB(24, 133, 24, 0),
-        child: LayoutBuilder(
-          builder: (context, constraints) {
-            final maxHeight = constraints.maxHeight;
-            return Column(
+    return 
+    NotificationListener<OverscrollIndicatorNotification>(
+       onNotification: (OverscrollIndicatorNotification notification) {
+            notification.disallowIndicator();
+            return false;
+          },
+      child: Container(
+          margin: const EdgeInsets.fromLTRB(24, 133, 24, 0),
+          child: SingleChildScrollView(
+            child: Column(
               children: [
-                SizedBox(
-                  height: (maxHeight / 4).clamp(130, 800),
-                  child: CollectItemWidget(constaints: maxHeight),
+                const SizedBox(
+                  height: 190,
+                  child: CollectItemWidget(),
                 ),
                 DailyItems(itemCollectCount: collectionPercentage),
                 const GalleryMain(),
                 SizedBox(
-                  height: (maxHeight / 4).clamp(100, 400),
+                  height: 190,
                   child: DailyBonuses(
-                    maxHeight: maxHeight,
                     multiplierList: multiplierList,
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 95,
                 )
               ],
-            );
-          },
-        ));
+            ),
+          )),
+    );
   }
 }
