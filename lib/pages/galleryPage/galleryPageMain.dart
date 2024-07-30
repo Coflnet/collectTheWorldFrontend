@@ -1,6 +1,10 @@
 import 'package:collect_the_world/background/backgroundGradiant.dart';
+import 'package:collect_the_world/footer/cameraButton.dart';
 import 'package:collect_the_world/footer/footerMain.dart';
 import 'package:collect_the_world/globals/globalScripts/systems/gallerySaving.dart';
+import 'package:collect_the_world/globals/globalScripts/systems/profilePicture.dart';
+import 'package:collect_the_world/globals/globalWidgets/header/header.dart';
+import 'package:collect_the_world/pages/galleryPage/galleryHeader.dart';
 import 'package:collect_the_world/pages/galleryPage/galleryPageRow.dart';
 import 'package:collect_the_world/pages/homePage/collectPage/widgets/idkWhatToCallThis/gallery/galleryFullImagePopup.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +20,9 @@ class _GalleryPageMainState extends State<GalleryPageMain> {
   int currentLoadedAmount = 0;
   int loadedAmountOffset = 0;
   List thumbNails = [];
+  bool popupVis = false;
+  String id = "";
+  String name = "";
 
   @override
   void initState() {
@@ -26,25 +33,54 @@ class _GalleryPageMainState extends State<GalleryPageMain> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(fontFamily: 'Rubik'),
       home: Scaffold(
-          body: Stack(
-        children: [
-          const BackgroundGradiant(),
-          ListView.builder(
-              itemCount: thumbNails.length,
-              itemBuilder: (
-                BuildContext context,
-                int index,
-              ) {
-                return GalleryPageRow(items: thumbNails[index]);
-              }),
-          const Visibility(
-              visible: false,
-              child: const GalleryFullImagePopup(name: "0", id: "1")),
-          const Footer()
-        ],
-      )),
+        body: Stack(
+          children: [
+            const BackgroundGradiant(),
+            GalleryHeader(),
+            Container(
+              margin: const EdgeInsets.only(top: 60),
+              child: ListView.builder(
+                  itemCount: thumbNails.length,
+                  itemBuilder: (
+                    BuildContext context,
+                    int index,
+                  ) {
+                    return GalleryPageRow(
+                      items: thumbNails[index],
+                      callBack: changeVisParams,
+                    );
+                  }),
+            ),
+            Visibility(
+                visible: popupVis,
+                child: GalleryFullImagePopup(
+                  name: name,
+                  id: id,
+                  callBack: changeVis,
+                )),
+            const Footer()
+          ],
+        ),
+        floatingActionButton: const CameraButtonFooter(),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      ),
     );
+  }
+
+  void changeVisParams(String Nname, String Nid) {
+    setState(() {
+      popupVis = !popupVis;
+      name = Nname;
+      id = Nid;
+    });
+  }
+
+  void changeVis() {
+    setState(() {
+      popupVis = !popupVis;
+    });
   }
 
   void loadData() async {
@@ -55,10 +91,7 @@ class _GalleryPageMainState extends State<GalleryPageMain> {
     List tmpItems = [];
     int holding = 0;
 
-    print(unproccessedItems.length);
-
     for (var i = 0; i < unproccessedItems.length; i++) {
-      print(holding);
       if (holding != 2) {
         tmpItems.add(unproccessedItems[i]);
         holding++;
@@ -70,7 +103,6 @@ class _GalleryPageMainState extends State<GalleryPageMain> {
       newListItems.add(tmpItems);
       tmpItems = [];
     }
-    print(newListItems.length);
     setState(() {
       thumbNails.addAll(newListItems);
     });
