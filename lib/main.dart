@@ -12,6 +12,7 @@ import 'package:collect_the_world/globals/globalScripts/systems/authClient.dart'
 import 'package:collect_the_world/globals/globalScripts/systems/itemToFindUpdater.dart';
 import 'package:collect_the_world/globals/globalScripts/systems/legalChangeUploader.dart';
 import 'package:collect_the_world/globals/globalScripts/systems/profilePicture.dart';
+import 'package:collect_the_world/globals/globalScripts/systems/runNotifications.dart';
 import 'package:collect_the_world/globals/globalScripts/systems/serverSideData/serverSideData.dart';
 import 'package:collect_the_world/pages/homePage/cameraScene/pages/cameraScene.dart';
 import 'package:collect_the_world/pages/homePage/cameraScene/pages/confirmScene.dart';
@@ -72,6 +73,7 @@ class HomePageState extends State<HomePage> {
   void loadpopup() {}
 
   void loadData() async {
+    RunNotifications().initNotifications();
     loadImportantData();
     loadChallenge();
     LoadingProfileInfo().loadLeaderboardProfile();
@@ -166,7 +168,6 @@ class HomePageState extends State<HomePage> {
     });
   }
 }
-
 
 class CameraScene extends StatelessWidget {
   final CameraController controller;

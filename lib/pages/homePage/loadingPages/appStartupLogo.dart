@@ -39,6 +39,7 @@ class _AppStartupLogoState extends State<AppStartupLogo> {
     ChallengeCaching().getDailyChallenge();
     LeaderboardHandler().refreshLeaderboard(1);
     await LoadingProfileInfo().loadStatsFromCloud();
+    
     LegalChangeUploader().loadFileData();
     placementCaching().loadPlacements();
     LeaderboardHandler().getLeaderboard(1);
