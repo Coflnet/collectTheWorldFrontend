@@ -10,10 +10,9 @@ import 'package:flutter/widgets.dart';
 
 class DailyBonuses extends StatelessWidget {
   final List<ActiveMultiplier> multiplierList;
-  final double maxHeight;
 
   const DailyBonuses(
-      {super.key, required this.multiplierList, required this.maxHeight});
+      {super.key, required this.multiplierList});
 
   @override
   Widget build(BuildContext context) {

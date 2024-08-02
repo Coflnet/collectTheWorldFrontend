@@ -2,6 +2,7 @@ import 'package:collect_the_world/globals/globalScripts/cachingScripts/challenge
 import 'package:collect_the_world/globals/globalScripts/cachingScripts/listCaching.dart';
 import 'package:collect_the_world/globals/globalScripts/cachingScripts/placementCaching.dart';
 import 'package:collect_the_world/globals/globalScripts/systems/authClient.dart';
+import 'package:collect_the_world/globals/globalScripts/systems/gallerySaving.dart';
 import 'package:collect_the_world/globals/globalScripts/systems/infoPopupHandler.dart';
 import 'package:collect_the_world/globals/globalScripts/systems/itemToFindUpdater.dart';
 import 'package:collect_the_world/globals/globalScripts/systems/legalChangeUploader.dart';
@@ -30,6 +31,7 @@ class _AppStartupLogoState extends State<AppStartupLogo> {
 
   void loadData() async {
     await Authclient().initClient();
+    gallerySaving().loadDataBase();
     ItemToFindHandler().loadFileData();
     ItemToFindHandler().requestRemainingSkips();
     ServerSideData().loadFileData();
