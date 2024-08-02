@@ -56,7 +56,7 @@ class _LeaderboardWeeklyPageState extends State<LeaderboardWeeklyPageContent> {
             ),
             const LBRewardWeekly(),
             SizedBox(
-                height: MediaQuery.of(context).size.height / 4.5,
+                height: MediaQuery.of(context).size.height / 4.2,
                 child: LBPLmain(
                   topUsers: leaderboardlist.take(3).toList(),
                   whichLeaderBoard: 1,

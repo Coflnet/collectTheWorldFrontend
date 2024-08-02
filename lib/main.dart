@@ -12,6 +12,7 @@ import 'package:collect_the_world/globals/globalScripts/systems/authClient.dart'
 import 'package:collect_the_world/globals/globalScripts/systems/itemToFindUpdater.dart';
 import 'package:collect_the_world/globals/globalScripts/systems/legalChangeUploader.dart';
 import 'package:collect_the_world/globals/globalScripts/systems/profilePicture.dart';
+import 'package:collect_the_world/globals/globalScripts/systems/runNotifications.dart';
 import 'package:collect_the_world/globals/globalScripts/systems/serverSideData/serverSideData.dart';
 import 'package:collect_the_world/pages/homePage/cameraScene/pages/cameraScene.dart';
 import 'package:collect_the_world/pages/homePage/cameraScene/pages/confirmScene.dart';
@@ -72,6 +73,7 @@ class HomePageState extends State<HomePage> {
   void loadpopup() {}
 
   void loadData() async {
+    RunNotifications().initNotifications();
     loadImportantData();
     loadChallenge();
     LoadingProfileInfo().loadLeaderboardProfile();
@@ -164,38 +166,6 @@ class HomePageState extends State<HomePage> {
     setState(() {
       floatingVisible = !floatingVisible;
     });
-  }
-}
-
-class CapturePage extends StatelessWidget {
-  const CapturePage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(fontFamily: 'Rubik'),
-      home: Scaffold(
-        body: ChangeNotifierProvider(
-          create: (context) => PageChangeNotifer(),
-          child: const Stack(children: [
-            BackgroundGradiant(),
-            Column(
-              children: [
-                SizedBox(
-                  height: 125,
-                ),
-                Expanded(child: Selectedpage())
-              ],
-            ),
-            SlidingPageHeader(),
-            Footer(),
-          ]),
-        ),
-        floatingActionButton: const CameraButtonFooter(),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        backgroundColor: const Color.fromRGBO(34, 40, 49, 1),
-      ),
-    );
   }
 }
 

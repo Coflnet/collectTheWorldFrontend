@@ -1,7 +1,9 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:collect_the_world/globals/globalScripts/systems/serverSideData/serverSideData.dart';
 import 'package:collect_the_world/pages/leaderboard/widgets/containers/leaderBoardWidget/LBprofilePicture.dart';
+import 'package:collect_the_world/pages/leaderboard/widgets/containers/leaderBoardWidget/leaderboardInfo/leaderboardProfileWidget.dart';
 import 'package:collect_the_world/pages/leaderboard/widgets/containers/leaderboardPlacement/LBplacementXpWidget.dart';
+import 'package:custom_pop_up_menu/custom_pop_up_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:random_avatar/random_avatar.dart';
 
@@ -17,18 +19,27 @@ class LBplacementTwo extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: <Widget>[
-          Container(
-            margin: const EdgeInsets.fromLTRB(8, 4, 8, 4),
-            width: double.infinity,
-            padding: const EdgeInsets.fromLTRB(0, 16, 0, 8),
-            decoration: BoxDecoration(
-                color: Colors.grey[400],
-                borderRadius: BorderRadius.circular(8)),
-            child: PlacementContent(
-              userInfo: userInfo,
-              whichLeaderBoard: whichLeaderBoard,
-            ),
-          )
+          CustomPopupMenu(
+              arrowSize: 40,
+              arrowColor: const Color.fromRGBO(73, 64, 119, 1),
+              verticalMargin: -40,
+              menuBuilder: () => LeaderboardProfileWidget(
+                  username: userInfo[0] ?? "NA",
+                  profileImage: userInfo[3] ?? "loading",
+                  userid: userInfo[2] ?? "1"),
+              pressType: PressType.singleClick,
+              child: Container(
+                margin: const EdgeInsets.fromLTRB(8, 4, 8, 4),
+                width: double.infinity,
+                padding: const EdgeInsets.fromLTRB(4, 16, 4, 8),
+                decoration: BoxDecoration(
+                    color: Colors.grey[400],
+                    borderRadius: BorderRadius.circular(8)),
+                child: PlacementContent(
+                  userInfo: userInfo,
+                  whichLeaderBoard: whichLeaderBoard,
+                ),
+              ))
         ],
       ),
     );

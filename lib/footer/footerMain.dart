@@ -1,4 +1,5 @@
 import 'package:collect_the_world/main.dart';
+import 'package:collect_the_world/pages/capturePage.dart';
 import 'package:collect_the_world/pages/leaderboard/LeaderboardMain.dart';
 import 'package:collect_the_world/pages/profilePage/profilePage.dart';
 import 'package:flutter/cupertino.dart';

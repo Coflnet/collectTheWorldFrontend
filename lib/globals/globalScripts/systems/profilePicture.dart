@@ -20,6 +20,8 @@ int dailyStreak = 0;
 int skipsRemaining = 0;
 bool legalDone = false;
 bool isConnected = false;
+bool notificationsNeed = true;
+
 
 class LoadingProfileInfo {
   void load() {
@@ -43,7 +45,8 @@ class LoadingProfileInfo {
         "totalXp": 0,
         "dailyStreak": 0,
         "skipsRemaining": 0,
-        "legalDone": false
+        "legalDone": false,
+        "notificationsNeed": true
       };
       var jsonFileData = jsonEncode(fileData);
       await file.writeAsString(jsonFileData);
@@ -62,6 +65,7 @@ class LoadingProfileInfo {
     dailyStreak = fileData["dailyStreak"];
     legalDone = fileData["legalDone"];
     isConnected = fileData["isConnected"] ?? false;
+    notificationsNeed = fileData["notificationsNeed"] ?? true;
     return;
   }
 
@@ -139,7 +143,8 @@ class LoadingProfileInfo {
       "dailyStreak": dailyStreak,
       "skipsRemaining": skipsRemaining,
       "legalDone": legalDone,
-      "isConnected": isConnected
+      "isConnected": isConnected,
+      "notificationsNeed": notificationsNeed
     };
     var fileDataJson = jsonEncode(fileData);
     file.writeAsString(fileDataJson);
@@ -151,7 +156,9 @@ class LoadingProfileInfo {
 class ProfileRetrevial {
   bool get getIsConnected => isConnected;
   bool get getLegalDone => legalDone;
+  bool get getnotificationsNeed => notificationsNeed;
   set setLegalDone(newValue) => legalDone = newValue;
+  set setnotificationsNeed(newValue) => notificationsNeed = newValue;
 
   void setIsConnected(bool newValue) {
     isConnected = newValue;

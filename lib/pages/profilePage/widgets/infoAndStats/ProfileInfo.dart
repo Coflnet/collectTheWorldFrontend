@@ -44,7 +44,6 @@ class ProfileInfo extends StatelessWidget {
   }
 
   void changeScene(context) {
-    print("changing");
     Navigator.push(
         context,
         PageRouteBuilder(

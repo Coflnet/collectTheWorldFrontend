@@ -22,7 +22,6 @@ class _LeaderboardProfileWidgetState extends State<LeaderboardProfileWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.all(10),
       child: baseWidget(
           child: Container(
         margin: const EdgeInsets.fromLTRB(24, 20, 24, 20),

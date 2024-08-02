@@ -69,7 +69,7 @@ class ItemToFindHandler {
       return name;
     } catch (e) {
       if (e is! ApiException) {
-        print(
+      print(
             'Exception when calling ObjectApi->apiObjectsCategoriesGet: $e\n');
         return "There's a error";
       }

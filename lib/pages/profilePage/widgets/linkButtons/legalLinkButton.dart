@@ -28,7 +28,7 @@ class LegalLinkButton extends StatelessWidget {
             Container(margin: const EdgeInsets.only(left: 20),)
           ],
         ),
-        onPressed: () => {linkPressed("https://example.org")},
+        onPressed: () => {linkPressed("https://coflnet.com/privacy")},
       ),
     );
   }

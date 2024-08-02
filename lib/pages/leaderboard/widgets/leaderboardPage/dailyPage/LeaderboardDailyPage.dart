@@ -34,7 +34,7 @@ class LeaderboardDailyPageState extends State<LeaderboardDailyPage> {
         LeaderboardDailyContent(),
         Column(
           mainAxisAlignment: MainAxisAlignment.end,
-          children: <Widget>[LeaderboardDailyJumpTo()],
+          children: <Widget>[],
         )
       ],
     );
@@ -53,20 +53,23 @@ class LeaderboardDailyJumpToState extends State<LeaderboardDailyJumpTo> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 65,
-      height: 65,
-      margin: const EdgeInsets.fromLTRB(0, 0, 16, 90),
-      decoration: BoxDecoration(
-          color: const Color.fromRGBO(112, 48, 172, 1),
-          borderRadius: BorderRadius.circular(80)),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          clickState
-              ? const LeaderboardDailyJumpToContent(type: true)
-              : LoadingAnimationWidget.inkDrop(color: Colors.white, size: 37)
-        ],
+    return Visibility(
+      visible: placementCaching().getWeekly != 0,
+      child: Container(
+        width: 65,
+        height: 65,
+        margin: const EdgeInsets.fromLTRB(0, 0, 16, 90),
+        decoration: BoxDecoration(
+            color: const Color.fromRGBO(112, 48, 172, 1),
+            borderRadius: BorderRadius.circular(80)),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            clickState
+                ? const LeaderboardDailyJumpToContent(type: true)
+                : LoadingAnimationWidget.inkDrop(color: Colors.white, size: 37)
+          ],
+        ),
       ),
     );
   }
@@ -80,7 +83,9 @@ class LeaderboardDailyJumpToContent extends StatelessWidget {
   Widget build(BuildContext context) {
     return type
         ? Text(
-            (placementCaching().getDaily == 0 ? "NA" : placementCaching().getDaily.ordinal),
+            (placementCaching().getDaily == 0
+                ? "NA"
+                : placementCaching().getDaily.ordinal),
             style: const TextStyle(color: Colors.white, fontSize: 18),
           )
         : Icon(

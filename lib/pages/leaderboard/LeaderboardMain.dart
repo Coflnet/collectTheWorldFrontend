@@ -19,7 +19,6 @@ class LeaderboardMain extends StatefulWidget {
 }
 
 class LeaderboardMainState extends State<LeaderboardMain> {
-
   @override
   void initState() {
     super.initState();
@@ -31,13 +30,17 @@ class LeaderboardMainState extends State<LeaderboardMain> {
     return MaterialApp(
       theme: ThemeData(fontFamily: 'Poppins'),
       home: Scaffold(
-        body: ChangeNotifierProvider(
-          create: (context) => PageChangeNotifer(),
+        body: MultiProvider(
+          providers: [
+            ChangeNotifierProvider(create: (_) => PageChangeNotifer()),
+            ChangeNotifierProvider(create: (_) => PageChangeBackNotifer())
+          ],
           child: const Stack(
             children: [
               BackgroundGradiant(),
-              LeaderboardHeader(),
               LeaderBoardPageContainer(),
+              LeaderboardHeader(),
+
               Footer(),
             ],
           ),

@@ -60,7 +60,7 @@ class _LegalVariationFirstPageState extends State<LegalVariationFirstPage> {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: <Widget>[
                       LegalVariationButton(
-                        disapear: widget.disapear,
+                        disapear: dicline,
                         buttonText: "Decline",
                         isDone: true,
                       ),
@@ -77,6 +77,12 @@ class _LegalVariationFirstPageState extends State<LegalVariationFirstPage> {
         ],
       ),
     );
+  }
+
+  void dicline() {
+    LegalChangeUploader().setIsChanged = true;
+    LegalChangeUploader().decline();
+    widget.disapear();
   }
 
   void disapearCallBack() {

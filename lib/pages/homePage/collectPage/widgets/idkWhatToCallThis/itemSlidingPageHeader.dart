@@ -1,3 +1,4 @@
+import 'package:collect_the_world/pages/homePage/collectPage/itemSlidingPage.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -51,10 +52,24 @@ class SlidingPageHeaderState extends State<SlidingPageHeader> {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
-                      Text("Daily",
-                          style: nameTextStyle(sel: 1, cur: currentSelection)),
-                      Text("Newest",
-                          style: nameTextStyle(sel: 2, cur: currentSelection)),
+                      TextButton(
+                        onPressed: () => Provider.of<PageChangeBackNotifer>(
+                                context,
+                                listen: false)
+                            .changePage(0),
+                        child: Text("Daily",
+                            style:
+                                nameTextStyle(sel: 1, cur: currentSelection)),
+                      ),
+                      TextButton(
+                        onPressed: () => Provider.of<PageChangeBackNotifer>(
+                                context,
+                                listen: false)
+                            .changePage(1),
+                        child: Text("Newest",
+                            style:
+                                nameTextStyle(sel: 2, cur: currentSelection)),
+                      ),
                     ],
                   ),
                 ),

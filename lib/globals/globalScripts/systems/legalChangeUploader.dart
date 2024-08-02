@@ -10,8 +10,21 @@ bool isChanged = false;
 bool alreadyAgrreed = false;
 
 class LegalChangeUploader {
+  void decline() {
+    optionsChosen = ConsentData(
+        targetedAds: false,
+        tracking: false,
+        analytics: false,
+        allowResell: false,
+        newService: false);
+    alreadyAgrreed = true;
+    saveData();
+    submiteChanges();
+  }
+
   void submiteChanges() async {
     if (!isChanged) {
+        print("returning");
       return;
     }
     token = (await Authclient().tokenRequest())!;
@@ -22,7 +35,9 @@ class LegalChangeUploader {
     final api_instance = PrivacyApi(client);
     optionsChosen.givenAt = DateTime.now();
     try {
+      print("sending data $optionsChosen");
       await api_instance.saveConsent(consentData: optionsChosen);
+
       isChanged = false;
       alreadyAgrreed = true;
       saveData();
