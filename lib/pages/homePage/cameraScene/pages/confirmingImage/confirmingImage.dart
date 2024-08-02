@@ -77,46 +77,49 @@ class ConfirmingimagePageState extends State<ConfirmingimagePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Stack(children: [
-        const BackgroundGradiant(),
-        Center(
-          child: Loadingwidget(isVisible: isLoading),
-        ),
-        Visibility(
-          visible: !isLoading,
-          child: Center(
-              child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[
-              const SizedBox(),
-              RewardTopWidget(
-                  streak: streak, score: totalReward, skips: remainingSkips),
-              DisplayRewards(
-                baseReward: baseReward,
-                multi: multi,
-                dailyQuestProgress: dailyQuestProgress,
-                timesCollected: timesCollected,
-                dailyReward: dailyReward,
-              ),
-              const SizedBox(),
-            ],
-          )),
-        ),
-        Visibility(
-            visible: errorPopup,
-            child: ConfirmingImageError(
-              errorMessage: errorMessage,
+    return PopScope(
+      canPop: false,
+      child: Scaffold(
+        body: Stack(children: [
+          const BackgroundGradiant(),
+          Center(
+            child: Loadingwidget(isVisible: isLoading),
+          ),
+          Visibility(
+            visible: !isLoading,
+            child: Center(
+                child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                const SizedBox(),
+                RewardTopWidget(
+                    streak: streak, score: totalReward, skips: remainingSkips),
+                DisplayRewards(
+                  baseReward: baseReward,
+                  multi: multi,
+                  dailyQuestProgress: dailyQuestProgress,
+                  timesCollected: timesCollected,
+                  dailyReward: dailyReward,
+                ),
+                const SizedBox(),
+              ],
             )),
-        Visibility(visible: isValid, child: const ConfirmingImageNotReal()),
-        Visibility(visible: footerVisible, child: const Footer()),
-        Center(
-          child: CustomConfettiWidget(confettiController: confettiController),
-        ),
-      ]),
-      floatingActionButton:
-          Visibility(visible: footerVisible, child: const CameraButtonFooter()),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+          ),
+          Visibility(
+              visible: errorPopup,
+              child: ConfirmingImageError(
+                errorMessage: errorMessage,
+              )),
+          Visibility(visible: isValid, child: const ConfirmingImageNotReal()),
+          Visibility(visible: footerVisible, child: const Footer()),
+          Center(
+            child: CustomConfettiWidget(confettiController: confettiController),
+          ),
+        ]),
+        floatingActionButton:
+            Visibility(visible: footerVisible, child: const CameraButtonFooter()),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      ),
     );
   }
 

@@ -20,36 +20,39 @@ class FinalConformationScene extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Stack(
-        children: [
-          const BackgroundGradiant(),
-          Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const BackButton(),
-                  CreateDescription(
-                    searchBarContent: itemName,
-                  )
-                ],
-              ),
-              const Center(
-                  child: ImageWidget(
-                sideMargin: 65,
-              )),
-              ItemNameLabel(
-                itemName: itemName,
-              ),
-              ConfirmButton(
-                searchBarContent: itemName,
-                isHttpRequest: true,
-                isDailyWeekly: isDailyWeekly,
-              ),
-            ],
-          ),
-        ],
+    return PopScope(
+      canPop: false,
+      child: Scaffold(
+        body: Stack(
+          children: [
+            const BackgroundGradiant(),
+            Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const BackButton(),
+                    CreateDescription(
+                      searchBarContent: itemName,
+                    )
+                  ],
+                ),
+                const Center(
+                    child: ImageWidget(
+                  sideMargin: 65,
+                )),
+                ItemNameLabel(
+                  itemName: itemName,
+                ),
+                ConfirmButton(
+                  searchBarContent: itemName,
+                  isHttpRequest: true,
+                  isDailyWeekly: isDailyWeekly,
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

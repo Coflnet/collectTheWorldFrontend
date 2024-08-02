@@ -32,44 +32,47 @@ class _ConfirmSceneMainState extends State<ConfirmSceneMain> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: LayoutBuilder(
-        builder: (context, constraints) {
-          return Container(
-            color: const Color.fromRGBO(21, 31, 51, 1),
-            child: SingleChildScrollView(
-              child: ConstrainedBox(
-                constraints: BoxConstraints(
-                  minHeight: constraints.maxHeight,
-                ),
-                child: Padding(
-                  padding: EdgeInsets.only(
-                      bottom: MediaQuery.of(context).viewInsets.bottom),
-                  child: Stack(
-                    alignment: Alignment.topLeft,
-                    children: [
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          const SizedBox(height: 30),
-                          const ImageWidget(),
-                          ConfirmPageSearchBar(
-                              onSearchContentChanged: updateSearchBarContent),
-                          ConfirmButton(
-                            searchBarContent: searchBarContent,
-                            isHttpRequest: false,
-                            isItemToFind: widget.isItemToFind,
-                          ),
-                        ],
-                      ),
-                      const BackButtonConfirm()
-                    ],
+    return PopScope(
+      canPop: false,
+      child: Scaffold(
+        body: LayoutBuilder(
+          builder: (context, constraints) {
+            return Container(
+              color: const Color.fromRGBO(21, 31, 51, 1),
+              child: SingleChildScrollView(
+                child: ConstrainedBox(
+                  constraints: BoxConstraints(
+                    minHeight: constraints.maxHeight,
+                  ),
+                  child: Padding(
+                    padding: EdgeInsets.only(
+                        bottom: MediaQuery.of(context).viewInsets.bottom),
+                    child: Stack(
+                      alignment: Alignment.topLeft,
+                      children: [
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const SizedBox(height: 30),
+                            const ImageWidget(),
+                            ConfirmPageSearchBar(
+                                onSearchContentChanged: updateSearchBarContent),
+                            ConfirmButton(
+                              searchBarContent: searchBarContent,
+                              isHttpRequest: false,
+                              isItemToFind: widget.isItemToFind,
+                            ),
+                          ],
+                        ),
+                        const BackButtonConfirm()
+                      ],
+                    ),
                   ),
                 ),
               ),
-            ),
-          );
-        },
+            );
+          },
+        ),
       ),
     );
   }
