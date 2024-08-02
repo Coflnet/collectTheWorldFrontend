@@ -145,7 +145,8 @@ class ConfirmingimagePageState extends State<ConfirmingimagePage> {
       var responseString = await response.stream.bytesToString();
       var jsonResponse = jsonDecode(responseString);
       var rewards = jsonResponse["rewards"];
-      print(jsonResponse);
+      ProfileRetrevial().setTotal(ProfileRetrevial().getTotal() + 1);
+      LoadingProfileInfo().saveFile();
       if (jsonResponse["stats"]["isNoItem"]) {
         setState(() {
           isValid = true;

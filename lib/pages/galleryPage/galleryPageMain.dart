@@ -103,6 +103,11 @@ class _GalleryPageMainState extends State<GalleryPageMain> {
       newListItems.add(tmpItems);
       tmpItems = [];
     }
+    if (tmpItems.isNotEmpty) {
+      tmpItems.addAll([[], [], []]);
+      
+      newListItems.add(tmpItems);
+    }
     setState(() {
       thumbNails.addAll(newListItems);
     });

@@ -1,10 +1,12 @@
+import 'package:collect_the_world/globals/extentions/extentions.dart';
 import 'package:flutter/material.dart';
 
 class GalleryFullImageContent extends StatelessWidget {
   final String name;
   final imageData;
+  final VoidCallback callback;
   const GalleryFullImageContent(
-      {super.key, this.imageData, required this.name});
+      {super.key, this.imageData, required this.name, required this.callback});
 
   @override
   Widget build(BuildContext context) {
@@ -15,19 +17,35 @@ class GalleryFullImageContent extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.end,
           children: <Widget>[
             IconButton(
-                onPressed: () => {},
+                onPressed: () => callback(),
                 icon: const Icon(
                   Icons.close,
                   color: Colors.white60,
-                  size: 30,
+                  size: 43,
                 )),
           ],
         ),
-        Image.memory(imageData),
-        Text(
-          name,
-          style: const TextStyle(
-              color: Colors.white, fontWeight: FontWeight.w600, fontSize: 30),
+        Container(
+            height: MediaQuery.of(context).size.height * 0.58,
+            child: ClipRRect(
+                borderRadius: BorderRadius.circular(16),
+                child: Image.memory(
+                  imageData,
+                  fit: BoxFit.contain,
+                ))),
+        Expanded(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                name.capitalize(),
+                style: const TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w700,
+                    fontSize: 36),
+              ),
+            ],
+          ),
         )
       ],
     );

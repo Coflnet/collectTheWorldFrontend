@@ -1,6 +1,8 @@
+import 'dart:ffi';
 import 'dart:typed_data';
 
 import 'package:collect_the_world/globals/globalScripts/globals.dart';
+import 'package:collect_the_world/globals/globalScripts/systems/profilePicture.dart';
 import 'package:flutter/material.dart';
 import 'package:image/image.dart' as img;
 import 'package:path/path.dart';
@@ -9,7 +11,7 @@ import 'package:sqflite/sqflite.dart';
 class thumbNail {
   final Uint8List imageBytes;
   final String name;
-  final String created;
+  final int created;
   final String id;
 
   Map<String, Object> toMap() {
@@ -44,17 +46,16 @@ class gallerySaving {
       version: 1,
       onCreate: (dbInst, version) {
         return dbInst.execute(
-            "CREATE TABLE thumbNails(name STRING, imageBytes Uint8List, created STRING, id STRING)");
+            "CREATE TABLE thumbNails(name STRING, imageBytes Uint8List, created INT, id STRING)");
       },
     );
 
-    first5Thumbnails =
-        await db.query("thumbNails", orderBy: "created", limit: 5);
+    first5Thumbnails = await db.query("thumbNails", limit: 5,orderBy: "created DESC",);
     first5Thumbnails = [
       for (final {
             "imageBytes": imageBytes as Uint8List,
             "name": name as String,
-            "created": created as String,
+            "created": created as int,
             "id": id as String,
           } in first5Thumbnails)
         thumbNail(imageBytes: imageBytes, name: name, created: created, id: id)
@@ -62,7 +63,26 @@ class gallerySaving {
     if (first5Thumbnails.length == 5) {
       return;
     }
-    for (var i = 0; i < 5 - first5Thumbnails.length ; i++) {
+    for (var i = 0; i < 5 + 1; i++) {
+      first5Thumbnails.add([]);
+    }
+  }
+
+  void updateFirst5() async {
+    first5Thumbnails = await db.query("thumbNails",orderBy: "created DESC", limit: 5, );
+    first5Thumbnails = [
+      for (final {
+            "imageBytes": imageBytes as Uint8List,
+            "name": name as String,
+            "created": created as int,
+            "id": id as String,
+          } in first5Thumbnails)
+        thumbNail(imageBytes: imageBytes, name: name, created: created, id: id)
+    ];
+    if (first5Thumbnails.length == 5) {
+      return;
+    }
+    for (var i = 0; i < 5 - first5Thumbnails.length + 1; i++) {
       first5Thumbnails.add([]);
     }
   }
@@ -80,17 +100,17 @@ class gallerySaving {
         Uint8List.fromList(img.encodeJpg(resizedImage, quality: 75));
     var insertData = thumbNail(
         id: Globals().getImageId,
-        created: DateTime.now().toIso8601String(),
+        created: ProfileRetrevial().getTotal(),
         name: Globals().getImageName,
         imageBytes: resizedBytes);
     db.insert("thumbNails", insertData.toMap());
+    updateFirst5();
   }
 
   Future<List> loadWithOffset(int offset) async {
-    return  await db.query("thumbNails", orderBy: "created", limit: 20, offset: offset);
-    
+    return await db.query("thumbNails",
+        orderBy: "created DESC", limit: 20, offset: offset);
   }
 
   get getFirstFive => first5Thumbnails;
 }
-
