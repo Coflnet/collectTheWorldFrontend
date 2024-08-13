@@ -31,7 +31,8 @@ class _CollectItemSkipState extends State<CollectItemSkip> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.fromLTRB(0, 8, 4, 8),
+      margin: const EdgeInsets.fromLTRB(0, 8, 4, 16),
+
       width: 110,
       decoration: BoxDecoration(
           gradient: LinearGradient(
@@ -51,6 +52,7 @@ class _CollectItemSkipState extends State<CollectItemSkip> {
             : TextButton(
                 onPressed: () async {
                   setState(() {
+                    print(MediaQuery.of(context).size.height);
                     loading = true;
                   });
                   await ItemToFindHandler().skipItem(widget.itemName);

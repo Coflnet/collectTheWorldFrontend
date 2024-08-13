@@ -30,6 +30,12 @@ class _CameraScreenState extends State<CameraScreen> {
   bool capturing = false;
 
   @override
+  void initState() {
+    super.initState();
+    capturing = false;
+  }
+
+  @override
   void dispose() {
     super.dispose();
     widget.controller.dispose();

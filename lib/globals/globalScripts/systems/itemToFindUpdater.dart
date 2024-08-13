@@ -47,6 +47,8 @@ class ItemToFindHandler {
     return currentItem;
   }
 
+  get getTheCurrentItem => currentItem;
+
   Future<String?> fetchNewItem() async {
     return await getNewItem();
   }

@@ -1,8 +1,10 @@
 import 'dart:ui';
 
+import 'package:camera/camera.dart';
 import 'package:collect_the_world/background/backgroundGradiant.dart';
 import 'package:collect_the_world/background/backgroundImage.dart';
 import 'package:collect_the_world/background/frostedGlass.dart';
+import 'package:collect_the_world/main.dart';
 import 'package:collect_the_world/pages/homePage/cameraScene/confirm/widgets/confirmButton.dart';
 import 'package:collect_the_world/pages/homePage/cameraScene/confirm/widgets/createDescription.dart';
 import 'package:collect_the_world/pages/homePage/cameraScene/confirm/widgets/imageWidget.dart';
@@ -61,13 +63,31 @@ class FinalConformationScene extends StatelessWidget {
 class BackButton extends StatelessWidget {
   const BackButton({super.key});
 
+  Future<CameraController> _initializeCamera() async {
+    var cameras = await availableCameras();
+    var _controller = CameraController(cameras.first, ResolutionPreset.high);
+    await _controller.initialize();
+    return _controller;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Align(
         alignment: Alignment.topLeft,
         child: TextButton(
-            onPressed: () {
-              Navigator.pop(context);
+            onPressed: () async {
+              CameraController controller = await _initializeCamera();
+              Navigator.push(
+                  context,
+                  PageRouteBuilder(
+                    pageBuilder: (context, animation, secondaryAnimation) =>
+                        CameraScene(controller: controller),
+                    transitionsBuilder:
+                        (context, animation, secondaryAnimation, child) {
+                      return child;
+                    },
+                    transitionDuration: const Duration(milliseconds: 0),
+                  ));
             },
             child: Container(
               padding: const EdgeInsets.all(10),

@@ -12,8 +12,11 @@ import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:provider/provider.dart';
 
 class CollectItemWidget extends StatefulWidget {
-
-  const CollectItemWidget({super.key});
+  final double constaints;
+  const CollectItemWidget({
+    super.key,
+    required this.constaints,
+  });
   @override
   CollectItemWidgetState createState() => CollectItemWidgetState();
 }
@@ -41,6 +44,7 @@ class CollectItemWidgetState extends State<CollectItemWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: (widget.constaints / 4).clamp(100, 400),
       child: AttentionWidget(
           child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,

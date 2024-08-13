@@ -6,6 +6,7 @@ import 'package:collect_the_world/pages/homePage/cameraScene/pages/confirmingIma
 import 'package:collect_the_world/pages/homePage/cameraScene/pages/confirmingImage/rewardWidgets/dailyReward/dailyReward.dart';
 import 'package:collect_the_world/pages/homePage/cameraScene/pages/confirmingImage/rewardWidgets/dailyReward/header/rewardTopWidget.dart';
 import 'package:collect_the_world/pages/homePage/cameraScene/pages/confirmingImage/rewardWidgets/multipliers.dart';
+import 'package:collect_the_world/pages/homePage/cameraScene/pages/confirmingImage/rewardWidgets/nextItemToFind.dart';
 import 'package:collect_the_world/pages/homePage/cameraScene/pages/confirmingImage/rewardWidgets/rewardsHeader.dart';
 import 'package:collect_the_world/pages/homePage/cameraScene/pages/confirmingImage/rewardWidgets/timesCollectedWidget.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +17,7 @@ class DisplayRewards extends StatefulWidget {
   final int dailyQuestProgress;
   final int timesCollected;
   final int dailyReward;
+  final String nextItem;
 
   const DisplayRewards(
       {super.key,
@@ -23,7 +25,8 @@ class DisplayRewards extends StatefulWidget {
       required this.multi,
       required this.dailyQuestProgress,
       required this.timesCollected,
-      required this.dailyReward});
+      required this.dailyReward,
+      required this.nextItem});
 
   @override
   _DisplayRewardsState createState() => _DisplayRewardsState();
@@ -46,24 +49,32 @@ class _DisplayRewardsState extends State<DisplayRewards> {
       height: MediaQuery.sizeOf(context).height * 0.62,
       margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
       child: baseWidget(
-          child: Container(
-        padding: const EdgeInsets.all(8),
-        child: SingleChildScrollView(
           child: Column(
-            children: <Widget>[
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  BaseReward(baseReward: widget.baseReward),
-                  Multipliers(multi: widget.multi),
-                  DailyReward(progress: widget.dailyQuestProgress),
-                  TimesCollectedWidget(timesCollected: widget.timesCollected),
-                  DailyItemQuestReward(progress: widget.dailyQuestProgress)
-                ],
-              )
-            ],
+        children: [
+          Flexible(
+            child: Container(
+              padding: const EdgeInsets.all(8),
+              child: SingleChildScrollView(
+                child: Column(
+                  children: <Widget>[
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        BaseReward(baseReward: widget.baseReward),
+                        Multipliers(multi: widget.multi),
+                        DailyReward(progress: widget.dailyQuestProgress),
+                        TimesCollectedWidget(
+                            timesCollected: widget.timesCollected),
+                        DailyItemQuestReward(
+                            progress: widget.dailyQuestProgress)
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ),
           ),
-        ),
+        ],
       )),
     );
   }

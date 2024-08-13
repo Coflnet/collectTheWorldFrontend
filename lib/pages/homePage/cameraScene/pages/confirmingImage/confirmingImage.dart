@@ -17,6 +17,7 @@ import 'package:collect_the_world/pages/homePage/cameraScene/pages/confirmingIma
 import 'package:collect_the_world/pages/homePage/cameraScene/pages/confirmingImage/error/confirmingImageError.dart';
 import 'package:collect_the_world/pages/homePage/cameraScene/pages/confirmingImage/error/confirmingImageNotReal.dart';
 import 'package:collect_the_world/pages/homePage/cameraScene/pages/confirmingImage/rewardWidgets/dailyReward/header/rewardTopWidget.dart';
+import 'package:collect_the_world/pages/homePage/cameraScene/pages/confirmingImage/rewardWidgets/dailyReward/footer/rewardsFooter.dart';
 import 'package:confetti/confetti.dart';
 import 'package:http/http.dart' as http;
 import 'package:collect_the_world/globals/globalScripts/systems/authClient.dart'
@@ -65,6 +66,7 @@ class ConfirmingimagePageState extends State<ConfirmingimagePage> {
   int timesCollected = 0;
   int dailyReward = 0;
   String errorMessage = "";
+  String nextItemToFind = "";
 
   @override
   void initState() {
@@ -100,6 +102,7 @@ class ConfirmingimagePageState extends State<ConfirmingimagePage> {
                   dailyQuestProgress: dailyQuestProgress,
                   timesCollected: timesCollected,
                   dailyReward: dailyReward,
+                  nextItem: nextItemToFind,
                 ),
                 const SizedBox(),
               ],
@@ -111,14 +114,13 @@ class ConfirmingimagePageState extends State<ConfirmingimagePage> {
                 errorMessage: errorMessage,
               )),
           Visibility(visible: isValid, child: const ConfirmingImageNotReal()),
-          Visibility(visible: footerVisible, child: const Footer()),
+          Visibility(
+              visible: footerVisible,
+              child: RewardsFooter(itemName: nextItemToFind)),
           Center(
             child: CustomConfettiWidget(confettiController: confettiController),
           ),
         ]),
-        floatingActionButton:
-            Visibility(visible: footerVisible, child: const CameraButtonFooter()),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       ),
     );
   }
@@ -203,15 +205,18 @@ class ConfirmingimagePageState extends State<ConfirmingimagePage> {
     }
   }
 
-  void successfullReqeust() {
+  void successfullReqeust() async {
     confettiController.play();
-    if (widget.isDailyWeekly) {
-      ItemToFindHandler().fetchNewItem();
-    }
     ChallengeCaching().requestChallenge();
+
+    if (widget.isDailyWeekly) {
+      await ItemToFindHandler().fetchNewItem();
+    }
+    String? newitem = await ItemToFindHandler().getCurrentItem();
 
     setState(() {
       isLoading = false;
+      nextItemToFind = newitem ?? "";
     });
   }
 
