@@ -21,17 +21,17 @@ class ReturnPageLeaderboardHeader extends StatelessWidget {
         children: <Widget>[
           TextButton(
             style: TextButton.styleFrom(padding: const EdgeInsets.all(0)),
-            onPressed: () => callBack(1),
+            onPressed: () => callBack(0),
             child: Text("Daily", style: nameTextStyle(sel: 1, cur: selection)),
           ),
           TextButton(
             style: TextButton.styleFrom(padding: const EdgeInsets.all(0)),
-            onPressed: () => callBack(2),
+            onPressed: () => callBack(1),
             child: Text("Weekly", style: nameTextStyle(sel: 2, cur: selection)),
           ),
           TextButton(
             style: TextButton.styleFrom(padding: const EdgeInsets.all(0)),
-            onPressed: () => callBack(3),
+            onPressed: () => callBack(2),
             child:
                 Text("All Time", style: nameTextStyle(sel: 3, cur: selection)),
           )

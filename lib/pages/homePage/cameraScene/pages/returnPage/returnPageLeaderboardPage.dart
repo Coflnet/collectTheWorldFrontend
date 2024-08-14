@@ -7,7 +7,13 @@ import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class ReturnPageLeaderboardPage extends StatefulWidget {
   final String whichOne;
-  const ReturnPageLeaderboardPage({super.key, required this.whichOne});
+  final Function(List, String) setLBData;
+  final Map lbData;
+  const ReturnPageLeaderboardPage(
+      {super.key,
+      required this.whichOne,
+      required this.setLBData,
+      required this.lbData});
 
   @override
   _ReturnPageLeaderboardPageState createState() =>
@@ -20,26 +26,36 @@ class _ReturnPageLeaderboardPageState extends State<ReturnPageLeaderboardPage> {
   @override
   void initState() {
     super.initState();
+    if (widget.lbData[widget.whichOne].isNotEmpty) {
+      setState(() {
+        content = widget.lbData[widget.whichOne];
+      });
+    return;
+    }
     loadLeaderBoard();
   }
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      shrinkWrap: true,
-      itemCount: content.length,
-      itemBuilder: (context, index) {
-        return content.isEmpty
-            ? LoadingAnimationWidget.inkDrop(color: Colors.white, size: 30)
-            : LeaderBoardWidget(
-                name: content[index][0],
-                xp: content[index][1],
-                index: index,
-                profileImage: content[index][3] ?? "",
-                userId: content[index][2] ?? "",
-              );
-      },
-    );
+    return content.isEmpty
+        ? LoadingAnimationWidget.inkDrop(color: Colors.white, size: 80)
+        : MediaQuery.removePadding(
+          context: context,
+          removeTop: true,
+          child: ListView.builder(
+              shrinkWrap: true,
+              itemCount: content.length,
+              itemBuilder: (context, index) {
+                return LeaderBoardWidget(
+                  name: content[index][0],
+                  xp: content[index][1],
+                  index: index,
+                  profileImage: content[index][3] ?? "",
+                  userId: content[index][2] ?? "",
+                );
+              },
+            ),
+        );
   }
 
   void loadLeaderBoard() async {
@@ -64,6 +80,7 @@ class _ReturnPageLeaderboardPageState extends State<ReturnPageLeaderboardPage> {
         }
         returnList.add([username, i.score, i.user?.userId, i.user?.avatar]);
       }
+      widget.setLBData(returnList, widget.whichOne);
       setState(() {
         content = returnList;
       });

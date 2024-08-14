@@ -206,7 +206,6 @@ class ConfirmingimagePageState extends State<ConfirmingimagePage> {
   }
 
   void successfullReqeust() async {
-    confettiController.play();
     ChallengeCaching().requestChallenge();
 
     if (widget.isDailyWeekly) {
@@ -218,6 +217,8 @@ class ConfirmingimagePageState extends State<ConfirmingimagePage> {
       isLoading = false;
       nextItemToFind = newitem ?? "";
     });
+    confettiController.play();
+
   }
 
   void descriptionEndpoint() async {

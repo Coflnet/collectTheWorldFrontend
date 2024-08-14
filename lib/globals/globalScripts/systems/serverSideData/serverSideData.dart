@@ -3,7 +3,7 @@ import 'dart:io';
 
 import 'package:path_provider/path_provider.dart';
 
-List dailyBonusesList = [1.25, 2, 4];
+List dailyBonusesList = [1.25, 1.5, 2];
 List leaderboardBaseRewardsList = [1000, 3000];
 List leaderboardTopThree = [
   [3000, 2000, 1000],

@@ -2,6 +2,7 @@ import 'package:collect_the_world/globals/globalWidgets/baseWidget/baseWidget.da
 import 'package:collect_the_world/pages/homePage/cameraScene/pages/returnPage/returnPageLeaderboardHeader.dart';
 import 'package:collect_the_world/pages/homePage/cameraScene/pages/returnPage/returnPageLeaderboardPage.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 class ReturnPageLeaderboardMain extends StatefulWidget {
   const ReturnPageLeaderboardMain({super.key});
@@ -13,10 +14,15 @@ class ReturnPageLeaderboardMain extends StatefulWidget {
 
 class _ReturnPageLeaderboardMainState extends State<ReturnPageLeaderboardMain> {
   int currentSel = 0;
-  final List<Widget> pages = [
-    const ReturnPageLeaderboardPage(whichOne: "daily"),
-    const ReturnPageLeaderboardPage(whichOne: "weekly"),
-    const ReturnPageLeaderboardPage(whichOne: "exp_overall")
+  Map lbData = {"daily": [], "weekly": [], "exp_overall": []};
+
+  late List<Widget> pages = [
+    ReturnPageLeaderboardPage(
+        whichOne: "daily", setLBData: setLBData, lbData: lbData),
+    ReturnPageLeaderboardPage(
+        whichOne: "weekly", setLBData: setLBData, lbData: lbData),
+    ReturnPageLeaderboardPage(
+        whichOne: "exp_overall", setLBData: setLBData, lbData: lbData)
   ];
 
   late PageController pageController;
@@ -24,6 +30,12 @@ class _ReturnPageLeaderboardMainState extends State<ReturnPageLeaderboardMain> {
   void initState() {
     super.initState();
     pageController = PageController(initialPage: currentSel);
+  }
+
+  void setLBData(List content, String which) {
+    setState(() {
+      lbData[which] = content;
+    });
   }
 
   void updateCurrentSelection(int newSelection) {
@@ -41,7 +53,13 @@ class _ReturnPageLeaderboardMainState extends State<ReturnPageLeaderboardMain> {
           height: MediaQuery.sizeOf(context).height * 0.5,
           child: Column(
             children: <Widget>[
-              ReturnPageLeaderboardHeader(selection: currentSel+1, callBack: changeSel),
+              ReturnPageLeaderboardHeader(
+                  selection: currentSel + 1, callBack: changeSel),
+              Container(
+                margin: const EdgeInsets.only(top: 8),
+                height: 2,
+                decoration: BoxDecoration(color: Colors.grey.withOpacity(0.4)),
+              ),
               Flexible(
                 child: PageView.builder(
                   itemBuilder: (context, index) {
@@ -62,6 +80,7 @@ class _ReturnPageLeaderboardMainState extends State<ReturnPageLeaderboardMain> {
   }
 
   void changeSel(int newSel) {
+    pageController.jumpToPage(newSel);
     setState(() {
       currentSel = newSel;
     });
