@@ -39,8 +39,8 @@ class _CollectItemSkipState extends State<CollectItemSkip> {
               begin: Alignment.centerLeft,
               end: Alignment.centerRight,
               colors: [
-                HexColor("#6430FF"),
-                HexColor("#6430FF"),
+                HexColor("4A4EBA"),
+                HexColor("4A4EBA"),
               ]),
           borderRadius: BorderRadius.circular(16)),
       child: Container(
@@ -52,16 +52,15 @@ class _CollectItemSkipState extends State<CollectItemSkip> {
             : TextButton(
                 onPressed: () async {
                   setState(() {
-                    print(MediaQuery.of(context).size.height);
                     loading = true;
                   });
                   await ItemToFindHandler().skipItem(widget.itemName);
                   skipConfirmed();
                 },
-                child: const Text(
+                child: Text(
                   "Skip item",
                   style: TextStyle(
-                      color: Colors.white,
+                      color: Colors.grey[200],
                       fontSize: 15,
                       fontWeight: FontWeight.w700,
                       fontFamily: "Fredoka-SemiExpanded"),

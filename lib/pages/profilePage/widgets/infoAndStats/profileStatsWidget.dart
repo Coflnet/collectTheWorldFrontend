@@ -21,7 +21,7 @@ class ProfileStatsWidgetCustom extends StatelessWidget {
         margin: const EdgeInsets.all(6),
         padding: const EdgeInsets.fromLTRB(6, 6, 6, 4),
         decoration: BoxDecoration(
-            color: const Color.fromRGBO(111, 99, 150, 1),
+            color: HexColor("434373"),
             borderRadius: BorderRadius.circular(12)),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,

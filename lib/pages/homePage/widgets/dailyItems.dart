@@ -2,6 +2,7 @@ import 'package:collect_the_world/pages/homePage/widgets/dailyItemPopup.dart';
 import 'package:custom_pop_up_menu/custom_pop_up_menu.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:hexcolor/hexcolor.dart';
 
 class DailyItems extends StatefulWidget {
   final int itemCollectCount;
@@ -71,7 +72,7 @@ class DailyItemsContent extends StatelessWidget {
       margin: const EdgeInsets.only(top: 16),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16),
-          color: const Color.fromRGBO(73, 61, 91, 1)),
+          color: HexColor("3B3054")),
       child: Container(
         margin: const EdgeInsets.all(12),
         child: Column(

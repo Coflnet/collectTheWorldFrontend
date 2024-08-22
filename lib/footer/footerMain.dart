@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'dart:ui';
 
 import 'package:haptic_feedback/haptic_feedback.dart';
+import 'package:hexcolor/hexcolor.dart';
 
 class Footer extends StatelessWidget {
   const Footer({super.key});
@@ -25,8 +26,8 @@ class Footer extends StatelessWidget {
           children: [
             IconButton(
               iconSize: 45,
-              icon: const Icon(Icons.home_outlined,
-                  color: Color.fromRGBO(80, 173, 255, 1)),
+              icon: Icon(Icons.home_outlined,
+                  color: HexColor("5559CE")),
               onPressed: () => {
                 Haptics.vibrate(HapticsType.light),
                 Navigator.push(
@@ -44,8 +45,8 @@ class Footer extends StatelessWidget {
             ),
             IconButton(
               iconSize: 40,
-              icon: const Icon(Icons.paste_rounded,
-                color: Color.fromRGBO(0, 145, 255, 1)),
+              icon: Icon(Icons.paste_rounded,
+                color: HexColor("5559CE")),
               onPressed: () => {
                 Haptics.vibrate(HapticsType.light),
                 Navigator.push(
@@ -66,8 +67,8 @@ class Footer extends StatelessWidget {
             ),
             IconButton(
               iconSize: 45,
-              icon: const Icon(Icons.leaderboard_outlined,
-                  color: Color.fromRGBO(0, 145, 255, 1)),
+              icon: Icon(Icons.leaderboard_outlined,
+                  color: HexColor("5559CE")),
               onPressed: () => {
                 Haptics.vibrate(HapticsType.light),
                 Navigator.push(
@@ -85,9 +86,9 @@ class Footer extends StatelessWidget {
             ),
             IconButton(
               iconSize: 50,
-              icon: const Icon(
+              icon:  Icon(
                 Icons.person_outline,
-                color: Color.fromRGBO(0, 145, 255, 1),
+                color: HexColor("5559CE"),
               ),
               onPressed: () => {
                 Haptics.vibrate(HapticsType.light),

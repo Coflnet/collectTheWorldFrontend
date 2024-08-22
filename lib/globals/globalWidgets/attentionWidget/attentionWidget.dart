@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:hexcolor/hexcolor.dart';
 
 class AttentionWidget extends StatelessWidget {
   final Widget child;
@@ -14,13 +15,12 @@ class AttentionWidget extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16),
-          gradient: const LinearGradient(
+          gradient: LinearGradient(
             begin: Alignment.centerRight,
             end: Alignment.centerLeft,
             colors: [
-              Color.fromRGBO(112, 48, 172, 1),
-              Color.fromRGBO(112, 48, 172, 1),
-              Color.fromRGBO(99, 40, 154, 1),
+              HexColor("2A2C5A"),
+              HexColor("2A2C5A"),
             ],
           )),
       child: child,

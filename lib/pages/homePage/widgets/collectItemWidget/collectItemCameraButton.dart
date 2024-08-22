@@ -4,6 +4,7 @@ import 'package:camera/camera.dart';
 import 'package:collect_the_world/globals/globalScripts/systems/itemToFindUpdater.dart';
 import 'package:collect_the_world/pages/homePage/cameraScene/pages/cameraScene.dart';
 import 'package:flutter/material.dart';
+import 'package:hexcolor/hexcolor.dart';
 
 class CameraButton extends StatefulWidget {
   const CameraButton({super.key});
@@ -38,7 +39,7 @@ class _CollectItemCameraButtonState extends State<CameraButton> {
             height: 85,
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(50),
-                color: const Color.fromARGB(255, 238, 226, 255),
+                color: HexColor("4A4EBA"),
                 boxShadow: const [
                   BoxShadow(
                       spreadRadius: -5,
@@ -48,10 +49,10 @@ class _CollectItemCameraButtonState extends State<CameraButton> {
                 ]),
             child: IconButton(
                 onPressed: () => changeScene(context),
-                icon: const Icon(
+                icon: Icon(
                   Icons.camera_alt_outlined,
-                  size: 50,
-                  color: Colors.black,
+                  size: 48,
+                  color: HexColor("BDBACC"),
                 )),
           ),
         ],

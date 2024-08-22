@@ -27,19 +27,21 @@ class _GalleryMainState extends State<GalleryMain> {
               const ExpandGalleryButton(),
               Column(
                 children: <Widget>[
-                  const Text(
+                  Text(
                     "🖼️ Gallery",
                     style: TextStyle(
-                        color: Colors.white,
+                        color: Colors.grey[300],
                         fontSize: 25,
                         fontWeight: FontWeight.w700),
                   ),
+                  SizedBox(height: 4),
                   SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: <Widget>[
+                        SizedBox(width: 5),
                         GalleryHomePagePreview(thumbNailData: gallerImages[0]),
                         GalleryHomePagePreview(thumbNailData: gallerImages[1]),
                         GalleryHomePagePreview(thumbNailData: gallerImages[2]),

@@ -55,7 +55,7 @@ class _ItemToFindReturnPageState extends State<ItemToFindReturnPage> {
                             fontWeight: FontWeight.bold,
                             fontSize: 40),
                       )),
-                  const SizedBox(height: 16)
+                  const SizedBox(height: 24)
                 ],
               ),
             ),

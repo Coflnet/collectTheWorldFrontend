@@ -7,12 +7,12 @@ import 'package:collect_the_world/pages/homePage/widgets/dailyBonusPopup.dart';
 import 'package:custom_pop_up_menu/custom_pop_up_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:hexcolor/hexcolor.dart';
 
 class DailyBonuses extends StatelessWidget {
   final List<ActiveMultiplier> multiplierList;
 
-  const DailyBonuses(
-      {super.key, required this.multiplierList});
+  const DailyBonuses({super.key, required this.multiplierList});
 
   @override
   Widget build(BuildContext context) {
@@ -34,10 +34,10 @@ class DailyBonuses extends StatelessWidget {
               children: [
                 Container(
                   margin: const EdgeInsets.only(bottom: 12),
-                  child: const Text(
+                  child: Text(
                     "🏵️ Bonuses",
                     style: TextStyle(
-                        color: Colors.white,
+                        color: Colors.grey[300],
                         fontSize: 25,
                         fontWeight: FontWeight.w700),
                   ),
@@ -85,12 +85,12 @@ class BonusWidget extends StatelessWidget {
     return Expanded(
       child: Container(
         decoration: BoxDecoration(
-            gradient: const LinearGradient(
+            gradient: LinearGradient(
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
                 colors: [
-                  Color.fromRGBO(129, 87, 129, 1),
-                  Color.fromRGBO(119, 80, 119, 1)
+                  HexColor("3C3D68"),
+                  HexColor("3C3D68"),
                 ]),
             borderRadius: BorderRadius.circular(12)),
         child: Container(
@@ -99,20 +99,19 @@ class BonusWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(multi,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontFamily: "Robik-Light",
-                    color: Colors.white.withOpacity(0.9),
+                    color: Colors.white,
                     fontSize: 22,
                     fontWeight: FontWeight.w500,
                   )),
-              Container(
-                child: AutoSizeText(name,
-                    maxLines: 1,
-                    style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 22,
-                        fontWeight: FontWeight.w600)),
-              ),
+              AutoSizeText(name,
+                  maxLines: 1,
+                  style: TextStyle(
+                      fontFamily: "Robik-Light",
+                      color: Colors.grey[200],
+                      fontSize: 22,
+                      fontWeight: FontWeight.w500)),
               const SizedBox(height: 10)
             ],
           ),

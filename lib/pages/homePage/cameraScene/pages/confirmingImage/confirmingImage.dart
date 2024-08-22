@@ -214,8 +214,8 @@ class ConfirmingimagePageState extends State<ConfirmingimagePage> {
     String? newitem = await ItemToFindHandler().getCurrentItem();
 
     setState(() {
-      isLoading = false;
       nextItemToFind = newitem ?? "";
+      isLoading = false;
     });
     confettiController.play();
 

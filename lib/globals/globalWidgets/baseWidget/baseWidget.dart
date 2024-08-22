@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:hexcolor/hexcolor.dart';
 
 class baseWidget extends StatelessWidget {
   final Widget child;
@@ -14,12 +15,12 @@ class baseWidget extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16),
-          gradient: const LinearGradient(
+          gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
             colors: [
-              Color.fromRGBO(73, 64, 119, 1),
-              Color.fromRGBO(62, 52, 99, 1),
+              HexColor("#303154"),
+              HexColor("#303154"),
             ],
           )),
       child: child,
