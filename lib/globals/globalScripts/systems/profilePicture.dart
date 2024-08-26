@@ -22,7 +22,6 @@ bool legalDone = false;
 bool isConnected = false;
 bool notificationsNeed = true;
 
-
 class LoadingProfileInfo {
   void load() {
     loadProfileFile();
@@ -149,8 +148,6 @@ class LoadingProfileInfo {
     var fileDataJson = jsonEncode(fileData);
     file.writeAsString(fileDataJson);
   }
-
-  
 }
 
 class ProfileRetrevial {
@@ -164,8 +161,8 @@ class ProfileRetrevial {
     isConnected = newValue;
   }
 
-
   String getProfileString() {
+    print(profileString);
     if (profileString == "") {
       return "ohno";
     }

@@ -13,7 +13,7 @@ class GalleryMain extends StatefulWidget {
 }
 
 class _GalleryMainState extends State<GalleryMain> {
-  final gallerImages = gallerySaving().getFirstFive;
+  final List gallerImages = gallerySaving().getFirstFive;
 
   @override
   Widget build(BuildContext context) {
@@ -34,24 +34,8 @@ class _GalleryMainState extends State<GalleryMain> {
                         fontSize: 25,
                         fontWeight: FontWeight.w700),
                   ),
-                  SizedBox(height: 4),
-                  SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: <Widget>[
-                        SizedBox(width: 5),
-                        GalleryHomePagePreview(thumbNailData: gallerImages[0]),
-                        GalleryHomePagePreview(thumbNailData: gallerImages[1]),
-                        GalleryHomePagePreview(thumbNailData: gallerImages[2]),
-                        GalleryHomePagePreview(thumbNailData: gallerImages[3]),
-                        GalleryHomePagePreview(thumbNailData: gallerImages[3]),
-                      ],
-                    ),
-                  )
-                ],
-              ),
+                  const SizedBox(height: 4),
+
             ],
           ),
         ));
