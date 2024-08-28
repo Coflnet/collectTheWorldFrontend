@@ -163,7 +163,6 @@ class ConfirmingimagePageState extends State<ConfirmingimagePage> {
       Globals().setImageName = widget.searchBarContent;
       gallerySaving().saveImageThumbNail();
       setState(() {
-        footerVisible = true;
 
         baseReward = rewards["baseReward"] ?? 69;
         totalReward = rewards["total"] ?? 69;
@@ -216,6 +215,8 @@ class ConfirmingimagePageState extends State<ConfirmingimagePage> {
     setState(() {
       nextItemToFind = newitem ?? "";
       isLoading = false;
+      footerVisible = true;
+
     });
     confettiController.play();
 

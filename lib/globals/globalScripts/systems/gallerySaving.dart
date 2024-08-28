@@ -2,6 +2,7 @@ import 'dart:ffi';
 import 'dart:typed_data';
 
 import 'package:collect_the_world/globals/globalScripts/globals.dart';
+import 'package:collect_the_world/globals/globalScripts/systems/legalChangeUploader.dart';
 import 'package:collect_the_world/globals/globalScripts/systems/profilePicture.dart';
 import 'package:flutter/material.dart';
 import 'package:image/image.dart' as img;
@@ -50,7 +51,11 @@ class gallerySaving {
       },
     );
 
-    first5Thumbnails = await db.query("thumbNails", limit: 5,orderBy: "created DESC",);
+    first5Thumbnails = await db.query(
+      "thumbNails",
+      limit: 5,
+      orderBy: "created DESC",
+    );
     first5Thumbnails = [
       for (final {
             "imageBytes": imageBytes as Uint8List,
@@ -69,7 +74,11 @@ class gallerySaving {
   }
 
   void updateFirst5() async {
-    first5Thumbnails = await db.query("thumbNails",orderBy: "created DESC", limit: 5, );
+    first5Thumbnails = await db.query(
+      "thumbNails",
+      orderBy: "created DESC",
+      limit: 5,
+    );
     first5Thumbnails = [
       for (final {
             "imageBytes": imageBytes as Uint8List,
@@ -88,6 +97,10 @@ class gallerySaving {
   }
 
   void saveImageThumbNail() async {
+    if (LegalChangeUploader().getnewService == false ||
+        LegalChangeUploader().getallowResell == false) {
+      return;
+    }
     Uint8List imageBytes = await Globals().getImage.readAsBytes();
     img.Image? image = img.decodeImage(imageBytes);
 
