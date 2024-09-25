@@ -21,6 +21,7 @@ int skipsRemaining = 0;
 bool legalDone = false;
 bool isConnected = false;
 bool notificationsNeed = true;
+bool notifDone = false;
 
 class LoadingProfileInfo {
   void load() {
@@ -45,6 +46,7 @@ class LoadingProfileInfo {
         "dailyStreak": 0,
         "skipsRemaining": 0,
         "legalDone": false,
+        "notifDone": false,
         "notificationsNeed": true
       };
       var jsonFileData = jsonEncode(fileData);
@@ -65,6 +67,8 @@ class LoadingProfileInfo {
     legalDone = fileData["legalDone"];
     isConnected = fileData["isConnected"] ?? false;
     notificationsNeed = fileData["notificationsNeed"] ?? true;
+    notifDone = fileData["notifDone"] ?? false;
+    print(notifDone);
     return;
   }
 
@@ -128,6 +132,7 @@ class LoadingProfileInfo {
   }
 
   void saveFile() async {
+    print(notifDone);
     Directory appDir = await getApplicationDocumentsDirectory();
     String filePath = "${appDir.path}/profilePicutre.json";
     File file = File(filePath);
@@ -143,7 +148,8 @@ class LoadingProfileInfo {
       "skipsRemaining": skipsRemaining,
       "legalDone": legalDone,
       "isConnected": isConnected,
-      "notificationsNeed": notificationsNeed
+      "notificationsNeed": notificationsNeed,
+      "notifDone": notifDone
     };
     var fileDataJson = jsonEncode(fileData);
     file.writeAsString(fileDataJson);
@@ -200,6 +206,10 @@ class ProfileRetrevial {
   int getSkips() {
     return remainingSkips;
   }
+
+  bool get getnotifDone => notifDone;
+
+  set setNotifDone(i) => notifDone = i;
 
   void setSkips(int newSkips) {
     remainingSkips = newSkips;

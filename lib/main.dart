@@ -67,13 +67,13 @@ class HomePageState extends State<HomePage> {
   @override
   initState() {
     super.initState();
+
     loadData();
   }
 
   void loadpopup() {}
 
   void loadData() async {
-    RunNotifications().initNotifications();
     loadImportantData();
     loadChallenge();
     LoadingProfileInfo().loadLeaderboardProfile();
@@ -145,7 +145,8 @@ class HomePageState extends State<HomePage> {
               variation: variation,
               visible: popupVisible,
               flip: flipFloatingVisible,
-            ))
+            )),
+            const RunNotifications()
           ]),
         ),
         backgroundColor: const Color.fromRGBO(34, 40, 49, 1),
