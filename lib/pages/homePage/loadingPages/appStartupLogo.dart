@@ -30,6 +30,7 @@ class _AppStartupLogoState extends State<AppStartupLogo> {
   }
 
   void loadData() async {
+    LoadingProfileInfo().load();
     await Authclient().initClient();
     gallerySaving().loadDataBase();
     ItemToFindHandler().loadFileData();
@@ -41,7 +42,7 @@ class _AppStartupLogoState extends State<AppStartupLogo> {
     ChallengeCaching().getDailyChallenge();
     LeaderboardHandler().refreshLeaderboard(1);
     await LoadingProfileInfo().loadStatsFromCloud();
-    
+
     LegalChangeUploader().loadFileData();
     placementCaching().loadPlacements();
     LeaderboardHandler().getLeaderboard(1);

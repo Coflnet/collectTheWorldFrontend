@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:awesome_notifications/awesome_notifications.dart';
+import 'package:collect_the_world/globals/globalScripts/systems/legalChangeUploader.dart';
 import 'package:collect_the_world/globals/globalScripts/systems/profilePicture.dart';
 import 'package:collect_the_world/globals/globalWidgets/baseWidget/baseWidget.dart';
 import 'package:flutter/material.dart';
@@ -28,7 +29,10 @@ class _RunNotificationsState extends State<RunNotifications> {
           channelName: "Streak Notification",
           channelDescription: "Alert you before you lose your streak")
     ]);
-    if (!ProfileRetrevial().getnotifDone && ProfileRetrevial().getLegalDone) {
+    print("${ProfileRetrevial().getnotificationsNeed} profile");
+    print("legal ${ProfileRetrevial().getLegalDone}");
+    if (!ProfileRetrevial().getnotificationsNeed &&
+        LegalChangeUploader().getAlreadyAgreed) {
       setState(() {
         visible = true;
       });
@@ -75,9 +79,10 @@ class _RunNotificationsState extends State<RunNotifications> {
                               buttonColor: HexColor("4A4EBA"),
                               text: "Decline",
                               callback: () {
+                                ProfileRetrevial().setnotificationsNeed = true;
                                 setState(() {
                                   visible = false;
-                                  ProfileRetrevial().setNotifDone = true;
+
                                   LoadingProfileInfo().saveFile();
                                 });
                               },
@@ -113,7 +118,7 @@ class _RunNotificationsState extends State<RunNotifications> {
     setState(() {
       visible = false;
     });
-    ProfileRetrevial().setNotifDone = true;
+    ProfileRetrevial().setnotificationsNeed = true;
     LoadingProfileInfo().saveFile();
   }
 }

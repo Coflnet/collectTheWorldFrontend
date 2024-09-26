@@ -20,7 +20,7 @@ int dailyStreak = 0;
 int skipsRemaining = 0;
 bool legalDone = false;
 bool isConnected = false;
-bool notificationsNeed = true;
+bool notificationsNeed = false;
 bool notifDone = false;
 
 class LoadingProfileInfo {
@@ -47,7 +47,7 @@ class LoadingProfileInfo {
         "skipsRemaining": 0,
         "legalDone": false,
         "notifDone": false,
-        "notificationsNeed": true
+        "notificationsNeed": false
       };
       var jsonFileData = jsonEncode(fileData);
       await file.writeAsString(jsonFileData);
@@ -66,9 +66,9 @@ class LoadingProfileInfo {
     dailyStreak = fileData["dailyStreak"];
     legalDone = fileData["legalDone"];
     isConnected = fileData["isConnected"] ?? false;
-    notificationsNeed = fileData["notificationsNeed"] ?? true;
+    notificationsNeed = fileData["notificationsNeed"];
+    print("setting on open $notificationsNeed");
     notifDone = fileData["notifDone"] ?? false;
-    print(notifDone);
     return;
   }
 
@@ -132,7 +132,7 @@ class LoadingProfileInfo {
   }
 
   void saveFile() async {
-    print(notifDone);
+    print("saving notif $notificationsNeed");
     Directory appDir = await getApplicationDocumentsDirectory();
     String filePath = "${appDir.path}/profilePicutre.json";
     File file = File(filePath);
