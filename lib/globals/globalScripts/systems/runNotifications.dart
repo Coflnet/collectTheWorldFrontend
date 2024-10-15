@@ -29,14 +29,17 @@ class _RunNotificationsState extends State<RunNotifications> {
           channelName: "Streak Notification",
           channelDescription: "Alert you before you lose your streak")
     ]);
-    print("${ProfileRetrevial().getnotificationsNeed} profile");
-    print("legal ${ProfileRetrevial().getLegalDone}");
+    list();
     if (!ProfileRetrevial().getnotificationsNeed &&
         LegalChangeUploader().getAlreadyAgreed) {
       setState(() {
         visible = true;
       });
     }
+  }
+
+  void list() async {
+    print(await AwesomeNotifications().listScheduledNotifications());
   }
 
   @override
@@ -112,7 +115,8 @@ class _RunNotificationsState extends State<RunNotifications> {
             title: "⚠️Don't Lose That Streak!",
             body: "📸Collect a image before the day ends!",
           ),
-          schedule: NotificationCalendar(hour: 15, repeats: true));
+          schedule: NotificationCalendar(
+              hour: 15, second: 0, minute: 20, repeats: false));
     }
 
     setState(() {
